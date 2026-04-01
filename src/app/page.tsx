@@ -98,7 +98,7 @@ export default function Home() {
         {/* Row 1 */}
         <FadeIn>
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_160px_1fr] gap-8 lg:gap-12 pt-[60px] pb-[80px]">
-            <div className="font-[family-name:var(--font-noto)] text-[13px] font-medium text-text-sub leading-loose whitespace-pre-line">
+            <div className="font-[family-name:var(--font-noto)] text-[15px] font-bold text-text-sub leading-loose whitespace-pre-line">
               {`양양에는 사람은 오지만,
 그 흐름이 늘 지역의 관계와
 기회로 이어지지는 않습니다.
@@ -111,14 +111,14 @@ export default function Home() {
               <RaysArt className="w-[120px] h-[160px]" />
             </div>
             <div className="lg:text-right">
-              <h3 className="font-[family-name:var(--font-karla)] text-[28px] font-bold leading-tight whitespace-pre-line">
+              <h3 className="font-[family-name:var(--font-karla)] text-[32px] font-extrabold leading-tight whitespace-pre-line">
                 {`CONNECTING
 STRUCTURE`}
               </h3>
-              <p className="font-[family-name:var(--font-noto)] text-[13px] font-semibold text-text-sub mt-2">
+              <p className="font-[family-name:var(--font-noto)] text-[14px] font-bold text-text-sub mt-2">
                 사람과 지역의 연결 구조
               </p>
-              <p className="font-[family-name:var(--font-noto)] text-[13px] font-medium text-text-sub leading-loose mt-4">
+              <p className="font-[family-name:var(--font-noto)] text-[14px] font-semibold text-text-sub leading-loose mt-4">
                 방문자가 머물고, 머문 사람이 역할을 갖고,
                 <br />
                 그 역할이 지역 안에서 순환하는 구조.
@@ -137,14 +137,14 @@ STRUCTURE`}
               <EllipsesArt className="w-[120px] h-[120px]" />
             </div>
             <div className="lg:text-right">
-              <h3 className="font-[family-name:var(--font-karla)] text-[28px] font-bold leading-tight whitespace-pre-line">
+              <h3 className="font-[family-name:var(--font-karla)] text-[32px] font-extrabold leading-tight whitespace-pre-line">
                 {`A REPEATABLE
 MODEL IN YANGYANG`}
               </h3>
-              <p className="font-[family-name:var(--font-noto)] text-[13px] font-semibold text-text-sub mt-2">
+              <p className="font-[family-name:var(--font-noto)] text-[14px] font-bold text-text-sub mt-2">
                 양양에서 반복 가능한 구조
               </p>
-              <p className="font-[family-name:var(--font-noto)] text-[13px] font-medium text-text-sub leading-loose mt-4">
+              <p className="font-[family-name:var(--font-noto)] text-[14px] font-semibold text-text-sub leading-loose mt-4">
                 일회성 이벤트가 아닌,
                 <br />
                 계절마다 반복되고 확장 가능한 프로그램.
@@ -158,7 +158,7 @@ MODEL IN YANGYANG`}
         {/* Row 3 */}
         <FadeIn>
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_160px_1fr] gap-8 lg:gap-12 pb-[120px]">
-            <div className="font-[family-name:var(--font-noto)] text-[13px] font-medium text-text-sub leading-loose">
+            <div className="font-[family-name:var(--font-noto)] text-[15px] font-bold text-text-sub leading-loose">
               지역 주민, 체류자, 기관, 기업이
               <br />
               각자의 역할로 참여하고,
@@ -174,14 +174,14 @@ MODEL IN YANGYANG`}
               <WavesArt className="w-[120px] h-[80px]" />
             </div>
             <div className="lg:text-right">
-              <h3 className="font-[family-name:var(--font-karla)] text-[28px] font-bold leading-tight whitespace-pre-line">
+              <h3 className="font-[family-name:var(--font-karla)] text-[32px] font-extrabold leading-tight whitespace-pre-line">
                 {`WIN-WIN
 ECOSYSTEM`}
               </h3>
-              <p className="font-[family-name:var(--font-noto)] text-[13px] font-semibold text-text-sub mt-2">
+              <p className="font-[family-name:var(--font-noto)] text-[14px] font-bold text-text-sub mt-2">
                 상생하는 생태계
               </p>
-              <p className="font-[family-name:var(--font-noto)] text-[13px] font-medium text-text-sub leading-loose mt-4">
+              <p className="font-[family-name:var(--font-noto)] text-[14px] font-semibold text-text-sub leading-loose mt-4">
                 주민과 방문자가 함께 만드는 가치,
                 <br />
                 지역과 외부가 연결되는 경제 순환.
