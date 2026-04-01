@@ -23,10 +23,10 @@ const PROBLEMS = [
 ];
 
 const STATS = [
-  { end: 87, suffix: "", label: "참여자" },
-  { end: 5, suffix: "", label: "운영 기수" },
-  { end: 12, suffix: "", label: "협력 파트너" },
-  { end: 78, suffix: "%", label: "재참여율" },
+  { end: 513, suffix: "", label: "참여자" },
+  { end: 17, suffix: "", label: "행사 수" },
+  { end: 45, suffix: "", label: "협력 파트너" },
+  { end: 68, suffix: "%", label: "생활의향" },
 ];
 
 const RECORD_TABS = ["사진", "글", "문서"];
