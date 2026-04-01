@@ -1,0 +1,221 @@
+"use client";
+
+import { useState, useRef } from "react";
+import PageHero from "@/components/ui/PageHero";
+import TabNav from "@/components/ui/TabNav";
+import Button from "@/components/ui/Button";
+import FadeIn from "@/components/ui/FadeIn";
+import CountUp from "@/components/ui/CountUp";
+
+const TAB_ITEMS = [
+  { id: "problems", label: "우리가 다루는 문제" },
+  { id: "change", label: "우리가 만든 변화" },
+  { id: "records", label: "기록" },
+  { id: "partners", label: "파트너" },
+];
+
+const PROBLEMS = [
+  "양양에는 매년 수만 명이 찾아오지만, 대부분 지역과 연결되지 못한 채 떠납니다.",
+  "지역 인구는 줄어들고, 청년들은 일자리를 찾아 도시로 떠납니다.",
+  "생활인구의 경제적, 문화적 기여가 제도적으로 인정받지 못하고 있습니다.",
+  "지역과 외부인 사이의 갈등이 깊어지고, 공존의 모델이 부재합니다.",
+];
+
+const STATS = [
+  { end: 87, suffix: "", label: "참여자" },
+  { end: 5, suffix: "", label: "운영 기수" },
+  { end: 12, suffix: "", label: "협력 파트너" },
+  { end: 78, suffix: "%", label: "재참여율" },
+];
+
+const RECORD_TABS = ["사진", "글", "문서"];
+
+const GALLERY_COLORS = [
+  "#D4C4B0",
+  "#8BAFBE",
+  "#B8A890",
+  "#A8C4A0",
+  "#BEA8C4",
+  "#C4BEA8",
+];
+
+const PARTNER_PLACEHOLDERS = Array.from({ length: 6 }, (_, i) => i);
+
+export default function ImpactPage() {
+  const [activeId, setActiveId] = useState("problems");
+  const [recordTab, setRecordTab] = useState("사진");
+  const problemsRef = useRef<HTMLDivElement>(null);
+  const changeRef = useRef<HTMLDivElement>(null);
+  const recordsRef = useRef<HTMLDivElement>(null);
+  const partnersRef = useRef<HTMLDivElement>(null);
+
+  const sectionRefs: Record<string, React.RefObject<HTMLDivElement | null>> = {
+    problems: problemsRef,
+    change: changeRef,
+    records: recordsRef,
+    partners: partnersRef,
+  };
+
+  const handleTabChange = (id: string) => {
+    setActiveId(id);
+    sectionRefs[id]?.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <main>
+      <PageHero
+        titleEn="IMPACT"
+        subtitleKr="로마드가 다루는 문제와 지금까지 만든 변화"
+      />
+
+      <TabNav
+        items={TAB_ITEMS}
+        activeId={activeId}
+        onTabChange={handleTabChange}
+      />
+
+      {/* 문제 Section — full-width deep blue */}
+      <FadeIn>
+        <section
+          ref={problemsRef}
+          id="problems"
+          className="w-full bg-deep-blue py-[80px] mb-[100px]"
+        >
+          <div className="max-w-[1400px] mx-auto px-[60px]">
+            <h2 className="font-[family-name:var(--font-karla)] text-[32px] font-bold text-white mb-4">
+              THE PROBLEMS WE ADDRESS
+            </h2>
+            <p className="font-[family-name:var(--font-noto)] text-[20px] font-bold text-white leading-[1.8] mb-[48px]">
+              생활인구는 지역의 미래입니다.
+              <br />
+              하지만 아직 연결이 부족합니다.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-[40px]">
+              {PROBLEMS.map((text, idx) => (
+                <div key={idx} className="border-l-2 border-white/30 pl-6">
+                  <p className="font-[family-name:var(--font-noto)] text-[13px] font-semibold leading-[1.8] text-white/80">
+                    {text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </FadeIn>
+
+      {/* 변화 Section */}
+      <FadeIn>
+        <section
+          ref={changeRef}
+          id="change"
+          className="max-w-[1400px] mx-auto px-[60px] py-[80px] mb-[100px]"
+        >
+          <h2 className="font-[family-name:var(--font-karla)] text-[32px] font-bold mb-2">
+            THE CHANGE WE&apos;VE MADE
+          </h2>
+          <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub mb-[48px]">
+            로마드가 지금까지 만들어온 변화
+          </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-[24px]">
+            {STATS.map((stat) => (
+              <div
+                key={stat.label}
+                className="border border-border text-center p-[32px]"
+              >
+                <p className="font-[family-name:var(--font-karla)] text-[48px] font-bold leading-none mb-2">
+                  <CountUp end={stat.end} suffix={stat.suffix} />
+                </p>
+                <p className="font-[family-name:var(--font-noto)] text-[13px] text-text-sub">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </FadeIn>
+
+      {/* 기록 Section */}
+      <FadeIn>
+        <section
+          ref={recordsRef}
+          id="records"
+          className="max-w-[1400px] mx-auto px-[60px] py-[80px] mb-[100px]"
+        >
+          <h2 className="font-[family-name:var(--font-karla)] text-[32px] font-bold mb-2">
+            RECORDS
+          </h2>
+          <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub mb-[32px]">
+            로마드의 활동 기록
+          </p>
+
+          {/* Inner tab nav */}
+          <div className="flex gap-4 mb-[32px]">
+            {RECORD_TABS.map((tab) => (
+              <button
+                key={tab}
+                type="button"
+                onClick={() => setRecordTab(tab)}
+                className={`font-[family-name:var(--font-noto)] text-[13px] font-semibold px-4 py-2 cursor-pointer transition-colors duration-200 ${
+                  recordTab === tab
+                    ? "bg-text text-bg"
+                    : "bg-input-bg text-text-sub hover:text-text"
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+
+          {/* 3x2 Gallery Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-[16px] mb-[48px]">
+            {GALLERY_COLORS.map((color, idx) => (
+              <div
+                key={idx}
+                className="h-[200px] rounded-lg"
+                style={{ backgroundColor: color }}
+              />
+            ))}
+          </div>
+
+          <Button variant="outline" href="#">
+            기록 보기
+          </Button>
+        </section>
+      </FadeIn>
+
+      {/* 파트너 Section */}
+      <FadeIn>
+        <section
+          ref={partnersRef}
+          id="partners"
+          className="max-w-[1400px] mx-auto px-[60px] py-[80px] mb-[100px]"
+        >
+          <h2 className="font-[family-name:var(--font-karla)] text-[32px] font-bold mb-2">
+            PARTNERS
+          </h2>
+          <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub mb-[48px]">
+            함께하는 파트너
+          </p>
+
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-[16px] mb-[48px]">
+            {PARTNER_PLACEHOLDERS.map((_, idx) => (
+              <div
+                key={idx}
+                className="bg-[#E5E0DA] h-[80px] flex items-center justify-center rounded"
+              >
+                <span className="font-[family-name:var(--font-noto)] text-[12px] text-text-muted">
+                  로고
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <Button variant="primary" href="/contact">
+            문의하기
+          </Button>
+        </section>
+      </FadeIn>
+    </main>
+  );
+}
