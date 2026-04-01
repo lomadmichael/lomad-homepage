@@ -6,6 +6,7 @@ import TabNav from "@/components/ui/TabNav";
 import Button from "@/components/ui/Button";
 import FadeIn from "@/components/ui/FadeIn";
 import CountUp from "@/components/ui/CountUp";
+import Image from "next/image";
 
 const TAB_ITEMS = [
   { id: "badlbadl", label: "바들바들" },
@@ -89,7 +90,9 @@ export default function ProjectsPage() {
           <section ref={badlRef} id="badlbadl" className="mb-[100px]">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
               {/* Image */}
-              <div className="h-[360px] rounded-lg bg-gradient-to-br from-[#87CEEB] to-[#5B8FA8]" />
+              <div className="relative h-[360px] rounded-lg overflow-hidden">
+                <Image src="/images/badlbadl.png" alt="바들바들 현남생활" fill className="object-cover" />
+              </div>
 
               {/* Text */}
               <div className="flex flex-col justify-center">
@@ -175,7 +178,9 @@ export default function ProjectsPage() {
               </div>
 
               {/* Image */}
-              <div className="h-[360px] rounded-lg bg-gradient-to-br from-[#A8C4A0] to-[#7BA874]" />
+              <div className="relative h-[360px] rounded-lg overflow-hidden bg-white flex items-center justify-center">
+                <Image src="/images/buup.jpg" alt="부업스쿨" width={400} height={400} className="object-contain" />
+              </div>
             </div>
           </section>
         </FadeIn>

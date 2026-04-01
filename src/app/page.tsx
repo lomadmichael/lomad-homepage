@@ -19,7 +19,7 @@ export default function Home() {
         {/* Background */}
         {!heroImgError ? (
           <Image
-            src="/images/hero.jpg"
+            src="/images/hero.png"
             alt="Yangyang coastal landscape"
             fill
             className="object-cover"
@@ -211,8 +211,8 @@ ECOSYSTEM`}
           {/* Card 1 */}
           <FadeIn delay={0}>
             <div>
-              <div className="h-[260px] bg-gradient-to-br from-[#8BAFBE] to-[#5B8FA8] flex items-center justify-center text-white font-[family-name:var(--font-noto)] text-[14px]">
-                양양 풍경 / 팀 활동 사진
+              <div className="relative h-[260px] overflow-hidden">
+                <Image src="/images/whatwedo-lomad.png" alt="로마드 소개" fill className="object-cover" />
               </div>
               <h3 className="font-[family-name:var(--font-karla)] text-[22px] font-bold mt-5">
                 ABOUT LOMAD
@@ -230,8 +230,8 @@ ECOSYSTEM`}
           {/* Card 2 */}
           <FadeIn delay={0.1}>
             <div>
-              <div className="h-[260px] bg-gradient-to-br from-[#A8C4A0] to-[#7BA874] flex items-center justify-center text-white font-[family-name:var(--font-noto)] text-[14px]">
-                바들바들 / 부업스쿨 현장 사진
+              <div className="relative h-[260px] overflow-hidden">
+                <Image src="/images/whatwedo-project.png" alt="프로젝트" fill className="object-cover" />
               </div>
               <h3 className="font-[family-name:var(--font-karla)] text-[22px] font-bold mt-5">
                 PROJECTS
@@ -249,8 +249,8 @@ ECOSYSTEM`}
           {/* Card 3 */}
           <FadeIn delay={0.2}>
             <div>
-              <div className="h-[260px] bg-gradient-to-br from-[#C4A882] to-[#A88B6A] flex items-center justify-center text-white font-[family-name:var(--font-noto)] text-[14px]">
-                임팩트 / 파트너 사진
+              <div className="relative h-[260px] overflow-hidden">
+                <Image src="/images/whatwedo-impact.png" alt="임팩트" fill className="object-cover" />
               </div>
               <h3 className="font-[family-name:var(--font-karla)] text-[22px] font-bold mt-5">
                 IMPACT
@@ -292,8 +292,8 @@ ECOSYSTEM`}
                 <Button variant="outline">Service</Button>
               </div>
             </div>
-            <div className="h-[260px] bg-gradient-to-br from-[#D4C4B0] to-[#B8A890] flex items-center justify-center text-white font-[family-name:var(--font-noto)] text-[14px]">
-              커스텀하우스 제품 / 작업 사진
+            <div className="relative h-[260px] overflow-hidden bg-white flex items-center justify-center">
+              <Image src="/images/customhouse.jpg" alt="커스텀하우스" width={400} height={400} className="object-contain" />
             </div>
           </div>
         </FadeIn>
