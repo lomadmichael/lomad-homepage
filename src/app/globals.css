@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-bg: #F0EDE8;
+  --color-text: #1A1A1A;
+  --color-text-sub: #555555;
+  --color-text-muted: #888888;
+  --color-deep-blue: #2C4A5E;
+  --color-border: #D8D3CC;
+  --color-input-bg: #E5E0DA;
+  --font-karla: "Karla", "Helvetica Neue", sans-serif;
+  --font-noto: "Noto Sans KR", sans-serif;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-noto);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
