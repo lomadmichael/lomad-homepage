@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <main>
       {/* ── Section 1: Hero ── */}
-      <section className="relative h-[700px] overflow-hidden">
+      <section className="relative h-[400px] md:h-[700px] overflow-hidden">
         {/* Background */}
         {!heroImgError ? (
           <Image
@@ -41,11 +41,11 @@ export default function Home() {
 
         {/* Line art overlays */}
         <RaysArt
-          className="absolute top-10 right-20 w-[260px] h-[260px] opacity-[0.08]"
+          className="absolute top-10 right-6 md:right-20 w-[160px] md:w-[260px] h-[160px] md:h-[260px] opacity-[0.08]"
           color="white"
         />
         <EllipsesArt
-          className="absolute bottom-16 left-20 w-[200px] h-[140px] opacity-[0.06]"
+          className="absolute bottom-16 left-6 md:left-20 w-[120px] md:w-[200px] h-[90px] md:h-[140px] opacity-[0.06]"
           color="white"
         />
 
@@ -54,10 +54,10 @@ export default function Home() {
           <p className="font-[family-name:var(--font-karla)] text-[12px] tracking-[6px] opacity-60 mb-6">
             CONNECTING PEOPLE AND PLACES
           </p>
-          <h1 className="font-[family-name:var(--font-noto)] text-[48px] font-black leading-tight">
+          <h1 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[48px] font-black leading-tight">
             양양에서 관계를 만들고,
           </h1>
-          <h1 className="font-[family-name:var(--font-noto)] text-[48px] font-black leading-tight">
+          <h1 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[48px] font-black leading-tight">
             역할을 연결합니다
           </h1>
           <p className="font-[family-name:var(--font-noto)] text-[14px] font-medium opacity-50 mt-6 max-w-[600px]">
@@ -75,15 +75,15 @@ export default function Home() {
         </div>
 
         {/* Bottom-left caption */}
-        <p className="absolute bottom-6 left-8 z-10 font-[family-name:var(--font-karla)] text-[9px] tracking-[2px] uppercase text-white opacity-30">
+        <p className="absolute bottom-6 left-6 md:left-8 z-10 font-[family-name:var(--font-karla)] text-[9px] tracking-[2px] uppercase text-white opacity-30">
           Yangyang, Hyeonnam — Badlbadl Program
         </p>
       </section>
 
       {/* ── Section 2: THE CORE OF OUR WORK ── */}
-      <section className="max-w-[1400px] mx-auto px-[60px] pt-[120px] pb-[50px]">
+      <section className="max-w-[1400px] mx-auto px-6 md:px-[60px] pt-[60px] md:pt-[120px] pb-[50px]">
         <FadeIn>
-          <h2 className="font-[family-name:var(--font-karla)] text-[82px] font-extrabold uppercase leading-none whitespace-nowrap">
+          <h2 className="font-[family-name:var(--font-karla)] text-[40px] md:text-[60px] lg:text-[82px] font-extrabold uppercase leading-none lg:whitespace-nowrap">
             THE CORE OF OUR WORK
           </h2>
           <p className="font-[family-name:var(--font-noto)] text-[15px] font-semibold text-text-sub mt-4">
@@ -94,10 +94,10 @@ export default function Home() {
       </section>
 
       {/* ── Section 3: Philosophy 3 Rows ── */}
-      <section className="max-w-[1400px] mx-auto px-[60px]">
+      <section className="max-w-[1400px] mx-auto px-6 md:px-[60px]">
         {/* Row 1 */}
         <FadeIn>
-          <div className="grid grid-cols-[1fr_160px_1fr] gap-12 pt-[60px] pb-[80px]">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_160px_1fr] gap-8 lg:gap-12 pt-[60px] pb-[80px]">
             <div className="font-[family-name:var(--font-noto)] text-[13px] font-medium text-text-sub leading-loose whitespace-pre-line">
               {`양양에는 사람은 오지만,
 그 흐름이 늘 지역의 관계와
@@ -107,10 +107,10 @@ export default function Home() {
 생활인구와 주민이 연결되는 접점 부족.
 로마드는 이 간극을 다룹니다.`}
             </div>
-            <div className="flex items-center justify-center">
+            <div className="hidden lg:flex items-center justify-center">
               <RaysArt className="w-[120px] h-[160px]" />
             </div>
-            <div className="text-right">
+            <div className="lg:text-right">
               <h3 className="font-[family-name:var(--font-karla)] text-[28px] font-bold leading-tight whitespace-pre-line">
                 {`CONNECTING
 STRUCTURE`}
@@ -131,12 +131,12 @@ STRUCTURE`}
 
         {/* Row 2 */}
         <FadeIn>
-          <div className="grid grid-cols-[1fr_160px_1fr] gap-12 pb-[80px]">
-            <div />
-            <div className="flex items-center justify-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_160px_1fr] gap-8 lg:gap-12 pb-[80px]">
+            <div className="hidden lg:block" />
+            <div className="hidden lg:flex items-center justify-center">
               <EllipsesArt className="w-[120px] h-[120px]" />
             </div>
-            <div className="text-right">
+            <div className="lg:text-right">
               <h3 className="font-[family-name:var(--font-karla)] text-[28px] font-bold leading-tight whitespace-pre-line">
                 {`A REPEATABLE
 MODEL IN YANGYANG`}
@@ -157,7 +157,7 @@ MODEL IN YANGYANG`}
 
         {/* Row 3 */}
         <FadeIn>
-          <div className="grid grid-cols-[1fr_160px_1fr] gap-12 pb-[120px]">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_160px_1fr] gap-8 lg:gap-12 pb-[120px]">
             <div className="font-[family-name:var(--font-noto)] text-[13px] font-medium text-text-sub leading-loose">
               지역 주민, 체류자, 기관, 기업이
               <br />
@@ -170,10 +170,10 @@ MODEL IN YANGYANG`}
               <br />
               모두가 연결의 일부가 됩니다.
             </div>
-            <div className="flex items-center justify-center">
+            <div className="hidden lg:flex items-center justify-center">
               <WavesArt className="w-[120px] h-[80px]" />
             </div>
-            <div className="text-right">
+            <div className="lg:text-right">
               <h3 className="font-[family-name:var(--font-karla)] text-[28px] font-bold leading-tight whitespace-pre-line">
                 {`WIN-WIN
 ECOSYSTEM`}
@@ -197,17 +197,17 @@ ECOSYSTEM`}
       <SectionDivider />
 
       {/* ── Section 5: WHAT WE DO ── */}
-      <section className="px-[60px] py-[80px]">
+      <section className="px-6 md:px-[60px] py-[80px]">
         <FadeIn>
           <div className="flex items-center gap-5 mb-10">
             <div className="w-[48px] h-[48px] rounded-full bg-text" />
-            <h2 className="font-[family-name:var(--font-karla)] text-[42px] font-bold">
+            <h2 className="font-[family-name:var(--font-karla)] text-[32px] md:text-[42px] font-bold">
               WHAT WE DO
             </h2>
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-3 gap-7">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
           {/* Card 1 */}
           <FadeIn delay={0}>
             <div>
@@ -270,9 +270,9 @@ ECOSYSTEM`}
       <SectionDivider />
 
       {/* ── Section 7: CUSTOM HOUSE ── */}
-      <section className="px-[60px] py-[80px]">
+      <section className="px-6 md:px-[60px] py-[80px]">
         <FadeIn>
-          <div className="grid grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
             <div>
               <p className="font-[family-name:var(--font-karla)] text-[10px] font-semibold tracking-[3px] uppercase text-text-muted">
                 Local Goods & Production
@@ -303,7 +303,7 @@ ECOSYSTEM`}
       <SectionDivider />
 
       {/* ── Section 9: CTA ── */}
-      <section className="px-[60px] py-[100px] text-center">
+      <section className="px-6 md:px-[60px] py-[100px] text-center">
         <FadeIn>
           <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[4px] uppercase text-text-muted">
             Get In Touch

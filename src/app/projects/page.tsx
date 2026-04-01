@@ -83,11 +83,11 @@ export default function ProjectsPage() {
         className="mb-[60px]"
       />
 
-      <div className="max-w-[1400px] mx-auto px-[60px]">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-[60px]">
         {/* 바들바들 */}
         <FadeIn>
           <section ref={badlRef} id="badlbadl" className="mb-[100px]">
-            <div className="grid grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
               {/* Image */}
               <div className="h-[360px] rounded-lg bg-gradient-to-br from-[#87CEEB] to-[#5B8FA8]" />
 
@@ -147,7 +147,7 @@ export default function ProjectsPage() {
         {/* 부업스쿨 */}
         <FadeIn>
           <section ref={buupRef} id="buupschool" className="mb-[100px]">
-            <div className="grid grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
               {/* Text */}
               <div className="flex flex-col justify-center">
                 <p className="font-[family-name:var(--font-karla)] text-[28px] font-bold uppercase tracking-tight">
@@ -194,7 +194,7 @@ export default function ProjectsPage() {
               함께한 프로젝트 · 로마드가 지역과 함께 만들어 온 협업들
             </p>
 
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {COLLAB_CARDS.map((card) => (
                 <div key={card.title} className="group">
                   <div

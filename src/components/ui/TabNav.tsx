@@ -23,11 +23,11 @@ export default function TabNav({
   return (
     <nav
       className={cn(
-        "max-w-[1400px] mx-auto px-[60px] border-b border-border",
+        "max-w-[1400px] mx-auto px-6 md:px-[60px] border-b border-border overflow-x-auto",
         className,
       )}
     >
-      <div className="flex gap-8">
+      <div className="flex gap-6 md:gap-8 min-w-max">
         {items.map((item) => (
           <button
             key={item.id}

@@ -29,7 +29,7 @@ export default function ContactPage() {
       />
 
       <FadeIn>
-        <section className="max-w-[640px] mx-auto px-[60px] pb-[120px]">
+        <section className="max-w-[640px] mx-auto px-6 md:px-[60px] pb-[120px]">
           {/* Status message */}
           {state.message && (
             <div
@@ -45,7 +45,7 @@ export default function ContactPage() {
 
           <form action={formAction}>
             {/* 2x2 grid top */}
-            <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
                 <label className="font-[family-name:var(--font-noto)] text-[12px] font-semibold text-text-sub block mb-1.5">
                   이름 *

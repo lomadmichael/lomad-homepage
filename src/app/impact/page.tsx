@@ -81,7 +81,7 @@ export default function ImpactPage() {
           id="problems"
           className="w-full bg-deep-blue py-[80px] mb-[100px]"
         >
-          <div className="max-w-[1400px] mx-auto px-[60px]">
+          <div className="max-w-[1400px] mx-auto px-6 md:px-[60px]">
             <h2 className="font-[family-name:var(--font-karla)] text-[32px] font-bold text-white mb-4">
               THE PROBLEMS WE ADDRESS
             </h2>
@@ -108,7 +108,7 @@ export default function ImpactPage() {
         <section
           ref={changeRef}
           id="change"
-          className="max-w-[1400px] mx-auto px-[60px] py-[80px] mb-[100px]"
+          className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-[80px] mb-[100px]"
         >
           <h2 className="font-[family-name:var(--font-karla)] text-[32px] font-bold mb-2">
             THE CHANGE WE&apos;VE MADE
@@ -140,7 +140,7 @@ export default function ImpactPage() {
         <section
           ref={recordsRef}
           id="records"
-          className="max-w-[1400px] mx-auto px-[60px] py-[80px] mb-[100px]"
+          className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-[80px] mb-[100px]"
         >
           <h2 className="font-[family-name:var(--font-karla)] text-[32px] font-bold mb-2">
             RECORDS
@@ -189,7 +189,7 @@ export default function ImpactPage() {
         <section
           ref={partnersRef}
           id="partners"
-          className="max-w-[1400px] mx-auto px-[60px] py-[80px] mb-[100px]"
+          className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-[80px] mb-[100px]"
         >
           <h2 className="font-[family-name:var(--font-karla)] text-[32px] font-bold mb-2">
             PARTNERS

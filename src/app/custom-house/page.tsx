@@ -67,14 +67,14 @@ export default function CustomHousePage() {
         <section
           ref={serviceRef}
           id="service"
-          className="max-w-[1400px] mx-auto px-[60px] py-[80px] mb-[100px]"
+          className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-[80px] mb-[100px]"
         >
           <h2 className="font-[family-name:var(--font-karla)] text-[28px] font-bold mb-[48px]">
             SERVICE
           </h2>
 
           {/* Process Flow */}
-          <div className="grid grid-cols-5 items-center mb-[60px]">
+          <div className="grid grid-cols-1 md:grid-cols-5 items-center gap-4 md:gap-0 mb-[60px]">
             <div className="border border-border text-center p-[24px]">
               <p className="font-[family-name:var(--font-karla)] text-[16px] font-bold mb-2">
                 DESIGN
@@ -85,7 +85,7 @@ export default function CustomHousePage() {
                 디자인 기획
               </p>
             </div>
-            <div className="flex justify-center">
+            <div className="hidden md:flex justify-center">
               <span className="text-border text-[20px]">&rarr;</span>
             </div>
             <div className="border border-border text-center p-[24px]">
@@ -98,7 +98,7 @@ export default function CustomHousePage() {
                 소량 생산
               </p>
             </div>
-            <div className="flex justify-center">
+            <div className="hidden md:flex justify-center">
               <span className="text-border text-[20px]">&rarr;</span>
             </div>
             <div className="border border-border text-center p-[24px]">
@@ -143,7 +143,7 @@ export default function CustomHousePage() {
         <section
           ref={storeRef}
           id="store"
-          className="max-w-[1400px] mx-auto px-[60px] py-[80px] mb-[100px]"
+          className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-[80px] mb-[100px]"
         >
           <h2 className="font-[family-name:var(--font-karla)] text-[28px] font-bold mb-2">
             STORE

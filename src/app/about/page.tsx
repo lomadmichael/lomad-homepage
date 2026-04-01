@@ -102,7 +102,7 @@ export default function AboutPage() {
         <section
           ref={introRef}
           id="intro"
-          className="max-w-[1400px] mx-auto px-[60px] py-[80px]"
+          className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-[80px]"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[60px] items-center">
             <div>
@@ -134,8 +134,8 @@ export default function AboutPage() {
           id="why"
           className="w-full bg-[#2C4A5E] py-[80px]"
         >
-          <div className="max-w-[1400px] mx-auto px-[60px]">
-            <h2 className="font-[family-name:var(--font-karla)] text-[36px] font-bold text-white mb-4">
+          <div className="max-w-[1400px] mx-auto px-6 md:px-[60px]">
+            <h2 className="font-[family-name:var(--font-karla)] text-[28px] md:text-[36px] font-bold text-white mb-4">
               WHY LOMAD
             </h2>
             <p className="font-[family-name:var(--font-noto)] text-[18px] font-bold text-white/80 mb-[48px]">
@@ -166,9 +166,9 @@ export default function AboutPage() {
         <section
           ref={whatRef}
           id="what"
-          className="max-w-[1400px] mx-auto px-[60px] py-[80px]"
+          className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-[80px]"
         >
-          <h2 className="font-[family-name:var(--font-karla)] text-[36px] font-bold mb-2">
+          <h2 className="font-[family-name:var(--font-karla)] text-[28px] md:text-[36px] font-bold mb-2">
             WHAT WE DO
           </h2>
           <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub mb-[48px]">
@@ -197,9 +197,9 @@ export default function AboutPage() {
         <section
           ref={peopleRef}
           id="people"
-          className="max-w-[1400px] mx-auto px-[60px] py-[80px]"
+          className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-[80px]"
         >
-          <h2 className="font-[family-name:var(--font-karla)] text-[36px] font-bold mb-2">
+          <h2 className="font-[family-name:var(--font-karla)] text-[28px] md:text-[36px] font-bold mb-2">
             PEOPLE
           </h2>
           <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub mb-[48px]">
@@ -228,7 +228,7 @@ export default function AboutPage() {
 
       {/* CTA */}
       <FadeIn>
-        <section className="max-w-[1400px] mx-auto px-[60px] py-[60px] flex gap-4">
+        <section className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-[60px] flex gap-4">
           <Button variant="primary" href="/contact">
             Contact Us
           </Button>

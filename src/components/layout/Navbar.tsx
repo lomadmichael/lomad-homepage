@@ -16,7 +16,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 flex items-center justify-between px-[60px] py-[18px] bg-bg/95 backdrop-blur-xl border-b border-border/60">
+    <nav className="sticky top-0 z-50 flex items-center justify-between px-6 md:px-[60px] py-[18px] bg-bg/95 backdrop-blur-xl border-b border-border/60">
       {/* Logo */}
       <Link href="/" className="flex items-center gap-3">
         <span className="block w-[22px] h-[22px] rounded-full bg-text" />
@@ -60,7 +60,7 @@ export default function Navbar() {
 
       {/* Mobile dropdown */}
       {mobileOpen && (
-        <div className="absolute top-full left-0 w-full bg-bg/95 backdrop-blur-xl border-b border-border/60 px-[60px] py-6 flex flex-col gap-4 md:hidden">
+        <div className="absolute top-full left-0 w-full bg-bg/95 backdrop-blur-xl border-b border-border/60 px-6 py-6 flex flex-col gap-4 md:hidden">
           {navLinks.map((l) => (
             <Link
               key={l.href}
