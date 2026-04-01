@@ -17,37 +17,37 @@ const TAB_ITEMS = [
 const COLLAB_CARDS = [
   {
     title: "찾아가는 새참모임",
-    bg: "#B8A890",
+    image: "/images/collabo-01.png",
     description:
       "지역 주민과 함께하는 소규모 모임을 통해 현장의 이야기를 듣고 공유합니다.",
   },
   {
     title: "현남 고민 수집소",
-    bg: "#8BAFBE",
+    image: "/images/collabo-02.jpg",
     description:
       "주민들의 일상 고민을 수집하고, 함께 해결 방법을 모색하는 프로젝트입니다.",
   },
   {
     title: "기업 워케이션",
-    bg: "#A8C4A0",
+    image: "/images/collabo-03.png",
     description:
       "기업 팀 단위의 워케이션 프로그램을 기획하고 운영합니다.",
   },
   {
     title: "대회·행사 운영",
-    bg: "#C4A882",
+    image: "/images/collabo-04.png",
     description:
       "지역 기반의 대회와 행사를 기획부터 운영까지 함께합니다.",
   },
   {
     title: "브랜딩·콘텐츠",
-    bg: "#D4C4B0",
+    image: "/images/collabo-05.jpg",
     description:
       "지역과 브랜드의 이야기를 콘텐츠로 만들어 전달합니다.",
   },
   {
     title: "주민 교류 프로그램",
-    bg: "#9BB0A0",
+    image: "/images/collabo-06.jpg",
     description:
       "지역 주민 간 교류를 촉진하는 다양한 프로그램을 운영합니다.",
   },
@@ -202,12 +202,9 @@ export default function ProjectsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {COLLAB_CARDS.map((card) => (
                 <div key={card.title} className="group">
-                  <div
-                    className="h-[180px] rounded-lg"
-                    style={{
-                      background: `linear-gradient(135deg, ${card.bg}, ${card.bg}dd)`,
-                    }}
-                  />
+                  <div className="relative h-[180px] rounded-lg overflow-hidden">
+                    <Image src={card.image} alt={card.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
+                  </div>
                   <p className="font-[family-name:var(--font-karla)] text-[14px] font-bold mt-3">
                     {card.title}
                   </p>
