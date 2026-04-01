@@ -31,7 +31,7 @@ export default function Navbar() {
           <li key={l.href}>
             <Link
               href={l.href}
-              className="font-[family-name:var(--font-karla)] text-[11px] font-semibold tracking-[1.5px] uppercase text-text hover:opacity-70 transition-opacity"
+              className="font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[1.5px] uppercase text-text hover:opacity-70 transition-opacity"
             >
               {l.label}
             </Link>
@@ -65,7 +65,7 @@ export default function Navbar() {
             <Link
               key={l.href}
               href={l.href}
-              className="font-[family-name:var(--font-karla)] text-[11px] font-semibold tracking-[1.5px] uppercase text-text"
+              className="font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[1.5px] uppercase text-text"
               onClick={() => setMobileOpen(false)}
             >
               {l.label}
