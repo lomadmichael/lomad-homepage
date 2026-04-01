@@ -19,8 +19,19 @@ const notoSansKR = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: "LOMAD Cooperative | 로마드 협동조합",
-  description: "양양에서 관계를 만들고, 역할을 연결합니다. 체류 프로그램, 프로젝트, 상품화를 통해 사람과 지역이 더 오래 연결되는 구조를 만듭니다.",
+  title: {
+    default: "LOMAD Cooperative | 로마드 협동조합",
+    template: "%s | LOMAD",
+  },
+  description: "양양에서 관계를 만들고, 역할을 연결합니다.",
+  openGraph: {
+    title: "LOMAD Cooperative",
+    description: "양양에서 관계를 만들고, 역할을 연결합니다.",
+    url: "https://lomadcoop.net",
+    siteName: "LOMAD Cooperative",
+    locale: "ko_KR",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
