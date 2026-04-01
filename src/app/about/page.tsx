@@ -123,8 +123,8 @@ export default function AboutPage() {
                 영역에서 프로젝트를 운영하고 있습니다.
               </p>
             </div>
-            <div className="h-[320px] rounded-2xl bg-[#F0EDE8] flex items-center justify-center">
-              <Image src="/images/lomad-logo.png" alt="로마드 로고" width={280} height={280} className="object-contain" />
+            <div className="relative h-[320px] rounded-2xl overflow-hidden">
+              <Image src="/images/lomad-logo.png" alt="로마드 로고" fill className="object-contain" />
             </div>
           </div>
         </section>
