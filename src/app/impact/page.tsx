@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import Image from "next/image";
 import PageHero from "@/components/ui/PageHero";
 import TabNav from "@/components/ui/TabNav";
 import Button from "@/components/ui/Button";
@@ -79,9 +80,17 @@ export default function ImpactPage() {
         <section
           ref={problemsRef}
           id="problems"
-          className="w-full bg-deep-blue py-[80px] mb-[100px]"
+          className="relative w-full py-[80px] mb-[100px] overflow-hidden"
         >
-          <div className="max-w-[1400px] mx-auto px-6 md:px-[60px]">
+          {/* Background image + blue overlay */}
+          <Image
+            src="/images/impact-bg.png"
+            alt=""
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-deep-blue/80" />
+          <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-[60px]">
             <h2 className="font-[family-name:var(--font-karla)] text-[32px] font-bold text-white mb-4">
               THE PROBLEMS WE ADDRESS
             </h2>
