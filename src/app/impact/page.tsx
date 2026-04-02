@@ -31,13 +31,13 @@ const STATS = [
 
 const RECORD_TABS = ["사진", "글", "문서"];
 
-const GALLERY_COLORS = [
-  "#D4C4B0",
-  "#8BAFBE",
-  "#B8A890",
-  "#A8C4A0",
-  "#BEA8C4",
-  "#C4BEA8",
+const RECORD_IMAGES = [
+  "/images/records/record-01.jpg",
+  "/images/records/record-02.jpg",
+  "/images/records/record-03.jpg",
+  "/images/records/record-04.jpg",
+  "/images/records/record-05.jpg",
+  "/images/records/record-06.jpg",
 ];
 
 const PARTNERS = [
@@ -186,12 +186,10 @@ export default function ImpactPage() {
 
           {/* 3x2 Gallery Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-[16px] mb-[48px]">
-            {GALLERY_COLORS.map((color, idx) => (
-              <div
-                key={idx}
-                className="h-[200px] rounded-lg"
-                style={{ backgroundColor: color }}
-              />
+            {RECORD_IMAGES.map((src, idx) => (
+              <div key={idx} className="relative h-[200px] rounded-lg overflow-hidden">
+                <Image src={src} alt={`기록 ${idx + 1}`} fill className="object-cover hover:scale-105 transition-transform duration-300" />
+              </div>
             ))}
           </div>
 
