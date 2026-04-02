@@ -96,11 +96,11 @@ export default function ProjectsPage() {
 
               {/* Text */}
               <div className="flex flex-col justify-center">
-                <p className="font-[family-name:var(--font-karla)] text-[28px] font-bold uppercase tracking-tight">
-                  BADLBADL
+                <p className="font-[family-name:var(--font-noto)] text-[28px] font-black tracking-tight">
+                  바들바들 현남생활
                 </p>
                 <p className="font-[family-name:var(--font-noto)] text-[13px] font-semibold text-text-sub mt-1">
-                  바들바들 현남생활 · 체류 프로그램
+                  체류 프로그램
                 </p>
                 <h2 className="font-[family-name:var(--font-noto)] text-[16px] font-black leading-snug mt-5">
                   양양을 잠깐 스쳐가는 곳이 아니라,
@@ -117,8 +117,8 @@ export default function ProjectsPage() {
                 <div className="grid grid-cols-3 gap-6 mt-8">
                   {[
                     { value: 5, label: "운영 기수" },
-                    { value: 87, label: "참가자 수" },
-                    { value: 78, label: "재방문 의향", suffix: "%" },
+                    { value: 100, label: "참가자 수" },
+                    { value: 68, label: "생활 의향", suffix: "%" },
                   ].map((stat) => (
                     <div
                       key={stat.label}
