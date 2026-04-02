@@ -154,10 +154,10 @@ export default function ProjectsPage() {
               {/* Text */}
               <div className="flex flex-col justify-center">
                 <p className="font-[family-name:var(--font-karla)] text-[28px] font-bold uppercase tracking-tight">
-                  BUUP SCHOOL
+                  현남부업스쿨
                 </p>
                 <p className="font-[family-name:var(--font-noto)] text-[13px] font-semibold text-text-sub mt-1">
-                  부업스쿨 · 실전 수익화 교육 프로그램
+                  실전 수익화 교육 프로그램
                 </p>
                 <h2 className="font-[family-name:var(--font-noto)] text-[16px] font-black leading-snug mt-5">
                   배우고 실제로 해보는 과정까지
