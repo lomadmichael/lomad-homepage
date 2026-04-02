@@ -44,7 +44,7 @@ const PARTNERS = [
   { src: "/images/partners/partner-01.png", name: "강원특별자치도", maxH: "max-h-[45px]" },
   { src: "/images/partners/partner-02.png", name: "양양군", maxH: "max-h-[35px]" },
   { src: "/images/partners/partner-03.png", name: "강원농촌융복합산업지원센터", maxH: "max-h-[45px]" },
-  { src: "/images/partners/partner-04.png", name: "양양군 서핑협회", maxH: "max-h-[45px]" },
+  { src: "/images/partners/partner-04.png", name: "양양군 서핑협회", maxH: "max-h-[35px]" },
   { src: "/images/partners/partner-05.png", name: "양양군체육회", maxH: "max-h-[45px]" },
   { src: "/images/partners/partner-06.jpg", name: "중소벤처기업부", maxH: "max-h-[55px]" },
   { src: "/images/partners/partner-07.png", name: "소상공인진흥공단", maxH: "max-h-[55px]" },
