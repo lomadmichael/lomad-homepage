@@ -41,13 +41,13 @@ const GALLERY_COLORS = [
 ];
 
 const PARTNERS = [
-  { src: "/images/partners/partner-01.png", name: "강원특별자치도" },
-  { src: "/images/partners/partner-02.png", name: "양양군" },
-  { src: "/images/partners/partner-03.png", name: "강원농촌융복합산업지원센터" },
-  { src: "/images/partners/partner-04.png", name: "양양군 서핑협회" },
-  { src: "/images/partners/partner-05.png", name: "양양군체육회" },
-  { src: "/images/partners/partner-06.jpg", name: "중소벤처기업부" },
-  { src: "/images/partners/partner-07.png", name: "소상공인진흥공단" },
+  { src: "/images/partners/partner-01.png", name: "강원특별자치도", maxH: "max-h-[45px]" },
+  { src: "/images/partners/partner-02.png", name: "양양군", maxH: "max-h-[35px]" },
+  { src: "/images/partners/partner-03.png", name: "강원농촌융복합산업지원센터", maxH: "max-h-[45px]" },
+  { src: "/images/partners/partner-04.png", name: "양양군 서핑협회", maxH: "max-h-[45px]" },
+  { src: "/images/partners/partner-05.png", name: "양양군체육회", maxH: "max-h-[45px]" },
+  { src: "/images/partners/partner-06.jpg", name: "중소벤처기업부", maxH: "max-h-[55px]" },
+  { src: "/images/partners/partner-07.png", name: "소상공인진흥공단", maxH: "max-h-[55px]" },
 ];
 
 export default function ImpactPage() {
@@ -221,7 +221,7 @@ export default function ImpactPage() {
                 key={partner.name}
                 className="bg-white h-[80px] flex items-center justify-center rounded p-3 grayscale hover:grayscale-0 transition-all duration-300"
               >
-                <Image src={partner.src} alt={partner.name} width={120} height={60} className="object-contain max-h-[50px]" />
+                <Image src={partner.src} alt={partner.name} width={140} height={70} className={`object-contain ${partner.maxH}`} />
               </div>
             ))}
           </div>
