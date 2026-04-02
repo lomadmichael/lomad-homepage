@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import Image from "next/image";
 import PageHero from "@/components/ui/PageHero";
 import TabNav from "@/components/ui/TabNav";
 import Button from "@/components/ui/Button";
@@ -27,10 +28,10 @@ const SERVICE_CARDS = [
 ];
 
 const PRODUCTS = [
-  { name: "티셔츠", price: "₩32,000", bg: "#D4C4B0", category: "APPAREL" },
-  { name: "에코백", price: "₩18,000", bg: "#B8A890", category: "BAG" },
-  { name: "머그컵", price: "₩15,000", bg: "#8BAFBE", category: "MUG" },
-  { name: "접시", price: "₩25,000", bg: "#A8C4A0", category: "PLATE" },
+  { name: "티셔츠", price: "₩32,000", image: "/images/store/tee.jpg", category: "APPAREL" },
+  { name: "에코백", price: "₩18,000", image: "/images/store/bag.jpg", category: "BAG" },
+  { name: "머그컵", price: "₩15,000", image: "/images/store/mug.jpg", category: "MUG" },
+  { name: "포스터", price: "₩25,000", image: "/images/store/poster.jpg", category: "POSTER" },
 ];
 
 export default function CustomHousePage() {
@@ -155,12 +156,9 @@ export default function CustomHousePage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-[24px] mb-[48px]">
             {PRODUCTS.map((product) => (
               <div key={product.name} className="group cursor-pointer">
-                <div
-                  className="h-[200px] rounded-lg mb-3"
-                  style={{
-                    background: `linear-gradient(135deg, ${product.bg}, ${product.bg}dd)`,
-                  }}
-                />
+                <div className="relative h-[200px] rounded-lg mb-3 overflow-hidden bg-white">
+                  <Image src={product.image} alt={product.name} fill className="object-contain p-4 group-hover:scale-105 transition-transform duration-300" />
+                </div>
                 <p className="font-[family-name:var(--font-noto)] text-[12px] text-text-muted">
                   {product.category}
                 </p>
