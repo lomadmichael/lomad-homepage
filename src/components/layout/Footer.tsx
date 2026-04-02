@@ -22,8 +22,8 @@ export default function Footer() {
           Contact
         </span>
         <div className="font-[family-name:var(--font-noto)] text-[11px] text-text-muted leading-relaxed">
-          <p>lomad.coop@gmail.co</p>
-          <p>+82 033 672 6775</p>
+          <p>lomad.coop@gmail.com</p>
+          <p>033 672 6775</p>
         </div>
         <div className="flex gap-4 mt-1">
           <Link
