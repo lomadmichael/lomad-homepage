@@ -24,10 +24,15 @@ export const metadata: Metadata = {
     template: "%s | LOMAD",
   },
   description: "양양에서 관계를 만들고, 역할을 연결합니다.",
+  verification: {
+    other: {
+      "naver-site-verification": "367a738cad567988254bb843f346af7477c54efb",
+    },
+  },
   openGraph: {
     title: "LOMAD Cooperative",
     description: "양양에서 관계를 만들고, 역할을 연결합니다.",
-    url: "https://lomadcoop.net",
+    url: "https://lomadcoop.com",
     siteName: "LOMAD Cooperative",
     locale: "ko_KR",
     type: "website",
