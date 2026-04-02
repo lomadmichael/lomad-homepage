@@ -20,20 +20,21 @@ const notoSansKR = Noto_Sans_KR({
 
 export const metadata: Metadata = {
   title: {
-    default: "LOMAD Cooperative | 로마드 협동조합",
-    template: "%s | LOMAD",
+    default: "로마드 협동조합 | 양양 생활인구 연결 플랫폼",
+    template: "%s | 로마드 협동조합",
   },
-  description: "양양에서 관계를 만들고, 역할을 연결합니다.",
+  description: "로마드 협동조합은 양양에서 관계를 만들고 역할을 연결합니다. 체류 프로그램, 프로젝트, 상품화를 통해 사람과 지역이 더 오래 연결되는 구조를 만듭니다.",
+  keywords: ["로마드", "로마드협동조합", "양양", "생활인구", "체류프로그램", "바들바들", "현남생활", "부업스쿨", "커스텀하우스", "양양협동조합"],
   verification: {
     other: {
       "naver-site-verification": "367a738cad567988254bb843f346af7477c54efb",
     },
   },
   openGraph: {
-    title: "LOMAD Cooperative",
-    description: "양양에서 관계를 만들고, 역할을 연결합니다.",
+    title: "로마드 협동조합 | 양양에서 관계를 만들고, 역할을 연결합니다",
+    description: "체류 프로그램, 프로젝트, 상품화를 통해 사람과 지역이 더 오래 연결되는 구조를 만듭니다.",
     url: "https://lomadcoop.com",
-    siteName: "LOMAD Cooperative",
+    siteName: "로마드 협동조합",
     locale: "ko_KR",
     type: "website",
   },
