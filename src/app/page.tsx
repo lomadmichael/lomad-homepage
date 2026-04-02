@@ -95,10 +95,10 @@ export default function Home() {
 
       {/* ── Section 3: Philosophy 3 Rows ── */}
       <section className="max-w-[1400px] mx-auto px-6 md:px-[60px]">
-        {/* Row 1 */}
+        {/* Row 1: CONNECTING STRUCTURE */}
         <FadeIn>
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_160px_1fr] gap-8 lg:gap-12 pt-[60px] pb-[80px]">
-            <div className="font-[family-name:var(--font-noto)] text-[15px] font-bold text-text-sub leading-loose whitespace-pre-line">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_100px_1fr] gap-8 lg:gap-6 pt-[60px] pb-[80px] items-start">
+            <div className="font-[family-name:var(--font-noto)] text-[17px] font-black text-text leading-[2] whitespace-pre-line">
               {`양양에는 사람은 오지만,
 그 흐름이 늘 지역의 관계와
 기회로 이어지지는 않습니다.
@@ -107,8 +107,8 @@ export default function Home() {
 생활인구와 주민이 연결되는 접점 부족.
 로마드는 이 간극을 다룹니다.`}
             </div>
-            <div className="hidden lg:flex items-center justify-center">
-              <RaysArt className="w-[120px] h-[160px]" />
+            <div className="hidden lg:flex items-start justify-center pt-2">
+              <RaysArt className="w-[80px] h-[110px]" />
             </div>
             <div className="lg:text-right">
               <h3 className="font-[family-name:var(--font-karla)] text-[32px] font-extrabold leading-tight whitespace-pre-line">
@@ -129,12 +129,12 @@ STRUCTURE`}
           </div>
         </FadeIn>
 
-        {/* Row 2 */}
+        {/* Row 2: A REPEATABLE MODEL IN YANGYANG */}
         <FadeIn>
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_160px_1fr] gap-8 lg:gap-12 pb-[80px]">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_100px_1fr] gap-8 lg:gap-6 pb-[80px] items-start">
             <div className="hidden lg:block" />
-            <div className="hidden lg:flex items-center justify-center">
-              <EllipsesArt className="w-[120px] h-[120px]" />
+            <div className="hidden lg:flex items-start justify-center pt-2">
+              <EllipsesArt className="w-[80px] h-[60px]" />
             </div>
             <div className="lg:text-right">
               <h3 className="font-[family-name:var(--font-karla)] text-[32px] font-extrabold leading-tight whitespace-pre-line">
@@ -155,10 +155,10 @@ MODEL IN YANGYANG`}
           </div>
         </FadeIn>
 
-        {/* Row 3 */}
+        {/* Row 3: WIN-WIN ECOSYSTEM */}
         <FadeIn>
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_160px_1fr] gap-8 lg:gap-12 pb-[120px]">
-            <div className="font-[family-name:var(--font-noto)] text-[15px] font-bold text-text-sub leading-loose">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_100px_1fr] gap-8 lg:gap-6 pb-[120px] items-start">
+            <div className="font-[family-name:var(--font-noto)] text-[17px] font-black text-text leading-[2]">
               지역 주민, 체류자, 기관, 기업이
               <br />
               각자의 역할로 참여하고,
@@ -170,8 +170,8 @@ MODEL IN YANGYANG`}
               <br />
               모두가 연결의 일부가 됩니다.
             </div>
-            <div className="hidden lg:flex items-center justify-center">
-              <WavesArt className="w-[120px] h-[80px]" />
+            <div className="hidden lg:flex items-start justify-center pt-2">
+              <WavesArt className="w-[80px] h-[80px]" />
             </div>
             <div className="lg:text-right">
               <h3 className="font-[family-name:var(--font-karla)] text-[32px] font-extrabold leading-tight whitespace-pre-line">
