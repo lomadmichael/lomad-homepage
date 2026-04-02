@@ -11,7 +11,6 @@ const TAB_ITEMS = [
   { id: "intro", label: "소개" },
   { id: "why", label: "왜 로마드인가" },
   { id: "what", label: "무엇을 하는가" },
-  { id: "people", label: "사람들" },
 ];
 
 const WHAT_CARDS = [
@@ -195,52 +194,11 @@ export default function AboutPage() {
         </section>
       </FadeIn>
 
-      {/* 사람들 Section */}
-      <FadeIn>
-        <section
-          ref={peopleRef}
-          id="people"
-          className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-[80px]"
-        >
-          <h2 className="font-[family-name:var(--font-karla)] text-[28px] md:text-[36px] font-bold mb-2">
-            PEOPLE
-          </h2>
-          <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub mb-[48px]">
-            로마드를 만들어가는 사람들
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-[40px]">
-            {PEOPLE.map((person, idx) => (
-              <div key={idx} className="flex flex-col items-center text-center">
-                <div
-                  className={`w-[120px] h-[120px] rounded-full bg-gradient-to-br ${person.gradient} mb-4`}
-                />
-                <p className="font-[family-name:var(--font-karla)] text-[14px] font-bold">
-                  {person.name}
-                </p>
-                <p className="font-[family-name:var(--font-noto)] text-[12px] text-text-muted mt-1">
-                  {person.role}
-                </p>
-                <p className="font-[family-name:var(--font-noto)] text-[11px] text-text-sub mt-0.5">
-                  {person.specialty}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-      </FadeIn>
-
       {/* CTA */}
       <FadeIn>
-        <section className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-[60px] flex gap-4">
+        <section className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-[60px]">
           <Button variant="primary" href="/contact">
             Contact Us
-          </Button>
-          <Button
-            variant="outline"
-            href="#"
-            className="cursor-pointer"
-          >
-            About Lomad
           </Button>
         </section>
       </FadeIn>
