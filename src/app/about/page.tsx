@@ -15,8 +15,8 @@ const TAB_ITEMS = [
 
 const WHAT_CARDS = [
   {
-    titleEn: "BADLBADL",
-    subtitleKr: "바들바들",
+    titleEn: "바들바들 현남생활",
+    subtitleKr: "체류 프로그램",
     body: "양양 생활인구를 위한 커뮤니티 플랫폼. 서퍼, 디지털 노마드, 이주민이 지역과 연결되는 공간을 만듭니다.",
   },
   {
