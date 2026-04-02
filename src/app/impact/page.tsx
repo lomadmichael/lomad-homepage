@@ -40,7 +40,15 @@ const GALLERY_COLORS = [
   "#C4BEA8",
 ];
 
-const PARTNER_PLACEHOLDERS = Array.from({ length: 6 }, (_, i) => i);
+const PARTNERS = [
+  { src: "/images/partners/partner-01.png", name: "강원특별자치도" },
+  { src: "/images/partners/partner-02.png", name: "양양군" },
+  { src: "/images/partners/partner-03.png", name: "강원농촌융복합산업지원센터" },
+  { src: "/images/partners/partner-04.png", name: "양양군 서핑협회" },
+  { src: "/images/partners/partner-05.png", name: "양양군체육회" },
+  { src: "/images/partners/partner-06.jpg", name: "중소벤처기업부" },
+  { src: "/images/partners/partner-07.png", name: "소상공인진흥공단" },
+];
 
 export default function ImpactPage() {
   const [activeId, setActiveId] = useState("problems");
@@ -207,15 +215,13 @@ export default function ImpactPage() {
             함께하는 파트너
           </p>
 
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-[16px] mb-[48px]">
-            {PARTNER_PLACEHOLDERS.map((_, idx) => (
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-[16px] mb-[48px] items-center">
+            {PARTNERS.map((partner) => (
               <div
-                key={idx}
-                className="bg-[#E5E0DA] h-[80px] flex items-center justify-center rounded"
+                key={partner.name}
+                className="bg-white h-[80px] flex items-center justify-center rounded p-3 grayscale hover:grayscale-0 transition-all duration-300"
               >
-                <span className="font-[family-name:var(--font-noto)] text-[12px] text-text-muted">
-                  로고
-                </span>
+                <Image src={partner.src} alt={partner.name} width={120} height={60} className="object-contain max-h-[50px]" />
               </div>
             ))}
           </div>
