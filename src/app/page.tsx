@@ -68,15 +68,15 @@ export default function Home() {
         </p>
       </section>
 
-      {/* ── Section 2: THE CORE OF OUR WORK ── */}
+      {/* ── Section 2: DESIGNING CONNECTIONS THAT LAST ── */}
       <section className="max-w-[1400px] mx-auto px-6 md:px-[60px] pt-[60px] md:pt-[120px] pb-[50px]">
         <FadeIn>
-          <h2 className="font-[family-name:var(--font-karla)] text-[40px] md:text-[60px] lg:text-[82px] font-extrabold uppercase leading-none lg:whitespace-nowrap">
-            THE CORE OF OUR WORK
+          <h2 className="font-[family-name:var(--font-karla)] text-[40px] md:text-[60px] lg:text-[78px] font-extrabold uppercase leading-[1.05]">
+            DESIGNING CONNECTIONS<br />THAT LAST
           </h2>
           <p className="font-[family-name:var(--font-noto)] text-[15px] font-semibold text-text-sub mt-4">
-            로마드는 지역문제를 현장에서 실행 가능한 프로젝트와 프로그램으로
-            풀어가고 있습니다.
+            로마드는 양양에서 사람과 지역이 만나는 접점을 만들고, 그 만남이
+            관계와 역할로 이어지는 구조를 설계합니다.
           </p>
         </FadeIn>
       </section>
