@@ -19,7 +19,7 @@ export default function Home() {
         {/* Background */}
         {!heroImgError ? (
           <Image
-            src="/images/hero.png"
+            src="/images/hero_02.jpg"
             alt="Yangyang coastal landscape"
             fill
             className="object-cover"
@@ -195,110 +195,51 @@ ECOSYSTEM`}
       {/* ── Section 4: Divider ── */}
       <SectionDivider />
 
-      {/* ── Section 5: WHAT WE DO ── */}
-      <section className="px-6 md:px-[60px] py-[80px]">
+      {/* ── Section 5: CLIENTS & PARTNERS ── */}
+      <section className="px-6 md:px-[60px] py-[80px] max-w-[1400px] mx-auto">
         <FadeIn>
-          <div className="flex items-center gap-5 mb-10">
+          <div className="flex items-center gap-5 mb-4">
             <div className="w-[48px] h-[48px] rounded-full bg-text" />
             <h2 className="font-[family-name:var(--font-karla)] text-[32px] md:text-[42px] font-bold">
-              WHAT WE DO
+              CLIENTS & PARTNERS
             </h2>
           </div>
+          <p className="font-[family-name:var(--font-noto)] text-[14px] font-semibold text-text-sub mb-[48px] ml-[68px]">
+            함께한 기관
+          </p>
         </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-          {/* Card 1 */}
-          <FadeIn delay={0}>
-            <div>
-              <div className="relative h-[260px] overflow-hidden">
-                <Image src="/images/whatwedo-lomad.png" alt="로마드 소개" fill className="object-cover" />
-              </div>
-              <h3 className="font-[family-name:var(--font-karla)] text-[22px] font-bold mt-5">
-                ABOUT LOMAD
-              </h3>
-              <p className="font-[family-name:var(--font-karla)] text-[10px] font-semibold uppercase text-text-muted mt-1">
-                Who We Are & What We Believe
-              </p>
-              <p className="font-[family-name:var(--font-noto)] text-[13px] font-medium text-text-sub mt-3 leading-relaxed">
-                양양을 기반으로 사람과 지역의 연결 구조를 만드는
-                협동조합입니다.
-              </p>
-            </div>
-          </FadeIn>
-
-          {/* Card 2 */}
-          <FadeIn delay={0.1}>
-            <div>
-              <div className="relative h-[260px] overflow-hidden">
-                <Image src="/images/whatwedo-project.png" alt="프로젝트" fill className="object-cover" />
-              </div>
-              <h3 className="font-[family-name:var(--font-karla)] text-[22px] font-bold mt-5">
-                PROJECTS
-              </h3>
-              <p className="font-[family-name:var(--font-karla)] text-[10px] font-semibold uppercase text-text-muted mt-1">
-                Programs & Initiatives
-              </p>
-              <p className="font-[family-name:var(--font-noto)] text-[13px] font-medium text-text-sub mt-3 leading-relaxed">
-                바들바들 체류 프로그램, 부업스쿨, 양양 프로젝트 등 현장에서
-                실행하는 프로그램입니다.
-              </p>
-            </div>
-          </FadeIn>
-
-          {/* Card 3 */}
-          <FadeIn delay={0.2}>
-            <div>
-              <div className="relative h-[260px] overflow-hidden">
-                <Image src="/images/whatwedo-impact.png" alt="임팩트" fill className="object-cover" />
-              </div>
-              <h3 className="font-[family-name:var(--font-karla)] text-[22px] font-bold mt-5">
-                IMPACT
-              </h3>
-              <p className="font-[family-name:var(--font-karla)] text-[10px] font-semibold uppercase text-text-muted mt-1">
-                Results & Partnerships
-              </p>
-              <p className="font-[family-name:var(--font-noto)] text-[13px] font-medium text-text-sub mt-3 leading-relaxed">
-                지역 파트너와 함께 만들어낸 성과와 협업 사례를 소개합니다.
-              </p>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* ── Section 6: Divider ── */}
-      <SectionDivider />
-
-      {/* ── Section 7: CUSTOM HOUSE ── */}
-      <section className="px-6 md:px-[60px] py-[80px]">
         <FadeIn>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
-            <div>
-              <p className="font-[family-name:var(--font-karla)] text-[10px] font-semibold tracking-[3px] uppercase text-text-muted">
-                Local Goods & Production
-              </p>
-              <h2 className="font-[family-name:var(--font-karla)] text-[38px] font-bold mt-2">
-                CUSTOM HOUSE
-              </h2>
-              <p className="font-[family-name:var(--font-noto)] text-[13px] font-medium text-text-sub leading-relaxed mt-4">
-                양양의 로컬 자원을 활용한 상품 기획, 제작, 유통을 담당합니다.
-                <br />
-                지역의 이야기를 담은 굿즈와 브랜드를 만들어
-                <br />
-                양양의 가치를 더 많은 사람에게 전달합니다.
-              </p>
-              <div className="flex gap-4 mt-8">
-                <Button variant="primary">Store</Button>
-                <Button variant="outline">Service</Button>
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-9 gap-[16px] items-center">
+            {[
+              { src: "/images/partners/partner-01.png", name: "강원특별자치도", maxH: "max-h-[45px]" },
+              { src: "/images/partners/partner-02.png", name: "양양군", maxH: "max-h-[35px]" },
+              { src: "/images/partners/partner-03.png", name: "강원농촌융복합산업지원센터", maxH: "max-h-[45px]" },
+              { src: "/images/partners/partner-04.png", name: "양양군 서핑협회", maxH: "max-h-[35px]" },
+              { src: "/images/partners/partner-05.png", name: "양양군체육회", maxH: "max-h-[45px]" },
+              { src: "/images/partners/partner-08.png", name: "파트너 8", maxH: "max-h-[45px]" },
+              { src: "/images/partners/partner-09.png", name: "파트너 9", maxH: "max-h-[45px]" },
+              { src: "/images/partners/partner-10.png", name: "파트너 10", maxH: "max-h-[45px]" },
+              { src: "/images/partners/partner-11.png", name: "파트너 11", maxH: "max-h-[45px]" },
+            ].map((partner) => (
+              <div
+                key={partner.src}
+                className="bg-white h-[80px] flex items-center justify-center rounded p-3 grayscale hover:grayscale-0 transition-all duration-300"
+              >
+                <Image
+                  src={partner.src}
+                  alt={partner.name}
+                  width={140}
+                  height={70}
+                  className={`object-contain ${partner.maxH}`}
+                />
               </div>
-            </div>
-            <div className="relative h-[260px] overflow-hidden bg-white flex items-center justify-center">
-              <Image src="/images/customhouse.jpg" alt="커스텀하우스" width={400} height={400} className="object-contain" />
-            </div>
+            ))}
           </div>
         </FadeIn>
       </section>
 
-      {/* ── Section 8: Divider ── */}
+      {/* ── Divider ── */}
       <SectionDivider />
 
       {/* ── Section 9: CTA ── */}

@@ -12,7 +12,6 @@ const TAB_ITEMS = [
   { id: "problems", label: "우리가 다루는 문제" },
   { id: "change", label: "우리가 만든 변화" },
   { id: "records", label: "기록" },
-  { id: "partners", label: "파트너" },
 ];
 
 const PROBLEMS = [
@@ -40,29 +39,17 @@ const RECORD_IMAGES = [
   "/images/records/record-06.jpg",
 ];
 
-const PARTNERS = [
-  { src: "/images/partners/partner-01.png", name: "강원특별자치도", maxH: "max-h-[45px]" },
-  { src: "/images/partners/partner-02.png", name: "양양군", maxH: "max-h-[35px]" },
-  { src: "/images/partners/partner-03.png", name: "강원농촌융복합산업지원센터", maxH: "max-h-[45px]" },
-  { src: "/images/partners/partner-04.png", name: "양양군 서핑협회", maxH: "max-h-[35px]" },
-  { src: "/images/partners/partner-05.png", name: "양양군체육회", maxH: "max-h-[45px]" },
-  { src: "/images/partners/partner-06.jpg", name: "중소벤처기업부", maxH: "max-h-[55px]" },
-  { src: "/images/partners/partner-07.png", name: "소상공인진흥공단", maxH: "max-h-[55px]" },
-];
-
 export default function ImpactPage() {
   const [activeId, setActiveId] = useState("problems");
   const [recordTab, setRecordTab] = useState("사진");
   const problemsRef = useRef<HTMLDivElement>(null);
   const changeRef = useRef<HTMLDivElement>(null);
   const recordsRef = useRef<HTMLDivElement>(null);
-  const partnersRef = useRef<HTMLDivElement>(null);
 
   const sectionRefs: Record<string, React.RefObject<HTMLDivElement | null>> = {
     problems: problemsRef,
     change: changeRef,
     records: recordsRef,
-    partners: partnersRef,
   };
 
   const handleTabChange = (id: string) => {
@@ -199,36 +186,6 @@ export default function ImpactPage() {
         </section>
       </FadeIn>
 
-      {/* 파트너 Section */}
-      <FadeIn>
-        <section
-          ref={partnersRef}
-          id="partners"
-          className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-[80px] mb-[100px]"
-        >
-          <h2 className="font-[family-name:var(--font-karla)] text-[32px] font-bold mb-2">
-            PARTNERS
-          </h2>
-          <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub mb-[48px]">
-            함께하는 파트너
-          </p>
-
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-[16px] mb-[48px] items-center">
-            {PARTNERS.map((partner) => (
-              <div
-                key={partner.name}
-                className="bg-white h-[80px] flex items-center justify-center rounded p-3 grayscale hover:grayscale-0 transition-all duration-300"
-              >
-                <Image src={partner.src} alt={partner.name} width={140} height={70} className={`object-contain ${partner.maxH}`} />
-              </div>
-            ))}
-          </div>
-
-          <Button variant="primary" href="/contact">
-            문의하기
-          </Button>
-        </section>
-      </FadeIn>
     </main>
   );
 }

@@ -153,21 +153,22 @@ export default function ProjectsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
               {/* Text */}
               <div className="flex flex-col justify-center">
-                <p className="font-[family-name:var(--font-karla)] text-[28px] font-bold uppercase tracking-tight">
-                  현남부업스쿨
+                <p className="font-[family-name:var(--font-noto)] text-[28px] font-black tracking-tight">
+                  부업스쿨
                 </p>
                 <p className="font-[family-name:var(--font-noto)] text-[13px] font-semibold text-text-sub mt-1">
-                  실전 수익화 교육 프로그램
+                  지역 정착을 위한 AI 활용 실험형 프로그램
                 </p>
                 <h2 className="font-[family-name:var(--font-noto)] text-[16px] font-black leading-snug mt-5">
-                  배우고 실제로 해보는 과정까지
+                  지금의 일과 삶에 AI를 어떻게
                   <br />
-                  연결합니다.
+                  연결할 수 있을지 직접 탐색합니다.
                 </h2>
                 <p className="font-[family-name:var(--font-noto)] text-[13px] text-text-sub leading-relaxed mt-4">
-                  AI 음원 · AI 쇼츠 · 쇼핑 쇼츠 · 디지털 상품 등 실제 수익을 만들
-                  수 있는 기술을 배우고, 직접 실행해보는 프로그램입니다. 단순
-                  강의가 아닌 실전 프로젝트를 통해 결과물을 만들어냅니다.
+                  왜 지금 AI를 이해하고 활용해야 하는지 함께 살펴보고, 각자의
+                  관심사와 생활 방식에 맞는 가능성을 실험해보는 프로그램입니다.
+                  정해진 답을 바로 제시하는 강의가 아니라, 변화하는 환경 속에서
+                  스스로 방향을 찾고 다음 단계를 구상해보는 경험을 제공합니다.
                 </p>
 
                 {/* Buttons */}
