@@ -37,6 +37,20 @@ export const metadata: Metadata = {
     siteName: "로마드 협동조합",
     locale: "ko_KR",
     type: "website",
+    images: [
+      {
+        url: "https://lomadcoop.com/images/lomad-logo.png",
+        width: 1200,
+        height: 630,
+        alt: "로마드 협동조합",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "로마드 협동조합",
+    description: "양양에서 관계를 만들고, 역할을 연결합니다.",
+    images: ["https://lomadcoop.com/images/lomad-logo.png"],
   },
 };
 
