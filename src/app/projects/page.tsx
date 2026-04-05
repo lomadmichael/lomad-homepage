@@ -9,7 +9,7 @@ import CountUp from "@/components/ui/CountUp";
 import Image from "next/image";
 
 const TAB_ITEMS = [
-  { id: "badlbadl", label: "바들바들" },
+  { id: "badlbadl", label: "바들바들 현남생활" },
   { id: "buupschool", label: "부업스쿨" },
   { id: "collaborations", label: "함께한 프로젝트" },
 ];
@@ -139,9 +139,13 @@ export default function ProjectsPage() {
                 </div>
 
                 {/* Buttons */}
-                <div className="flex gap-3 mt-8">
-                  <Button variant="primary">참가 신청</Button>
-                  <Button variant="outline">문의하기</Button>
+                <div className="flex flex-wrap gap-3 mt-8">
+                  <Button variant="primary" href="https://likehn.kr/">
+                    현남생활 홈페이지
+                  </Button>
+                  <Button variant="outline" href="https://www.instagram.com/likehn.kr">
+                    Instagram
+                  </Button>
                 </div>
               </div>
             </div>
