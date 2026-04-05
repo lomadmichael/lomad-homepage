@@ -190,7 +190,7 @@ ECOSYSTEM`}
             CLIENTS & PARTNERS
           </h2>
           <p className="font-[family-name:var(--font-noto)] text-[14px] font-semibold text-text-sub mb-[48px]">
-            함께한 기관
+            함께한 파트너
           </p>
         </FadeIn>
 

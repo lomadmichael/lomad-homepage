@@ -15,7 +15,7 @@ const TAB_ITEMS = [
 const SERVICE_CARDS = [
   {
     titleEn: "ARTIST COLLABORATION",
-    body: "양양의 아티스트, 서퍼, 크리에이터와 협업하여 지역의 감각을 담은 디자인을 만듭니다.",
+    body: "아티스트, 크리에이터, 서퍼와 협업하여 양양의 감각을 담은 디자인을 만듭니다.",
   },
   {
     titleEn: "CUSTOM ORDER",
@@ -23,7 +23,7 @@ const SERVICE_CARDS = [
   },
   {
     titleEn: "POP-UP & EVENTS",
-    body: "양양의 공간에서 팝업 스토어와 이벤트를 기획하고 운영합니다. 오프라인에서 만나는 로컬 굿즈.",
+    body: "양양의 공간에서 팝업 스토어와 이벤트를 기획하고 운영합니다.",
   },
 ];
 
@@ -54,7 +54,7 @@ export default function CustomHousePage() {
       <PageHero
         labelEn="Local Goods & Production"
         titleEn="CUSTOM HOUSE"
-        subtitleKr="양양의 풍경과 감각, 지역의 작업을 하나의 상품으로 연결합니다."
+        subtitleKr="양양의 로컬 자원을 활용한 상품 기획, 제작, 유통을 통해 지역의 이야기를 담은 굿즈와 브랜드를 만들어 양양의 가치를 더 많은 사람에게 전달합니다."
       />
 
       <TabNav
