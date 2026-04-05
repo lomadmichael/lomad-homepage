@@ -198,13 +198,10 @@ ECOSYSTEM`}
       {/* ── Section 5: CLIENTS & PARTNERS ── */}
       <section className="px-6 md:px-[60px] py-[80px] max-w-[1400px] mx-auto">
         <FadeIn>
-          <div className="flex items-center gap-5 mb-4">
-            <div className="w-[48px] h-[48px] rounded-full bg-text" />
-            <h2 className="font-[family-name:var(--font-karla)] text-[32px] md:text-[42px] font-bold">
-              CLIENTS & PARTNERS
-            </h2>
-          </div>
-          <p className="font-[family-name:var(--font-noto)] text-[14px] font-semibold text-text-sub mb-[48px] ml-[68px]">
+          <h2 className="font-[family-name:var(--font-karla)] text-[32px] md:text-[42px] font-bold mb-4">
+            CLIENTS & PARTNERS
+          </h2>
+          <p className="font-[family-name:var(--font-noto)] text-[14px] font-semibold text-text-sub mb-[48px]">
             함께한 기관
           </p>
         </FadeIn>
