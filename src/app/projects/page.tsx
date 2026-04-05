@@ -108,9 +108,10 @@ export default function ProjectsPage() {
                   다시 찾고 관계를 맺는 곳으로.
                 </h2>
                 <p className="font-[family-name:var(--font-noto)] text-[13px] text-text-sub leading-relaxed mt-4">
-                  바들바들은 양양 현남에서 운영하는 로컬 체류형 프로그램입니다.
-                  단순한 여행이 아닌, 지역 사람들과 관계를 맺고 일상을 나누며
-                  새로운 가능성을 발견하는 경험을 제공합니다.
+                  바들바들은 양양군 현남면에서 운영되는 로컬 체류형
+                  프로그램입니다. 단순한 여행이 아닌, 지역 사람들과 관계를
+                  맺고 일상을 나누며 새로운 가능성을 발견하는 경험을
+                  제공합니다.
                 </p>
 
                 {/* Stats */}
