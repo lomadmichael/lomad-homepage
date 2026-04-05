@@ -4,8 +4,6 @@ import Image from "next/image";
 import Button from "@/components/ui/Button";
 import FadeIn from "@/components/ui/FadeIn";
 import SectionDivider from "@/components/ui/SectionDivider";
-import RaysArt from "@/components/svg/RaysArt";
-import EllipsesArt from "@/components/svg/EllipsesArt";
 import WavesArt from "@/components/svg/WavesArt";
 import { useState } from "react";
 
@@ -38,16 +36,6 @@ export default function Home() {
 
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/35" />
-
-        {/* Line art overlays */}
-        <RaysArt
-          className="absolute top-10 right-6 md:right-20 w-[160px] md:w-[260px] h-[160px] md:h-[260px] opacity-[0.08]"
-          color="white"
-        />
-        <EllipsesArt
-          className="absolute bottom-16 left-6 md:left-20 w-[120px] md:w-[200px] h-[90px] md:h-[140px] opacity-[0.06]"
-          color="white"
-        />
 
         {/* Centered content */}
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white">
