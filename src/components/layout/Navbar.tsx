@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Button from "@/components/ui/Button";
 
 const navLinks = [
@@ -19,11 +20,15 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 flex items-center justify-between px-6 md:px-[60px] py-[18px] bg-bg/95 backdrop-blur-xl border-b border-border/60">
       {/* Logo */}
-      <Link href="/" className="flex items-center gap-3">
-        <span className="block w-[22px] h-[22px] rounded-full bg-text" />
-        <span className="font-[family-name:var(--font-karla)] text-[18px] font-extrabold tracking-[2px] uppercase">
-          LOMAD
-        </span>
+      <Link href="/" className="flex items-center">
+        <Image
+          src="/images/logo-new-01.png"
+          alt="LOMAD"
+          width={160}
+          height={40}
+          className="h-[40px] w-auto object-contain"
+          priority
+        />
       </Link>
 
       {/* Desktop links */}
