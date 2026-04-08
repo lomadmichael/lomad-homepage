@@ -21,7 +21,7 @@ const WHAT_CARDS = [
     bodyExtra: "",
   },
   {
-    titleEn: "부업스쿨",
+    titleEn: "Ai 내일바꿈",
     subtitleKr: "AI 활용 실험형 프로그램",
     body: "지역에 머물고 싶지만 일과 소득의 기반이 부족한 사람을 위해, AI를 활용해 지속가능한 수입원을 스스로 만들어볼 수 있도록 돕습니다.",
     bodyExtra: "",

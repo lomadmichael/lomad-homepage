@@ -10,7 +10,7 @@ import Image from "next/image";
 
 const TAB_ITEMS = [
   { id: "badlbadl", label: "바들바들 현남생활" },
-  { id: "buupschool", label: "부업스쿨" },
+  { id: "buupschool", label: "Ai 내일바꿈" },
   { id: "collaborations", label: "함께한 프로젝트" },
 ];
 
@@ -159,7 +159,7 @@ export default function ProjectsPage() {
               {/* Text */}
               <div className="flex flex-col justify-center">
                 <p className="font-[family-name:var(--font-noto)] text-[28px] font-black tracking-tight">
-                  부업스쿨
+                  Ai 내일바꿈
                 </p>
                 <p className="font-[family-name:var(--font-noto)] text-[13px] font-semibold text-text-sub mt-1">
                   지역 정착을 위한 AI 활용 실험형 프로그램
@@ -185,7 +185,7 @@ export default function ProjectsPage() {
 
               {/* Image */}
               <div className="relative h-[360px] rounded-lg overflow-hidden bg-white flex items-center justify-center">
-                <Image src="/images/buup.jpg" alt="부업스쿨" width={400} height={400} className="object-contain" />
+                <Image src="/images/buup.jpg" alt="Ai 내일바꿈" width={400} height={400} className="object-contain" />
               </div>
             </div>
           </section>
