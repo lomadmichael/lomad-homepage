@@ -26,7 +26,7 @@ export default function Navbar() {
           alt="LOMAD"
           width={160}
           height={40}
-          className="h-[40px] w-auto object-contain"
+          className="h-[44px] w-auto object-contain"
           priority
         />
       </Link>
