@@ -22,7 +22,7 @@ export default function Navbar() {
       {/* Logo */}
       <Link href="/" className="flex items-center">
         <Image
-          src="/images/logo-new-01.png"
+          src="/images/logo-new-03.png"
           alt="LOMAD"
           width={160}
           height={40}
