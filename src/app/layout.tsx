@@ -20,19 +20,39 @@ const notoSansKR = Noto_Sans_KR({
 
 export const metadata: Metadata = {
   title: {
-    default: "로마드 협동조합 | 양양 생활인구 연결 플랫폼",
+    default: "로마드 협동조합 | 양양의 자원을, 작동하는 프로젝트로",
     template: "%s | 로마드 협동조합",
   },
-  description: "로마드 협동조합은 양양에서 관계를 만들고, 역할을 연결합니다. 체류 프로그램·프로젝트·상품화로 사람과 지역을 잇습니다.",
-  keywords: ["로마드", "로마드협동조합", "양양", "생활인구", "체류프로그램", "바들바들", "바들바들 현남생활", "현남생활", "Ai 내일바꿈", "내일바꿈", "커스텀하우스", "커스텀 하우스", "양양협동조합", "양양 로컬", "양양 체류"],
+  description:
+    "로마드는 양양과 해안생활권의 자원을 프로그램·교육·관광·상품·협업 구조로 전환하는 실행형 지역기획 조직입니다.",
+  keywords: [
+    "로마드",
+    "로마드협동조합",
+    "양양",
+    "해안생활권",
+    "지역기획",
+    "체류프로그램",
+    "생태관광",
+    "해양생태관광",
+    "해양레저창업",
+    "바들바들",
+    "바들바들 현남생활",
+    "Ai 내일바꿈",
+    "커스텀하우스",
+    "협회 홈페이지 제작",
+    "비영리 사업화",
+    "양양협동조합",
+  ],
   verification: {
     other: {
-      "naver-site-verification": "367a738cad567988254bb843f346af7477c54efb",
+      "naver-site-verification":
+        "367a738cad567988254bb843f346af7477c54efb",
     },
   },
   openGraph: {
-    title: "로마드 협동조합 | 양양에서 관계를 만들고, 역할을 연결합니다",
-    description: "체류 프로그램, 프로젝트, 상품화를 통해 사람과 지역이 더 오래 연결되는 구조를 만듭니다.",
+    title: "로마드 협동조합 | 양양의 자원을, 작동하는 프로젝트로",
+    description:
+      "체류 프로그램, 교육, 관광, 상품, 협업 구조를 통해 사람과 지역이 더 오래 연결되는 방식을 만듭니다.",
     url: "https://lomadcoop.com",
     siteName: "로마드 협동조합",
     locale: "ko_KR",
@@ -48,8 +68,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "로마드 협동조합",
-    description: "양양에서 관계를 만들고, 역할을 연결합니다.",
+    title: "로마드 협동조합 | 양양의 자원을, 작동하는 프로젝트로",
+    description:
+      "양양과 해안생활권의 자원을 프로그램·교육·관광·상품·협업 구조로 전환하는 실행형 지역기획 조직.",
     images: ["https://lomadcoop.com/images/lomad-logo.png"],
   },
 };

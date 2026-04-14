@@ -6,79 +6,37 @@ import PageHero from "@/components/ui/PageHero";
 import TabNav from "@/components/ui/TabNav";
 import Button from "@/components/ui/Button";
 import FadeIn from "@/components/ui/FadeIn";
+import { SERVICES } from "@/data/services";
 
 const TAB_ITEMS = [
-  { id: "intro", label: "소개" },
-  { id: "why", label: "왜 로마드인가" },
-  { id: "what", label: "무엇을 하는가" },
+  { id: "who", label: "Who We Are" },
+  { id: "why", label: "Why We Exist" },
+  { id: "how", label: "How We Work" },
+  { id: "yangyang", label: "Why Yangyang" },
+  { id: "partners", label: "Who We Work With" },
 ];
 
-const WHAT_CARDS = [
-  {
-    titleEn: "바들바들 현남생활",
-    subtitleKr: "체류 프로그램",
-    body: "양양을 잠깐 스쳐가는 곳이 아니라, 다시 찾고 관계를 맺는 곳으로 경험하게 합니다.",
-    bodyExtra: "",
-  },
-  {
-    titleEn: "Ai 내일바꿈",
-    subtitleKr: "AI 활용 실험형 프로그램",
-    body: "지역에 머물고 싶지만 일과 소득의 기반이 부족한 사람을 위해, AI를 활용해 지속가능한 수입원을 스스로 만들어볼 수 있도록 돕습니다.",
-    bodyExtra: "",
-  },
-  {
-    titleEn: "COLLABORATIONS",
-    subtitleKr: "함께한 프로젝트",
-    body: "강원도, 양양군, 지역 기업과의 협업 프로젝트. 생활인구 정책과 지역 활성화를 함께 설계합니다.",
-    bodyExtra: "",
-  },
-  {
-    titleEn: "CUSTOM HOUSE",
-    subtitleKr: "커스텀하우스",
-    body: "양양의 로컬 자원을 활용한 상품 기획, 제작, 유통을 담당합니다. 지역의 이야기를 담은 굿즈와 브랜드를 만들어 양양의 가치를 더 많은 사람들에게 전달합니다.",
-    bodyExtra: "",
-  },
-];
-
-const PEOPLE = [
-  {
-    name: "MICHAEL HONG",
-    role: "대표",
-    specialty: "기획 / 사업개발",
-    gradient: "from-[#8BAFBE] to-[#5B8FA8]",
-  },
-  {
-    name: "TEAM MEMBER",
-    role: "실무진",
-    specialty: "커뮤니티 / 운영",
-    gradient: "from-[#A8C4B8] to-[#6B9E8A]",
-  },
-  {
-    name: "TEAM MEMBER",
-    role: "실무진",
-    specialty: "디자인 / 브랜딩",
-    gradient: "from-[#BEA8C4] to-[#8A6B9E]",
-  },
-  {
-    name: "TEAM MEMBER",
-    role: "실무진",
-    specialty: "개발 / 기술",
-    gradient: "from-[#C4BEA8] to-[#9E8A6B]",
-  },
+const PARTNER_CATEGORIES = [
+  { titleEn: "Government", titleKr: "지자체 · 공공기관" },
+  { titleEn: "Associations", titleKr: "협회 · 단체" },
+  { titleEn: "Education", titleKr: "교육기관 · 연구기관" },
+  { titleEn: "Private", titleKr: "민간 파트너 · 지역 브랜드" },
 ];
 
 export default function AboutPage() {
-  const [activeId, setActiveId] = useState("intro");
-  const introRef = useRef<HTMLDivElement>(null);
+  const [activeId, setActiveId] = useState("who");
+  const whoRef = useRef<HTMLDivElement>(null);
   const whyRef = useRef<HTMLDivElement>(null);
-  const whatRef = useRef<HTMLDivElement>(null);
-  const peopleRef = useRef<HTMLDivElement>(null);
+  const howRef = useRef<HTMLDivElement>(null);
+  const yangyangRef = useRef<HTMLDivElement>(null);
+  const partnersRef = useRef<HTMLDivElement>(null);
 
   const sectionRefs: Record<string, React.RefObject<HTMLDivElement | null>> = {
-    intro: introRef,
+    who: whoRef,
     why: whyRef,
-    what: whatRef,
-    people: peopleRef,
+    how: howRef,
+    yangyang: yangyangRef,
+    partners: partnersRef,
   };
 
   const handleTabChange = (id: string) => {
@@ -88,51 +46,51 @@ export default function AboutPage() {
 
   return (
     <main>
-      {/* Hero */}
       <PageHero
-        titleEn="ABOUT LOMAD"
-        subtitleKr="양양의 생활인구와 지역을 연결하는 협동조합"
+        labelEn="About LOMAD"
+        titleEn="양양의 자원을, 작동하는 프로젝트로"
+        subtitleKr="로마드는 양양과 해안생활권의 사람, 공간, 이야기, 자원을 발굴해 체류 프로그램, 교육, 관광, 상품, 협업 사업으로 전환하는 실행형 지역기획 조직입니다."
       />
 
-      {/* Tab Navigation */}
       <TabNav
         items={TAB_ITEMS}
         activeId={activeId}
         onTabChange={handleTabChange}
       />
 
-      {/* 소개 Section */}
+      {/* 1. Who We Are */}
       <FadeIn>
         <section
-          ref={introRef}
-          id="intro"
+          ref={whoRef}
+          id="who"
           className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-[80px]"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-[60px] items-center">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 md:gap-16">
             <div>
-              <h2 className="font-[family-name:var(--font-noto)] text-[24px] font-black mb-6">
-                로마드 협동조합
+              <p className="font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[2px] uppercase text-text-muted mb-3">
+                01 — Who We Are
+              </p>
+              <h2 className="font-[family-name:var(--font-noto)] text-[24px] md:text-[28px] font-black leading-snug">
+                로마드는 무엇을 하는 조직인가
               </h2>
-              <p className="font-[family-name:var(--font-noto)] text-[14px] leading-[1.8] text-text-sub">
-                로마드 협동조합은 강원도 양양의 생활인구, 관계인구, 지역
-                청년이 지역 안에서 관계를 맺고 역할을 만들 수 있도록 기획하고
-                운영하는 협동조합입니다.
-              </p>
-              <p className="font-[family-name:var(--font-noto)] text-[14px] leading-[1.8] text-text-sub mt-4">
-                우리는 생활인구가 단순한 방문자가 아닌, 지역의 일원으로서
-                경제적 가치를 창출하고 문화적 다양성을 더할 수 있다고
-                믿습니다. 이를 위해 커뮤니티, 교육, 공간, 정책 등 다양한
-                영역에서 프로젝트를 운영하고 있습니다.
-              </p>
             </div>
-            <div className="relative h-[320px] rounded-2xl overflow-hidden">
-              <Image src="/images/lomad-logo.png" alt="로마드 로고" fill className="object-contain" />
+            <div>
+              <p className="font-[family-name:var(--font-noto)] text-[15px] md:text-[16px] font-semibold leading-[1.9] text-text mb-5">
+                양양과 해안생활권의 사람, 공간, 이야기, 자원을 발굴해 체류
+                프로그램, 교육, 관광, 상품, 협업 사업으로 전환하는 실행형
+                지역기획 조직입니다.
+              </p>
+              <p className="font-[family-name:var(--font-noto)] text-[14px] leading-[1.9] text-text-sub">
+                프로젝트를 나열하는 조직이 아니라, 지역 자원을 프로그램과
+                사업으로 연결하는 구조를 설계하고 직접 운영합니다. 기획만
+                하지 않고 운영까지 책임집니다.
+              </p>
             </div>
           </div>
         </section>
       </FadeIn>
 
-      {/* 왜 로마드인가 Section */}
+      {/* 2. Why We Exist */}
       <FadeIn>
         <section
           ref={whyRef}
@@ -140,25 +98,110 @@ export default function AboutPage() {
           className="w-full bg-[#2C4A5E] py-[80px]"
         >
           <div className="max-w-[1400px] mx-auto px-6 md:px-[60px]">
-            <h2 className="font-[family-name:var(--font-karla)] text-[28px] md:text-[36px] font-bold text-white mb-4">
-              WHY LOMAD
-            </h2>
-            <p className="font-[family-name:var(--font-noto)] text-[18px] font-bold text-white/80 mb-[48px]">
-              생활인구는 지역의 미래입니다. 하지만 아직 연결이 부족합니다.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-[40px]">
-              <div className="border-l-2 border-white/30 pl-6">
-                <p className="font-[family-name:var(--font-noto)] text-[14px] leading-[1.8] text-white/80">
-                  양양에는 매년 수만 명의 생활인구가 찾아오지만, 대부분은
-                  지역과 깊이 연결되지 못한 채 떠납니다. 지역에는 인구가
-                  줄고, 찾아오는 사람들은 머물 이유를 찾지 못합니다.
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 md:gap-16">
+              <div>
+                <p className="font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[2px] uppercase text-white/60 mb-3">
+                  02 — Why We Exist
                 </p>
+                <h2 className="font-[family-name:var(--font-noto)] text-[24px] md:text-[28px] font-black text-white leading-snug">
+                  왜 이 일을 하는가
+                </h2>
               </div>
-              <div className="border-l-2 border-white/30 pl-6">
-                <p className="font-[family-name:var(--font-noto)] text-[14px] leading-[1.8] text-white/80">
-                  로마드는 이 간극을 메웁니다. 생활인구와 지역 주민이
-                  함께 만드는 커뮤니티, 함께 배우는 교육, 함께 일하는
-                  공간을 통해 양양을 '살고 싶은 지역'으로 바꿔갑니다.
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-[40px]">
+                <div className="border-l-2 border-white/30 pl-6">
+                  <p className="font-[family-name:var(--font-noto)] text-[14px] leading-[1.9] text-white/85">
+                    양양에는 매년 수많은 사람이 찾아오지만, 대부분 지역과
+                    깊이 연결되지 못한 채 떠납니다. 지역 인구는 줄고, 자원은
+                    소진됩니다.
+                  </p>
+                </div>
+                <div className="border-l-2 border-white/30 pl-6">
+                  <p className="font-[family-name:var(--font-noto)] text-[14px] leading-[1.9] text-white/85">
+                    로마드는 이 간극을 구조로 메웁니다. 체류·교육·관광·상품·
+                    협업 사업을 통해 사람과 지역이 더 오래 연결되는 방식을
+                    만듭니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </FadeIn>
+
+      {/* 3. How We Work */}
+      <FadeIn>
+        <section
+          ref={howRef}
+          id="how"
+          className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-[80px]"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 md:gap-16">
+            <div>
+              <p className="font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[2px] uppercase text-text-muted mb-3">
+                03 — How We Work
+              </p>
+              <h2 className="font-[family-name:var(--font-noto)] text-[24px] md:text-[28px] font-black leading-snug">
+                어떻게 일하는가
+              </h2>
+            </div>
+            <div>
+              <p className="font-[family-name:var(--font-noto)] text-[14px] leading-[1.9] text-text-sub mb-8">
+                현장에서 출발해 구조로 남깁니다. 기획–운영–교육–브랜딩–협업
+                실행까지 하나의 흐름 안에서 연결합니다.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                {SERVICES.map((service, idx) => (
+                  <div
+                    key={service.id}
+                    className="border-l-2 border-text pl-4 py-2"
+                  >
+                    <p className="font-[family-name:var(--font-karla)] text-[10px] font-extrabold tracking-[1.5px] uppercase text-text-muted mb-2">
+                      0{idx + 1}
+                    </p>
+                    <p className="font-[family-name:var(--font-noto)] text-[14px] font-black leading-snug mb-2">
+                      {service.titleKr}
+                    </p>
+                    <p className="font-[family-name:var(--font-noto)] text-[12px] leading-relaxed text-text-sub">
+                      {service.tagline}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      </FadeIn>
+
+      {/* 4. Why Yangyang — 중요 섹션 */}
+      <FadeIn>
+        <section
+          ref={yangyangRef}
+          id="yangyang"
+          className="w-full bg-[color:var(--color-warm-beige,#F0EDE8)] py-[80px]"
+        >
+          <div className="max-w-[1400px] mx-auto px-6 md:px-[60px]">
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 md:gap-16">
+              <div>
+                <p className="font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[2px] uppercase text-text-muted mb-3">
+                  04 — Why Yangyang
+                </p>
+                <h2 className="font-[family-name:var(--font-noto)] text-[24px] md:text-[28px] font-black leading-snug">
+                  왜 양양인가
+                </h2>
+              </div>
+              <div>
+                <p className="font-[family-name:var(--font-noto)] text-[16px] md:text-[17px] font-bold leading-[1.9] text-text mb-6">
+                  양양은 관광지나 배경이 아닙니다. 해안생활권의 사람·산업·
+                  문화·자연이 교차하는 현장입니다.
+                </p>
+                <p className="font-[family-name:var(--font-noto)] text-[14px] leading-[1.9] text-text-sub mb-4">
+                  로마드는 양양을 소비하지 않고 오래 다룹니다. 지역의 사람을
+                  이해하고, 공간을 읽고, 자원을 구조로 연결하는 방법을 현장에서
+                  학습해 왔습니다.
+                </p>
+                <p className="font-[family-name:var(--font-noto)] text-[14px] leading-[1.9] text-text-sub">
+                  이 현장 기반의 이해가 로마드의 지역 진정성을 만드는 핵심이며,
+                  실제 프로젝트 실행 역량의 바탕입니다.
                 </p>
               </div>
             </div>
@@ -166,48 +209,69 @@ export default function AboutPage() {
         </section>
       </FadeIn>
 
-      {/* 무엇을 하는가 Section */}
+      {/* 5. Who We Work With */}
       <FadeIn>
         <section
-          ref={whatRef}
-          id="what"
+          ref={partnersRef}
+          id="partners"
           className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-[80px]"
         >
-          <h2 className="font-[family-name:var(--font-karla)] text-[28px] md:text-[36px] font-bold mb-2">
-            WHAT WE DO
-          </h2>
-          <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub mb-[48px]">
-            생활인구와 지역을 연결하는 네 가지 축
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[60px] gap-y-[40px]">
-            {WHAT_CARDS.map((card) => (
-              <div key={card.titleEn} className="pb-[24px] border-b border-border">
-                <h3 className="font-[family-name:var(--font-karla)] text-[18px] font-bold mb-1">
-                  {card.titleEn}
-                </h3>
-                <p className="font-[family-name:var(--font-noto)] text-[12px] text-text-muted mb-3">
-                  {card.subtitleKr}
-                </p>
-                <p className="font-[family-name:var(--font-noto)] text-[13px] leading-[1.7] text-text-sub">
-                  {card.body}
-                </p>
-                {card.bodyExtra && (
-                  <p className="font-[family-name:var(--font-noto)] text-[13px] leading-[1.7] text-text-sub mt-3">
-                    {card.bodyExtra}
-                  </p>
-                )}
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 md:gap-16">
+            <div>
+              <p className="font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[2px] uppercase text-text-muted mb-3">
+                05 — Who We Work With
+              </p>
+              <h2 className="font-[family-name:var(--font-noto)] text-[24px] md:text-[28px] font-black leading-snug">
+                누구와 함께하는가
+              </h2>
+            </div>
+            <div>
+              <p className="font-[family-name:var(--font-noto)] text-[14px] leading-[1.9] text-text-sub mb-8">
+                지자체·공공기관·협회·교육기관·민간 파트너가 각자의 자리에서
+                로마드와 연결되는 지점을 만듭니다.
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                {PARTNER_CATEGORIES.map((cat) => (
+                  <div
+                    key={cat.titleEn}
+                    className="pb-5 border-b border-border"
+                  >
+                    <p className="font-[family-name:var(--font-karla)] text-[10px] font-extrabold tracking-[1.5px] uppercase text-text-muted mb-2">
+                      {cat.titleEn}
+                    </p>
+                    <p className="font-[family-name:var(--font-noto)] text-[14px] font-black leading-snug">
+                      {cat.titleKr}
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
+              <div className="relative h-[200px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/lomad-logo.png"
+                  alt="로마드 로고"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </div>
           </div>
         </section>
       </FadeIn>
 
       {/* CTA */}
       <FadeIn>
-        <section className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-[60px]">
-          <Button variant="primary" href="/contact">
-            Contact Us
-          </Button>
+        <section className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-[80px] text-center border-t border-border">
+          <h2 className="font-[family-name:var(--font-noto)] text-[22px] md:text-[28px] font-black mb-5">
+            로마드와 함께 일해 보시겠어요?
+          </h2>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Button variant="primary" href="/what-we-do">
+              사업영역 보기
+            </Button>
+            <Button variant="outline" href="/contact">
+              문의하기
+            </Button>
+          </div>
         </section>
       </FadeIn>
     </main>

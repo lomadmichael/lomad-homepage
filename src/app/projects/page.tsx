@@ -1,231 +1,119 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import PageHero from "@/components/ui/PageHero";
-import TabNav from "@/components/ui/TabNav";
 import Button from "@/components/ui/Button";
 import FadeIn from "@/components/ui/FadeIn";
-import CountUp from "@/components/ui/CountUp";
-import Image from "next/image";
+import { PROJECTS } from "@/data/projects";
+import { SERVICES, type ServiceId } from "@/data/services";
 
-const TAB_ITEMS = [
-  { id: "badlbadl", label: "바들바들 현남생활" },
-  { id: "buupschool", label: "Ai 내일바꿈" },
-  { id: "collaborations", label: "함께한 프로젝트" },
-];
+type FilterValue = "all" | ServiceId;
 
-const COLLAB_CARDS = [
-  {
-    title: "찾아가는 새참모임",
-    image: "/images/collabo-01.png",
-    description:
-      "지역 주민과 함께하는 소규모 모임을 통해 현장의 이야기를 듣고 공유합니다.",
-  },
-  {
-    title: "현남 고민 수집소",
-    image: "/images/collabo-02.jpg",
-    description:
-      "주민들의 일상 고민을 수집하고, 함께 해결 방법을 모색하는 프로젝트입니다.",
-  },
-  {
-    title: "기업 워케이션",
-    image: "/images/collabo-03.png",
-    description:
-      "기업 팀 단위의 워케이션 프로그램을 기획하고 운영합니다.",
-  },
-  {
-    title: "대회·행사 운영",
-    image: "/images/collabo-04.png",
-    description:
-      "지역 기반의 대회와 행사를 기획부터 운영까지 함께합니다.",
-  },
-  {
-    title: "브랜딩·콘텐츠",
-    image: "/images/collabo-05.jpg",
-    description:
-      "지역과 브랜드의 이야기를 콘텐츠로 만들어 전달합니다.",
-  },
-  {
-    title: "주민 교류 프로그램",
-    image: "/images/collabo-06.jpg",
-    description:
-      "지역 주민 간 교류를 촉진하는 다양한 프로그램을 운영합니다.",
-  },
+const FILTERS: { id: FilterValue; label: string }[] = [
+  { id: "all", label: "전체" },
+  ...SERVICES.map((s) => ({ id: s.id as FilterValue, label: s.titleKr })),
 ];
 
 export default function ProjectsPage() {
-  const [activeTab, setActiveTab] = useState("badlbadl");
-  const badlRef = useRef<HTMLDivElement>(null);
-  const buupRef = useRef<HTMLDivElement>(null);
-  const collabRef = useRef<HTMLDivElement>(null);
+  const [filter, setFilter] = useState<FilterValue>("all");
 
-  const sectionRefs: Record<string, React.RefObject<HTMLDivElement | null>> = {
-    badlbadl: badlRef,
-    buupschool: buupRef,
-    collaborations: collabRef,
-  };
-
-  const handleTabChange = (id: string) => {
-    setActiveTab(id);
-    sectionRefs[id]?.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const filtered =
+    filter === "all"
+      ? PROJECTS
+      : PROJECTS.filter((p) => p.category === filter);
 
   return (
     <>
       <PageHero
+        labelEn="Case Studies"
         titleEn="PROJECTS"
         subtitleKr="로마드는 지역문제를 현장에서 실행 가능한 프로젝트와 프로그램으로 풀어가고 있습니다."
       />
 
-      <TabNav
-        items={TAB_ITEMS}
-        activeId={activeTab}
-        onTabChange={handleTabChange}
-        className="mb-[60px]"
-      />
-
+      {/* 카테고리 필터 */}
       <div className="max-w-[1400px] mx-auto px-6 md:px-[60px]">
-        {/* 바들바들 */}
-        <FadeIn>
-          <section ref={badlRef} id="badlbadl" className="mb-[100px]">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-              {/* Image */}
-              <div className="relative h-[360px] rounded-lg overflow-hidden">
-                <Image src="/images/badlbadl.png" alt="바들바들 현남생활" fill className="object-cover" />
-              </div>
+        <div className="flex flex-wrap gap-2 md:gap-3 mb-[60px] pb-6 border-b border-border">
+          {FILTERS.map((f) => (
+            <button
+              key={f.id}
+              type="button"
+              onClick={() => setFilter(f.id)}
+              className={`font-[family-name:var(--font-noto)] text-[12px] md:text-[13px] font-semibold px-4 py-2 rounded-full border transition-colors duration-200 cursor-pointer ${
+                filter === f.id
+                  ? "bg-text text-bg border-text"
+                  : "bg-transparent text-text-sub border-border hover:text-text hover:border-text"
+              }`}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
 
-              {/* Text */}
-              <div className="flex flex-col justify-center">
-                <p className="font-[family-name:var(--font-noto)] text-[28px] font-black tracking-tight">
-                  바들바들 현남생활
-                </p>
-                <p className="font-[family-name:var(--font-noto)] text-[13px] font-semibold text-text-sub mt-1">
-                  체류 프로그램
-                </p>
-                <h2 className="font-[family-name:var(--font-noto)] text-[16px] font-black leading-snug mt-5">
-                  양양을 잠깐 스쳐가는 곳이 아니라,
-                  <br />
-                  다시 찾고 관계를 맺는 곳으로.
-                </h2>
-                <p className="font-[family-name:var(--font-noto)] text-[13px] text-text-sub leading-relaxed mt-4">
-                  바들바들은 양양군 현남면에서 운영되는 로컬 체류형
-                  프로그램입니다. 단순한 여행이 아닌, 지역 사람들과 관계를
-                  맺고 일상을 나누며 새로운 가능성을 발견하는 경험을
-                  제공합니다.
-                </p>
-
-                {/* Stats */}
-                <div className="grid grid-cols-3 gap-6 mt-8">
-                  {[
-                    { value: 5, label: "운영 기수" },
-                    { value: 100, label: "참가자 수" },
-                    { value: 68, label: "생활 의향", suffix: "%" },
-                  ].map((stat) => (
-                    <div
-                      key={stat.label}
-                      className="border-l-2 border-text pl-4"
-                    >
-                      <p className="font-[family-name:var(--font-karla)] text-[32px] font-bold leading-none">
-                        <CountUp
-                          end={stat.value}
-                          suffix={stat.suffix ?? ""}
-                        />
+        {/* 카드 그리드 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 mb-[100px]">
+          {filtered.map((project) => {
+            const service = SERVICES.find((s) => s.id === project.category);
+            return (
+              <FadeIn key={project.slug}>
+                <Link href={`/projects/${project.slug}`} className="group block">
+                  <div className="relative h-[240px] rounded-lg overflow-hidden mb-4">
+                    <Image
+                      src={project.image}
+                      alt={project.name}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <p className="font-[family-name:var(--font-karla)] text-[10px] font-extrabold tracking-[2px] uppercase text-text-muted mb-2">
+                    {service?.titleEn}
+                  </p>
+                  <h3 className="font-[family-name:var(--font-noto)] text-[18px] font-black leading-snug mb-2">
+                    {project.name}
+                  </h3>
+                  <p className="font-[family-name:var(--font-noto)] text-[13px] text-text-sub leading-relaxed line-clamp-2 mb-4">
+                    {project.oneLiner}
+                  </p>
+                  <div className="grid grid-cols-2 gap-4 pt-3 border-t border-border">
+                    <div>
+                      <p className="font-[family-name:var(--font-karla)] text-[9px] font-extrabold tracking-[1.5px] uppercase text-text-muted mb-1">
+                        Target
                       </p>
-                      <p className="font-[family-name:var(--font-noto)] text-[11px] text-text-sub mt-1">
-                        {stat.label}
+                      <p className="font-[family-name:var(--font-noto)] text-[11px] leading-snug text-text-sub line-clamp-2">
+                        {project.target}
                       </p>
                     </div>
-                  ))}
-                </div>
-
-                {/* Buttons */}
-                <div className="flex flex-wrap gap-3 mt-8">
-                  <Button variant="primary" href="https://likehn.kr/">
-                    현남생활 홈페이지
-                  </Button>
-                  <Button variant="outline" href="https://www.instagram.com/likehn.kr">
-                    Instagram
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </section>
-        </FadeIn>
-
-        {/* 부업스쿨 */}
-        <FadeIn>
-          <section ref={buupRef} id="buupschool" className="mb-[100px]">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-              {/* Text */}
-              <div className="flex flex-col justify-center">
-                <p className="font-[family-name:var(--font-noto)] text-[28px] font-black tracking-tight">
-                  Ai 내일바꿈
-                </p>
-                <p className="font-[family-name:var(--font-noto)] text-[13px] font-semibold text-text-sub mt-1">
-                  지역 정착을 위한 AI 활용 실험형 프로그램
-                </p>
-                <h2 className="font-[family-name:var(--font-noto)] text-[16px] font-black leading-snug mt-5">
-                  지금의 일과 삶에 AI를 어떻게
-                  <br />
-                  연결할 수 있을지 직접 탐색합니다.
-                </h2>
-                <p className="font-[family-name:var(--font-noto)] text-[13px] text-text-sub leading-relaxed mt-4">
-                  왜 지금 AI를 이해하고 활용해야 하는지 함께 살펴보고, 각자의
-                  관심사와 생활 방식에 맞는 가능성을 실험해보는 프로그램입니다.
-                  정해진 답을 바로 제시하는 강의가 아니라, 변화하는 환경 속에서
-                  스스로 방향을 찾고 다음 단계를 구상해보는 경험을 제공합니다.
-                </p>
-
-                {/* Buttons */}
-                <div className="flex gap-3 mt-8">
-                  <Button variant="primary">참가 신청</Button>
-                  <Button variant="outline">커리큘럼 보기</Button>
-                </div>
-              </div>
-
-              {/* Image */}
-              <div className="relative h-[360px] rounded-lg overflow-hidden bg-white flex items-center justify-center">
-                <Image src="/images/buup.jpg" alt="Ai 내일바꿈" width={400} height={400} className="object-contain" />
-              </div>
-            </div>
-          </section>
-        </FadeIn>
-
-        {/* 함께한 프로젝트 */}
-        <FadeIn>
-          <section
-            ref={collabRef}
-            id="collaborations"
-            className="mb-[100px]"
-          >
-            <p className="font-[family-name:var(--font-karla)] text-[28px] font-bold uppercase tracking-tight">
-              COLLABORATIONS
-            </p>
-            <p className="font-[family-name:var(--font-noto)] text-[13px] font-semibold text-text-sub mt-1 mb-10">
-              함께한 프로젝트 · 로마드가 지역과 함께 만들어 온 협업들
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {COLLAB_CARDS.map((card) => (
-                <div key={card.title} className="group">
-                  <div className="relative h-[180px] rounded-lg overflow-hidden">
-                    <Image src={card.image} alt={card.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
+                    <div>
+                      <p className="font-[family-name:var(--font-karla)] text-[9px] font-extrabold tracking-[1.5px] uppercase text-text-muted mb-1">
+                        Outcome
+                      </p>
+                      <p className="font-[family-name:var(--font-noto)] text-[11px] leading-snug text-text-sub line-clamp-2">
+                        {project.outcome}
+                      </p>
+                    </div>
                   </div>
-                  <p className="font-[family-name:var(--font-karla)] text-[14px] font-bold mt-3">
-                    {card.title}
-                  </p>
-                  <p className="font-[family-name:var(--font-noto)] text-[11px] text-text-sub mt-1">
-                    {card.description}
-                  </p>
-                </div>
-              ))}
-            </div>
+                </Link>
+              </FadeIn>
+            );
+          })}
+        </div>
 
-            <div className="mt-10">
-              <Button variant="primary" href="/contact">
-                협업 문의
-              </Button>
-            </div>
+        {filtered.length === 0 && (
+          <p className="text-center py-[80px] font-[family-name:var(--font-noto)] text-[14px] text-text-sub">
+            해당 카테고리의 프로젝트가 아직 준비 중입니다.
+          </p>
+        )}
+
+        {/* Bottom CTA */}
+        <FadeIn>
+          <section className="py-[80px] text-center border-t border-border">
+            <h2 className="font-[family-name:var(--font-noto)] text-[22px] md:text-[28px] font-black mb-5">
+              함께 프로젝트를 만들어 볼까요?
+            </h2>
+            <Button variant="primary" href="/contact">
+              협업 문의
+            </Button>
           </section>
         </FadeIn>
       </div>

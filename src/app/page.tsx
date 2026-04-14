@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import Button from "@/components/ui/Button";
 import FadeIn from "@/components/ui/FadeIn";
 import SectionDivider from "@/components/ui/SectionDivider";
-import WavesArt from "@/components/svg/WavesArt";
+import { SERVICES } from "@/data/services";
 import { useState } from "react";
 
 export default function Home() {
@@ -13,7 +14,7 @@ export default function Home() {
   return (
     <main>
       {/* ── Section 1: Hero ── */}
-      <section className="relative h-[400px] md:h-[700px] overflow-hidden">
+      <section className="relative h-[480px] md:h-[720px] overflow-hidden">
         {/* Background */}
         {!heroImgError ? (
           <Image
@@ -35,159 +36,112 @@ export default function Home() {
         )}
 
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/35" />
+        <div className="absolute inset-0 bg-black/40" />
 
         {/* Centered content */}
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white">
-          <p className="font-[family-name:var(--font-karla)] text-[12px] tracking-[6px] opacity-60 mb-6">
-            CONNECTING PEOPLE AND PLACES
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6">
+          <p className="font-[family-name:var(--font-karla)] text-[11px] md:text-[12px] tracking-[6px] opacity-70 mb-6">
+            IDENTITY · EXPERTISE · LOCAL INTEGRITY
           </p>
-          <h1 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[48px] font-black leading-tight">
-            양양에서 관계를 만들고,
+          <h1 className="font-[family-name:var(--font-noto)] text-[32px] md:text-[56px] font-black leading-[1.15]">
+            양양의 자원을,
           </h1>
-          <h1 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[48px] font-black leading-tight">
-            역할을 연결합니다
+          <h1 className="font-[family-name:var(--font-noto)] text-[32px] md:text-[56px] font-black leading-[1.15]">
+            작동하는 프로젝트로
           </h1>
-          <p className="font-[family-name:var(--font-noto)] text-[14px] font-medium opacity-50 mt-6 max-w-[600px]">
-            체류 프로그램, 프로젝트, 상품화를 통해 사람과 지역이 더 오래
-            연결되는 구조를 만듭니다.
+          <p className="font-[family-name:var(--font-noto)] text-[14px] md:text-[15px] font-medium opacity-80 mt-6 max-w-[640px] leading-relaxed">
+            체류 프로그램, 교육, 관광, 상품, 협업 구조를 통해
+            <br className="hidden md:block" />
+            사람과 지역이 더 오래 연결되는 방식을 만듭니다.
           </p>
-          <div className="flex gap-4 mt-10">
-            <Button variant="white" href="/contact">
-              Contact Us
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4 mt-10">
+            <Button variant="white" href="/what-we-do">
+              사업영역 보기
             </Button>
-            <Button variant="outline-white" href="/about">
-              About Lomad
+            <Button variant="outline-white" href="/projects">
+              프로젝트 보기
+            </Button>
+            <Button variant="outline-white" href="/contact">
+              문의하기
             </Button>
           </div>
         </div>
 
         {/* Bottom-left caption */}
         <p className="absolute bottom-6 left-6 md:left-8 z-10 font-[family-name:var(--font-karla)] text-[9px] tracking-[2px] uppercase text-white opacity-30">
-          Yangyang, Hyeonnam — Badlbadl Program
+          LOMAD — Yangyang &amp; Coastal Life Zone
         </p>
       </section>
 
-      {/* ── Section 2: DESIGNING CONNECTIONS THAT LAST ── */}
+      {/* ── Section 2: 한 줄 정의 ── */}
       <section className="max-w-[1400px] mx-auto px-6 md:px-[60px] pt-[60px] md:pt-[120px] pb-[50px]">
         <FadeIn>
-          <h2 className="font-[family-name:var(--font-karla)] text-[40px] md:text-[60px] lg:text-[78px] font-extrabold uppercase leading-[1.05]">
-            DESIGNING CONNECTIONS<br />THAT LAST
+          <p className="font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[2px] uppercase text-text-muted mb-5">
+            Who We Are
+          </p>
+          <h2 className="font-[family-name:var(--font-karla)] text-[32px] md:text-[52px] lg:text-[64px] font-extrabold uppercase leading-[1.05]">
+            A REGIONAL
+            <br />
+            PLANNING STUDIO
           </h2>
-          <p className="font-[family-name:var(--font-noto)] text-[15px] font-semibold text-text-sub mt-4">
-            로마드는 양양에서 사람과 지역이 만나는 접점을 만들고, 그 만남이
-            관계와 역할로 이어지는 구조를 설계합니다.
+          <p className="font-[family-name:var(--font-noto)] text-[15px] md:text-[17px] font-semibold text-text-sub mt-6 max-w-[760px] leading-relaxed">
+            로마드는 양양과 해안생활권의 자원을 프로그램·교육·관광·상품·협업 구조로
+            전환하는 실행형 지역기획 조직입니다.
           </p>
         </FadeIn>
       </section>
 
-      {/* ── Section 3: Philosophy 3 Rows ── */}
-      <section className="max-w-[1400px] mx-auto px-6 md:px-[60px] relative">
-        {/* Center art — absolute, spans all 3 rows */}
-        <div className="hidden lg:flex absolute inset-0 items-center justify-center pointer-events-none z-0">
-          <WavesArt className="w-[360px] h-[360px] opacity-90" />
+      {/* ── Section 3: 4개 사업영역 프리뷰 ── */}
+      <section className="max-w-[1400px] mx-auto px-6 md:px-[60px] pb-[80px]">
+        <FadeIn>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+              <p className="font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[2px] uppercase text-text-muted mb-3">
+                What We Do
+              </p>
+              <h2 className="font-[family-name:var(--font-noto)] text-[24px] md:text-[32px] font-black leading-tight">
+                네 개의 사업영역
+              </h2>
+            </div>
+            <Link
+              href="/what-we-do"
+              className="font-[family-name:var(--font-karla)] text-[12px] font-extrabold tracking-[1.5px] uppercase text-text hover:opacity-60 transition-opacity"
+            >
+              전체 보기 →
+            </Link>
+          </div>
+        </FadeIn>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
+          {SERVICES.map((service, idx) => (
+            <FadeIn key={service.id}>
+              <Link
+                href={`/what-we-do#${service.id}`}
+                className="group block pb-8 border-b border-border"
+              >
+                <p className="font-[family-name:var(--font-karla)] text-[10px] font-extrabold tracking-[2px] uppercase text-text-muted mb-2">
+                  0{idx + 1} · {service.titleEn}
+                </p>
+                <h3 className="font-[family-name:var(--font-noto)] text-[22px] md:text-[26px] font-black leading-tight mb-3 group-hover:opacity-60 transition-opacity">
+                  {service.titleKr}
+                </h3>
+                <p className="font-[family-name:var(--font-noto)] text-[14px] leading-relaxed text-text-sub max-w-[520px]">
+                  {service.tagline}
+                </p>
+              </Link>
+            </FadeIn>
+          ))}
         </div>
-
-        {/* Row 1: CONNECTING STRUCTURE */}
-        <FadeIn>
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.2fr_280px_1fr] gap-8 lg:gap-6 pt-[60px] pb-[80px] items-start">
-            <div className="font-[family-name:var(--font-noto)] text-[17px] font-black text-text leading-[2] whitespace-pre-line">
-              {`양양에는 사람은 오지만,
-그 흐름이 늘 지역의 관계와
-기회로 이어지지는 않습니다.
-
-방문과 체류는 늘었지만 지역 자산으로 남지 않는 문제,
-생활인구와 주민이 연결되는 접점 부족.
-로마드는 이 간극을 다룹니다.`}
-            </div>
-            <div className="hidden lg:block" />
-            <div className="lg:text-right">
-              <h3 className="font-[family-name:var(--font-karla)] text-[32px] font-extrabold leading-tight whitespace-pre-line">
-                {`CONNECTING
-STRUCTURE`}
-              </h3>
-              <p className="font-[family-name:var(--font-noto)] text-[14px] font-bold text-text-sub mt-2">
-                사람과 지역의 연결 구조
-              </p>
-              <p className="font-[family-name:var(--font-noto)] text-[14px] font-semibold text-text-sub leading-loose mt-4">
-                방문자가 머물고, 머문 사람이 역할을 갖고,
-                <br />
-                그 역할이 지역 안에서 순환하는 구조.
-                <br />
-                로마드는 이 흐름을 설계합니다.
-              </p>
-            </div>
-          </div>
-        </FadeIn>
-
-        {/* Row 2: A REPEATABLE MODEL IN YANGYANG */}
-        <FadeIn>
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.2fr_280px_1fr] gap-8 lg:gap-6 pb-[80px] items-start">
-            <div className="hidden lg:block" />
-            <div className="hidden lg:block" />
-            <div className="lg:text-right">
-              <h3 className="font-[family-name:var(--font-karla)] text-[32px] font-extrabold leading-tight whitespace-pre-line">
-                {`A REPEATABLE
-MODEL IN YANGYANG`}
-              </h3>
-              <p className="font-[family-name:var(--font-noto)] text-[14px] font-bold text-text-sub mt-2">
-                양양에서 반복 가능한 구조
-              </p>
-              <p className="font-[family-name:var(--font-noto)] text-[14px] font-semibold text-text-sub leading-loose mt-4">
-                일회성 이벤트가 아닌,
-                <br />
-                계절마다 반복되고 확장 가능한 프로그램.
-                <br />
-                양양이라는 지역 안에서 실험하고 증명합니다.
-              </p>
-            </div>
-          </div>
-        </FadeIn>
-
-        {/* Row 3: WIN-WIN ECOSYSTEM */}
-        <FadeIn>
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.2fr_280px_1fr] gap-8 lg:gap-6 pb-[120px] items-start">
-            <div className="font-[family-name:var(--font-noto)] text-[17px] font-black text-text leading-[2]">
-              지역 주민, 체류자, 기관, 기업이
-              <br />
-              각자의 역할로 참여하고,
-              <br />
-              함께 성장하는 생태계를 만듭니다.
-              <br />
-              <br />
-              이 구조 안에서 누구도 소외되지 않고,
-              <br />
-              모두가 연결의 일부가 됩니다.
-            </div>
-            <div className="hidden lg:block" />
-            <div className="lg:text-right">
-              <h3 className="font-[family-name:var(--font-karla)] text-[32px] font-extrabold leading-tight whitespace-pre-line">
-                {`WIN-WIN
-ECOSYSTEM`}
-              </h3>
-              <p className="font-[family-name:var(--font-noto)] text-[14px] font-bold text-text-sub mt-2">
-                상생하는 생태계
-              </p>
-              <p className="font-[family-name:var(--font-noto)] text-[14px] font-semibold text-text-sub leading-loose mt-4">
-                주민과 방문자가 함께 만드는 가치,
-                <br />
-                지역과 외부가 연결되는 경제 순환.
-                <br />
-                로마드는 상생의 구조를 설계합니다.
-              </p>
-            </div>
-          </div>
-        </FadeIn>
       </section>
 
-      {/* ── Section 4: Divider ── */}
+      {/* ── Divider ── */}
       <SectionDivider />
 
-      {/* ── Section 5: CLIENTS & PARTNERS ── */}
+      {/* ── Section 4: CLIENTS & PARTNERS ── */}
       <section className="px-6 md:px-[60px] py-[80px] max-w-[1400px] mx-auto">
         <FadeIn>
           <h2 className="font-[family-name:var(--font-karla)] text-[32px] md:text-[42px] font-bold mb-4">
-            CLIENTS & PARTNERS
+            CLIENTS &amp; PARTNERS
           </h2>
           <p className="font-[family-name:var(--font-noto)] text-[14px] font-semibold text-text-sub mb-[48px]">
             함께한 파트너
@@ -202,7 +156,7 @@ ECOSYSTEM`}
               { src: "/images/partners/partner-03.png", name: "강원농촌융복합산업지원센터", maxH: "max-h-[45px]" },
               { src: "/images/partners/partner-04.png", name: "양양군 서핑협회", maxH: "max-h-[35px]" },
               { src: "/images/partners/partner-05.png", name: "양양군체육회", maxH: "max-h-[45px]" },
-              { src: "/images/partners/partner-08.png", name: "파트너 8", maxH: "max-h-[45px]" },
+              { src: "/images/partners/partner-08.jpg", name: "파트너 8", maxH: "max-h-[45px]" },
               { src: "/images/partners/partner-09.png", name: "파트너 9", maxH: "max-h-[45px]" },
               { src: "/images/partners/partner-10.png", name: "파트너 10", maxH: "max-h-[45px]" },
               { src: "/images/partners/partner-11.png", name: "파트너 11", maxH: "max-h-[45px]" },
@@ -227,7 +181,7 @@ ECOSYSTEM`}
       {/* ── Divider ── */}
       <SectionDivider />
 
-      {/* ── Section 9: CTA ── */}
+      {/* ── Section 5: CTA ── */}
       <section className="px-6 md:px-[60px] py-[100px] text-center">
         <FadeIn>
           <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[4px] uppercase text-text-muted">
@@ -236,12 +190,16 @@ ECOSYSTEM`}
           <h2 className="font-[family-name:var(--font-karla)] text-[32px] font-bold mt-3">
             LET&apos;S WORK TOGETHER
           </h2>
-          <p className="font-[family-name:var(--font-noto)] text-[15px] font-semibold text-text-sub mt-3">
-            협업, 프로그램 참여, 제작 관련 문의를 남겨주세요.
+          <p className="font-[family-name:var(--font-noto)] text-[15px] font-semibold text-text-sub mt-3 max-w-[520px] mx-auto leading-relaxed">
+            프로그램 운영, 교육 프로그램, 협업·용역, 홈페이지 제작까지 — 의뢰 유형에
+            맞춰 빠르게 답변드립니다.
           </p>
-          <div className="mt-8">
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button variant="primary" href="/contact">
-              Contact Us
+              문의하기
+            </Button>
+            <Button variant="outline" href="/partners-outcomes">
+              협업 성과 보기
             </Button>
           </div>
         </FadeIn>
