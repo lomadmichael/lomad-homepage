@@ -156,7 +156,7 @@ export default function Home() {
               { src: "/images/partners/partner-03.png", name: "강원농촌융복합산업지원센터", maxH: "max-h-[45px]" },
               { src: "/images/partners/partner-04.png", name: "양양군 서핑협회", maxH: "max-h-[35px]" },
               { src: "/images/partners/partner-05.png", name: "양양군체육회", maxH: "max-h-[45px]" },
-              { src: "/images/partners/partner-08.jpg", name: "파트너 8", maxH: "max-h-[45px]" },
+              { src: "/images/partners/partner-08.png", name: "파트너 8", maxH: "max-h-[45px]" },
               { src: "/images/partners/partner-09.png", name: "파트너 9", maxH: "max-h-[45px]" },
               { src: "/images/partners/partner-10.png", name: "파트너 10", maxH: "max-h-[45px]" },
               { src: "/images/partners/partner-11.png", name: "파트너 11", maxH: "max-h-[45px]" },

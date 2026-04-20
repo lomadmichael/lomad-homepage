@@ -13,7 +13,7 @@ export const PARTNERS: Partner[] = [
   { name: "파트너 03", image: "/images/partners/partner-03.png", type: "협회" },
   { name: "파트너 04", image: "/images/partners/partner-04.png", type: "교육기관" },
   { name: "파트너 05", image: "/images/partners/partner-05.png", type: "민간 파트너" },
-  { name: "파트너 08", image: "/images/partners/partner-08.jpg", type: "지자체" },
+  { name: "파트너 08", image: "/images/partners/partner-08.png", type: "지자체" },
   { name: "파트너 09", image: "/images/partners/partner-09.png", type: "민간 파트너" },
   { name: "파트너 10", image: "/images/partners/partner-10.png", type: "협회" },
   { name: "파트너 11", image: "/images/partners/partner-11.png", type: "공공기관" },
