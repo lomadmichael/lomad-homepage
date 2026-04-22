@@ -1,0 +1,675 @@
+/* Scoped styles for the 남대천 하구습지의 봄 project page.
+   All selectors are prefixed with .ecology-wetland-page to avoid bleeding
+   into the rest of the Lomad site. */
+
+.ecology-wetland-page {
+  --cream: #F5EFE0;
+  --cream-2: #EDE5D1;
+  --sand: #E8DCBE;
+  --reed: #A8B367;
+  --moss: #6B7F3A;
+  --deep-moss: #3E4E22;
+  --forest: #2A3A1A;
+  --water: #4A7A8A;
+  --water-deep: #2E5461;
+  --sun: #E8A845;
+  --sun-deep: #C78128;
+  --pink: #E8B4A0;
+  --coral: #D4705C;
+  --ink: #1E2818;
+  --ink-soft: #4A5240;
+
+  position: relative;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-noto), -apple-system, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.ecology-wetland-page *,
+.ecology-wetland-page *::before,
+.ecology-wetland-page *::after {
+  box-sizing: border-box;
+}
+
+.ecology-wetland-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(168, 179, 103, 0.04) 0, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(232, 168, 69, 0.04) 0, transparent 40%);
+}
+
+.ecology-wetland-page > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ecology-wetland-page .serif { font-family: var(--font-noto), serif; }
+.ecology-wetland-page .hand { font-family: var(--font-gaegu), cursive; }
+.ecology-wetland-page .dodum { font-family: var(--font-gowun), sans-serif; }
+
+.ecology-wetland-page .wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* HERO */
+.ecology-wetland-page .hero {
+  position: relative;
+  padding: 80px 0 120px;
+  overflow: hidden;
+}
+.ecology-wetland-page .hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.ecology-wetland-page .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--moss);
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(168, 179, 103, 0.15);
+  border: 1px solid rgba(107, 127, 58, 0.25);
+  margin-bottom: 24px;
+}
+.ecology-wetland-page .eyebrow .pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--coral);
+  animation: wetland-pulse 2s infinite;
+}
+@keyframes wetland-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .4; }
+}
+
+.ecology-wetland-page h1.hero-title {
+  font-family: var(--font-gowun), sans-serif;
+  font-weight: 700;
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--forest);
+  margin: 0 0 28px 0;
+}
+.ecology-wetland-page h1.hero-title .flow {
+  color: var(--water-deep);
+  font-style: italic;
+  position: relative;
+  display: inline-block;
+}
+.ecology-wetland-page h1.hero-title .flow::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 8px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8'><path d='M0,4 Q25,0 50,4 T100,4' stroke='%234A7A8A' stroke-width='2' fill='none'/></svg>") repeat-x;
+  background-size: 60px 8px;
+}
+.ecology-wetland-page .hero-sub {
+  font-size: 18px;
+  color: var(--ink-soft);
+  max-width: 520px;
+  margin: 0 0 40px 0;
+  line-height: 1.75;
+}
+.ecology-wetland-page .hero-ctas {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.ecology-wetland-page .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all .2s;
+  border: none;
+  cursor: pointer;
+}
+.ecology-wetland-page .btn-primary {
+  background: var(--deep-moss);
+  color: var(--cream);
+}
+.ecology-wetland-page .btn-primary:hover {
+  background: var(--forest);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(42, 58, 26, 0.2);
+}
+.ecology-wetland-page .btn-ghost {
+  background: transparent;
+  color: var(--deep-moss);
+  border: 1.5px solid var(--deep-moss);
+}
+.ecology-wetland-page .btn-ghost:hover {
+  background: var(--deep-moss);
+  color: var(--cream);
+}
+.ecology-wetland-page .hero-meta {
+  display: flex;
+  gap: 32px;
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px dashed rgba(62, 78, 34, 0.3);
+}
+.ecology-wetland-page .hero-meta .k {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.ecology-wetland-page .hero-meta .v {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--forest);
+  font-family: var(--font-noto);
+}
+
+.ecology-wetland-page .hero-art {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.05;
+}
+.ecology-wetland-page .stamp {
+  position: absolute;
+  font-family: var(--font-gaegu), cursive;
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 4px;
+  z-index: 5;
+  background: var(--cream);
+  border: 1.5px dashed var(--coral);
+  color: var(--coral);
+}
+
+/* SECTION */
+.ecology-wetland-page section.band {
+  padding: 100px 0;
+  position: relative;
+}
+.ecology-wetland-page .band-title-row {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 56px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.ecology-wetland-page .section-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--moss);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ecology-wetland-page .section-label::before {
+  content: '';
+  width: 28px;
+  height: 2px;
+  background: var(--moss);
+}
+.ecology-wetland-page h2.section-title {
+  font-family: var(--font-gowun), sans-serif;
+  font-weight: 700;
+  font-size: clamp(32px, 4vw, 48px);
+  color: var(--forest);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  max-width: 680px;
+  margin: 0;
+}
+.ecology-wetland-page .section-sub {
+  color: var(--ink-soft);
+  font-size: 16px;
+  max-width: 420px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* PROGRAM CARDS */
+.ecology-wetland-page .prog-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+.ecology-wetland-page .prog-card {
+  position: relative;
+  background: var(--cream-2);
+  border: 1px solid rgba(62, 78, 34, 0.1);
+  border-radius: 24px;
+  padding: 40px;
+  overflow: hidden;
+  transition: transform .3s;
+}
+.ecology-wetland-page .prog-card:hover { transform: translateY(-4px); }
+.ecology-wetland-page .prog-card.highlight { background: var(--forest); color: var(--cream); }
+.ecology-wetland-page .prog-card.highlight .pc-type { color: var(--reed); }
+.ecology-wetland-page .prog-card.highlight .pc-title { color: var(--cream); }
+.ecology-wetland-page .prog-card.highlight .pc-desc { color: rgba(245, 239, 224, 0.8); }
+.ecology-wetland-page .prog-card.highlight .pc-meta-item { border-color: rgba(245, 239, 224, 0.2); }
+.ecology-wetland-page .prog-card.highlight .pc-meta-k { color: var(--reed); }
+.ecology-wetland-page .prog-card.highlight .pc-meta-v { color: var(--cream); }
+.ecology-wetland-page .prog-card.highlight .pc-cta { background: var(--sun); color: var(--forest); }
+
+.ecology-wetland-page .pc-icon { position: absolute; top: 24px; right: 24px; opacity: 0.9; }
+.ecology-wetland-page .pc-type {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--moss);
+  margin-bottom: 14px;
+}
+.ecology-wetland-page .pc-title {
+  font-family: var(--font-gowun), sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--forest);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin: 0 0 14px 0;
+}
+.ecology-wetland-page .pc-desc {
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0 0 28px 0;
+}
+.ecology-wetland-page .pc-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 28px;
+}
+.ecology-wetland-page .pc-meta-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-top: 1px solid rgba(62, 78, 34, 0.12);
+}
+.ecology-wetland-page .pc-meta-item:last-child { border-bottom: 1px solid rgba(62, 78, 34, 0.12); }
+.ecology-wetland-page .pc-meta-k {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  padding-top: 2px;
+}
+.ecology-wetland-page .pc-meta-v {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--forest);
+  line-height: 1.6;
+}
+.ecology-wetland-page .pc-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: var(--deep-moss);
+  color: var(--cream);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform .2s;
+}
+.ecology-wetland-page .pc-cta:hover { transform: translateX(4px); }
+
+/* TIMELINE */
+.ecology-wetland-page .timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: 40px;
+}
+.ecology-wetland-page .timeline::before {
+  content: '';
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  top: 46px;
+  height: 2px;
+  background: repeating-linear-gradient(to right, var(--moss) 0 6px, transparent 6px 12px);
+}
+.ecology-wetland-page .tl-node {
+  position: relative;
+  padding-top: 70px;
+  text-align: center;
+}
+.ecology-wetland-page .tl-dot {
+  position: absolute;
+  top: 34px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 3px solid var(--moss);
+  z-index: 2;
+}
+.ecology-wetland-page .tl-dot.active {
+  background: var(--coral);
+  border-color: var(--coral);
+  box-shadow: 0 0 0 6px rgba(212, 112, 92, 0.2);
+}
+.ecology-wetland-page .tl-date {
+  font-family: var(--font-noto);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--forest);
+  margin-bottom: 4px;
+}
+.ecology-wetland-page .tl-day { font-size: 12px; color: var(--ink-soft); margin-bottom: 8px; }
+.ecology-wetland-page .tl-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--moss);
+  line-height: 1.5;
+  padding: 0 12px;
+}
+
+/* LEARN */
+.ecology-wetland-page .learn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+.ecology-wetland-page .learn-card {
+  background: var(--cream);
+  border: 1px solid rgba(62, 78, 34, 0.1);
+  border-radius: 20px;
+  padding: 32px 28px;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+}
+.ecology-wetland-page .learn-card:hover {
+  border-color: var(--moss);
+  transform: translateY(-4px);
+}
+.ecology-wetland-page .learn-card .lc-num {
+  font-family: var(--font-noto);
+  font-size: 14px;
+  color: var(--moss);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.ecology-wetland-page .learn-card .lc-illust {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.ecology-wetland-page .learn-card .lc-title {
+  font-family: var(--font-gowun), sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--forest);
+  margin: 0 0 10px 0;
+  letter-spacing: -0.02em;
+}
+.ecology-wetland-page .learn-card .lc-desc {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* CREATURES */
+.ecology-wetland-page .creatures-band {
+  background: var(--forest);
+  color: var(--cream);
+  padding: 110px 0;
+  position: relative;
+  overflow: hidden;
+}
+.ecology-wetland-page .creatures-band h2 { color: var(--cream); }
+.ecology-wetland-page .creatures-band .section-sub { color: rgba(245, 239, 224, 0.75); }
+.ecology-wetland-page .creatures-band .section-label { color: var(--reed); }
+.ecology-wetland-page .creatures-band .section-label::before { background: var(--reed); }
+.ecology-wetland-page .creature-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+.ecology-wetland-page .creature {
+  background: rgba(168, 179, 103, 0.08);
+  border: 1px solid rgba(168, 179, 103, 0.2);
+  border-radius: 20px;
+  padding: 28px;
+  transition: all .3s;
+}
+.ecology-wetland-page .creature:hover {
+  background: rgba(168, 179, 103, 0.15);
+  transform: translateY(-3px);
+}
+.ecology-wetland-page .creature-illust {
+  height: 110px;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.ecology-wetland-page .creature-name {
+  font-family: var(--font-noto);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--sun);
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+.ecology-wetland-page .creature-lat {
+  font-size: 11px;
+  color: rgba(245, 239, 224, 0.5);
+  font-style: italic;
+  margin-bottom: 10px;
+  letter-spacing: 0.05em;
+}
+.ecology-wetland-page .creature-desc {
+  font-size: 13px;
+  color: rgba(245, 239, 224, 0.8);
+  line-height: 1.7;
+}
+
+/* CHECKLIST */
+.ecology-wetland-page .checklist-band { background: var(--sand); }
+.ecology-wetland-page .check-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+.ecology-wetland-page .check-col h3 {
+  font-family: var(--font-noto);
+  font-size: 24px;
+  color: var(--forest);
+  margin: 0 0 24px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ecology-wetland-page .check-col h3 .badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--cream);
+}
+.ecology-wetland-page .check-list { list-style: none; padding: 0; margin: 0; }
+.ecology-wetland-page .check-list li {
+  padding: 14px 0;
+  border-bottom: 1px dashed rgba(62, 78, 34, 0.2);
+  display: flex;
+  align-items: start;
+  gap: 14px;
+  font-size: 15px;
+  color: var(--ink);
+}
+.ecology-wetland-page .check-list li .chk {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--cream);
+  border: 2px solid var(--moss);
+  display: grid;
+  place-items: center;
+  margin-top: 2px;
+}
+.ecology-wetland-page .check-list li .chk svg { display: block; }
+
+/* NOTES */
+.ecology-wetland-page .notes-band {
+  background: var(--cream);
+  padding: 100px 0;
+}
+.ecology-wetland-page .notes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.ecology-wetland-page .note-card {
+  background: var(--cream-2);
+  border-radius: 16px;
+  padding: 24px 28px;
+  border-left: 4px solid var(--coral);
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+.ecology-wetland-page .note-card strong {
+  color: var(--forest);
+  font-weight: 600;
+}
+
+/* CTA band */
+.ecology-wetland-page .cta-band {
+  background: var(--deep-moss);
+  color: var(--cream);
+  padding: 100px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.ecology-wetland-page .cta-band h2 {
+  color: var(--cream);
+  margin: 0 auto 20px;
+  max-width: 620px;
+}
+.ecology-wetland-page .cta-band p {
+  color: rgba(245, 239, 224, 0.8);
+  max-width: 540px;
+  margin: 0 auto 36px;
+  font-size: 17px;
+}
+
+/* FAQ */
+.ecology-wetland-page .faq {
+  max-width: 780px;
+  margin: 40px auto 0;
+}
+.ecology-wetland-page .faq details {
+  background: var(--cream-2);
+  border: 1px solid rgba(62, 78, 34, 0.1);
+  border-radius: 16px;
+  padding: 20px 28px;
+  margin-bottom: 12px;
+  transition: all .2s;
+}
+.ecology-wetland-page .faq details[open] {
+  background: var(--cream);
+  border-color: var(--moss);
+}
+.ecology-wetland-page .faq summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--forest);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+}
+.ecology-wetland-page .faq summary::-webkit-details-marker { display: none; }
+.ecology-wetland-page .faq summary::after {
+  content: '+';
+  font-size: 22px;
+  color: var(--moss);
+  transition: transform .2s;
+}
+.ecology-wetland-page .faq details[open] summary::after { transform: rotate(45deg); }
+.ecology-wetland-page .faq details p {
+  margin: 14px 0 0 0;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(62, 78, 34, 0.2);
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Breadcrumb at the top */
+.ecology-wetland-page .crumb {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px 32px 0;
+  font-size: 12px;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.ecology-wetland-page .crumb a {
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+.ecology-wetland-page .crumb a:hover { color: var(--moss); }
+.ecology-wetland-page .crumb .sep { margin: 0 8px; color: rgba(62, 78, 34, 0.35); }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .ecology-wetland-page .hero-grid,
+  .ecology-wetland-page .prog-grid,
+  .ecology-wetland-page .learn-grid,
+  .ecology-wetland-page .creature-row,
+  .ecology-wetland-page .check-grid,
+  .ecology-wetland-page .notes-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .ecology-wetland-page .timeline {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 0;
+  }
+  .ecology-wetland-page .timeline::before { display: none; }
+  .ecology-wetland-page section.band { padding: 70px 0; }
+  .ecology-wetland-page .hero { padding: 40px 0 80px; }
+}

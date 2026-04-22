@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Karla, Noto_Sans_KR } from "next/font/google";
+import { Karla, Noto_Sans_KR, Gowun_Dodum, Gaegu } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
@@ -15,6 +15,20 @@ const notoSansKR = Noto_Sans_KR({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "900"],
   variable: "--font-noto",
+  display: "swap",
+});
+
+const gowunDodum = Gowun_Dodum({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-gowun",
+  display: "swap",
+});
+
+const gaegu = Gaegu({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-gaegu",
   display: "swap",
 });
 
@@ -77,7 +91,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko" className={`${karla.variable} ${notoSansKR.variable}`}>
+    <html lang="ko" className={`${karla.variable} ${notoSansKR.variable} ${gowunDodum.variable} ${gaegu.variable}`}>
       <body>
         <Navbar />
         <main>{children}</main>
