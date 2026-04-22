@@ -71,21 +71,14 @@ export const metadata: Metadata = {
     siteName: "로마드 협동조합",
     locale: "ko_KR",
     type: "website",
-    images: [
-      {
-        url: "https://lomadcoop.com/images/lomad-logo.png",
-        width: 1200,
-        height: 630,
-        alt: "로마드 협동조합",
-      },
-    ],
+    // OG 이미지는 src/app/opengraph-image.tsx에서 자동 생성 (로고 단독, 흰 배경)
   },
   twitter: {
     card: "summary_large_image",
     title: "로마드 협동조합 | 양양의 자원을, 작동하는 프로젝트로",
     description:
       "양양과 해안생활권의 자원을 프로그램·교육·관광·상품·협업 구조로 전환하는 실행형 지역기획 조직.",
-    images: ["https://lomadcoop.com/images/lomad-logo.png"],
+    // Twitter 카드도 opengraph-image.tsx 자동 사용
   },
 };
 
