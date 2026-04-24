@@ -57,12 +57,9 @@ export default function PartnersOutcomesPage() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-[60px]">
         <FadeIn>
           <section id="partners" className="py-[80px]">
-            <p className="font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[2px] uppercase text-text-muted mb-3">
+            <p className="font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[2px] uppercase text-text-muted mb-[48px]">
               01 — IMPACT
             </p>
-            <h2 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[36px] font-black mb-[48px]">
-              함께한 기관과 파트너
-            </h2>
             <div className="grid grid-cols-3 md:grid-cols-5 gap-6 md:gap-8 items-center">
               {PARTNERS.map((partner) => (
                 <div
