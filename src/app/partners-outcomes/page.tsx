@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import PageHero from "@/components/ui/PageHero";
 import Button from "@/components/ui/Button";
 import FadeIn from "@/components/ui/FadeIn";
 import CountUp from "@/components/ui/CountUp";
@@ -46,24 +45,17 @@ const SERVICE_THEME: Record<
 export default function PartnersOutcomesPage() {
   return (
     <>
-      <PageHero
-        labelEn="Impact & Evidence"
-        titleEn="PARTNERS & OUTCOMES"
-        subtitleKr="함께 일해도 되는 조직이라는 신뢰는, 누구와 일했고 무엇이 남았는지로 증명됩니다."
-      />
-
       {/* 1. Impact by Service Area — 사업영역별 임팩트 */}
       <section>
-        <div className="max-w-[1400px] mx-auto px-6 md:px-[60px] pt-[40px] pb-[20px]">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-[60px] pt-[80px] md:pt-[100px] pb-[20px]">
           <p className="font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[2px] uppercase text-text-muted mb-3">
             01 — Impact by Service Area
           </p>
           <h2 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[36px] font-black mb-5">
             사업영역별 임팩트
           </h2>
-          <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub max-w-[640px] leading-relaxed mb-[60px]">
-            각 사업영역이 어떤 지역 문제를 다루고, 어떤 방식으로 접근하며,
-            어떤 성과와 사례로 이어졌는지 한눈에 확인하세요.
+          <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub leading-relaxed mb-[60px] whitespace-normal">
+            각 사업영역이 어떤 지역 문제를 다루고, 어떤 방식으로 접근하며, 어떤 성과와 사례로 이어졌는지 한눈에 확인하세요.
           </p>
         </div>
 
