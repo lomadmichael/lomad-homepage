@@ -5,7 +5,6 @@ import PageHero from "@/components/ui/PageHero";
 import Button from "@/components/ui/Button";
 import FadeIn from "@/components/ui/FadeIn";
 import CountUp from "@/components/ui/CountUp";
-import { PARTNERS } from "@/data/partners";
 import { SERVICES } from "@/data/services";
 
 const RECORD_IMAGES = [
@@ -53,37 +52,11 @@ export default function PartnersOutcomesPage() {
         subtitleKr="함께 일해도 되는 조직이라는 신뢰는, 누구와 일했고 무엇이 남았는지로 증명됩니다."
       />
 
-      {/* 1. IMPACT — Partners 로고 */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-[60px]">
-        <FadeIn>
-          <section id="partners" className="py-[80px]">
-            <p className="font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[2px] uppercase text-text-muted mb-[48px]">
-              01 — IMPACT
-            </p>
-            <div className="grid grid-cols-3 md:grid-cols-5 gap-6 md:gap-8 items-center">
-              {PARTNERS.map((partner) => (
-                <div
-                  key={partner.name}
-                  className="relative h-[80px] md:h-[100px] flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity"
-                >
-                  <Image
-                    src={partner.image}
-                    alt={partner.name}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              ))}
-            </div>
-          </section>
-        </FadeIn>
-      </div>
-
-      {/* 2. Impact by Service Area — 사업영역별 임팩트 */}
-      <section className="border-t border-border">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-[60px] pt-[80px] pb-[20px]">
+      {/* 1. Impact by Service Area — 사업영역별 임팩트 */}
+      <section>
+        <div className="max-w-[1400px] mx-auto px-6 md:px-[60px] pt-[40px] pb-[20px]">
           <p className="font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[2px] uppercase text-text-muted mb-3">
-            02 — Impact by Service Area
+            01 — Impact by Service Area
           </p>
           <h2 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[36px] font-black mb-5">
             사업영역별 임팩트
@@ -237,7 +210,7 @@ export default function PartnersOutcomesPage() {
             className="py-[80px] border-t border-border"
           >
             <p className="font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[2px] uppercase text-text-muted mb-3">
-              03 — Records
+              02 — Records
             </p>
             <h2 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[36px] font-black mb-3">
               기록과 아카이브
