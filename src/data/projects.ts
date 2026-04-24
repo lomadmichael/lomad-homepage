@@ -135,7 +135,7 @@ export const PROJECTS: Project[] = [
     description:
       "양양군서핑협회(YSA)의 운영 업무를 지원하는 공식 홈페이지입니다. 협회 일정, 회차 공지, 지도자·심판 교육, 자격 시험, 대회 접수를 하나의 창구에서 처리할 수 있도록 기획·구축했습니다.",
     why: "협회 운영 정보가 여러 채널에 흩어져 있으면 회원과 외부 파트너 모두 접근이 어렵습니다. 협회가 실제로 기능하는 공식 창구를 만들어, 기관·지도자·응시자가 한 흐름 안에서 연결되도록 했습니다.",
-    image: "/images/partners/partner-04.png",
+    image: "/images/ysa-hero.jpg",
     externalLinks: [
       { label: "ysakorea.com", url: "https://ysakorea.com" },
       { label: "ysakoreaofficial.com", url: "https://ysakoreaofficial.com" },
