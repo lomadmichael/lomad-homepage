@@ -44,10 +44,10 @@ export default function Home() {
             IDENTITY · EXPERTISE · LOCAL INTEGRITY
           </p>
           <h1 className="font-[family-name:var(--font-noto)] text-[32px] md:text-[56px] font-black leading-[1.15]">
-            양양의 자원을,
+            머무름이
           </h1>
           <h1 className="font-[family-name:var(--font-noto)] text-[32px] md:text-[56px] font-black leading-[1.15]">
-            작동하는 프로젝트로
+            관계가 되는 곳
           </h1>
           <p className="font-[family-name:var(--font-noto)] text-[14px] md:text-[15px] font-medium opacity-80 mt-6 max-w-[640px] leading-relaxed">
             체류 프로그램, 교육, 관광, 상품, 협업 구조를 통해
@@ -100,7 +100,7 @@ export default function Home() {
                 What We Do
               </p>
               <h2 className="font-[family-name:var(--font-noto)] text-[24px] md:text-[32px] font-black leading-tight">
-                네 개의 사업영역
+                사업영역
               </h2>
             </div>
             <Link

@@ -31,15 +31,11 @@ export default function PartnersOutcomesPage() {
         <FadeIn>
           <section id="partners" className="py-[80px]">
             <p className="font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[2px] uppercase text-text-muted mb-3">
-              01 — Partners
+              01 — IMPACT
             </p>
-            <h2 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[36px] font-black mb-3">
+            <h2 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[36px] font-black mb-[48px]">
               함께한 기관과 파트너
             </h2>
-            <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub mb-[48px] max-w-[560px]">
-              지자체, 공공기관, 협회, 교육기관, 민간 파트너와 협력해 지역의
-              문제를 프로그램·사업 구조로 풀어왔습니다.
-            </p>
             <div className="grid grid-cols-3 md:grid-cols-5 gap-6 md:gap-8 items-center">
               {PARTNERS.map((partner) => (
                 <div

@@ -66,6 +66,7 @@ export const SERVICES: Service[] = [
     titleEn: "Partnership & Execution",
     tagline: "기관이 필요로 하는 기획·운영·전달 기반을 함께 만듭니다.",
     representativeProjects: [
+      "양양군서핑협회 홈페이지 구축",
       "협회·단체 홈페이지 제작",
       "공공 연계 프로젝트",
     ],

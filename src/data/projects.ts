@@ -122,6 +122,26 @@ export const PROJECTS: Project[] = [
     image: "/images/collabo-03.png",
   },
   {
+    slug: "ysa-website",
+    name: "양양군서핑협회 홈페이지 구축",
+    oneLiner:
+      "협회의 일정·공지·교육·강사진을 하나의 창구로 통합한 운영형 홈페이지.",
+    category: "partnership",
+    target: "양양군서핑협회, 회원·지도자·시험 응시자, 지자체 협력 파트너",
+    operation:
+      "Next.js + Vercel + Google Calendar API 기반 실시간 일정 연동, 공지·회차 관리, 대회·강습·시험 접수 흐름까지 설계·운영.",
+    outcome:
+      "분산되어 있던 협회 업무가 하나의 공식 창구로 통합. 회원·응시자·파트너가 한 곳에서 정보를 확인하고 신청할 수 있는 실행 기반 확보.",
+    description:
+      "양양군서핑협회(YSA)의 운영 업무를 지원하는 공식 홈페이지입니다. 협회 일정, 회차 공지, 지도자·심판 교육, 자격 시험, 대회 접수를 하나의 창구에서 처리할 수 있도록 기획·구축했습니다.",
+    why: "협회 운영 정보가 여러 채널에 흩어져 있으면 회원과 외부 파트너 모두 접근이 어렵습니다. 협회가 실제로 기능하는 공식 창구를 만들어, 기관·지도자·응시자가 한 흐름 안에서 연결되도록 했습니다.",
+    image: "/images/partners/partner-04.png",
+    externalLinks: [
+      { label: "ysakorea.com", url: "https://ysakorea.com" },
+      { label: "ysakoreaofficial.com", url: "https://ysakoreaofficial.com" },
+    ],
+  },
+  {
     slug: "events",
     name: "대회·행사 운영",
     oneLiner: "지역 기반의 대회와 행사를 기획부터 운영까지 함께합니다.",
