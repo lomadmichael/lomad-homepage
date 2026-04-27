@@ -66,7 +66,7 @@ export const PROJECTS: Project[] = [
     description:
       "왜 지금 AI를 이해하고 활용해야 하는지 함께 살펴보고, 각자의 관심사와 생활 방식에 맞는 가능성을 실험해보는 프로그램입니다. 정해진 답을 바로 제시하는 강의가 아니라, 변화하는 환경 속에서 스스로 방향을 찾고 다음 단계를 구상해보는 경험을 제공합니다.",
     why: "지역에서 AI는 멀게 느껴지지만, 실제로는 작은 업무부터 큰 변화를 만들 수 있는 도구입니다. 정보 격차를 줄이고 지역의 실행력을 높이는 것이 이 프로그램의 목적입니다.",
-    image: "/images/buup.jpg",
+    image: "/images/ai-naeilbakkum.jpg",
   },
   {
     slug: "custom-house",
