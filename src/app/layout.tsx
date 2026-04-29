@@ -59,8 +59,11 @@ export const metadata: Metadata = {
   ],
   verification: {
     other: {
-      "naver-site-verification":
-        "367a738cad567988254bb843f346af7477c54efb",
+      // 두 토큰 모두 유지: 기존(http) + 신규(https). Naver는 동일 name의 다중 meta 태그를 허용.
+      "naver-site-verification": [
+        "367a738cad567988254bb843f346af7477c54efb", // http://lomadcoop.com (기존)
+        "367a738cad5679882548b843f346af7477c54efb", // https://lomadcoop.com (신규)
+      ],
     },
   },
   openGraph: {
