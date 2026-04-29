@@ -33,6 +33,7 @@ const gaegu = Gaegu({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://lomadcoop.com"),
   title: {
     default: "로마드 협동조합 | 머무름이 관계가 되는 곳",
     template: "%s | 로마드 협동조합",
@@ -67,6 +68,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
+    canonical: "/",
     types: {
       "application/rss+xml": [
         { url: "/feed.xml", title: "로마드 협동조합 — 소식" },

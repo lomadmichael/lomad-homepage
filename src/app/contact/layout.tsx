@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "로마드에 문의하세요. 협업, 프로그램 참여, 제작 관련 문의를 받고 있습니다.",
+  description:
+    "프로그램 운영, 교육 프로그램, 협업·용역, 홈페이지 제작 문의를 받습니다.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

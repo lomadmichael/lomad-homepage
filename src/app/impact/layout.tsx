@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Partners & Outcomes",
+  title: "IMPACT",
   description:
-    "로마드가 함께한 기관과 파트너, 숫자로 보는 성과, 대표 사례, 현장 기록.",
+    "로마드 사업영역별 임팩트 — 체류·관광, 교육·창업, 로컬 상품·브랜딩, 기관·협회 실행 파트너십에서 만든 변화.",
+  alternates: { canonical: "/impact" },
 };
 
 export default function PartnersOutcomesLayout({

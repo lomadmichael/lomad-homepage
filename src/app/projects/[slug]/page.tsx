@@ -26,6 +26,7 @@ export async function generateMetadata({
   return {
     title: `${project.name} | LOMAD Projects`,
     description: project.oneLiner,
+    alternates: { canonical: `/projects/${slug}` },
   };
 }
 
