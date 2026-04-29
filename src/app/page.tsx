@@ -198,7 +198,7 @@ export default function Home() {
             <Button variant="primary" href="/contact">
               문의하기
             </Button>
-            <Button variant="outline" href="/partners-outcomes">
+            <Button variant="outline" href="/impact">
               협업 성과 보기
             </Button>
           </div>

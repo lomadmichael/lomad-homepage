@@ -9,8 +9,9 @@ const nextConfig: NextConfig = {
         permanent: true, // 308 — SEO 보호를 위해 반드시 permanent
       },
       {
-        source: "/impact",
-        destination: "/partners-outcomes",
+        // /impact가 이제 정식 URL — /partners-outcomes는 과거 잠시 사용된 경로라 SEO 보호용 308
+        source: "/partners-outcomes",
+        destination: "/impact",
         permanent: true, // 308
       },
     ];
