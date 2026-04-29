@@ -34,11 +34,11 @@ const gaegu = Gaegu({
 
 export const metadata: Metadata = {
   title: {
-    default: "로마드 협동조합 | 양양의 자원을, 작동하는 프로젝트로",
+    default: "로마드 협동조합 | 머무름이 관계가 되는 곳",
     template: "%s | 로마드 협동조합",
   },
   description:
-    "로마드는 양양과 해안생활권의 자원을 프로그램·교육·관광·상품·협업 구조로 전환하는 실행형 지역기획 조직입니다.",
+    "체류 프로그램, 교육, 관광, 상품, 협업 구조를 통해 사람과 지역이 더 오래 연결되는 방식을 만듭니다.",
   keywords: [
     "로마드",
     "로마드협동조합",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "로마드 협동조합 | 양양의 자원을, 작동하는 프로젝트로",
+    title: "로마드 협동조합 | 머무름이 관계가 되는 곳",
     description:
       "체류 프로그램, 교육, 관광, 상품, 협업 구조를 통해 사람과 지역이 더 오래 연결되는 방식을 만듭니다.",
     url: "https://lomadcoop.com",
@@ -85,9 +85,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "로마드 협동조합 | 양양의 자원을, 작동하는 프로젝트로",
+    title: "로마드 협동조합 | 머무름이 관계가 되는 곳",
     description:
-      "양양과 해안생활권의 자원을 프로그램·교육·관광·상품·협업 구조로 전환하는 실행형 지역기획 조직.",
+      "체류 프로그램, 교육, 관광, 상품, 협업 구조를 통해 사람과 지역이 더 오래 연결되는 방식을 만듭니다.",
     // Twitter 카드도 opengraph-image.tsx 자동 사용
   },
 };
