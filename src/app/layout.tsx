@@ -66,6 +66,13 @@ export const metadata: Metadata = {
       ],
     },
   },
+  alternates: {
+    types: {
+      "application/rss+xml": [
+        { url: "/feed.xml", title: "로마드 협동조합 — 소식" },
+      ],
+    },
+  },
   openGraph: {
     title: "로마드 협동조합 | 양양의 자원을, 작동하는 프로젝트로",
     description:
