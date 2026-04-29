@@ -45,8 +45,7 @@ export default function Home() {
           </p>
           <h1 className="font-[family-name:var(--font-noto)] text-[32px] md:text-[56px] font-black leading-[1.15]">
             머무름이
-          </h1>
-          <h1 className="font-[family-name:var(--font-noto)] text-[32px] md:text-[56px] font-black leading-[1.15]">
+            <br />
             관계가 되는 곳
           </h1>
           <p className="font-[family-name:var(--font-noto)] text-[14px] md:text-[15px] font-medium opacity-80 mt-6 max-w-[640px] leading-relaxed">
