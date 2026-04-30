@@ -184,7 +184,7 @@ const INLINE_HTML = `
           </div>
           <div class="pc-meta-item">
             <div class="pc-meta-k">운영</div>
-            <div class="pc-meta-v">오전 A·B팀 10:00~11:30<br>오후 A·B팀 14:00~15:30<br><span style="color: var(--coral); font-weight:600;">팀마다 선착순 16명</span></div>
+            <div class="pc-meta-v">오전 A팀 10:00~11:30<br>오전 B팀 10:30~12:00<br>오후 A팀 13:00~14:30<br>오후 B팀 13:30~15:00<br><span style="color: var(--coral); font-weight:600;">팀마다 선착순 16명</span></div>
           </div>
           <div class="pc-meta-item">
             <div class="pc-meta-k">대상</div>
@@ -497,7 +497,7 @@ const INLINE_HTML = `
         <div class="section-label">준비물 안내</div>
         <h2 class="section-title">이렇게 챙겨오면<br>든든해요</h2>
       </div>
-      <p class="section-sub">뜰채와 루페, 관찰통은 현장에서 제공됩니다. 야외활동이니 움직이기 편한 복장으로 오세요.</p>
+      <p class="section-sub">야외활동이니 움직이기 편한 복장으로 오세요.</p>
     </div>
     <div class="check-grid">
       <div class="check-col">
@@ -523,9 +523,6 @@ const INLINE_HTML = `
           현장 제공
         </h3>
         <ul class="check-list">
-          <li><span class="chk" style="background: var(--moss); border-color: var(--moss);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l5 5L20 7" stroke="#F5EFE0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>교재 · 체험 학습지</li>
-          <li><span class="chk" style="background: var(--moss); border-color: var(--moss);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l5 5L20 7" stroke="#F5EFE0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>뜰채 (물속 생물 채집용)</li>
-          <li><span class="chk" style="background: var(--moss); border-color: var(--moss);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l5 5L20 7" stroke="#F5EFE0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>채집통 · 관찰통</li>
           <li><span class="chk" style="background: var(--moss); border-color: var(--moss);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l5 5L20 7" stroke="#F5EFE0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>루페 (돋보기)</li>
           <li><span class="chk" style="background: var(--moss); border-color: var(--moss);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l5 5L20 7" stroke="#F5EFE0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>만들기 체험 재료 (봄꽃 뱃지)</li>
         </ul>
