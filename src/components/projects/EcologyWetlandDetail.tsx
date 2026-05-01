@@ -28,11 +28,11 @@ const INLINE_HTML = `
         생태지도사와 함께 루페로 들여다보고, 뜰채로 건져 올리며, 작은 생명들의 비밀을 배워봐요.
       </p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="#apply" aria-disabled="true" style="pointer-events: auto; opacity: 0.85;">
-          접수예정
+        <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSeJJb_6wy8h5SiReGT5d-hA6m7CRYr7ygX0g-LtaCDv_Tu9Bg/viewform" target="_blank" rel="noopener noreferrer">
+          5월 5일 접수
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <a class="btn btn-ghost" href="#programs">프로그램 살펴보기</a>
+        <a class="btn btn-ghost" href="https://docs.google.com/forms/d/e/1FAIpQLSeJJb_6wy8h5SiReGT5d-hA6m7CRYr7ygX0g-LtaCDv_Tu9Bg/viewform" target="_blank" rel="noopener noreferrer">프로그램 살펴보기</a>
       </div>
       <div class="hero-meta">
         <div>
@@ -191,10 +191,6 @@ const INLINE_HTML = `
             <div class="pc-meta-v">행사장 방문객 누구나</div>
           </div>
         </div>
-        <a href="#apply" class="pc-cta">
-          부스 안내 자세히
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
       </div>
 
       <div class="prog-card highlight">
