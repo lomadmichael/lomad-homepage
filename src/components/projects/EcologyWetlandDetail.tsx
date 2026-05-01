@@ -32,7 +32,7 @@ const INLINE_HTML = `
           5월 5일 접수
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <a class="btn btn-ghost" href="https://docs.google.com/forms/d/e/1FAIpQLSeJJb_6wy8h5SiReGT5d-hA6m7CRYr7ygX0g-LtaCDv_Tu9Bg/viewform" target="_blank" rel="noopener noreferrer">프로그램 살펴보기</a>
+        <a class="btn btn-ghost" href="#programs">프로그램 살펴보기</a>
       </div>
       <div class="hero-meta">
         <div>
@@ -622,15 +622,15 @@ export default function EcologyWetlandDetail() {
               flexWrap: "wrap",
             }}
           >
-            <span
+            <a
               className="btn"
               style={{
                 background: "var(--sun)",
                 color: "var(--forest)",
-                opacity: 0.85,
-                cursor: "default",
               }}
-              aria-disabled="true"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSeJJb_6wy8h5SiReGT5d-hA6m7CRYr7ygX0g-LtaCDv_Tu9Bg/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <svg
                 width="16"
@@ -654,8 +654,8 @@ export default function EcologyWetlandDetail() {
                   strokeLinejoin="round"
                 />
               </svg>
-              접수예정
-            </span>
+              5월 5일 접수
+            </a>
             <a
               className="btn"
               style={{
