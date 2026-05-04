@@ -155,7 +155,7 @@ const INLINE_HTML = `
         <div class="section-label">두 가지 프로그램</div>
         <h2 class="section-title">어린이날엔 가볍게,<br>주말엔 깊이 있게.</h2>
       </div>
-      <p class="section-sub">5월 5일 어린이날엔 누구나 참여할 수 있는 체험 부스를, 5월 23·30일엔 2시간 깊이 탐험하는 정규 프로그램을 운영합니다.</p>
+      <p class="section-sub">5월 5일 어린이날엔 누구나 참여할 수 있는 체험 부스를, 5월 23·30일엔 생태지도사와 함께 깊이 탐험하는 정규 프로그램을 운영합니다.</p>
     </div>
 
     <div class="prog-grid">
