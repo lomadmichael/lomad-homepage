@@ -17,7 +17,7 @@ export const ECOLOGY_TEMPLATES = {
     templateId: "TMPL_ECOLOGY_APPLICATION_CONFIRMED",
     buildVariables: (data: {
       parentName: string;
-      session: string; // 예: "5월 23일(토) 오전반 10:00"
+      session: string; // 예: "5월 23일(토) 오전반 10:00–12:00"
       place: string;
       inquiry: string;
     }) => ({

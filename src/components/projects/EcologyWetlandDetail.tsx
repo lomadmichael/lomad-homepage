@@ -206,7 +206,7 @@ const INLINE_HTML = `
           </svg>
         </div>
         <div class="pc-type">PROGRAM 02 · 정규 생태체험 프로그램</div>
-        <h3 class="pc-title">생태지도사와 함께<br>습지의 비밀을 찾는 120분</h3>
+        <h3 class="pc-title">생태지도사와 함께<br>습지의 비밀을 찾는 시간</h3>
         <p class="pc-desc">습지가 왜 우리 몸의 콩팥 같은 역할을 할까요? 개구리밥과 부들은 어떻게 물을 맑게 할까요? 알에서 올챙이, 개구리가 되기까지 — 생태지도사와 함께 습지 구석구석을 누비며 생물의 한살이를 관찰합니다.</p>
         <div class="pc-meta">
           <div class="pc-meta-item">
@@ -215,7 +215,7 @@ const INLINE_HTML = `
           </div>
           <div class="pc-meta-item">
             <div class="pc-meta-k">운영시간</div>
-            <div class="pc-meta-v">오전반 10:00 – 12:00<br>오후반 14:00 – 16:00 <span style="opacity:.6;">· 회당 120분</span></div>
+            <div class="pc-meta-v">오전반 10:00 – 12:00<br>오후반 14:00 – 16:00</div>
           </div>
           <div class="pc-meta-item">
             <div class="pc-meta-k">참여대상</div>
