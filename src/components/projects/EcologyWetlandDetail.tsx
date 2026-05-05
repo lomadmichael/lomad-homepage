@@ -28,9 +28,9 @@ const INLINE_HTML = `
         생태지도사와 함께 루페로 들여다보고, 뜰채로 건져 올리며, 작은 생명들의 비밀을 배워봐요.
       </p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSeJJb_6wy8h5SiReGT5d-hA6m7CRYr7ygX0g-LtaCDv_Tu9Bg/viewform" target="_blank" rel="noopener noreferrer">
-          5월 5일 접수
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <a class="btn btn-primary" href="https://forms.gle/7bfM3x5Zhk55iQcz9" target="_blank" rel="noopener noreferrer">
+          5월 23·30일 정규 접수
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 4h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14L20 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a class="btn btn-ghost" href="#programs">프로그램 살펴보기</a>
       </div>
@@ -170,7 +170,7 @@ const INLINE_HTML = `
             <path d="M22 32 L36 37" stroke="#3E4E22" stroke-width="1"/>
           </svg>
         </div>
-        <div class="pc-type">PROGRAM 01 · 어린이날 특별 체험 부스</div>
+        <div class="pc-type">PROGRAM 01 · 어린이날 특별 체험 부스 <span style="display:inline-block;margin-left:8px;padding:2px 10px;border-radius:999px;background:rgba(212,112,92,0.15);color:var(--coral);font-size:11px;font-weight:700;letter-spacing:0.04em;">접수 마감</span></div>
         <h3 class="pc-title">루페로 보는<br>작은 세계와 봄꽃 뱃지</h3>
         <p class="pc-desc">어린이날 행사장을 찾은 누구나 자유롭게 참여할 수 있는 오픈 체험 부스. 돋보기로 들여다보는 습지 식물·물속 생물 관찰과, 세상에 하나뿐인 봄꽃 뱃지 만들기가 준비되어 있어요.</p>
         <div class="pc-meta">
@@ -226,9 +226,9 @@ const INLINE_HTML = `
             <div class="pc-meta-v">남대천 하구습지 일대 (양양읍 송암리 502)</div>
           </div>
         </div>
-        <a href="#apply" class="pc-cta">
-          접수예정
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <a href="https://forms.gle/7bfM3x5Zhk55iQcz9" target="_blank" rel="noopener noreferrer" class="pc-cta">
+          접수하기
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 4h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14L20 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </div>
@@ -611,8 +611,8 @@ export default function EcologyWetlandDetail() {
             습지에서 만나요
           </h2>
           <p>
-            회차별 선착순 16명으로 곧 접수가 열립니다.<br />
-            소식 받아보시려면 아래 번호로 문의해 주세요.
+            5월 23·30일 정규 프로그램 접수가 진행 중입니다.<br />
+            회차별 선착순 16명, 마감 시 조기 종료될 수 있어요.
           </p>
           <div
             style={{
@@ -628,7 +628,7 @@ export default function EcologyWetlandDetail() {
                 background: "var(--sun)",
                 color: "var(--forest)",
               }}
-              href="https://docs.google.com/forms/d/e/1FAIpQLSeJJb_6wy8h5SiReGT5d-hA6m7CRYr7ygX0g-LtaCDv_Tu9Bg/viewform"
+              href="https://forms.gle/7bfM3x5Zhk55iQcz9"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -639,22 +639,29 @@ export default function EcologyWetlandDetail() {
                 fill="none"
                 aria-hidden="true"
               >
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="9"
+                <path
+                  d="M14 4h6v6"
                   stroke="currentColor"
                   strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
-                  d="M12 7v5l3 2"
+                  d="M10 14L20 4"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"
                   stroke="currentColor"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
               </svg>
-              5월 5일 접수
+              5월 23·30일 정규 프로그램 접수
             </a>
             <a
               className="btn"
