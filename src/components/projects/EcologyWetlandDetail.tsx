@@ -10,18 +10,16 @@ const INLINE_HTML = `
 <div class="crumb">
   <a href="/projects">PROJECTS</a>
   <span class="sep">/</span>
-  <span>남대천 하구습지의 봄</span>
+  <span>남대천 하구습지의 봄꽃세상</span>
 </div>
 
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow"><span class="pulse"></span> 2026년 5월 · 양양 남대천 하구습지</div>
+      <div class="eyebrow"><span class="pulse"></span> 2026년 5월·6월 · 양양 남대천 하구습지</div>
       <h1 class="hero-title">
-        물과 땅이<br>
-        만나는 자리,<br>
-        <span class="flow">습지의 봄</span>을<br>
-        만나러 가요
+        남대천 하구습지의<br>
+        <span class="flow">봄꽃세상</span>
       </h1>
       <p class="hero-sub">
         양양 남대천 하구는 연어가 돌아오는 강이자, 개구리밥과 부들이 자라고 개구리가 깨어나는 살아있는 습지입니다.
@@ -29,7 +27,7 @@ const INLINE_HTML = `
       </p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="https://forms.gle/7bfM3x5Zhk55iQcz9" target="_blank" rel="noopener noreferrer">
-          5월 23·30일 정규 접수
+          5/23·5/30·6/6 정규 접수
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 4h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14L20 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a class="btn btn-ghost" href="#programs">프로그램 살펴보기</a>
@@ -155,7 +153,7 @@ const INLINE_HTML = `
         <div class="section-label">두 가지 프로그램</div>
         <h2 class="section-title">어린이날엔 가볍게,<br>주말엔 깊이 있게.</h2>
       </div>
-      <p class="section-sub">5월 5일 어린이날엔 누구나 참여할 수 있는 체험 부스를, 5월 23·30일엔 생태지도사와 함께 깊이 탐험하는 정규 프로그램을 운영합니다.</p>
+      <p class="section-sub">5월 5일 어린이날엔 누구나 참여할 수 있는 체험 부스를, 5월 23·30일과 6월 6일엔 생태지도사와 함께 깊이 탐험하는 정규 프로그램을 운영합니다.</p>
     </div>
 
     <div class="prog-grid">
@@ -211,7 +209,7 @@ const INLINE_HTML = `
         <div class="pc-meta">
           <div class="pc-meta-item">
             <div class="pc-meta-k">운영일</div>
-            <div class="pc-meta-v">5월 23일 (토) · 5월 30일 (토)</div>
+            <div class="pc-meta-v">5월 23일 · 30일 · 6월 6일 (토)</div>
           </div>
           <div class="pc-meta-item">
             <div class="pc-meta-k">운영시간</div>
@@ -239,8 +237,8 @@ const INLINE_HTML = `
   <div class="wrap">
     <div class="band-title-row">
       <div>
-        <div class="section-label">5월의 일정</div>
-        <h2 class="section-title">달력 위의 세 번의 만남</h2>
+        <div class="section-label">5월·6월의 일정</div>
+        <h2 class="section-title">달력 위의 네 번의 만남</h2>
       </div>
     </div>
     <div class="timeline">
@@ -263,10 +261,10 @@ const INLINE_HTML = `
         <div class="tl-label">정규 생태체험 2회차<br><span style="color: var(--ink-soft); font-weight: 400;">하구습지 · 오전/오후반</span></div>
       </div>
       <div class="tl-node">
-        <div class="tl-dot" style="background: var(--sand); border-color: var(--ink-soft); opacity: 0.6;"></div>
-        <div class="tl-date" style="color: var(--ink-soft);">6월 ~</div>
-        <div class="tl-day">여름 프로그램 예정</div>
-        <div class="tl-label" style="color: var(--ink-soft);">또 만나요, 습지에서</div>
+        <div class="tl-dot"></div>
+        <div class="tl-date">6월 6일</div>
+        <div class="tl-day">토요일 · 현충일</div>
+        <div class="tl-label">정규 생태체험 3회차<br><span style="color: var(--ink-soft); font-weight: 400;">하구습지 · 오전/오후반</span></div>
       </div>
     </div>
   </div>
@@ -611,7 +609,7 @@ export default function EcologyWetlandDetail() {
             습지에서 만나요
           </h2>
           <p>
-            5월 23·30일 정규 프로그램 접수가 진행 중입니다.<br />
+            5월 23·30일, 6월 6일 정규 프로그램 접수가 진행 중입니다.<br />
             회차별 선착순 16명, 마감 시 조기 종료될 수 있어요.
           </p>
           <div
@@ -661,7 +659,7 @@ export default function EcologyWetlandDetail() {
                   strokeLinejoin="round"
                 />
               </svg>
-              5월 23·30일 정규 프로그램 접수
+              5월 23·30일·6월 6일 정규 프로그램 접수
             </a>
             <a
               className="btn"
