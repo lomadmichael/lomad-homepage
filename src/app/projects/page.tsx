@@ -19,10 +19,12 @@ const FILTERS: { id: FilterValue; label: string }[] = [
 export default function ProjectsPage() {
   const [filter, setFilter] = useState<FilterValue>("all");
 
+  // archived 항목(지난 회차 등)은 목록에서 숨기되 상세 URL은 살아있음.
+  const visible = PROJECTS.filter((p) => !p.archived);
   const filtered =
     filter === "all"
-      ? PROJECTS
-      : PROJECTS.filter((p) => p.category === filter);
+      ? visible
+      : visible.filter((p) => p.category === filter);
 
   return (
     <>

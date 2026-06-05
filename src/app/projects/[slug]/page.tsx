@@ -5,7 +5,8 @@ import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import Button from "@/components/ui/Button";
 import FadeIn from "@/components/ui/FadeIn";
-import EcologyWetlandDetail from "@/components/projects/EcologyWetlandDetail";
+import EcologyWetlandSpring from "@/components/projects/EcologyWetlandSpring";
+import EcologyWetlandSummer from "@/components/projects/EcologyWetlandSummer";
 import { PROJECTS, getProjectBySlug } from "@/data/projects";
 import { getServiceById } from "@/data/services";
 
@@ -39,9 +40,12 @@ export default async function ProjectDetailPage({
   const project = getProjectBySlug(slug);
   if (!project) notFound();
 
-  // 남대천 하구습지 생태체험은 전용 랜딩(커스텀 디자인)을 렌더한다.
+  // 남대천 하구습지 생태체험 시리즈는 회차별 전용 랜딩(커스텀 디자인)을 렌더한다.
   if (project.slug === "ecology-wetland-spring") {
-    return <EcologyWetlandDetail />;
+    return <EcologyWetlandSpring />;
+  }
+  if (project.slug === "ecology-wetland-summer") {
+    return <EcologyWetlandSummer />;
   }
 
   const service = getServiceById(project.category);
@@ -149,7 +153,7 @@ export default async function ProjectDetailPage({
               More Projects
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {PROJECTS.filter((p) => p.slug !== project.slug)
+              {PROJECTS.filter((p) => p.slug !== project.slug && !p.archived)
                 .slice(0, 3)
                 .map((p) => (
                   <Link

@@ -574,7 +574,7 @@ const INLINE_HTML = `
 </section>
 `;
 
-export default function EcologyWetlandDetail() {
+export default function EcologyWetlandSpring() {
   return (
     <div className="ecology-wetland-page">
       <div dangerouslySetInnerHTML={{ __html: INLINE_HTML }} />

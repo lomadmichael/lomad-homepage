@@ -19,7 +19,7 @@ export default function WhatWeDoPage() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-[60px]">
         {SERVICES.map((service, idx) => {
           const relatedProjects = PROJECTS.filter(
-            (p) => p.category === service.id,
+            (p) => p.category === service.id && !p.archived,
           ).slice(0, 3);
 
           return (
