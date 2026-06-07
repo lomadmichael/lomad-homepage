@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "현남생활 페스티벌 · 2026.7.4 — 7.5",
     description: "양양서핑로드 위에서 보내는 1박 2일",
-    images: ["/images/hyeonnam-festival-poster.png"],
+    images: ["/images/festival-hero-bg.png"],
   },
 };
 
