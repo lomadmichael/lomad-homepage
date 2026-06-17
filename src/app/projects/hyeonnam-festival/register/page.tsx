@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import RegistrationForm from "@/components/projects/festival/RegistrationForm";
 import CountdownTimer from "@/components/projects/festival/CountdownTimer";
+import RegistrationForm from "@/components/projects/festival/RegistrationForm";
+import { SUBMISSIONS_OPEN } from "@/lib/festival-config";
 
 export const metadata: Metadata = {
-  title: "참가 신청 · 현남생활 페스티벌 | LOMAD",
+  title: SUBMISSIONS_OPEN
+    ? "참가 신청 · 현남생활 페스티벌 | LOMAD"
+    : "접수 준비 중 · 현남생활 페스티벌 | LOMAD",
   description:
     "현남생활 페스티벌 참가 신청 — 2026.7.4(토)~7.5(일), 양양 죽도·북분리.",
   alternates: { canonical: "/projects/hyeonnam-festival/register" },
@@ -71,9 +74,48 @@ export default function FestivalRegisterPage() {
             </div>
           </aside>
 
-          {/* 우 — 폼 */}
+          {/* 우 — 접수 폼 (오픈 시) 또는 준비 중 안내 */}
           <div>
-            <RegistrationForm />
+            {SUBMISSIONS_OPEN ? (
+              <RegistrationForm />
+            ) : (
+            <div className="border border-border bg-bg-soft p-8 md:p-12">
+              <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-[#FF6B6B] mb-4">
+                Coming Soon
+              </p>
+              <h1 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[36px] font-black leading-tight mb-5">
+                접수 준비 중입니다
+              </h1>
+              <p className="font-[family-name:var(--font-noto)] text-[15px] md:text-[16px] text-text-sub leading-[1.9] mb-8">
+                현남생활 페스티벌의 정식 접수는
+                <br className="hidden md:block" />
+                준비가 완료되는 대로 별도 공지를 통해 안내드립니다.
+              </p>
+              <div className="space-y-3 pt-6 border-t border-border text-[14px] text-text-sub">
+                <p>
+                  <span className="font-black text-text">행사 일정</span>
+                  <br />
+                  2026.7.4(토) — 7.5(일) · 1박 2일
+                </p>
+                <p>
+                  <span className="font-black text-text">행사 장소</span>
+                  <br />
+                  양양 죽도해변 · 북분리 캠핑장
+                </p>
+              </div>
+              <div className="mt-8 pt-6 border-t border-border space-y-2">
+                <p className="font-[family-name:var(--font-noto)] text-[13px] text-text-sub leading-relaxed">
+                  파트너 · 셀러 · 후원 협력 문의는 지금 바로 받고 있습니다.
+                </p>
+                <Link
+                  href={`/contact?type=${encodeURIComponent("현남생활 페스티벌 협력 문의")}`}
+                  className="inline-block mt-2 font-[family-name:var(--font-karla)] text-[11px] md:text-[12px] font-extrabold tracking-[2px] uppercase border border-text px-5 py-3 hover:bg-text hover:text-white transition-colors"
+                >
+                  협력 문의하기 →
+                </Link>
+              </div>
+            </div>
+            )}
           </div>
         </div>
       </div>

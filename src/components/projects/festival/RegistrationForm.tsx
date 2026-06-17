@@ -10,16 +10,19 @@ const initialState: FestivalFormState = {
   message: "",
 };
 
-const PROGRAMS = [
-  "서퍼's 나이트",
-  "랜드서핑 페스타",
-  "로컬 쿠킹클래스",
-  "블루 웰니스 (요가·명상·핸드팬)",
-  "비치 러닝",
-  "선셋 공동 새참",
-  "트로트 DJ 파티",
-  "불꽃 피날레",
+const CLASSES = [
+  "서핑 체험 (유료 · 선착순)",
+  "SUP 체험 (유료 · 선착순)",
+  "랜드서핑 체험 (유료 · 선착순)",
+  "클라이밍 체험 (유료 · 선착순)",
+  "로컬 쿠킹클래스 — 블루베리 모찌 만들기 (13:00 · 80명)",
+  "비치 러닝 (죽도 · 18:00)",
+  "비치 요가 (일요일 아침 · 북분리)",
+  "사운드 배스 — iNDIGO MOON WAVE (북분리)",
+  "선셋 비치 테이블 — 각자 음식 지참 교류 만찬",
 ];
+
+const TRANSPORTS = ["대중교통", "자차", "기타"];
 
 export default function RegistrationForm() {
   const [state, formAction] = useActionState(submitFestival, initialState);
@@ -99,6 +102,31 @@ export default function RegistrationForm() {
           </select>
         </Field>
 
+        {/* 참가 지역 · 이동방법 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <Field label="참가 지역" required>
+            <input
+              type="text"
+              name="region"
+              required
+              placeholder="예: 서울 마포구 · 양양 · 속초"
+              className={inputCls}
+            />
+          </Field>
+          <Field label="이동방법" required>
+            <select name="transport" required defaultValue="" className={`${inputCls} appearance-none cursor-pointer`}>
+              <option value="" disabled>
+                이동방법을 선택해 주세요
+              </option>
+              {TRANSPORTS.map((t) => (
+                <option key={t} value={t}>
+                  {t}
+                </option>
+              ))}
+            </select>
+          </Field>
+        </div>
+
         <div className="grid grid-cols-2 gap-4 mb-4">
           <Field label="성인 인원">
             <input type="number" name="adults" min={0} max={20} defaultValue={1} className={inputCls} />
@@ -108,13 +136,13 @@ export default function RegistrationForm() {
           </Field>
         </div>
 
-        {/* 관심 프로그램 */}
+        {/* 클래스 사전 참여 신청 */}
         <div className="mb-6">
           <p className="font-[family-name:var(--font-noto)] text-[12px] font-semibold text-text-sub mb-3">
-            관심 있는 프로그램 (복수 선택)
+            클래스 사전 참여 신청 (복수 선택)
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            {PROGRAMS.map((p) => (
+            {CLASSES.map((p) => (
               <label
                 key={p}
                 className="flex items-center gap-2 cursor-pointer text-[13px] font-[family-name:var(--font-noto)] py-1"
@@ -130,7 +158,9 @@ export default function RegistrationForm() {
             ))}
           </div>
           <p className="text-[11px] text-text-muted italic mt-3">
-            ※ 프로그램 라인업은 확정 후 별도 안내드립니다.
+            ※ 유료 체험(서핑·SUP·랜드서핑·클라이밍)은 1인 2만 원 · 선착순이며, 확정 여부와 결제 안내는 개별 연락드립니다.
+            <br />
+            ※ 선셋 비치 테이블은 각자 나눌 음식을 준비해 오시는 교류 만찬입니다.
           </p>
         </div>
 
