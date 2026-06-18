@@ -156,6 +156,16 @@ export default function HyeonnamFestivalPage() {
               자세히 보기
             </a>
           </div>
+          {SUBMISSIONS_OPEN && (
+            <div className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 font-[family-name:var(--font-karla)] text-[10px] md:text-[11px] font-extrabold tracking-[2px] uppercase text-white/60">
+              <Link href="/projects/hyeonnam-festival/status" className="hover:text-white underline underline-offset-4">
+                접수 현황
+              </Link>
+              <Link href="/projects/hyeonnam-festival/my" className="hover:text-white underline underline-offset-4">
+                내 신청 조회 · 취소
+              </Link>
+            </div>
+          )}
           {!SUBMISSIONS_OPEN && (
             <p className="mt-5 font-[family-name:var(--font-noto)] text-[12px] md:text-[13px] text-white/60 tracking-wide">
               접수는 준비가 완료되는 대로 별도 공지로 안내드립니다

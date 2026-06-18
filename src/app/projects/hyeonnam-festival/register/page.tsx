@@ -3,6 +3,10 @@ import Link from "next/link";
 import CountdownTimer from "@/components/projects/festival/CountdownTimer";
 import RegistrationForm from "@/components/projects/festival/RegistrationForm";
 import { SUBMISSIONS_OPEN } from "@/lib/festival-config";
+import { getAvailability, availabilityMap } from "@/lib/festival-db";
+
+// 잔여 현황은 매 요청 시점 데이터라 동적 렌더
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: SUBMISSIONS_OPEN
@@ -14,7 +18,15 @@ export const metadata: Metadata = {
   robots: { index: false }, // 접수 페이지는 검색 노출 제외
 };
 
-export default function FestivalRegisterPage() {
+export default async function FestivalRegisterPage() {
+  let availability: Record<string, { confirmed: number; waitlist: number }> = {};
+  if (SUBMISSIONS_OPEN) {
+    try {
+      availability = availabilityMap(await getAvailability());
+    } catch (e) {
+      console.error("[festival] availability fetch failed:", e);
+    }
+  }
   return (
     <main className="min-h-screen bg-bg flex flex-col">
       {/* 미니멀 헤더 */}
@@ -77,7 +89,7 @@ export default function FestivalRegisterPage() {
           {/* 우 — 접수 폼 (오픈 시) 또는 준비 중 안내 */}
           <div>
             {SUBMISSIONS_OPEN ? (
-              <RegistrationForm />
+              <RegistrationForm availability={availability} />
             ) : (
             <div className="border border-border bg-bg-soft p-8 md:p-12">
               <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-[#FF6B6B] mb-4">

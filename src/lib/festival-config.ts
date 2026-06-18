@@ -3,4 +3,4 @@
  * true 로 바꾸면: 메인 페이지 CTA 3곳 + 접수 페이지 폼 + 서버 액션이 모두 열린다.
  * (2026-06-15 월요일 오픈 예정 — 오픈 시 이 값만 바꾸고 배포)
  */
-export const SUBMISSIONS_OPEN = false;
+export const SUBMISSIONS_OPEN = true;

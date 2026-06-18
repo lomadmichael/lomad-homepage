@@ -1,50 +1,146 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import { submitFestival, type FestivalFormState } from "@/lib/festival-action";
+import { EXPERIENCES, CAMPING, experienceLabel } from "@/lib/festival-experiences";
 
-const initialState: FestivalFormState = {
-  success: false,
-  message: "",
-};
+const initialState: FestivalFormState = { success: false, message: "" };
 
-const CLASSES = [
-  "서핑 체험 (유료 · 선착순)",
-  "SUP 체험 (유료 · 선착순)",
-  "랜드서핑 체험 (유료 · 선착순)",
-  "클라이밍 체험 (유료 · 선착순)",
-  "로컬 쿠킹클래스 — 블루베리 모찌 만들기 (13:00 · 80명)",
-  "비치 러닝 (죽도 · 18:00)",
-  "비치 요가 (일요일 아침 · 북분리)",
-  "사운드 배스 — iNDIGO MOON WAVE (북분리)",
-  "선셋 비치 테이블 — 각자 음식 지참 교류 만찬",
-];
+type Avail = Record<string, { confirmed: number; waitlist: number }>;
 
-const TRANSPORTS = ["대중교통", "자차", "기타"];
+interface ExpOption {
+  key: string;
+  slot: string | null;
+  label: string;
+  capacity: number;
+  location: string;
+  fee?: string;
+  ageLimit?: string;
+  desc: string;
+}
 
-export default function RegistrationForm() {
-  const [state, formAction] = useActionState(submitFestival, initialState);
+// EXPERIENCES → 선택 가능한 (체험·타임) 옵션 평면 목록
+const OPTIONS: ExpOption[] = EXPERIENCES.flatMap((exp): ExpOption[] =>
+  exp.slots
+    ? exp.slots.map((s) => ({
+        key: exp.key,
+        slot: s.slot,
+        label: `${exp.label} · ${s.label}`,
+        capacity: s.capacity,
+        location: exp.location,
+        fee: exp.fee,
+        ageLimit: exp.ageLimit,
+        desc: exp.desc,
+      }))
+    : [
+        {
+          key: exp.key,
+          slot: null,
+          label: exp.label,
+          capacity: exp.capacity ?? 0,
+          location: exp.location,
+          fee: exp.fee,
+          ageLimit: exp.ageLimit,
+          desc: exp.desc,
+        },
+      ],
+);
+
+interface PExp {
+  key: string;
+  slot: string | null;
+}
+interface Participant {
+  name: string;
+  age: string;
+  experiences: PExp[];
+}
+
+export default function RegistrationForm({ availability }: { availability: Avail }) {
+  const [state, formAction, pending] = useActionState(submitFestival, initialState);
+  const [participants, setParticipants] = useState<Participant[]>([
+    { name: "", age: "", experiences: [] },
+  ]);
+
+  function availKey(o: { key: string; slot: string | null }) {
+    return o.slot ? `${o.key}|${o.slot}` : o.key;
+  }
+  function remaining(o: ExpOption) {
+    return o.capacity - (availability[availKey(o)]?.confirmed ?? 0);
+  }
+  function campRemaining(key: "deck" | "noji", cap: number) {
+    return cap - (availability[`camping_${key}`]?.confirmed ?? 0);
+  }
+
+  function updateParticipant(i: number, patch: Partial<Participant>) {
+    setParticipants((prev) => prev.map((p, idx) => (idx === i ? { ...p, ...patch } : p)));
+  }
+  function toggleExp(i: number, o: ExpOption) {
+    setParticipants((prev) =>
+      prev.map((p, idx) => {
+        if (idx !== i) return p;
+        const has = p.experiences.some((e) => e.key === o.key && e.slot === o.slot);
+        return {
+          ...p,
+          experiences: has
+            ? p.experiences.filter((e) => !(e.key === o.key && e.slot === o.slot))
+            : [...p.experiences, { key: o.key, slot: o.slot }],
+        };
+      }),
+    );
+  }
+  function addParticipant() {
+    setParticipants((prev) => [...prev, { name: "", age: "", experiences: [] }]);
+  }
+  function removeParticipant(i: number) {
+    setParticipants((prev) => prev.filter((_, idx) => idx !== i));
+  }
+
+  const participantsPayload = JSON.stringify(
+    participants.map((p) => ({
+      name: p.name.trim(),
+      age: Number(p.age),
+      experiences: p.experiences,
+    })),
+  );
 
   if (state.success) {
+    const r = state.result;
     return (
-      <div className="max-w-[560px] mx-auto py-[80px] text-center">
+      <div className="max-w-[560px] mx-auto py-[60px]">
         <p className="font-[family-name:var(--font-karla)] text-[10px] font-extrabold tracking-[3px] uppercase text-[#FF6B6B] mb-4">
           Registration Complete
         </p>
         <h2 className="font-[family-name:var(--font-noto)] text-[26px] md:text-[32px] font-black mb-5 leading-snug">
           접수가 완료되었습니다
         </h2>
-        <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub leading-relaxed mb-10">
+        <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub leading-relaxed mb-6">
           {state.message}
         </p>
-        <div className="flex flex-wrap justify-center gap-3">
-          <Button variant="primary" href="/projects/hyeonnam-festival">
-            페스티벌 페이지로
+        {r && (r.confirmed.length > 0 || r.waitlisted.length > 0) && (
+          <div className="mb-8 text-[13px] font-[family-name:var(--font-noto)] space-y-2">
+            {r.confirmed.length > 0 && (
+              <p>
+                <span className="font-bold text-[#0B1F3A]">확정</span> ·{" "}
+                {r.confirmed.map((c) => `${c.participant}(${experienceLabel(c.key, c.slot)})`).join(", ")}
+              </p>
+            )}
+            {r.waitlisted.length > 0 && (
+              <p>
+                <span className="font-bold text-[#b45309]">대기</span> ·{" "}
+                {r.waitlisted.map((c) => `${c.participant}(${experienceLabel(c.key, c.slot)})`).join(", ")}
+              </p>
+            )}
+          </div>
+        )}
+        <div className="flex flex-wrap gap-3">
+          <Button variant="primary" href="/projects/hyeonnam-festival/my">
+            내 신청 조회
           </Button>
-          <Button variant="outline" href="/">
-            로마드 홈
+          <Button variant="outline" href="/projects/hyeonnam-festival">
+            페스티벌 페이지로
           </Button>
         </div>
       </div>
@@ -52,9 +148,8 @@ export default function RegistrationForm() {
   }
 
   return (
-    <div className="max-w-[640px] mx-auto">
-      {/* Header */}
-      <div className="mb-10">
+    <div className="max-w-[680px] mx-auto">
+      <div className="mb-8">
         <Link
           href="/projects/hyeonnam-festival"
           className="font-[family-name:var(--font-karla)] text-[10px] font-extrabold tracking-[2px] uppercase text-text-muted hover:text-text mb-4 inline-flex items-center gap-1"
@@ -68,9 +163,9 @@ export default function RegistrationForm() {
           참가 신청
         </h1>
         <p className="font-[family-name:var(--font-noto)] text-[13px] md:text-[14px] text-text-sub leading-relaxed">
-          입장 무료 · 일부 체험만 사전 예약 필요.
+          입장 무료 · 일부 체험만 사전 예약 필요. 체험비·캠핑비는 현장 결제입니다.
           <br />
-          접수 후 자세한 일정 · 체험 안내가 별도 발송됩니다.
+          참가자별로 나이와 신청 체험을 입력해 주세요. (연령 제한 체험 확인용)
         </p>
       </div>
 
@@ -81,100 +176,151 @@ export default function RegistrationForm() {
       )}
 
       <form action={formAction}>
-        {/* 이름·연락처 */}
+        <input type="hidden" name="participants_json" value={participantsPayload} />
+
+        {/* 신청자(대표) 정보 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <Field label="이름" required>
-            <input type="text" name="name" required className={inputCls} />
+          <Field label="신청자명" required>
+            <input type="text" name="rep_name" required className={inputCls} />
           </Field>
           <Field label="연락처" required>
             <input type="tel" name="phone" required placeholder="010-1234-5678" className={inputCls} />
           </Field>
         </div>
-
-        <Field label="참여일" required>
-          <select name="day" required defaultValue="" className={`${inputCls} appearance-none cursor-pointer`}>
-            <option value="" disabled>
-              참여하실 날짜를 선택해 주세요
-            </option>
-            <option value="7/4(토) 메인 데이">7/4(토) 메인 데이</option>
-            <option value="7/5(일) 캠핑객 위주">7/5(일) 캠핑객 위주</option>
-            <option value="둘 다 (1박 2일 · 캠핑 숙박)">둘 다 (1박 2일 · 캠핑 숙박)</option>
-          </select>
+        <Field label="참가지역" required>
+          <input type="text" name="region" required placeholder="예: 서울 마포구 · 양양 · 속초" className={inputCls} />
         </Field>
 
-        {/* 참가 지역 · 이동방법 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <Field label="참가 지역" required>
-            <input
-              type="text"
-              name="region"
-              required
-              placeholder="예: 서울 마포구 · 양양 · 속초"
-              className={inputCls}
-            />
-          </Field>
-          <Field label="이동방법" required>
-            <select name="transport" required defaultValue="" className={`${inputCls} appearance-none cursor-pointer`}>
-              <option value="" disabled>
-                이동방법을 선택해 주세요
-              </option>
-              {TRANSPORTS.map((t) => (
-                <option key={t} value={t}>
-                  {t}
-                </option>
-              ))}
-            </select>
-          </Field>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          <Field label="성인 인원">
-            <input type="number" name="adults" min={0} max={20} defaultValue={1} className={inputCls} />
-          </Field>
-          <Field label="아동 인원">
-            <input type="number" name="children" min={0} max={20} defaultValue={0} className={inputCls} />
-          </Field>
-        </div>
-
-        {/* 클래스 사전 참여 신청 */}
+        {/* 캠핑 */}
         <div className="mb-6">
-          <p className="font-[family-name:var(--font-noto)] text-[12px] font-semibold text-text-sub mb-3">
-            클래스 사전 참여 신청 (복수 선택)
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            {CLASSES.map((p) => (
-              <label
-                key={p}
-                className="flex items-center gap-2 cursor-pointer text-[13px] font-[family-name:var(--font-noto)] py-1"
-              >
-                <input
-                  type="checkbox"
-                  name="programs"
-                  value={p}
-                  className="w-4 h-4 cursor-pointer accent-text"
-                />
-                <span>{p}</span>
-              </label>
+          <p className={labelCls}>캠핑 사이트 신청</p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <label className={radioCardCls}>
+              <input type="radio" name="camping" value="" defaultChecked className="accent-text" />
+              <span>신청 안 함</span>
+            </label>
+            {CAMPING.map((c) => {
+              const rem = campRemaining(c.key, c.capacity);
+              const full = rem <= 0;
+              return (
+                <label key={c.key} className={radioCardCls}>
+                  <input type="radio" name="camping" value={c.key} className="accent-text" />
+                  <span>
+                    {c.label} <span className="text-text-muted">({c.fee})</span>
+                    <br />
+                    <span className={`text-[11px] ${full ? "text-[#b45309]" : "text-text-muted"}`}>
+                      {full ? "마감 · 대기 신청" : `잔여 ${rem}/${c.capacity}`}
+                    </span>
+                  </span>
+                </label>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* 참가자 명단 */}
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-3">
+            <p className={labelCls} style={{ marginBottom: 0 }}>
+              참가자 ({participants.length}명)
+            </p>
+            <button type="button" onClick={addParticipant} className={addBtnCls}>
+              + 참가자 추가
+            </button>
+          </div>
+
+          <div className="space-y-5">
+            {participants.map((p, i) => (
+              <div key={i} className="border border-border p-4 md:p-5 bg-bg-soft">
+                <div className="flex items-end gap-3 mb-4">
+                  <div className="flex-1">
+                    <label className={labelCls}>이름</label>
+                    <input
+                      type="text"
+                      value={p.name}
+                      onChange={(e) => updateParticipant(i, { name: e.target.value })}
+                      className={inputCls}
+                      placeholder="참가자 이름"
+                    />
+                  </div>
+                  <div className="w-[110px]">
+                    <label className={labelCls}>나이(만)</label>
+                    <input
+                      type="number"
+                      min={0}
+                      max={120}
+                      value={p.age}
+                      onChange={(e) => updateParticipant(i, { age: e.target.value })}
+                      className={inputCls}
+                      placeholder="세"
+                    />
+                  </div>
+                  {participants.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => removeParticipant(i)}
+                      className="h-11 px-3 text-[12px] text-text-muted hover:text-[#b45309] font-[family-name:var(--font-noto)]"
+                    >
+                      삭제
+                    </button>
+                  )}
+                </div>
+
+                <p className="font-[family-name:var(--font-noto)] text-[12px] font-semibold text-text-sub mb-2">
+                  신청 체험 (복수 선택)
+                </p>
+                <div className="grid grid-cols-1 gap-1.5">
+                  {OPTIONS.map((o) => {
+                    const rem = remaining(o);
+                    const full = rem <= 0;
+                    const checked = p.experiences.some((e) => e.key === o.key && e.slot === o.slot);
+                    return (
+                      <label
+                        key={`${o.key}-${o.slot ?? ""}`}
+                        className="flex items-start gap-2.5 cursor-pointer py-1.5 px-2 hover:bg-bg rounded"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={() => toggleExp(i, o)}
+                          className="mt-0.5 w-4 h-4 cursor-pointer accent-text shrink-0"
+                        />
+                        <span className="text-[13px] font-[family-name:var(--font-noto)] leading-snug">
+                          <span className="font-semibold">{o.label}</span>
+                          <span className="text-text-muted"> · {o.location}</span>
+                          {o.fee && <span className="text-text-muted"> · {o.fee}</span>}
+                          {o.ageLimit && <span className="text-[#b45309]"> · {o.ageLimit}</span>}
+                          <span className={`ml-1 text-[11px] font-medium ${full ? "text-[#b45309]" : "text-[#0B7A5A]"}`}>
+                            {full ? "[마감 · 대기 신청]" : `[잔여 ${rem}/${o.capacity}]`}
+                          </span>
+                          <br />
+                          <span className="text-[11.5px] text-text-muted">{o.desc}</span>
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
             ))}
           </div>
-          <p className="text-[11px] text-text-muted italic mt-3">
-            ※ 유료 체험(서핑·SUP·랜드서핑·클라이밍)은 1인 2만 원 · 선착순이며, 확정 여부와 결제 안내는 개별 연락드립니다.
-            <br />
-            ※ 선셋 비치 테이블은 각자 나눌 음식을 준비해 오시는 교류 만찬입니다.
-          </p>
         </div>
 
         <Field label="남기실 말씀 (선택)">
           <textarea
             name="note"
-            className={`${inputCls} min-h-[100px] py-3 resize-y h-auto`}
+            className={`${inputCls} min-h-[90px] py-3 resize-y h-auto`}
             placeholder="알레르기 · 특이사항 · 문의사항 등"
           />
         </Field>
 
-        <div className="mt-8 flex flex-wrap gap-3">
+        <p className="text-[11px] text-text-muted italic mt-3 leading-relaxed">
+          ※ 체험은 무료이며, <b>선셋 비치 테이블(2만원)·캠핑 데크(1만원)</b>만 현장 결제입니다. 확정 여부와 안내는 개별 연락드립니다.
+          <br />※ 정원이 찬 체험은 <b>대기</b>로 접수되며, 취소자가 생기면 순서대로 자동 확정·문자 안내됩니다.
+        </p>
+
+        <div className="mt-7 flex flex-wrap gap-3">
           <Button variant="primary" type="submit">
-            접수하기
+            {pending ? "접수 중..." : "접수하기"}
           </Button>
           <Button variant="outline" href="/projects/hyeonnam-festival">
             취소
@@ -187,19 +333,16 @@ export default function RegistrationForm() {
 
 const inputCls =
   "w-full bg-input-bg h-11 px-3 font-[family-name:var(--font-noto)] text-sm font-medium outline-none";
+const labelCls = "font-[family-name:var(--font-noto)] text-[12px] font-semibold text-text-sub block mb-1.5";
+const radioCardCls =
+  "flex items-center gap-2 border border-border px-3 py-2.5 cursor-pointer text-[13px] font-[family-name:var(--font-noto)] hover:border-text";
+const addBtnCls =
+  "font-[family-name:var(--font-karla)] text-[10px] font-extrabold tracking-[1px] uppercase border border-text px-3 py-2 hover:bg-text hover:text-bg transition-colors";
 
-function Field({
-  label,
-  required,
-  children,
-}: {
-  label: string;
-  required?: boolean;
-  children: React.ReactNode;
-}) {
+function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <div className="mb-4 last:mb-0">
-      <label className="font-[family-name:var(--font-noto)] text-[12px] font-semibold text-text-sub block mb-1.5">
+      <label className={labelCls}>
         {label} {required && <span className="text-[#FF6B6B]">*</span>}
       </label>
       {children}

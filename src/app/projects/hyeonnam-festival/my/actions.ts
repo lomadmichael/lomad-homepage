@@ -1,0 +1,102 @@
+"use server";
+
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { otpSet, otpVerify, cancelSignup, lookupByPhone } from "@/lib/festival-db";
+import { generateOtp, hashOtp, signSession, verifySession } from "@/lib/festival-otp";
+import { sendOtpSms, sendPromotionSms } from "@/lib/festival-sms";
+
+const COOKIE = "festival_my";
+const COOKIE_PATH = "/projects/hyeonnam-festival";
+const SESSION_TTL = 1800; // 30분
+const OTP_TTL = 300; // 5분
+
+export interface OtpState {
+  step: "phone" | "verify" | "error";
+  phone?: string;
+  message?: string;
+}
+
+function normalizePhone(raw: string): string {
+  return raw.replace(/\D/g, "");
+}
+
+/** 1단계: 연락처로 인증코드 발송. */
+export async function requestOtp(_prev: OtpState, formData: FormData): Promise<OtpState> {
+  const phone = normalizePhone((formData.get("phone") as string | null) ?? "");
+  if (phone.length < 10 || phone.length > 11) {
+    return { step: "error", message: "유효한 연락처를 입력해 주세요." };
+  }
+  // 신청 내역이 없으면 굳이 발송하지 않음(존재 노출 방지 위해 메시지는 동일하게 유지 가능하나, UX 우선)
+  const code = generateOtp();
+  try {
+    await otpSet(phone, hashOtp(phone, code), OTP_TTL);
+    await sendOtpSms(phone, code);
+  } catch (e) {
+    console.error("[festival] requestOtp failed:", e);
+    return { step: "error", message: "인증번호 발송에 실패했습니다. 잠시 후 다시 시도해 주세요." };
+  }
+  return { step: "verify", phone };
+}
+
+/** 2단계: 인증코드 확인 → 세션 쿠키 발급 후 조회 화면으로. */
+export async function verifyOtp(_prev: OtpState, formData: FormData): Promise<OtpState> {
+  const phone = normalizePhone((formData.get("phone") as string | null) ?? "");
+  const code = ((formData.get("code") as string | null) ?? "").replace(/\D/g, "");
+  if (!phone || !code) {
+    return { step: "verify", phone, message: "인증번호를 입력해 주세요." };
+  }
+  let ok = false;
+  try {
+    ok = await otpVerify(phone, hashOtp(phone, code));
+  } catch (e) {
+    console.error("[festival] verifyOtp failed:", e);
+  }
+  if (!ok) {
+    return { step: "verify", phone, message: "인증번호가 올바르지 않거나 만료되었습니다." };
+  }
+  const store = await cookies();
+  store.set(COOKIE, signSession(phone, SESSION_TTL), {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: COOKIE_PATH,
+    maxAge: SESSION_TTL,
+  });
+  redirect("/projects/hyeonnam-festival/my");
+}
+
+/** 인증된 본인의 체험 신청 취소 → 대기 1번 자동 승급 + 승급자 SMS. */
+export async function cancelMySignup(formData: FormData): Promise<void> {
+  const signupId = (formData.get("signup_id") as string | null) ?? "";
+  const store = await cookies();
+  const phone = verifySession(store.get(COOKIE)?.value);
+  if (!phone || !signupId) return;
+
+  // 소유권 확인: 이 연락처의 신청에 속한 signup 인지 검증
+  const regs = await lookupByPhone(phone);
+  const owns = regs.some((r) => r.participants.some((p) => p.signups.some((s) => s.id === signupId)));
+  if (!owns) return;
+
+  try {
+    const res = await cancelSignup(signupId);
+    if (res.promoted) {
+      await sendPromotionSms({
+        phone: res.promoted.phone,
+        name: res.promoted.name,
+        key: res.promoted.key,
+        slot: res.promoted.slot,
+      });
+    }
+  } catch (e) {
+    console.error("[festival] cancelMySignup failed:", e);
+  }
+  revalidatePath("/projects/hyeonnam-festival/my");
+}
+
+export async function logoutMy(): Promise<void> {
+  const store = await cookies();
+  store.delete({ name: COOKIE, path: COOKIE_PATH });
+  redirect("/projects/hyeonnam-festival/my");
+}
