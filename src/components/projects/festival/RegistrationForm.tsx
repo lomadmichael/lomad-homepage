@@ -148,7 +148,7 @@ export default function RegistrationForm({ availability }: { availability: Avail
   }
 
   return (
-    <div className="max-w-[680px] mx-auto">
+    <div className="w-full">
       <div className="mb-8">
         <Link
           href="/projects/hyeonnam-festival"

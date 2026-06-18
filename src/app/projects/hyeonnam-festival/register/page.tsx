@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import CountdownTimer from "@/components/projects/festival/CountdownTimer";
 import RegistrationForm from "@/components/projects/festival/RegistrationForm";
 import { SUBMISSIONS_OPEN } from "@/lib/festival-config";
 import { getAvailability, availabilityMap } from "@/lib/festival-db";
@@ -47,51 +46,35 @@ export default async function FestivalRegisterPage() {
         </div>
       </header>
 
-      {/* 본문 — 좌측 정보 + 우측 폼 (모바일은 stack) */}
-      <div className="flex-1 max-w-[1200px] w-full mx-auto px-6 md:px-12 py-[60px] md:py-[80px]">
-        <div className="grid md:grid-cols-[1fr_1.2fr] gap-10 md:gap-20">
-          {/* 좌 — 페스티벌 정보 + 카운트다운 (다크 카드) */}
-          <aside
-            className="text-white p-8 md:p-10 md:sticky md:top-8 md:self-start"
-            style={{
-              background:
-                "linear-gradient(160deg, #0B1F3A 0%, #004E5A 100%)",
-            }}
-          >
-            <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-[#FF6B6B] mb-4">
-              Yangyang Surf Road
-            </p>
-            <h2 className="font-[family-name:var(--font-noto)] text-[26px] md:text-[34px] font-black mb-2 leading-tight">
-              현남생활 페스티벌
-            </h2>
-            <p className="font-[family-name:var(--font-noto)] text-[13px] text-white/70 mb-8 italic">
-              서퍼와 마을이 한 상에
-            </p>
+      {/* 본문 — 단일 컬럼 중앙 정렬 (상단 정보 배너 + 폼) */}
+      <div className="max-w-[680px] w-full mx-auto px-6 py-[48px] md:py-[64px]">
+        {/* 상단 컴팩트 정보 배너 */}
+        <aside
+          className="text-white p-6 md:p-7 mb-10"
+          style={{ background: "linear-gradient(135deg, #0B1F3A 0%, #004E5A 100%)" }}
+        >
+          <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-[#FF6B6B] mb-2">
+            Yangyang Surf Road
+          </p>
+          <h2 className="font-[family-name:var(--font-noto)] text-[24px] md:text-[28px] font-black mb-1 leading-tight">
+            현남생활 페스티벌
+          </h2>
+          <p className="font-[family-name:var(--font-noto)] text-[13px] text-white/70 mb-5 italic">
+            서퍼와 마을이 한 상에
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-4 gap-x-3 pt-5 border-t border-white/15 text-[12px]">
+            <Info k="When" v="7.4~7.5(토·일)" sub="1박 2일" />
+            <Info k="Where" v="죽도·북분리" sub="양양서핑로드" />
+            <Info k="Entry" v="무료" sub="일부 체험 예약" />
+            <Info k="Host" v="로마드 협동조합" sub="활력화 사업" />
+          </div>
+        </aside>
 
-            <div className="mb-8 pb-8 border-b border-white/15 space-y-3 text-[13px]">
-              <Info k="When" v="2026.7.4(토) ~ 7.5(일)" sub="1박 2일" />
-              <Info k="Where" v="양양 죽도 · 북분리" sub="양양서핑로드" />
-              <Info k="Entry" v="무료" sub="일부 체험 사전 예약" />
-              <Info k="Host" v="로마드 협동조합" sub="농촌마을 활력화 사업" />
-            </div>
-
-            <div>
-              <p className="font-[family-name:var(--font-karla)] text-[9px] tracking-[3px] font-bold uppercase text-white/50 mb-3">
-                Starts In
-              </p>
-              {/* 작은 카운트다운 — 그대로 풀 사이즈는 부담스러우니 추후 mini variant 별도 만들 수도 */}
-              <div className="scale-[0.55] md:scale-[0.7] origin-left">
-                <CountdownTimer />
-              </div>
-            </div>
-          </aside>
-
-          {/* 우 — 접수 폼 (오픈 시) 또는 준비 중 안내 */}
-          <div>
-            {SUBMISSIONS_OPEN ? (
-              <RegistrationForm availability={availability} />
-            ) : (
-            <div className="border border-border bg-bg-soft p-8 md:p-12">
+        {/* 접수 폼 (오픈 시) 또는 준비 중 안내 */}
+        {SUBMISSIONS_OPEN ? (
+          <RegistrationForm availability={availability} />
+        ) : (
+          <div className="border border-border bg-bg-soft p-8 md:p-12">
               <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-[#FF6B6B] mb-4">
                 Coming Soon
               </p>
@@ -126,10 +109,8 @@ export default async function FestivalRegisterPage() {
                   협력 문의하기 →
                 </Link>
               </div>
-            </div>
-            )}
           </div>
-        </div>
+        )}
       </div>
 
       <footer className="border-t border-border py-6 text-center text-[11px] text-text-muted font-[family-name:var(--font-noto)]">
