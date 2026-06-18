@@ -118,17 +118,33 @@ export const CAMPING: CampingOption[] = [
   { key: "noji", label: "노지", capacity: 10, fee: "무료" },
 ];
 
-/** RPC capacities 맵: 체험(key 또는 key|slot) + 캠핑(camping_deck/noji) */
+/**
+ * 온라인 사전접수 비율. 전체 정원의 70%만 온라인으로 받고, 나머지 30%는 현장 접수 몫으로 남긴다.
+ * 정원 판정(확정/대기)·폼/현황 표시는 모두 "온라인 정원" 기준.
+ */
+export const ONLINE_RATIO = 0.7;
+
+/** 전체 정원 → 온라인 사전접수 정원(70%, 반올림). */
+export function onlineCapacity(total: number): number {
+  return Math.round(total * ONLINE_RATIO);
+}
+
+/** 전체 정원 → 현장 접수 정원(나머지 30%). */
+export function onsiteCapacity(total: number): number {
+  return total - onlineCapacity(total);
+}
+
+/** RPC capacities 맵: 체험(key 또는 key|slot) + 캠핑(camping_deck/noji). 값은 온라인 정원(70%). */
 export function buildCapacities(): Record<string, number> {
   const caps: Record<string, number> = {};
   for (const exp of EXPERIENCES) {
     if (exp.slots) {
-      for (const s of exp.slots) caps[`${exp.key}|${s.slot}`] = s.capacity;
+      for (const s of exp.slots) caps[`${exp.key}|${s.slot}`] = onlineCapacity(s.capacity);
     } else if (typeof exp.capacity === "number") {
-      caps[exp.key] = exp.capacity;
+      caps[exp.key] = onlineCapacity(exp.capacity);
     }
   }
-  for (const c of CAMPING) caps[`camping_${c.key}`] = c.capacity;
+  for (const c of CAMPING) caps[`camping_${c.key}`] = onlineCapacity(c.capacity);
   return caps;
 }
 

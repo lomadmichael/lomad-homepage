@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getAvailability, availabilityMap } from "@/lib/festival-db";
-import { EXPERIENCES, CAMPING } from "@/lib/festival-experiences";
+import { EXPERIENCES, CAMPING, onlineCapacity } from "@/lib/festival-experiences";
 
 export const dynamic = "force-dynamic";
 
@@ -72,7 +72,7 @@ export default async function FestivalStatusPage() {
           접수 현황
         </h1>
         <p className="font-[family-name:var(--font-noto)] text-[13px] md:text-[14px] text-text-sub mb-10">
-          체험·캠핑별 실시간 잔여 자리입니다. 마감된 항목도 대기 신청이 가능하며, 취소가 생기면 순서대로 자동 확정됩니다.
+          체험·캠핑별 실시간 잔여 자리입니다(온라인 사전접수 = 전체 정원의 70%, 나머지 30%는 현장 접수). 마감된 항목도 대기 신청이 가능하며, 취소가 생기면 순서대로 자동 확정됩니다.
         </p>
 
         <StatusGrid title="체험 프로그램" slots={expSlots} avail={avail} />
@@ -98,9 +98,10 @@ function StatusGrid({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {slots.map((s) => {
           const a = avail[s.availKey] ?? { confirmed: 0, waitlist: 0 };
-          const rem = Math.max(0, s.capacity - a.confirmed);
+          const cap = onlineCapacity(s.capacity); // 온라인 사전접수 정원(70%)
+          const rem = Math.max(0, cap - a.confirmed);
           const full = rem <= 0;
-          const pct = s.capacity > 0 ? Math.min(100, Math.round((a.confirmed / s.capacity) * 100)) : 0;
+          const pct = cap > 0 ? Math.min(100, Math.round((a.confirmed / cap) * 100)) : 0;
           return (
             <div key={s.availKey} className="border border-border p-4 bg-bg-soft">
               <div className="flex items-baseline justify-between mb-2">
@@ -113,7 +114,7 @@ function StatusGrid({
                     full ? "text-[#b45309]" : "text-[#0B7A5A]"
                   }`}
                 >
-                  {full ? `마감 (대기 ${a.waitlist})` : `잔여 ${rem}/${s.capacity}`}
+                  {full ? `마감 (대기 ${a.waitlist})` : `잔여 ${rem}/${cap}`}
                 </span>
               </div>
               <div className="h-1.5 bg-border/60 overflow-hidden rounded-full">

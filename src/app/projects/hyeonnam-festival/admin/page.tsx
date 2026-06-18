@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { adminList, getAvailability, availabilityMap, type RegistrationRow } from "@/lib/festival-db";
-import { EXPERIENCES, CAMPING, experienceLabel } from "@/lib/festival-experiences";
+import { EXPERIENCES, CAMPING, experienceLabel, onlineCapacity, onsiteCapacity } from "@/lib/festival-experiences";
 import { isAdmin, adminLogout, adminCancel } from "./actions";
 import AdminLogin from "./AdminLogin";
 
@@ -87,14 +87,19 @@ export default async function FestivalAdminPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 mb-10">
           {slots.map((s) => {
             const a = avail[s.availKey] ?? { confirmed: 0, waitlist: 0 };
-            const full = a.confirmed >= s.capacity;
+            const onlineCap = onlineCapacity(s.capacity);
+            const onsite = onsiteCapacity(s.capacity);
+            const full = a.confirmed >= onlineCap;
             return (
               <div key={s.availKey} className="border border-border p-3 bg-bg-soft">
                 <p className="font-[family-name:var(--font-noto)] text-[12px] font-semibold leading-tight mb-1">{s.label}</p>
                 <p className="font-[family-name:var(--font-karla)] text-[13px] font-extrabold">
                   <span className={full ? "text-[#b45309]" : "text-[#0B7A5A]"}>{a.confirmed}</span>
-                  <span className="text-text-muted">/{s.capacity}</span>
+                  <span className="text-text-muted">/{onlineCap}</span>
                   {a.waitlist > 0 && <span className="text-[#b45309] text-[11px]"> · 대기 {a.waitlist}</span>}
+                </p>
+                <p className="font-[family-name:var(--font-noto)] text-[10px] text-text-muted mt-0.5">
+                  온라인 {onlineCap} · 현장 {onsite} (전체 {s.capacity})
                 </p>
               </div>
             );

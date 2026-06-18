@@ -4,7 +4,7 @@ import { useActionState, useState } from "react";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import { submitFestival, type FestivalFormState } from "@/lib/festival-action";
-import { EXPERIENCES, CAMPING, experienceLabel } from "@/lib/festival-experiences";
+import { EXPERIENCES, CAMPING, experienceLabel, onlineCapacity } from "@/lib/festival-experiences";
 
 const initialState: FestivalFormState = { success: false, message: "" };
 
@@ -68,10 +68,10 @@ export default function RegistrationForm({ availability }: { availability: Avail
     return o.slot ? `${o.key}|${o.slot}` : o.key;
   }
   function remaining(o: ExpOption) {
-    return o.capacity - (availability[availKey(o)]?.confirmed ?? 0);
+    return onlineCapacity(o.capacity) - (availability[availKey(o)]?.confirmed ?? 0);
   }
   function campRemaining(key: "deck" | "noji", cap: number) {
-    return cap - (availability[`camping_${key}`]?.confirmed ?? 0);
+    return onlineCapacity(cap) - (availability[`camping_${key}`]?.confirmed ?? 0);
   }
 
   function updateParticipant(i: number, patch: Partial<Participant>) {
@@ -209,7 +209,7 @@ export default function RegistrationForm({ availability }: { availability: Avail
                     {c.label} <span className="text-text-muted">({c.fee})</span>
                     <br />
                     <span className={`text-[11px] ${full ? "text-[#b45309]" : "text-text-muted"}`}>
-                      {full ? "마감 · 대기 신청" : `잔여 ${rem}/${c.capacity}`}
+                      {full ? "마감 · 대기 신청" : `잔여 ${rem}/${onlineCapacity(c.capacity)}`}
                     </span>
                   </span>
                 </label>
@@ -291,7 +291,7 @@ export default function RegistrationForm({ availability }: { availability: Avail
                           {o.fee && <span className="text-text-muted"> · {o.fee}</span>}
                           {o.ageLimit && <span className="text-[#b45309]"> · {o.ageLimit}</span>}
                           <span className={`ml-1 text-[11px] font-medium ${full ? "text-[#b45309]" : "text-[#0B7A5A]"}`}>
-                            {full ? "[마감 · 대기 신청]" : `[잔여 ${rem}/${o.capacity}]`}
+                            {full ? "[마감 · 대기 신청]" : `[잔여 ${rem}/${onlineCapacity(o.capacity)}]`}
                           </span>
                           <br />
                           <span className="text-[11.5px] text-text-muted">{o.desc}</span>

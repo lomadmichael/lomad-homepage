@@ -6,6 +6,7 @@ import FadeIn from "@/components/ui/FadeIn";
 import CountdownTimer from "@/components/projects/festival/CountdownTimer";
 import Marquee from "@/components/projects/festival/Marquee";
 import { SUBMISSIONS_OPEN } from "@/lib/festival-config";
+import { EXPERIENCES, onlineCapacity, onsiteCapacity } from "@/lib/festival-experiences";
 
 const MARQUEE_ITEMS = [
   "2026.7.4 (SAT) ~ 7.5 (SUN)",
@@ -94,6 +95,7 @@ export default function HyeonnamFestivalPage() {
             <a href="#about" className="hover:text-white">About</a>
             <a href="#zones" className="hover:text-white">Zones</a>
             <a href="#schedule" className="hover:text-white">Schedule</a>
+            <a href="#programs" className="hover:text-white">Programs</a>
             <a href="#signature" className="hover:text-white">Signature</a>
           </nav>
           {SUBMISSIONS_OPEN ? (
@@ -426,6 +428,77 @@ export default function HyeonnamFestivalPage() {
                 </ul>
               </div>
             </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ─── PROGRAMS (체험 프로그램) ───────────────────────────── */}
+      <section id="programs" className="bg-white text-text py-[120px] px-6">
+        <div className="max-w-[1080px] mx-auto">
+          <FadeIn>
+            <div className="text-center mb-14">
+              <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-text-muted mb-4">
+                Programs
+              </p>
+              <h2 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[44px] font-black leading-tight">
+                체험 프로그램
+              </h2>
+              <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub mt-5 max-w-[660px] mx-auto leading-relaxed">
+                양양서핑로드 위에서 즐기는 체험들. 체험은 모두 <b>무료</b>이며(선셋 비치 테이블 2만원·캠핑 데크 1만원만 현장 결제),
+                정원의 <b>70%는 온라인 사전접수</b>, 30%는 현장 접수로 운영됩니다.
+              </p>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {EXPERIENCES.map((exp) => {
+                const total = exp.slots
+                  ? exp.slots.reduce((s, x) => s + x.capacity, 0)
+                  : exp.capacity ?? 0;
+                const online = exp.slots
+                  ? exp.slots.reduce((s, x) => s + onlineCapacity(x.capacity), 0)
+                  : onlineCapacity(exp.capacity ?? 0);
+                const onsite = total - online;
+                return (
+                  <div key={exp.key} className="border border-border p-5 flex flex-col bg-[#FAF5EE]">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-[family-name:var(--font-karla)] text-[10px] tracking-[2px] uppercase font-bold text-[#006B7A]">
+                        {exp.location}
+                      </span>
+                      <span className={`font-[family-name:var(--font-noto)] text-[11px] font-bold ${exp.fee ? "text-[#b45309]" : "text-[#0B7A5A]"}`}>
+                        {exp.fee ?? "무료"}
+                      </span>
+                    </div>
+                    <h3 className="font-[family-name:var(--font-noto)] text-[17px] font-black mb-1.5 leading-snug">
+                      {exp.label}
+                    </h3>
+                    <p className="font-[family-name:var(--font-noto)] text-[13px] text-text-sub leading-relaxed mb-4 flex-1">
+                      {exp.desc}
+                    </p>
+                    <div className="font-[family-name:var(--font-noto)] text-[12px] space-y-1 pt-3 border-t border-border">
+                      <p>
+                        <span className="text-text-muted">정원</span> <b>{total}명</b>
+                        <span className="text-text-muted"> · 사전 {online} / 현장 {onsite}</span>
+                        {exp.slots && (
+                          <span className="text-text-muted">
+                            {" "}
+                            (타임당 {exp.slots[0].capacity}명 · {exp.slots.map((s) => s.slot).join("·")})
+                          </span>
+                        )}
+                      </p>
+                      <p>
+                        <span className="text-text-muted">연령</span> {exp.ageLimit ?? "전연령"}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            {SUBMISSIONS_OPEN && (
+              <div className="text-center mt-12">
+                <Button variant="primary" href="/projects/hyeonnam-festival/register">
+                  사전 접수하기 →
+                </Button>
+              </div>
+            )}
           </FadeIn>
         </div>
       </section>
