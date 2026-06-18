@@ -71,7 +71,8 @@ export default function RegistrationForm({ availability }: { availability: Avail
     return onlineCapacity(o.capacity) - (availability[availKey(o)]?.confirmed ?? 0);
   }
   function campRemaining(key: "deck" | "noji", cap: number) {
-    return onlineCapacity(cap) - (availability[`camping_${key}`]?.confirmed ?? 0);
+    // 캠핑은 온라인 100%(전체 정원)
+    return cap - (availability[`camping_${key}`]?.confirmed ?? 0);
   }
 
   function updateParticipant(i: number, patch: Partial<Participant>) {
@@ -209,7 +210,7 @@ export default function RegistrationForm({ availability }: { availability: Avail
                     {c.label} <span className="text-text-muted">({c.fee})</span>
                     <br />
                     <span className={`text-[11px] ${full ? "text-[#b45309]" : "text-text-muted"}`}>
-                      {full ? "마감 · 대기 신청" : `잔여 ${rem}/${onlineCapacity(c.capacity)}`}
+                      {full ? "마감 · 대기 신청" : `잔여 ${rem}/${c.capacity}`}
                     </span>
                   </span>
                 </label>

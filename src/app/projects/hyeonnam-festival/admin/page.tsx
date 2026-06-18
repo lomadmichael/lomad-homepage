@@ -87,8 +87,9 @@ export default async function FestivalAdminPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 mb-10">
           {slots.map((s) => {
             const a = avail[s.availKey] ?? { confirmed: 0, waitlist: 0 };
-            const onlineCap = onlineCapacity(s.capacity);
-            const onsite = onsiteCapacity(s.capacity);
+            const isCamp = s.availKey.startsWith("camping_");
+            const onlineCap = isCamp ? s.capacity : onlineCapacity(s.capacity);
+            const onsite = isCamp ? 0 : onsiteCapacity(s.capacity);
             const full = a.confirmed >= onlineCap;
             return (
               <div key={s.availKey} className="border border-border p-3 bg-bg-soft">
@@ -99,7 +100,7 @@ export default async function FestivalAdminPage() {
                   {a.waitlist > 0 && <span className="text-[#b45309] text-[11px]"> · 대기 {a.waitlist}</span>}
                 </p>
                 <p className="font-[family-name:var(--font-noto)] text-[10px] text-text-muted mt-0.5">
-                  온라인 {onlineCap} · 현장 {onsite} (전체 {s.capacity})
+                  {isCamp ? `온라인 100% (전체 ${s.capacity})` : `온라인 ${onlineCap} · 현장 ${onsite} (전체 ${s.capacity})`}
                 </p>
               </div>
             );

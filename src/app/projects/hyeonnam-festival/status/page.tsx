@@ -98,7 +98,8 @@ function StatusGrid({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {slots.map((s) => {
           const a = avail[s.availKey] ?? { confirmed: 0, waitlist: 0 };
-          const cap = onlineCapacity(s.capacity); // 온라인 사전접수 정원(70%)
+          // 체험=온라인 70%, 캠핑=온라인 100%(전체)
+          const cap = s.availKey.startsWith("camping_") ? s.capacity : onlineCapacity(s.capacity);
           const rem = Math.max(0, cap - a.confirmed);
           const full = rem <= 0;
           const pct = cap > 0 ? Math.min(100, Math.round((a.confirmed / cap) * 100)) : 0;

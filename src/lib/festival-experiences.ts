@@ -134,7 +134,10 @@ export function onsiteCapacity(total: number): number {
   return total - onlineCapacity(total);
 }
 
-/** RPC capacities 맵: 체험(key 또는 key|slot) + 캠핑(camping_deck/noji). 값은 온라인 정원(70%). */
+/**
+ * RPC capacities 맵: 체험(key 또는 key|slot) + 캠핑(camping_deck/noji).
+ * 체험은 온라인 정원(70%), 캠핑은 온라인 100%(전체 정원).
+ */
 export function buildCapacities(): Record<string, number> {
   const caps: Record<string, number> = {};
   for (const exp of EXPERIENCES) {
@@ -144,7 +147,8 @@ export function buildCapacities(): Record<string, number> {
       caps[exp.key] = onlineCapacity(exp.capacity);
     }
   }
-  for (const c of CAMPING) caps[`camping_${c.key}`] = onlineCapacity(c.capacity);
+  // 캠핑은 70/30 분배 없이 전체 정원을 온라인으로 받는다.
+  for (const c of CAMPING) caps[`camping_${c.key}`] = c.capacity;
   return caps;
 }
 
