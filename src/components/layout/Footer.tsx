@@ -10,7 +10,7 @@ export default function Footer() {
         </span>
         <div className="font-[family-name:var(--font-noto)] text-[11px] text-text-muted leading-relaxed">
           <p>로마드 협동조합 | 대표자 : 장래홍</p>
-          <p>소재지 : 강원도 양양군 북족로 110-1102호</p>
+          <p>소재지 : 강원특별자치도 양양군 북죽로 110-1102호</p>
           <p>사업자 등록번호 : 131-88-03158</p>
           <p>개인정보관리책임자 : 이홍래</p>
         </div>
