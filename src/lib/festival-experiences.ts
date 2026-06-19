@@ -91,10 +91,10 @@ export const EXPERIENCES: Experience[] = [
   },
   {
     key: "yoga",
-    label: "비치 요가",
+    label: "요가와 자연 만다라",
     location: "북분리",
     capacity: 30,
-    desc: "일요일 아침 북분리 해변에서 즐기는 비치 요가.",
+    desc: "일요일 아침 북분리 해변에서 요가로 몸을 깨우고, 자연물로 만다라를 만드는 힐링 프로그램.",
   },
   {
     key: "sunset",

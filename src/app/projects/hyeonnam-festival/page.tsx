@@ -23,12 +23,12 @@ const DAY1 = [
   ["13:00", "로컬 쿠킹클래스 — 블루베리 모찌 만들기 (북분리 · 80명)"],
   ["16:00", "캠핑 체크인 · 정착 상담"],
   ["18:00", "◎ 선셋 비치 테이블 (북분리) · 비치 러닝 (죽도)"],
-  ["19:00", "사운드배스 공연 (북분리) · ★ 서퍼's 나이트 — 밴드 라이브 (죽도)"],
+  ["19:00", "★ 서퍼's 나이트 — 밴드 라이브 (죽도)"],
   ["21:00", "★★ 불꽃 피날레 (죽도)"],
 ];
 
 const DAY2 = [
-  ["10:00", "비치 요가 (북분리)"],
+  ["10:00", "요가와 자연 만다라 (북분리)"],
   ["11:00", "스탬프 이벤트 · 영수증 이벤트 상품 수령"],
   ["12:00", "폐막"],
 ];
@@ -316,7 +316,7 @@ export default function HyeonnamFestivalPage() {
           <div className="relative min-h-[600px] md:min-h-[680px] flex items-center text-white overflow-hidden">
             <Image
               src="/images/festival-zone-bukbunri.png"
-              alt="북분리 자연·체류 존 — 송림 사운드 배스 컨셉"
+              alt="북분리 자연·체류 존 — 송림 캠핑·선셋 비치 테이블 컨셉"
               fill
               className="object-cover z-0"
               sizes="100vw"
@@ -349,7 +349,7 @@ export default function HyeonnamFestivalPage() {
                   북분리 마을 캠핑장
                 </p>
                 <p className="font-[family-name:var(--font-noto)] text-[14px] md:text-[16px] text-white/85 leading-[1.9] max-w-[440px] md:ml-auto">
-                  로컬 쿠킹클래스 · 선셋 비치 테이블 · 사운드배스 공연이 송림의 밤을 채운다.
+                  로컬 쿠킹클래스 · 선셋 비치 테이블 · 요가와 자연 만다라가 송림의 낮과 밤을 채운다.
                 </p>
               </div>
               <ul className="md:order-1 space-y-3 md:pt-12 text-[14px] md:text-[15px]">
@@ -357,7 +357,7 @@ export default function HyeonnamFestivalPage() {
                   ["캠핑 숙박 · 프리마켓", false],
                   ["로컬 쿠킹클래스 — 블루베리 모찌 (13:00)", false],
                   ["선셋 비치 테이블 (18:00)", true],
-                  ["사운드배스 공연 (19:00)", true],
+                  ["요가와 자연 만다라 (일 10:00)", true],
                 ].map(([txt, hi]) => (
                   <li key={String(txt)} className="flex items-start gap-3 py-2 border-b border-white/10">
                     <span className="text-[#FFD66E] mt-0.5">●</span>
