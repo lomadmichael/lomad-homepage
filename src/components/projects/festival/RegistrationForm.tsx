@@ -185,6 +185,16 @@ export default function RegistrationForm({ availability }: { availability: Avail
         </p>
       </div>
 
+      {/* 1인 1종목 안내 */}
+      <div className="mb-8 p-4 border-l-4 border-[#FF6B6B] bg-[#FF6B6B]/8">
+        <p className="font-[family-name:var(--font-noto)] text-[13px] font-semibold text-text leading-relaxed">
+          서핑 · SUP · 랜드서핑 · 볼더링은 <b>한 분당 1종목만</b> 신청할 수 있습니다.
+        </p>
+        <p className="font-[family-name:var(--font-noto)] text-[12px] text-text-sub leading-relaxed mt-1">
+          이 4종(수상·클라이밍) 중 하나를 고르면 다른 하나는 자동 해제됩니다. 로컬쿠킹·비치러닝·요가·선셋 비치 테이블은 함께 신청할 수 있습니다.
+        </p>
+      </div>
+
       {state.message && !state.success && (
         <div className="mb-6 p-4 text-[13px] font-[family-name:var(--font-noto)] font-medium bg-[#C4A8A8]/20 text-[#6b3a3a]">
           {state.message}
