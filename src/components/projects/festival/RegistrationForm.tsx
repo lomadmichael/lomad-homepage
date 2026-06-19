@@ -4,7 +4,14 @@ import { useActionState, useState } from "react";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import { submitFestival, type FestivalFormState } from "@/lib/festival-action";
-import { EXPERIENCES, CAMPING, experienceLabel, onlineCapacity } from "@/lib/festival-experiences";
+import {
+  EXPERIENCES,
+  CAMPING,
+  experienceLabel,
+  onlineCapacity,
+  getExperience,
+  EXCLUSIVE_GROUP_LABELS,
+} from "@/lib/festival-experiences";
 
 const initialState: FestivalFormState = { success: false, message: "" };
 
@@ -16,8 +23,10 @@ interface ExpOption {
   label: string;
   capacity: number;
   location: string;
+  time?: string;
   fee?: string;
   ageLimit?: string;
+  exclusiveGroup?: string;
   desc: string;
 }
 
@@ -32,6 +41,7 @@ const OPTIONS: ExpOption[] = EXPERIENCES.flatMap((exp): ExpOption[] =>
         location: exp.location,
         fee: exp.fee,
         ageLimit: exp.ageLimit,
+        exclusiveGroup: exp.exclusiveGroup,
         desc: exp.desc,
       }))
     : [
@@ -41,8 +51,10 @@ const OPTIONS: ExpOption[] = EXPERIENCES.flatMap((exp): ExpOption[] =>
           label: exp.label,
           capacity: exp.capacity ?? 0,
           location: exp.location,
+          time: exp.time,
           fee: exp.fee,
           ageLimit: exp.ageLimit,
+          exclusiveGroup: exp.exclusiveGroup,
           desc: exp.desc,
         },
       ],
@@ -83,12 +95,15 @@ export default function RegistrationForm({ availability }: { availability: Avail
       prev.map((p, idx) => {
         if (idx !== i) return p;
         const has = p.experiences.some((e) => e.key === o.key && e.slot === o.slot);
-        return {
-          ...p,
-          experiences: has
-            ? p.experiences.filter((e) => !(e.key === o.key && e.slot === o.slot))
-            : [...p.experiences, { key: o.key, slot: o.slot }],
-        };
+        if (has) {
+          return { ...p, experiences: p.experiences.filter((e) => !(e.key === o.key && e.slot === o.slot)) };
+        }
+        // 배타 그룹(택1): 같은 그룹의 기존 선택을 해제하고 새로 선택
+        let kept = p.experiences;
+        if (o.exclusiveGroup) {
+          kept = kept.filter((e) => getExperience(e.key)?.exclusiveGroup !== o.exclusiveGroup);
+        }
+        return { ...p, experiences: [...kept, { key: o.key, slot: o.slot }] };
       }),
     );
   }
@@ -267,8 +282,11 @@ export default function RegistrationForm({ availability }: { availability: Avail
                   )}
                 </div>
 
-                <p className="font-[family-name:var(--font-noto)] text-[12px] font-semibold text-text-sub mb-2">
+                <p className="font-[family-name:var(--font-noto)] text-[12px] font-semibold text-text-sub mb-1">
                   신청 체험 (복수 선택)
+                </p>
+                <p className="font-[family-name:var(--font-noto)] text-[11px] text-[#b45309] mb-2">
+                  ※ {EXCLUSIVE_GROUP_LABELS.activity}
                 </p>
                 <div className="grid grid-cols-1 gap-1.5">
                   {OPTIONS.map((o) => {
@@ -289,6 +307,7 @@ export default function RegistrationForm({ availability }: { availability: Avail
                         <span className="text-[13px] font-[family-name:var(--font-noto)] leading-snug">
                           <span className="font-semibold">{o.label}</span>
                           <span className="text-text-muted"> · {o.location}</span>
+                          {o.time && <span className="text-text-muted"> · {o.time}</span>}
                           {o.fee && <span className="text-text-muted"> · {o.fee}</span>}
                           {o.ageLimit && <span className="text-[#b45309]"> · {o.ageLimit}</span>}
                           <span className={`ml-1 text-[11px] font-medium ${full ? "text-[#b45309]" : "text-[#0B7A5A]"}`}>

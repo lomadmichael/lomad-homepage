@@ -74,6 +74,14 @@ export async function submitFestival(
       return { success: false, message: `${name}님의 나이를 올바르게 입력해 주세요.` };
     }
     const exps = Array.isArray(p?.experiences) ? p.experiences : [];
+    // 배타 그룹(서핑·SUP·랜드서핑·볼더링) 1인 1종목 제한
+    const activityCount = exps.filter((e) => getExperience(e.key)?.exclusiveGroup === "activity").length;
+    if (activityCount > 1) {
+      return {
+        success: false,
+        message: `${name}님: 서핑·SUP·랜드서핑·볼더링은 한 분당 1종목만 신청할 수 있습니다.`,
+      };
+    }
     for (const e of exps) {
       if (!VALID_KEYS.has(e.key)) {
         return { success: false, message: "선택할 수 없는 체험이 포함되어 있습니다." };

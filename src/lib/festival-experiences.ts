@@ -31,9 +31,21 @@ export interface Experience {
   minAge?: number;
   /** 사용자 표시용 연령 안내 (미정이면 undefined) */
   ageLimit?: string;
+  /** 진행 시간 표시 (예: "13:00", "7/5(일) 10:00"). slots 가 있으면 슬롯 라벨이 시간을 대신함 */
+  time?: string;
+  /**
+   * 배타 그룹. 같은 그룹의 체험은 한 참가자당 1개만 신청 가능(택1).
+   * 예: 수상·클라이밍 계열(서핑·SUP·랜드서핑·볼더링) = "activity".
+   */
+  exclusiveGroup?: string;
   /** 설명 (초안) */
   desc: string;
 }
+
+/** 1인 1종목만 신청 가능한 배타 그룹 안내 문구. */
+export const EXCLUSIVE_GROUP_LABELS: Record<string, string> = {
+  activity: "서핑 · SUP · 랜드서핑 · 볼더링은 한 분당 1종목만 신청할 수 있습니다.",
+};
 
 export const EXPERIENCES: Experience[] = [
   {
@@ -43,6 +55,7 @@ export const EXPERIENCES: Experience[] = [
     capacity: 80,
     minAge: 10,
     ageLimit: "만 10세 이상",
+    exclusiveGroup: "activity",
     desc: "강사와 함께 죽도해변에서 파도를 타보는 입문 서핑. 보드·슈트 제공.",
   },
   {
@@ -52,6 +65,7 @@ export const EXPERIENCES: Experience[] = [
     capacity: 10,
     minAge: 10,
     ageLimit: "만 10세 이상",
+    exclusiveGroup: "activity",
     desc: "스탠드업 패들보드 위에 서서 노를 저으며 잔잔한 물 위를 즐기는 체험.",
   },
   {
@@ -61,6 +75,7 @@ export const EXPERIENCES: Experience[] = [
     capacity: 10,
     minAge: 10,
     ageLimit: "만 10세 이상",
+    exclusiveGroup: "activity",
     desc: "랜드서핑 보드로 땅 위에서 서핑 감각을 익히는 3시간 클래스.",
   },
   {
@@ -69,6 +84,7 @@ export const EXPERIENCES: Experience[] = [
     location: "죽도",
     minAge: 13,
     ageLimit: "만 13세 이상",
+    exclusiveGroup: "activity",
     slots: [
       { slot: "16:00", label: "7/4(토) 오후 4시", capacity: 8 },
       { slot: "17:00", label: "7/4(토) 오후 5시", capacity: 8 },
@@ -80,6 +96,7 @@ export const EXPERIENCES: Experience[] = [
     label: "로컬 쿠킹클래스 — 블루베리 모찌",
     location: "북분리",
     capacity: 50,
+    time: "13:00",
     desc: "현남 블루베리로 만드는 모찌(찹쌀떡) 만들기 클래스.",
   },
   {
@@ -87,6 +104,7 @@ export const EXPERIENCES: Experience[] = [
     label: "비치 러닝",
     location: "죽도",
     capacity: 30,
+    time: "18:00",
     desc: "죽도 해변을 함께 달리는 선셋 비치 러닝.",
   },
   {
@@ -94,6 +112,7 @@ export const EXPERIENCES: Experience[] = [
     label: "요가와 자연 만다라",
     location: "북분리",
     capacity: 20,
+    time: "7/5(일) 10:00",
     desc: "일요일 아침 북분리 해변에서 요가로 몸을 깨우고, 자연물로 만다라를 만드는 힐링 프로그램.",
   },
   {
@@ -101,6 +120,7 @@ export const EXPERIENCES: Experience[] = [
     label: "선셋 비치 테이블",
     location: "북분리",
     capacity: 80,
+    time: "18:00",
     fee: "2만원 (현장 결제)",
     desc: "노을 아래 긴 테이블에 둘러앉아 음식을 나누는 교류 만찬.",
   },

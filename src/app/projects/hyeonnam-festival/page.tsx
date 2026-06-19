@@ -487,10 +487,29 @@ export default function HyeonnamFestivalPage() {
                       <p>
                         <span className="text-text-muted">연령</span> {exp.ageLimit ?? "전연령"}
                       </p>
+                      {(exp.time || exp.slots) && (
+                        <p>
+                          <span className="text-text-muted">시간</span>{" "}
+                          {exp.slots ? exp.slots.map((s) => s.slot).join(" / ") : exp.time}
+                        </p>
+                      )}
+                      {exp.exclusiveGroup === "activity" && (
+                        <p className="text-[#b45309] text-[11px]">※ 서핑·SUP·랜드서핑·볼더링 중 1인 1종목</p>
+                      )}
                     </div>
                   </div>
                 );
               })}
+            </div>
+
+            {/* 캠핑 사이트 안내 */}
+            <div className="mt-6 border border-border bg-[#0B1F3A] text-white p-5 md:p-6 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+              <span className="font-[family-name:var(--font-karla)] text-[10px] tracking-[2px] uppercase font-bold text-[#FFD66E] shrink-0">
+                Camping
+              </span>
+              <p className="font-[family-name:var(--font-noto)] text-[13px] md:text-[14px] leading-relaxed flex-1">
+                북분리 마을 캠핑장 사이트 예약 가능 — <b>데크 60면(1만원)</b> · <b>노지 10면(무료)</b>. 1박 2일 캠핑객은 선셋 비치 테이블·일요일 요가까지 함께 즐기세요. (캠핑비는 현장 결제, 접수 폼에서 신청)
+              </p>
             </div>
             {SUBMISSIONS_OPEN && (
               <div className="text-center mt-12">
