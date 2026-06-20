@@ -9,6 +9,7 @@ import {
   CAMPING,
   experienceLabel,
   onlineCapacity,
+  nonSlotOnlineCap,
   getExperience,
   EXCLUSIVE_GROUP_LABELS,
 } from "@/lib/festival-experiences";
@@ -22,6 +23,7 @@ interface ExpOption {
   slot: string | null;
   label: string;
   capacity: number;
+  onlineCap: number;
   location: string;
   time?: string;
   fee?: string;
@@ -38,6 +40,7 @@ const OPTIONS: ExpOption[] = EXPERIENCES.flatMap((exp): ExpOption[] =>
         slot: s.slot,
         label: `${exp.label} · ${s.label}`,
         capacity: s.capacity,
+        onlineCap: onlineCapacity(s.capacity),
         location: exp.location,
         fee: exp.fee,
         ageLimit: exp.ageLimit,
@@ -50,6 +53,7 @@ const OPTIONS: ExpOption[] = EXPERIENCES.flatMap((exp): ExpOption[] =>
           slot: null,
           label: exp.label,
           capacity: exp.capacity ?? 0,
+          onlineCap: nonSlotOnlineCap(exp),
           location: exp.location,
           time: exp.time,
           fee: exp.fee,
@@ -80,7 +84,7 @@ export default function RegistrationForm({ availability }: { availability: Avail
     return o.slot ? `${o.key}|${o.slot}` : o.key;
   }
   function remaining(o: ExpOption) {
-    return onlineCapacity(o.capacity) - (availability[availKey(o)]?.confirmed ?? 0);
+    return o.onlineCap - (availability[availKey(o)]?.confirmed ?? 0);
   }
   function campRemaining(key: "deck" | "noji", cap: number) {
     // 캠핑은 온라인 100%(전체 정원)
@@ -321,7 +325,7 @@ export default function RegistrationForm({ availability }: { availability: Avail
                           {o.fee && <span className="text-text-muted"> · {o.fee}</span>}
                           {o.ageLimit && <span className="text-[#b45309]"> · {o.ageLimit}</span>}
                           <span className={`ml-1 text-[11px] font-medium ${full ? "text-[#b45309]" : "text-[#0B7A5A]"}`}>
-                            {full ? "[마감 · 대기 신청]" : `[잔여 ${rem}/${onlineCapacity(o.capacity)}]`}
+                            {full ? "[마감 · 대기 신청]" : `[잔여 ${rem}/${o.onlineCap}]`}
                           </span>
                           <br />
                           <span className="text-[11.5px] text-text-muted">{o.desc}</span>

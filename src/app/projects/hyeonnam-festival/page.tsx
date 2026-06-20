@@ -6,7 +6,7 @@ import FadeIn from "@/components/ui/FadeIn";
 import CountdownTimer from "@/components/projects/festival/CountdownTimer";
 import Marquee from "@/components/projects/festival/Marquee";
 import { SUBMISSIONS_OPEN } from "@/lib/festival-config";
-import { EXPERIENCES, onlineCapacity, onsiteCapacity } from "@/lib/festival-experiences";
+import { EXPERIENCES, onlineCapacity, nonSlotOnlineCap } from "@/lib/festival-experiences";
 
 const MARQUEE_ITEMS = [
   "2026.7.4 (SAT) ~ 7.5 (SUN)",
@@ -455,7 +455,7 @@ export default function HyeonnamFestivalPage() {
                   : exp.capacity ?? 0;
                 const online = exp.slots
                   ? exp.slots.reduce((s, x) => s + onlineCapacity(x.capacity), 0)
-                  : onlineCapacity(exp.capacity ?? 0);
+                  : nonSlotOnlineCap(exp);
                 const onsite = total - online;
                 return (
                   <div key={exp.key} className="border border-border p-5 flex flex-col bg-[#FAF5EE]">

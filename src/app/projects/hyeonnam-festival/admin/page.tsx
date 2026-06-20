@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { adminList, getAvailability, availabilityMap, type RegistrationRow } from "@/lib/festival-db";
-import { EXPERIENCES, CAMPING, experienceLabel, onlineCapacity, onsiteCapacity } from "@/lib/festival-experiences";
+import { EXPERIENCES, CAMPING, experienceLabel, onlineCapacity, nonSlotOnlineCap } from "@/lib/festival-experiences";
 import { isAdmin, adminLogout, adminCancel } from "./actions";
 import AdminLogin from "./AdminLogin";
 
@@ -21,6 +21,7 @@ interface Slot {
   label: string;
   availKey: string;
   capacity: number;
+  onlineCap: number;
 }
 
 export default async function FestivalAdminPage() {
@@ -46,10 +47,10 @@ export default async function FestivalAdminPage() {
   const slots: Slot[] = [
     ...EXPERIENCES.flatMap((exp) =>
       exp.slots
-        ? exp.slots.map((s) => ({ label: `${exp.label}·${s.label}`, availKey: `${exp.key}|${s.slot}`, capacity: s.capacity }))
-        : [{ label: exp.label, availKey: exp.key, capacity: exp.capacity ?? 0 }],
+        ? exp.slots.map((s) => ({ label: `${exp.label}·${s.label}`, availKey: `${exp.key}|${s.slot}`, capacity: s.capacity, onlineCap: onlineCapacity(s.capacity) }))
+        : [{ label: exp.label, availKey: exp.key, capacity: exp.capacity ?? 0, onlineCap: nonSlotOnlineCap(exp) }],
     ),
-    ...CAMPING.map((c) => ({ label: `캠핑 ${c.label}`, availKey: `camping_${c.key}`, capacity: c.capacity })),
+    ...CAMPING.map((c) => ({ label: `캠핑 ${c.label}`, availKey: `camping_${c.key}`, capacity: c.capacity, onlineCap: c.capacity })),
   ];
 
   const totalRegs = regs.length;
@@ -88,8 +89,8 @@ export default async function FestivalAdminPage() {
           {slots.map((s) => {
             const a = avail[s.availKey] ?? { confirmed: 0, waitlist: 0 };
             const isCamp = s.availKey.startsWith("camping_");
-            const onlineCap = isCamp ? s.capacity : onlineCapacity(s.capacity);
-            const onsite = isCamp ? 0 : onsiteCapacity(s.capacity);
+            const onlineCap = s.onlineCap;
+            const onsite = s.capacity - s.onlineCap;
             const full = a.confirmed >= onlineCap;
             return (
               <div key={s.availKey} className="border border-border p-3 bg-bg-soft">

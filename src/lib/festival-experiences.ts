@@ -23,6 +23,8 @@ export interface Experience {
   location: FestivalLocation;
   /** 단일 정원 (slots 가 없을 때) */
   capacity?: number;
+  /** 온라인 사전접수 정원 명시값(비슬롯 체험). 없으면 capacity의 70%(반올림). */
+  onlineCap?: number;
   /** 타임별 정원 (볼더링) */
   slots?: ExperienceSlot[];
   /** 유료 안내 문구 (무료면 비움) */
@@ -72,7 +74,8 @@ export const EXPERIENCES: Experience[] = [
     key: "landsurf",
     label: "랜드서핑",
     location: "죽도",
-    capacity: 10,
+    capacity: 15,
+    onlineCap: 10,
     minAge: 10,
     ageLimit: "만 10세 이상",
     exclusiveGroup: "activity",
@@ -112,6 +115,7 @@ export const EXPERIENCES: Experience[] = [
     label: "요가와 자연 만다라",
     location: "북분리",
     capacity: 20,
+    onlineCap: 15,
     time: "7/5(일) 10:00",
     desc: "일요일 아침 북분리 해변에서 요가로 몸을 깨우고, 자연물로 만다라를 만드는 힐링 프로그램.",
   },
@@ -154,6 +158,11 @@ export function onsiteCapacity(total: number): number {
   return total - onlineCapacity(total);
 }
 
+/** 비슬롯 체험의 온라인 정원: onlineCap 명시값 우선, 없으면 70%(반올림). */
+export function nonSlotOnlineCap(exp: Experience): number {
+  return exp.onlineCap ?? onlineCapacity(exp.capacity ?? 0);
+}
+
 /**
  * RPC capacities 맵: 체험(key 또는 key|slot) + 캠핑(camping_deck/noji).
  * 체험은 온라인 정원(70%), 캠핑은 온라인 100%(전체 정원).
@@ -164,7 +173,7 @@ export function buildCapacities(): Record<string, number> {
     if (exp.slots) {
       for (const s of exp.slots) caps[`${exp.key}|${s.slot}`] = onlineCapacity(s.capacity);
     } else if (typeof exp.capacity === "number") {
-      caps[exp.key] = onlineCapacity(exp.capacity);
+      caps[exp.key] = nonSlotOnlineCap(exp);
     }
   }
   // 캠핑은 70/30 분배 없이 전체 정원을 온라인으로 받는다.

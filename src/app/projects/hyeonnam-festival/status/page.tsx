@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getAvailability, availabilityMap } from "@/lib/festival-db";
-import { EXPERIENCES, CAMPING, onlineCapacity } from "@/lib/festival-experiences";
+import { EXPERIENCES, CAMPING, onlineCapacity, nonSlotOnlineCap } from "@/lib/festival-experiences";
 
 export const dynamic = "force-dynamic";
 
@@ -15,6 +15,7 @@ interface Slot {
   label: string;
   availKey: string;
   capacity: number;
+  onlineCap: number;
   location: string;
 }
 
@@ -33,15 +34,17 @@ export default async function FestivalStatusPage() {
           label: `${exp.label} · ${s.label}`,
           availKey: `${exp.key}|${s.slot}`,
           capacity: s.capacity,
+          onlineCap: onlineCapacity(s.capacity),
           location: exp.location,
         }))
-      : [{ label: exp.label, availKey: exp.key, capacity: exp.capacity ?? 0, location: exp.location }],
+      : [{ label: exp.label, availKey: exp.key, capacity: exp.capacity ?? 0, onlineCap: nonSlotOnlineCap(exp), location: exp.location }],
   );
 
   const campSlots: Slot[] = CAMPING.map((c) => ({
     label: `캠핑 ${c.label} (${c.fee})`,
     availKey: `camping_${c.key}`,
     capacity: c.capacity,
+    onlineCap: c.capacity,
     location: "북분리",
   }));
 
@@ -98,8 +101,7 @@ function StatusGrid({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {slots.map((s) => {
           const a = avail[s.availKey] ?? { confirmed: 0, waitlist: 0 };
-          // 체험=온라인 70%, 캠핑=온라인 100%(전체)
-          const cap = s.availKey.startsWith("camping_") ? s.capacity : onlineCapacity(s.capacity);
+          const cap = s.onlineCap; // 온라인 사전접수 정원
           const rem = Math.max(0, cap - a.confirmed);
           const full = rem <= 0;
           const pct = cap > 0 ? Math.min(100, Math.round((a.confirmed / cap) * 100)) : 0;
