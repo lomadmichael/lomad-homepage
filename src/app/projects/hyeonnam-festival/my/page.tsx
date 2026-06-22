@@ -3,9 +3,9 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { lookupByPhone, type RegistrationRow } from "@/lib/festival-db";
 import { verifySession } from "@/lib/festival-otp";
-import { experienceLabel } from "@/lib/festival-experiences";
+import { experienceLabel, CAMPING } from "@/lib/festival-experiences";
 import OtpGate from "./OtpGate";
-import { cancelMySignup, logoutMy } from "./actions";
+import { cancelMySignup, changeMyCamping, logoutMy } from "./actions";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +19,9 @@ const STATUS_LABEL: Record<string, { text: string; cls: string }> = {
   confirmed: { text: "확정", cls: "text-[#0B7A5A]" },
   waitlist: { text: "대기", cls: "text-[#b45309]" },
 };
+
+const radioCls =
+  "flex items-center gap-2 border border-border px-3 py-2.5 cursor-pointer text-[13px] font-[family-name:var(--font-noto)] hover:border-text";
 
 export default async function FestivalMyPage() {
   const store = await cookies();
@@ -74,23 +77,50 @@ export default async function FestivalMyPage() {
               </p>
             ) : (
               <div className="space-y-8">
-                {regs.map((r) => (
+                {regs.map((r) => {
+                  const activeCamping = r.camping && r.camping_status !== "cancelled" ? r.camping : "";
+                  return (
                   <div key={r.id} className="border border-border bg-bg-soft p-5 md:p-7">
-                    <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-4 pb-4 border-b border-border">
+                    <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-4">
                       <span className="font-[family-name:var(--font-noto)] text-[16px] font-black">{r.rep_name}</span>
                       <span className="text-[12px] text-text-muted font-[family-name:var(--font-noto)]">{r.region}</span>
-                      {r.camping && (
-                        <span className="text-[12px] font-[family-name:var(--font-noto)]">
-                          캠핑 {r.camping === "deck" ? "데크" : "노지"}
-                          {r.camping_status && (
-                            <span className={STATUS_LABEL[r.camping_status]?.cls ?? ""}>
-                              {" "}
-                              · {STATUS_LABEL[r.camping_status]?.text ?? r.camping_status}
-                            </span>
-                          )}
-                        </span>
-                      )}
                     </div>
+
+                    {/* 캠핑 변경/취소 (체험과 달리 직접 변경 가능) */}
+                    <form action={changeMyCamping} className="mb-5 pb-5 border-b border-border">
+                      <input type="hidden" name="reg_id" value={r.id} />
+                      <p className="font-[family-name:var(--font-noto)] text-[12px] font-semibold text-text-sub mb-2">
+                        캠핑 사이트
+                        {activeCamping && r.camping_status && (
+                          <span className={`ml-1 ${STATUS_LABEL[r.camping_status]?.cls ?? ""}`}>
+                            · 현재 {activeCamping === "deck" ? "데크" : "노지"} {STATUS_LABEL[r.camping_status]?.text ?? ""}
+                          </span>
+                        )}
+                      </p>
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        <label className={radioCls}>
+                          <input type="radio" name="camping" value="" defaultChecked={activeCamping === ""} className="accent-text" />
+                          <span>신청 안 함</span>
+                        </label>
+                        {CAMPING.map((c) => (
+                          <label key={c.key} className={radioCls}>
+                            <input
+                              type="radio"
+                              name="camping"
+                              value={c.key}
+                              defaultChecked={activeCamping === c.key}
+                              className="accent-text"
+                            />
+                            <span>
+                              {c.label} <span className="text-text-muted">({c.fee})</span>
+                            </span>
+                          </label>
+                        ))}
+                      </div>
+                      <button className="font-[family-name:var(--font-karla)] text-[10px] font-extrabold tracking-[1px] uppercase border border-text px-3 py-2 hover:bg-text hover:text-bg transition-colors">
+                        캠핑 변경 저장
+                      </button>
+                    </form>
 
                     <div className="space-y-4">
                       {r.participants.map((p) => (
@@ -130,9 +160,10 @@ export default async function FestivalMyPage() {
                       ))}
                     </div>
                   </div>
-                ))}
+                  );
+                })}
                 <p className="text-[11px] text-text-muted italic font-[family-name:var(--font-noto)]">
-                  ※ 확정 체험을 취소하면 대기 1번이 자동으로 확정되고 해당 분께 문자가 발송됩니다.
+                  ※ 캠핑은 직접 변경·취소할 수 있고, 체험은 취소만 가능합니다. 확정 체험을 취소하면 대기 1번이 자동 확정되고 해당 분께 문자가 발송됩니다.
                 </p>
               </div>
             )}

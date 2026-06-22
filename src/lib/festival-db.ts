@@ -115,6 +115,21 @@ export async function cancelCamping(regId: string): Promise<{ cancelled: boolean
   return data as { cancelled: boolean; camping?: string };
 }
 
+/** 캠핑 변경/취소 (등록 단위). camping="" 이면 취소, deck/noji 면 정원 재판정해 확정/대기 부여. */
+export async function changeCamping(
+  regId: string,
+  camping: string,
+  caps: Record<string, number>,
+): Promise<{ camping: string | null; camping_status: "confirmed" | "waitlist" | null }> {
+  const { data, error } = await db().rpc("festival_change_camping", {
+    p_reg_id: regId,
+    p_camping: camping,
+    p_caps: caps,
+  });
+  if (error) throw new Error(`change_camping: ${error.message}`);
+  return data as { camping: string | null; camping_status: "confirmed" | "waitlist" | null };
+}
+
 export async function lookupByPhone(phone: string): Promise<RegistrationRow[]> {
   const { data, error } = await db().rpc("festival_lookup", { p_phone: phone });
   if (error) throw new Error(`lookup: ${error.message}`);

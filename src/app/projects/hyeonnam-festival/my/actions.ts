@@ -3,7 +3,8 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { otpSet, otpVerify, cancelSignup, lookupByPhone } from "@/lib/festival-db";
+import { otpSet, otpVerify, cancelSignup, changeCamping, lookupByPhone } from "@/lib/festival-db";
+import { buildCapacities } from "@/lib/festival-experiences";
 import { generateOtp, hashOtp, signSession, verifySession } from "@/lib/festival-otp";
 import { sendOtpSms, sendPromotionSms } from "@/lib/festival-sms";
 
@@ -91,6 +92,27 @@ export async function cancelMySignup(formData: FormData): Promise<void> {
     }
   } catch (e) {
     console.error("[festival] cancelMySignup failed:", e);
+  }
+  revalidatePath("/projects/hyeonnam-festival/my");
+}
+
+/** 인증된 본인의 캠핑 변경/취소 (신청안함="" / 데크 / 노지). 정원 재판정. */
+export async function changeMyCamping(formData: FormData): Promise<void> {
+  const regId = (formData.get("reg_id") as string | null) ?? "";
+  const camping = ((formData.get("camping") as string | null) ?? "").trim();
+  const store = await cookies();
+  const phone = verifySession(store.get(COOKIE)?.value);
+  if (!phone || !regId) return;
+  if (camping !== "" && camping !== "deck" && camping !== "noji") return;
+
+  // 소유권 확인: 이 연락처의 신청인지 검증
+  const regs = await lookupByPhone(phone);
+  if (!regs.some((r) => r.id === regId)) return;
+
+  try {
+    await changeCamping(regId, camping, buildCapacities());
+  } catch (e) {
+    console.error("[festival] changeMyCamping failed:", e);
   }
   revalidatePath("/projects/hyeonnam-festival/my");
 }
