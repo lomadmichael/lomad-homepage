@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { cancelSignup } from "@/lib/festival-db";
+import { cancelSignup, cancelCamping } from "@/lib/festival-db";
 import { signSession, verifySession } from "@/lib/festival-otp";
 import { sendPromotionSms } from "@/lib/festival-sms";
 
@@ -60,6 +60,19 @@ export async function adminCancel(formData: FormData): Promise<void> {
     }
   } catch (e) {
     console.error("[festival] adminCancel failed:", e);
+  }
+  revalidatePath("/projects/hyeonnam-festival/admin");
+}
+
+/** 관리자 캠핑 취소 (등록 단위). 캠핑은 자동 승급 없음 — 수동 관리. */
+export async function adminCancelCamping(formData: FormData): Promise<void> {
+  if (!(await isAdmin())) return;
+  const regId = (formData.get("reg_id") as string | null) ?? "";
+  if (!regId) return;
+  try {
+    await cancelCamping(regId);
+  } catch (e) {
+    console.error("[festival] adminCancelCamping failed:", e);
   }
   revalidatePath("/projects/hyeonnam-festival/admin");
 }

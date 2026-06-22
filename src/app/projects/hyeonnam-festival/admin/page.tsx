@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { adminList, getAvailability, availabilityMap, type RegistrationRow } from "@/lib/festival-db";
 import { EXPERIENCES, CAMPING, experienceLabel, onlineCapacity, nonSlotOnlineCap } from "@/lib/festival-experiences";
-import { isAdmin, adminLogout, adminCancel } from "./actions";
+import { isAdmin, adminLogout, adminCancel, adminCancelCamping } from "./actions";
 import AdminLogin from "./AdminLogin";
 
 export const dynamic = "force-dynamic";
@@ -121,12 +121,20 @@ export default async function FestivalAdminPage() {
                   <span className="text-text-muted">{r.phone}</span>
                   <span className="text-text-muted">{r.region}</span>
                   {r.camping && (
-                    <span>
+                    <span className="inline-flex items-center gap-1.5">
                       🏕 {r.camping === "deck" ? "데크" : "노지"}
                       {r.camping_status && (
                         <span className={STATUS[r.camping_status]?.cls}> ({STATUS[r.camping_status]?.text})</span>
                       )}
                       {r.tent_rental && <span className="text-[#b45309]"> · ⛺ 텐트대여</span>}
+                      {r.camping_status !== "cancelled" && (
+                        <form action={adminCancelCamping}>
+                          <input type="hidden" name="reg_id" value={r.id} />
+                          <button className="text-[11px] text-text-muted hover:text-[#b45309] underline shrink-0">
+                            캠핑취소
+                          </button>
+                        </form>
+                      )}
                     </span>
                   )}
                   <span className="text-text-muted text-[11px] ml-auto">

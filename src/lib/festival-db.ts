@@ -56,7 +56,7 @@ export interface RegistrationRow {
   phone: string;
   region: string;
   camping: "deck" | "noji" | null;
-  camping_status: "confirmed" | "waitlist" | null;
+  camping_status: "confirmed" | "waitlist" | "cancelled" | null;
   tent_rental: boolean;
   note: string | null;
   participants: ParticipantRow[];
@@ -106,6 +106,13 @@ export async function cancelSignup(signupId: string): Promise<CancelResult> {
   const { data, error } = await db().rpc("festival_cancel", { p_signup_id: signupId });
   if (error) throw new Error(`cancel: ${error.message}`);
   return data as CancelResult;
+}
+
+/** 캠핑 신청 취소 (등록 단위). 캠핑은 자동 승급이 없어 관리자 수동 처리. */
+export async function cancelCamping(regId: string): Promise<{ cancelled: boolean; camping?: string }> {
+  const { data, error } = await db().rpc("festival_cancel_camping", { p_reg_id: regId });
+  if (error) throw new Error(`cancel_camping: ${error.message}`);
+  return data as { cancelled: boolean; camping?: string };
 }
 
 export async function lookupByPhone(phone: string): Promise<RegistrationRow[]> {
