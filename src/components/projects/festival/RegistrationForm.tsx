@@ -279,7 +279,7 @@ export default function RegistrationForm({ availability }: { availability: Avail
                 </label>
               </div>
               <p className="mt-2 text-[11px] text-text-muted">
-                대여 희망 시 협의된 업체를 통해 현장 결제 예정입니다. (수요 조사 단계 · 금액 추후 안내)
+                대여 희망 시 협의된 업체를 통해 결제하시면 되십니다. (금액 추후 안내)
               </p>
             </div>
           )}
