@@ -7,11 +7,13 @@
  * 발신자 이름이 바뀐다.
  */
 
-const SOLAPI_API_KEY = process.env.SOLAPI_API_KEY || "";
-const SOLAPI_API_SECRET = process.env.SOLAPI_API_SECRET || "";
-const SOLAPI_SENDER = process.env.SOLAPI_SENDER || "";
-const KAKAO_CHANNEL_ID = process.env.SOLAPI_KAKAO_CHANNEL_ID || "";
-const SOLAPI_TEST_MODE = process.env.SOLAPI_TEST_MODE === "true";
+// 주의: env 값 끝에 줄바꿈/공백이 섞여 들어오면 HMAC 인증이 깨져(SOLAPI 400)
+// 발송이 전부 실패한다. 반드시 .trim() 으로 정제한다.
+const SOLAPI_API_KEY = (process.env.SOLAPI_API_KEY || "").trim();
+const SOLAPI_API_SECRET = (process.env.SOLAPI_API_SECRET || "").trim();
+const SOLAPI_SENDER = (process.env.SOLAPI_SENDER || "").trim();
+const KAKAO_CHANNEL_ID = (process.env.SOLAPI_KAKAO_CHANNEL_ID || "").trim();
+const SOLAPI_TEST_MODE = (process.env.SOLAPI_TEST_MODE || "").trim() === "true";
 
 interface SendAlimtalkParams {
   to: string;
