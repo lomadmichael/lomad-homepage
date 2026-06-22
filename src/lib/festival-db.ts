@@ -57,6 +57,7 @@ export interface RegistrationRow {
   region: string;
   camping: "deck" | "noji" | null;
   camping_status: "confirmed" | "waitlist" | null;
+  tent_rental: boolean;
   note: string | null;
   participants: ParticipantRow[];
 }
@@ -66,6 +67,7 @@ export interface SubmitInput {
   phone: string;
   region: string;
   camping: "deck" | "noji" | null;
+  tent_rental: boolean;
   note: string;
   participants: {
     name: string;

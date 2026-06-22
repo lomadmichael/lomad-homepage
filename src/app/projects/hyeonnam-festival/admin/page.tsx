@@ -126,6 +126,7 @@ export default async function FestivalAdminPage() {
                       {r.camping_status && (
                         <span className={STATUS[r.camping_status]?.cls}> ({STATUS[r.camping_status]?.text})</span>
                       )}
+                      {r.tent_rental && <span className="text-[#b45309]"> · ⛺ 텐트대여</span>}
                     </span>
                   )}
                   <span className="text-text-muted text-[11px] ml-auto">

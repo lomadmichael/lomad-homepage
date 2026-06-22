@@ -79,6 +79,7 @@ export default function RegistrationForm({ availability }: { availability: Avail
   const [participants, setParticipants] = useState<Participant[]>([
     { name: "", age: "", experiences: [] },
   ]);
+  const [camping, setCamping] = useState<string>("");
 
   function availKey(o: { key: string; slot: string | null }) {
     return o.slot ? `${o.key}|${o.slot}` : o.key;
@@ -226,7 +227,14 @@ export default function RegistrationForm({ availability }: { availability: Avail
           <p className={labelCls}>캠핑 사이트 신청</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             <label className={radioCardCls}>
-              <input type="radio" name="camping" value="" defaultChecked className="accent-text" />
+              <input
+                type="radio"
+                name="camping"
+                value=""
+                checked={camping === ""}
+                onChange={() => setCamping("")}
+                className="accent-text"
+              />
               <span>신청 안 함</span>
             </label>
             {CAMPING.map((c) => {
@@ -234,7 +242,14 @@ export default function RegistrationForm({ availability }: { availability: Avail
               const full = rem <= 0;
               return (
                 <label key={c.key} className={radioCardCls}>
-                  <input type="radio" name="camping" value={c.key} className="accent-text" />
+                  <input
+                    type="radio"
+                    name="camping"
+                    value={c.key}
+                    checked={camping === c.key}
+                    onChange={() => setCamping(c.key)}
+                    className="accent-text"
+                  />
                   <span>
                     {c.label} <span className="text-text-muted">({c.fee})</span>
                     <br />
@@ -246,6 +261,28 @@ export default function RegistrationForm({ availability }: { availability: Avail
               );
             })}
           </div>
+
+          {/* 텐트 대여 여부 (캠핑 신청 시에만 · 수요 조사) */}
+          {camping !== "" && (
+            <div className="mt-3 border border-border bg-bg-soft p-3 md:p-4">
+              <p className={labelCls} style={{ marginBottom: 6 }}>
+                텐트 대여 필요 여부
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <label className={radioCardCls}>
+                  <input type="radio" name="tent_rental" value="no" defaultChecked className="accent-text" />
+                  <span>텐트 직접 지참</span>
+                </label>
+                <label className={radioCardCls}>
+                  <input type="radio" name="tent_rental" value="yes" className="accent-text" />
+                  <span>텐트 대여 필요</span>
+                </label>
+              </div>
+              <p className="mt-2 text-[11px] text-text-muted">
+                대여 희망 시 협의된 업체를 통해 현장 결제 예정입니다. (수요 조사 단계 · 금액 추후 안내)
+              </p>
+            </div>
+          )}
         </div>
 
         {/* 참가자 명단 */}

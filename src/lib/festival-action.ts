@@ -39,6 +39,7 @@ export async function submitFestival(
   const phoneRaw = (formData.get("phone") as string | null)?.trim() ?? "";
   const region = (formData.get("region") as string | null)?.trim() ?? "";
   const campingRaw = (formData.get("camping") as string | null)?.trim() ?? "";
+  const tentRaw = (formData.get("tent_rental") as string | null)?.trim() ?? "no";
   const note = (formData.get("note") as string | null)?.trim() ?? "";
   const participantsJson = (formData.get("participants_json") as string | null) ?? "[]";
 
@@ -52,6 +53,8 @@ export async function submitFestival(
   }
 
   const camping = campingRaw === "deck" || campingRaw === "noji" ? campingRaw : null;
+  // 텐트 대여는 캠핑 신청 시에만 의미 있음 (수요 조사)
+  const tentRental = camping !== null && tentRaw === "yes";
 
   let participants: ParticipantInput[];
   try {
@@ -104,7 +107,7 @@ export async function submitFestival(
     });
   }
 
-  const input: SubmitInput = { rep_name: repName, phone, region, camping, note, participants: cleaned };
+  const input: SubmitInput = { rep_name: repName, phone, region, camping, tent_rental: tentRental, note, participants: cleaned };
 
   let result: SubmitResult;
   try {
@@ -125,6 +128,7 @@ export async function submitFestival(
     )
     .join("");
   const campingText = camping ? (camping === "deck" ? "데크(1만원)" : "노지(무료)") : "미신청";
+  const tentText = camping ? (tentRental ? "필요 (대여 희망)" : "직접 지참") : "-";
 
   try {
     await resend?.emails.send({
@@ -139,6 +143,7 @@ export async function submitFestival(
           <tr><td style="padding:8px;border:1px solid #ddd;background:#FAF5EE;font-weight:bold;">연락처</td><td style="padding:8px;border:1px solid #ddd;">${phoneRaw}</td></tr>
           <tr><td style="padding:8px;border:1px solid #ddd;background:#FAF5EE;font-weight:bold;">참가지역</td><td style="padding:8px;border:1px solid #ddd;">${region}</td></tr>
           <tr><td style="padding:8px;border:1px solid #ddd;background:#FAF5EE;font-weight:bold;">캠핑</td><td style="padding:8px;border:1px solid #ddd;">${campingText}</td></tr>
+          <tr><td style="padding:8px;border:1px solid #ddd;background:#FAF5EE;font-weight:bold;">텐트 대여</td><td style="padding:8px;border:1px solid #ddd;">${tentText}</td></tr>
           <tr><td style="padding:8px;border:1px solid #ddd;background:#FAF5EE;font-weight:bold;">비고</td><td style="padding:8px;border:1px solid #ddd;white-space:pre-wrap;">${note || "-"}</td></tr>
         </table>
         <h3 style="margin:16px 0 4px;">참가자 / 신청 체험</h3>
