@@ -44,7 +44,7 @@ export async function submitFestival(
   const participantsJson = (formData.get("participants_json") as string | null) ?? "[]";
 
   if (!repName || !phoneRaw || !region) {
-    return { success: false, message: "신청자명·연락처·참가지역은 필수입니다." };
+    return { success: false, message: "본인 이름·연락처·참가지역은 필수입니다." };
   }
 
   const phone = phoneRaw.replace(/\D/g, "");
@@ -105,6 +105,19 @@ export async function submitFestival(
       age,
       experiences: exps.map((e) => ({ key: e.key, slot: e.slot ?? null })),
     });
+  }
+
+  // 중복 참가자 가드: 같은 이름+나이가 두 번 이상이면 차단 (정원 중복 점유 방지)
+  const seen = new Set<string>();
+  for (const p of cleaned) {
+    const dupKey = `${p.name}|${p.age}`;
+    if (seen.has(dupKey)) {
+      return {
+        success: false,
+        message: `참가자 "${p.name}"(만 ${p.age}세)가 중복 입력되었습니다. 같은 분은 한 번만 추가해 주세요.`,
+      };
+    }
+    seen.add(dupKey);
   }
 
   const input: SubmitInput = { rep_name: repName, phone, region, camping, tent_rental: tentRental, note, participants: cleaned };

@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import { submitFestival, type FestivalFormState } from "@/lib/festival-action";
@@ -80,6 +80,15 @@ export default function RegistrationForm({ availability }: { availability: Avail
     { name: "", age: "", experiences: [] },
   ]);
   const [camping, setCamping] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [region, setRegion] = useState<string>("");
+  const [tent, setTent] = useState<string>("no");
+  // 폼 액션(useActionState) 후 React가 라디오를 native reset → controlled 상태와 desync.
+  // state가 바뀔 때(제출 후) 라디오 그룹을 리마운트해 상태값으로 다시 그린다.
+  const [resetKey, setResetKey] = useState(0);
+  useEffect(() => {
+    setResetKey((k) => k + 1);
+  }, [state]);
 
   function availKey(o: { key: string; slot: string | null }) {
     return o.slot ? `${o.key}|${o.slot}` : o.key;
@@ -117,6 +126,54 @@ export default function RegistrationForm({ availability }: { availability: Avail
   }
   function removeParticipant(i: number) {
     setParticipants((prev) => prev.filter((_, idx) => idx !== i));
+  }
+
+  // 체험 선택 UI (본인 블록·추가 참가자에서 공용)
+  function renderExperiences(i: number) {
+    const p = participants[i];
+    if (!p) return null;
+    return (
+      <>
+        <p className="font-[family-name:var(--font-noto)] text-[12px] font-semibold text-text-sub mb-1">
+          신청 체험 (복수 선택)
+        </p>
+        <p className="font-[family-name:var(--font-noto)] text-[11px] text-[#b45309] mb-2">
+          ※ {EXCLUSIVE_GROUP_LABELS.activity}
+        </p>
+        <div className="grid grid-cols-1 gap-1.5">
+          {OPTIONS.map((o) => {
+            const rem = remaining(o);
+            const full = rem <= 0;
+            const checked = p.experiences.some((e) => e.key === o.key && e.slot === o.slot);
+            return (
+              <label
+                key={`${o.key}-${o.slot ?? ""}`}
+                className="flex items-start gap-2.5 cursor-pointer py-1.5 px-2 hover:bg-bg rounded"
+              >
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={() => toggleExp(i, o)}
+                  className="mt-0.5 w-4 h-4 cursor-pointer accent-text shrink-0"
+                />
+                <span className="text-[13px] font-[family-name:var(--font-noto)] leading-snug">
+                  <span className="font-semibold">{o.label}</span>
+                  <span className="text-text-muted"> · {o.location}</span>
+                  {o.time && <span className="text-text-muted"> · {o.time}</span>}
+                  {o.fee && <span className="text-text-muted"> · {o.fee}</span>}
+                  {o.ageLimit && <span className="text-[#b45309]"> · {o.ageLimit}</span>}
+                  <span className={`ml-1 text-[11px] font-medium ${full ? "text-[#b45309]" : "text-[#0B7A5A]"}`}>
+                    {full ? "[마감 · 대기 신청]" : `[잔여 ${rem}/${o.onlineCap}]`}
+                  </span>
+                  <br />
+                  <span className="text-[11.5px] text-text-muted">{o.desc}</span>
+                </span>
+              </label>
+            );
+          })}
+        </div>
+      </>
+    );
   }
 
   const participantsPayload = JSON.stringify(
@@ -209,99 +266,179 @@ export default function RegistrationForm({ availability }: { availability: Avail
       <form action={formAction}>
         <input type="hidden" name="participants_json" value={participantsPayload} />
 
-        {/* 신청자(대표) 정보 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <Field label="신청자명" required>
-            <input type="text" name="rep_name" required className={inputCls} />
-          </Field>
-          <Field label="연락처" required>
-            <input type="tel" name="phone" required placeholder="010-1234-5678" className={inputCls} />
-          </Field>
-        </div>
-        <Field label="참가지역" required>
-          <input type="text" name="region" required placeholder="예: 서울 마포구 · 양양 · 속초" className={inputCls} />
-        </Field>
+        <input type="hidden" name="rep_name" value={participants[0]?.name.trim() ?? ""} />
+        <input type="hidden" name="camping" value={camping} />
+        <input type="hidden" name="tent_rental" value={camping ? tent : "no"} />
 
-        {/* 캠핑 */}
-        <div className="mb-6">
-          <p className={labelCls}>캠핑 사이트 신청</p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-            <label className={radioCardCls}>
-              <input
-                type="radio"
-                name="camping"
-                value=""
-                checked={camping === ""}
-                onChange={() => setCamping("")}
-                className="accent-text"
-              />
-              <span>신청 안 함</span>
-            </label>
-            {CAMPING.map((c) => {
-              const rem = campRemaining(c.key, c.capacity);
-              const full = rem <= 0;
-              return (
-                <label key={c.key} className={radioCardCls}>
+        <div className="space-y-5">
+          {/* 대표 신청자(본인) */}
+          <div className="border border-border p-4 md:p-5 bg-bg-soft">
+            <p className="font-[family-name:var(--font-noto)] text-[13px] font-bold text-text mb-4">
+              대표 신청자 (본인)
+            </p>
+
+            <div className="flex items-end gap-3 mb-4">
+              <div className="flex-1">
+                <label className={labelCls}>
+                  이름 <span className="text-[#FF6B6B]">*</span>
+                </label>
+                <input
+                  type="text"
+                  value={participants[0]?.name ?? ""}
+                  onChange={(e) => updateParticipant(0, { name: e.target.value })}
+                  className={inputCls}
+                  placeholder="본인 이름"
+                />
+              </div>
+              <div className="w-[110px]">
+                <label className={labelCls}>
+                  나이(만) <span className="text-[#FF6B6B]">*</span>
+                </label>
+                <input
+                  type="number"
+                  min={0}
+                  max={120}
+                  value={participants[0]?.age ?? ""}
+                  onChange={(e) => updateParticipant(0, { age: e.target.value })}
+                  className={inputCls}
+                  placeholder="세"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label className={labelCls}>
+                  연락처 <span className="text-[#FF6B6B]">*</span>
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="010-1234-5678"
+                  className={inputCls}
+                />
+              </div>
+              <div>
+                <label className={labelCls}>
+                  참가지역 <span className="text-[#FF6B6B]">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="region"
+                  value={region}
+                  onChange={(e) => setRegion(e.target.value)}
+                  placeholder="예: 서울 마포구 · 양양 · 속초"
+                  className={inputCls}
+                />
+              </div>
+            </div>
+
+            {/* 캠핑 (신청 그룹 공통) */}
+            <div className="mb-4">
+              <p className={labelCls}>
+                캠핑 사이트 신청 <span className="text-text-muted font-normal">· 신청 그룹 공통</span>
+              </p>
+              <div key={`camp-${resetKey}`} className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <label className={radioCardCls}>
                   <input
                     type="radio"
-                    name="camping"
-                    value={c.key}
-                    checked={camping === c.key}
-                    onChange={() => setCamping(c.key)}
+                    name="camping_ui"
+                    value=""
+                    checked={camping === ""}
+                    onChange={() => setCamping("")}
                     className="accent-text"
                   />
-                  <span>
-                    {c.label} <span className="text-text-muted">({c.fee})</span>
-                    <br />
-                    <span className={`text-[11px] ${full ? "text-[#b45309]" : "text-text-muted"}`}>
-                      {full ? "마감 · 대기 신청" : `잔여 ${rem}/${c.capacity}`}
-                    </span>
-                  </span>
+                  <span>신청 안 함</span>
                 </label>
-              );
-            })}
-          </div>
-
-          {/* 텐트 대여 여부 (캠핑 신청 시에만 · 수요 조사) */}
-          {camping !== "" && (
-            <div className="mt-3 border border-border bg-bg-soft p-3 md:p-4">
-              <p className={labelCls} style={{ marginBottom: 6 }}>
-                텐트 대여 필요 여부
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                <label className={radioCardCls}>
-                  <input type="radio" name="tent_rental" value="no" defaultChecked className="accent-text" />
-                  <span>텐트 직접 지참</span>
-                </label>
-                <label className={radioCardCls}>
-                  <input type="radio" name="tent_rental" value="yes" className="accent-text" />
-                  <span>텐트 대여 필요</span>
-                </label>
+                {CAMPING.map((c) => {
+                  const rem = campRemaining(c.key, c.capacity);
+                  const full = rem <= 0;
+                  return (
+                    <label key={c.key} className={radioCardCls}>
+                      <input
+                        type="radio"
+                        name="camping_ui"
+                        value={c.key}
+                        checked={camping === c.key}
+                        onChange={() => setCamping(c.key)}
+                        className="accent-text"
+                      />
+                      <span>
+                        {c.label} <span className="text-text-muted">({c.fee})</span>
+                        <br />
+                        <span className={`text-[11px] ${full ? "text-[#b45309]" : "text-text-muted"}`}>
+                          {full ? "마감 · 대기 신청" : `잔여 ${rem}/${c.capacity}`}
+                        </span>
+                      </span>
+                    </label>
+                  );
+                })}
               </div>
-              <p className="mt-2 text-[11px] text-text-muted">
-                대여 희망 시 협의된 업체를 통해 결제하시면 되십니다. (금액 추후 안내)
-              </p>
-            </div>
-          )}
-        </div>
 
-        {/* 참가자 명단 */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-3">
-            <p className={labelCls} style={{ marginBottom: 0 }}>
-              참가자 ({participants.length}명)
-            </p>
-            <button type="button" onClick={addParticipant} className={addBtnCls}>
-              + 참가자 추가
-            </button>
+              {camping !== "" && (
+                <div className="mt-3 border border-border bg-bg p-3 md:p-4">
+                  <p className={labelCls} style={{ marginBottom: 6 }}>
+                    텐트 대여 필요 여부
+                  </p>
+                  <div key={`tent-${resetKey}`} className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <label className={radioCardCls}>
+                      <input
+                        type="radio"
+                        name="tent_ui"
+                        value="no"
+                        checked={tent === "no"}
+                        onChange={() => setTent("no")}
+                        className="accent-text"
+                      />
+                      <span>텐트 직접 지참</span>
+                    </label>
+                    <label className={radioCardCls}>
+                      <input
+                        type="radio"
+                        name="tent_ui"
+                        value="yes"
+                        checked={tent === "yes"}
+                        onChange={() => setTent("yes")}
+                        className="accent-text"
+                      />
+                      <span>텐트 대여 필요</span>
+                    </label>
+                  </div>
+                  <p className="mt-2 text-[11px] text-text-muted">
+                    대여 희망 시 협의된 업체를 통해 결제하시면 되십니다. (금액 추후 안내)
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {renderExperiences(0)}
           </div>
 
-          <div className="space-y-5">
-            {participants.map((p, i) => (
+          {/* 추가 참가자 (이름·나이·체험만) */}
+          {participants.slice(1).map((p, j) => {
+            const i = j + 1;
+            return (
               <div key={i} className="border border-border p-4 md:p-5 bg-bg-soft">
+                <div className="flex items-center justify-between mb-4">
+                  <p className="font-[family-name:var(--font-noto)] text-[13px] font-bold text-text">
+                    참가자 {i + 1}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => removeParticipant(i)}
+                    className="text-[12px] text-text-muted hover:text-[#b45309] font-[family-name:var(--font-noto)]"
+                  >
+                    삭제
+                  </button>
+                </div>
+
                 <div className="flex items-end gap-3 mb-4">
                   <div className="flex-1">
-                    <label className={labelCls}>이름</label>
+                    <label className={labelCls}>
+                      이름 <span className="text-[#FF6B6B]">*</span>
+                    </label>
                     <input
                       type="text"
                       value={p.name}
@@ -311,7 +448,9 @@ export default function RegistrationForm({ availability }: { availability: Avail
                     />
                   </div>
                   <div className="w-[110px]">
-                    <label className={labelCls}>나이(만)</label>
+                    <label className={labelCls}>
+                      나이(만) <span className="text-[#FF6B6B]">*</span>
+                    </label>
                     <input
                       type="number"
                       min={0}
@@ -322,59 +461,20 @@ export default function RegistrationForm({ availability }: { availability: Avail
                       placeholder="세"
                     />
                   </div>
-                  {participants.length > 1 && (
-                    <button
-                      type="button"
-                      onClick={() => removeParticipant(i)}
-                      className="h-11 px-3 text-[12px] text-text-muted hover:text-[#b45309] font-[family-name:var(--font-noto)]"
-                    >
-                      삭제
-                    </button>
-                  )}
                 </div>
 
-                <p className="font-[family-name:var(--font-noto)] text-[12px] font-semibold text-text-sub mb-1">
-                  신청 체험 (복수 선택)
-                </p>
-                <p className="font-[family-name:var(--font-noto)] text-[11px] text-[#b45309] mb-2">
-                  ※ {EXCLUSIVE_GROUP_LABELS.activity}
-                </p>
-                <div className="grid grid-cols-1 gap-1.5">
-                  {OPTIONS.map((o) => {
-                    const rem = remaining(o);
-                    const full = rem <= 0;
-                    const checked = p.experiences.some((e) => e.key === o.key && e.slot === o.slot);
-                    return (
-                      <label
-                        key={`${o.key}-${o.slot ?? ""}`}
-                        className="flex items-start gap-2.5 cursor-pointer py-1.5 px-2 hover:bg-bg rounded"
-                      >
-                        <input
-                          type="checkbox"
-                          checked={checked}
-                          onChange={() => toggleExp(i, o)}
-                          className="mt-0.5 w-4 h-4 cursor-pointer accent-text shrink-0"
-                        />
-                        <span className="text-[13px] font-[family-name:var(--font-noto)] leading-snug">
-                          <span className="font-semibold">{o.label}</span>
-                          <span className="text-text-muted"> · {o.location}</span>
-                          {o.time && <span className="text-text-muted"> · {o.time}</span>}
-                          {o.fee && <span className="text-text-muted"> · {o.fee}</span>}
-                          {o.ageLimit && <span className="text-[#b45309]"> · {o.ageLimit}</span>}
-                          <span className={`ml-1 text-[11px] font-medium ${full ? "text-[#b45309]" : "text-[#0B7A5A]"}`}>
-                            {full ? "[마감 · 대기 신청]" : `[잔여 ${rem}/${o.onlineCap}]`}
-                          </span>
-                          <br />
-                          <span className="text-[11.5px] text-text-muted">{o.desc}</span>
-                        </span>
-                      </label>
-                    );
-                  })}
-                </div>
+                {renderExperiences(i)}
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
+
+        <button type="button" onClick={addParticipant} className={`${addBtnCls} mt-5`}>
+          + 참가자 추가
+        </button>
+        <p className="mt-2 text-[11px] text-text-muted">
+          함께 참가하는 분이 있으면 추가해 주세요. (이름·나이·체험만 입력)
+        </p>
 
         <Field label="남기실 말씀 (선택)">
           <textarea
