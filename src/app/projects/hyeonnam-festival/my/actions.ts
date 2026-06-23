@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import { otpSet, otpVerify, cancelSignup, changeCamping, lookupByPhone } from "@/lib/festival-db";
 import { buildCapacities } from "@/lib/festival-experiences";
 import { generateOtp, hashOtp, signSession, verifySession } from "@/lib/festival-otp";
-import { sendOtpSms, sendPromotionSms } from "@/lib/festival-sms";
+import { sendOtpSms, sendPromotionSms, sendCampingPromotionSms } from "@/lib/festival-sms";
 
 const COOKIE = "festival_my";
 const COOKIE_PATH = "/projects/hyeonnam-festival";
@@ -110,7 +110,8 @@ export async function changeMyCamping(formData: FormData): Promise<void> {
   if (!regs.some((r) => r.id === regId)) return;
 
   try {
-    await changeCamping(regId, camping, buildCapacities());
+    const res = await changeCamping(regId, camping, buildCapacities());
+    if (res.promoted) await sendCampingPromotionSms(res.promoted);
   } catch (e) {
     console.error("[festival] changeMyCamping failed:", e);
   }

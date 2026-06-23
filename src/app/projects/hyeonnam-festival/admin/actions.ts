@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { cancelSignup, cancelCamping } from "@/lib/festival-db";
 import { signSession, verifySession } from "@/lib/festival-otp";
-import { sendPromotionSms } from "@/lib/festival-sms";
+import { sendPromotionSms, sendCampingPromotionSms } from "@/lib/festival-sms";
 
 const COOKIE = "festival_admin";
 const COOKIE_PATH = "/projects/hyeonnam-festival/admin";
@@ -70,7 +70,8 @@ export async function adminCancelCamping(formData: FormData): Promise<void> {
   const regId = (formData.get("reg_id") as string | null) ?? "";
   if (!regId) return;
   try {
-    await cancelCamping(regId);
+    const res = await cancelCamping(regId);
+    if (res.promoted) await sendCampingPromotionSms(res.promoted);
   } catch (e) {
     console.error("[festival] adminCancelCamping failed:", e);
   }

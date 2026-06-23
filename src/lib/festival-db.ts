@@ -108,26 +108,42 @@ export async function cancelSignup(signupId: string): Promise<CancelResult> {
   return data as CancelResult;
 }
 
-/** 캠핑 신청 취소 (등록 단위). 캠핑은 자동 승급이 없어 관리자 수동 처리. */
-export async function cancelCamping(regId: string): Promise<{ cancelled: boolean; camping?: string }> {
-  const { data, error } = await db().rpc("festival_cancel_camping", { p_reg_id: regId });
-  if (error) throw new Error(`cancel_camping: ${error.message}`);
-  return data as { cancelled: boolean; camping?: string };
+export interface CampingPromoted {
+  phone: string;
+  name: string;
+  camping: string;
 }
 
-/** 캠핑 변경/취소 (등록 단위). camping="" 이면 취소, deck/noji 면 정원 재판정해 확정/대기 부여. */
+/** 캠핑 신청 취소 (등록 단위). 확정이 빠지면 같은 타입 대기 1번 자동 승급. */
+export async function cancelCamping(
+  regId: string,
+): Promise<{ cancelled: boolean; camping?: string; promoted?: CampingPromoted | null }> {
+  const { data, error } = await db().rpc("festival_cancel_camping", { p_reg_id: regId });
+  if (error) throw new Error(`cancel_camping: ${error.message}`);
+  return data as { cancelled: boolean; camping?: string; promoted?: CampingPromoted | null };
+}
+
+/** 캠핑 변경/취소 (등록 단위). 정원 재판정 + 기존 확정 타입에서 빠지면 대기 1번 자동 승급. */
 export async function changeCamping(
   regId: string,
   camping: string,
   caps: Record<string, number>,
-): Promise<{ camping: string | null; camping_status: "confirmed" | "waitlist" | null }> {
+): Promise<{
+  camping: string | null;
+  camping_status: "confirmed" | "waitlist" | null;
+  promoted?: CampingPromoted | null;
+}> {
   const { data, error } = await db().rpc("festival_change_camping", {
     p_reg_id: regId,
     p_camping: camping,
     p_caps: caps,
   });
   if (error) throw new Error(`change_camping: ${error.message}`);
-  return data as { camping: string | null; camping_status: "confirmed" | "waitlist" | null };
+  return data as {
+    camping: string | null;
+    camping_status: "confirmed" | "waitlist" | null;
+    promoted?: CampingPromoted | null;
+  };
 }
 
 export async function lookupByPhone(phone: string): Promise<RegistrationRow[]> {

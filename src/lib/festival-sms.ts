@@ -49,6 +49,22 @@ export async function sendOtpSms(phone: string, code: string) {
   });
 }
 
+/** 캠핑 대기자 승급 알림 SMS. */
+export async function sendCampingPromotionSms(params: {
+  phone: string;
+  name: string;
+  camping: string;
+}) {
+  const c = params.camping === "deck" ? "데크" : "노지";
+  const fee = params.camping === "deck" ? "데크는 현장 1만원 결제입니다." : "노지는 무료입니다.";
+  return sendAlimtalk({
+    to: params.phone,
+    templateId: "TMPL_FESTIVAL_PROMOTE",
+    variables: {},
+    fallbackText: `[현남생활 페스티벌] ${params.name}님, 대기 중이던 캠핑(${c})이 확정되었습니다. ${fee} — 로마드협동조합`,
+  });
+}
+
 /** 대기자 승급 알림 SMS. */
 export async function sendPromotionSms(params: {
   phone: string;
