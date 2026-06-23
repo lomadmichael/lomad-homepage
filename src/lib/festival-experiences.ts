@@ -185,6 +185,44 @@ export function getExperience(key: string): Experience | undefined {
   return EXPERIENCES.find((e) => e.key === key);
 }
 
+/** 선택 가능한 (체험·타임) 평면 옵션 — value = key 또는 key|slot. */
+export interface ExperienceOption {
+  value: string;
+  key: string;
+  slot: string | null;
+  label: string;
+  minAge?: number;
+  ageLimit?: string;
+  fee?: string;
+  exclusiveGroup?: string;
+}
+
+export const EXPERIENCE_OPTIONS: ExperienceOption[] = EXPERIENCES.flatMap((exp): ExperienceOption[] =>
+  exp.slots
+    ? exp.slots.map((s) => ({
+        value: `${exp.key}|${s.slot}`,
+        key: exp.key,
+        slot: s.slot,
+        label: `${exp.label} · ${s.label}`,
+        minAge: exp.minAge,
+        ageLimit: exp.ageLimit,
+        fee: exp.fee,
+        exclusiveGroup: exp.exclusiveGroup,
+      }))
+    : [
+        {
+          value: exp.key,
+          key: exp.key,
+          slot: null,
+          label: exp.label,
+          minAge: exp.minAge,
+          ageLimit: exp.ageLimit,
+          fee: exp.fee,
+          exclusiveGroup: exp.exclusiveGroup,
+        },
+      ],
+);
+
 /** 체험(+타임) 사람이 읽는 라벨. */
 export function experienceLabel(key: string, slot?: string | null): string {
   const exp = getExperience(key);

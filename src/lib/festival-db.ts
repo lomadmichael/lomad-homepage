@@ -146,6 +146,23 @@ export async function changeCamping(
   };
 }
 
+/** 본인조회 체험 추가: 중복/정원 판정 후 삽입. status(확정/대기) 반환. */
+export async function addSignup(
+  participantId: string,
+  key: string,
+  slot: string,
+  cap: number,
+): Promise<{ added?: boolean; status?: "confirmed" | "waitlist"; error?: string }> {
+  const { data, error } = await db().rpc("festival_add_signup", {
+    p_participant_id: participantId,
+    p_key: key,
+    p_slot: slot,
+    p_cap: cap,
+  });
+  if (error) throw new Error(`add_signup: ${error.message}`);
+  return data as { added?: boolean; status?: "confirmed" | "waitlist"; error?: string };
+}
+
 export async function lookupByPhone(phone: string): Promise<RegistrationRow[]> {
   const { data, error } = await db().rpc("festival_lookup", { p_phone: phone });
   if (error) throw new Error(`lookup: ${error.message}`);

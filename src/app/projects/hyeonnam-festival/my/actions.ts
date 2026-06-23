@@ -3,8 +3,8 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { otpSet, otpVerify, cancelSignup, changeCamping, lookupByPhone } from "@/lib/festival-db";
-import { buildCapacities } from "@/lib/festival-experiences";
+import { otpSet, otpVerify, cancelSignup, changeCamping, addSignup, lookupByPhone } from "@/lib/festival-db";
+import { buildCapacities, getExperience } from "@/lib/festival-experiences";
 import { generateOtp, hashOtp, signSession, verifySession } from "@/lib/festival-otp";
 import { sendOtpSms, sendPromotionSms, sendCampingPromotionSms } from "@/lib/festival-sms";
 
@@ -114,6 +114,55 @@ export async function changeMyCamping(formData: FormData): Promise<void> {
     if (res.promoted) await sendCampingPromotionSms(res.promoted);
   } catch (e) {
     console.error("[festival] changeMyCamping failed:", e);
+  }
+  revalidatePath("/projects/hyeonnam-festival/my");
+}
+
+/** 인증된 본인의 체험 추가 신청 (정원 판정·연령·1인1종목·중복 검증). */
+export async function addMySignup(formData: FormData): Promise<void> {
+  const participantId = (formData.get("participant_id") as string | null) ?? "";
+  const exp = ((formData.get("exp") as string | null) ?? "").trim();
+  if (!participantId || !exp) return;
+  const [key, slotRaw] = exp.split("|");
+  const slot = slotRaw ?? "";
+
+  const store = await cookies();
+  const phone = verifySession(store.get(COOKIE)?.value);
+  if (!phone) return;
+
+  // 소유권 + 참가자 정보(나이·기존 체험) 확인
+  const regs = await lookupByPhone(phone);
+  let age = -1;
+  let signups: { experience_key: string; time_slot: string | null }[] = [];
+  let owns = false;
+  for (const r of regs) {
+    for (const p of r.participants) {
+      if (p.id === participantId) {
+        owns = true;
+        age = p.age;
+        signups = p.signups;
+      }
+    }
+  }
+  if (!owns) return;
+
+  const e = getExperience(key);
+  if (!e) return;
+  if (e.slots && !slot) return; // 타임 필수(볼더링)
+  if (typeof e.minAge === "number" && age < e.minAge) return; // 연령 제한
+  // 중복(활성 동일 체험)
+  if (signups.some((s) => s.experience_key === key && (s.time_slot ?? "") === slot)) return;
+  // 1인 1종목(배타 그룹) — 같은 그룹 이미 있으면 불가
+  if (e.exclusiveGroup && signups.some((s) => getExperience(s.experience_key)?.exclusiveGroup === e.exclusiveGroup)) return;
+
+  const caps = buildCapacities();
+  const capKey = slot ? `${key}|${slot}` : key;
+  const cap = caps[capKey] ?? 0;
+
+  try {
+    await addSignup(participantId, key, slot, cap);
+  } catch (err) {
+    console.error("[festival] addMySignup failed:", err);
   }
   revalidatePath("/projects/hyeonnam-festival/my");
 }

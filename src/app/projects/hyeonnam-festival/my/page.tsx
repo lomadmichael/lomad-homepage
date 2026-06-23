@@ -3,9 +3,9 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { lookupByPhone, type RegistrationRow } from "@/lib/festival-db";
 import { verifySession } from "@/lib/festival-otp";
-import { experienceLabel, CAMPING } from "@/lib/festival-experiences";
+import { experienceLabel, CAMPING, EXPERIENCE_OPTIONS, getExperience } from "@/lib/festival-experiences";
 import OtpGate from "./OtpGate";
-import { cancelMySignup, changeMyCamping, logoutMy } from "./actions";
+import { cancelMySignup, changeMyCamping, addMySignup, logoutMy } from "./actions";
 
 export const dynamic = "force-dynamic";
 
@@ -123,7 +123,20 @@ export default async function FestivalMyPage() {
                     </form>
 
                     <div className="space-y-4">
-                      {r.participants.map((p) => (
+                      {r.participants.map((p) => {
+                        const activeSet = new Set(
+                          p.signups.map((s) => s.experience_key + (s.time_slot ? "|" + s.time_slot : "")),
+                        );
+                        const hasActivity = p.signups.some(
+                          (s) => getExperience(s.experience_key)?.exclusiveGroup === "activity",
+                        );
+                        const available = EXPERIENCE_OPTIONS.filter((o) => {
+                          if (activeSet.has(o.value)) return false;
+                          if (typeof o.minAge === "number" && p.age < o.minAge) return false;
+                          if (o.exclusiveGroup === "activity" && hasActivity) return false;
+                          return true;
+                        });
+                        return (
                         <div key={p.id}>
                           <p className="font-[family-name:var(--font-noto)] text-[14px] font-semibold mb-1.5">
                             {p.name} <span className="text-text-muted font-normal">· 만 {p.age}세</span>
@@ -156,14 +169,38 @@ export default async function FestivalMyPage() {
                               })}
                             </ul>
                           )}
+
+                          {available.length > 0 && (
+                            <form action={addMySignup} className="mt-2 flex flex-wrap items-center gap-2 pl-1">
+                              <input type="hidden" name="participant_id" value={p.id} />
+                              <select
+                                name="exp"
+                                defaultValue=""
+                                required
+                                className="bg-input-bg h-9 px-2 text-[12px] font-[family-name:var(--font-noto)] outline-none border border-border max-w-[260px]"
+                              >
+                                <option value="" disabled>+ 체험 추가 선택</option>
+                                {available.map((o) => (
+                                  <option key={o.value} value={o.value}>
+                                    {o.label}
+                                    {o.fee ? ` (${o.fee})` : ""}
+                                  </option>
+                                ))}
+                              </select>
+                              <button className="h-9 px-3 text-[11px] font-[family-name:var(--font-karla)] font-extrabold tracking-[1px] uppercase border border-text hover:bg-text hover:text-bg transition-colors">
+                                추가
+                              </button>
+                            </form>
+                          )}
                         </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                   );
                 })}
                 <p className="text-[11px] text-text-muted italic font-[family-name:var(--font-noto)]">
-                  ※ 캠핑은 직접 변경·취소할 수 있고, 체험은 취소만 가능합니다. 확정 체험을 취소하면 대기 1번이 자동 확정되고 해당 분께 문자가 발송됩니다.
+                  ※ 캠핑은 변경·취소, 체험은 추가·취소할 수 있습니다. 확정 체험을 취소하면 대기 1번이 자동 확정되고 해당 분께 문자가 발송됩니다. 정원이 찬 체험을 추가하면 대기로 접수됩니다.
                 </p>
               </div>
             )}
