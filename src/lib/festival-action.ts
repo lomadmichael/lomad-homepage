@@ -140,7 +140,7 @@ export async function submitFestival(
         }</td></tr>`,
     )
     .join("");
-  const campingText = camping ? (camping === "deck" ? "데크(1만원)" : "노지(무료)") : "미신청";
+  const campingText = camping ? (camping === "deck" ? "데크(무료)" : "노지(무료)") : "미신청";
   const tentText = camping ? (tentRental ? "필요 (대여 희망)" : "직접 지참") : "-";
 
   try {
@@ -185,7 +185,7 @@ export async function submitFestival(
     : "";
   return {
     success: true,
-    message: `접수가 완료되었습니다. 잠시 후 확인 문자가 발송됩니다.${waitMsg} 체험비·캠핑비는 현장 결제입니다.`,
+    message: `접수가 완료되었습니다. 잠시 후 확인 문자가 발송됩니다.${waitMsg} 캠핑은 무료(양양군 농업기술센터 후원)이며 선셋 비치 테이블(2만원)만 현장 결제입니다.`,
     result,
   };
 }

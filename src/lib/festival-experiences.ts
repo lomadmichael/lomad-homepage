@@ -138,7 +138,8 @@ export interface CampingOption {
 }
 
 export const CAMPING: CampingOption[] = [
-  { key: "deck", label: "데크", capacity: 60, fee: "1만원" },
+  // 양양군 농업기술센터 후원으로 데크 무료 제공 (2026-06)
+  { key: "deck", label: "데크", capacity: 60, fee: "무료" },
   { key: "noji", label: "노지", capacity: 10, fee: "무료" },
 ];
 

@@ -29,7 +29,7 @@ export async function sendConfirmSms(params: {
     const c = params.camping.type === "deck" ? "데크" : "노지";
     lines.push(`🏕 캠핑(${c}): ${params.camping.status === "confirmed" ? "확정" : "대기"}`);
   }
-  lines.push("2026.7.4-5 · 양양 죽도·북분리. 체험비·캠핑비는 현장 결제이며 자세한 안내는 추후 발송드립니다. — 로마드협동조합");
+  lines.push("2026.7.4-5 · 양양 죽도·북분리. 캠핑 무료(양양군 농업기술센터 후원)이며 선셋 비치 테이블(2만원)만 현장 결제입니다. 자세한 안내는 추후 발송드립니다. — 로마드협동조합");
 
   return sendAlimtalk({
     to: params.phone,
@@ -56,7 +56,7 @@ export async function sendCampingPromotionSms(params: {
   camping: string;
 }) {
   const c = params.camping === "deck" ? "데크" : "노지";
-  const fee = params.camping === "deck" ? "데크는 현장 1만원 결제입니다." : "노지는 무료입니다.";
+  const fee = "캠핑은 무료입니다.";
   return sendAlimtalk({
     to: params.phone,
     templateId: "TMPL_FESTIVAL_PROMOTE",

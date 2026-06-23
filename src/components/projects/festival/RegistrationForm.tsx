@@ -241,7 +241,7 @@ export default function RegistrationForm({ availability }: { availability: Avail
           참가 신청
         </h1>
         <p className="font-[family-name:var(--font-noto)] text-[13px] md:text-[14px] text-text-sub leading-relaxed">
-          입장 무료 · 일부 체험만 사전 예약 필요. 체험비·캠핑비는 현장 결제입니다.
+          입장 무료 · 일부 체험만 사전 예약 필요. 캠핑 무료(양양군 농업기술센터 후원) · 선셋 비치 테이블(2만원)만 현장 결제입니다.
           <br />
           참가자별로 나이와 신청 체험을 입력해 주세요. (연령 제한 체험 확인용)
         </p>
@@ -339,6 +339,7 @@ export default function RegistrationForm({ availability }: { availability: Avail
             <div className="mb-4">
               <p className={labelCls}>
                 캠핑 사이트 신청 <span className="text-text-muted font-normal">· 신청 그룹 공통</span>
+                <span className="block text-[11px] font-normal text-[#0B7A5A] mt-0.5">양양군 농업기술센터 후원 · 데크·노지 모두 무료</span>
               </p>
               <div key={`camp-${resetKey}`} className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 <label className={radioCardCls}>
@@ -367,6 +368,7 @@ export default function RegistrationForm({ availability }: { availability: Avail
                       />
                       <span>
                         {c.label} <span className="text-text-muted">({c.fee})</span>
+                        {c.key === "deck" && <span className="text-[#FF6B6B] font-bold"> 추천</span>}
                         <br />
                         <span className={`text-[11px] ${full ? "text-[#b45309]" : "text-text-muted"}`}>
                           {full ? "마감 · 대기 신청" : `잔여 ${rem}/${c.capacity}`}
@@ -485,7 +487,7 @@ export default function RegistrationForm({ availability }: { availability: Avail
         </Field>
 
         <p className="text-[11px] text-text-muted italic mt-3 leading-relaxed">
-          ※ 체험은 무료이며, <b>선셋 비치 테이블(2만원)·캠핑 데크(1만원)</b>만 현장 결제입니다. 확정 여부와 안내는 개별 연락드립니다.
+          ※ 체험·캠핑은 무료이며(캠핑은 양양군 농업기술센터 후원), <b>선셋 비치 테이블(2만원)</b>만 현장 결제입니다. 확정 여부와 안내는 개별 연락드립니다.
           <br />※ 정원이 찬 체험은 <b>대기</b>로 접수되며, 취소자가 생기면 순서대로 자동 확정·문자 안내됩니다.
         </p>
 
