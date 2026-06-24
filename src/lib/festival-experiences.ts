@@ -128,6 +128,22 @@ export const EXPERIENCES: Experience[] = [
     fee: "2만원 (현장 결제)",
     desc: "노을 아래 긴 테이블에 둘러앉아 음식을 나누는 교류 만찬.",
   },
+  {
+    key: "hyrox",
+    label: "해변 하이록스",
+    location: "죽도",
+    capacity: 30,
+    time: "16:00~18:00",
+    desc: "모래밭에서 펑셔널 운동으로 겨루는 비치 하이록스. 체력에 맞춰 누구나 도전.",
+  },
+  {
+    key: "barre",
+    label: "해변 선셋 바레",
+    location: "북분리",
+    capacity: 20,
+    time: "18:00",
+    desc: "노을 지는 해변에서 즐기는 바레 클래스. 코어와 균형을 깨우는 힐링 운동.",
+  },
 ];
 
 export interface CampingOption {
