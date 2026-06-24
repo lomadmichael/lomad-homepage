@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { otpSet, otpVerify, cancelSignup, changeCamping, addSignup, lookupByPhone } from "@/lib/festival-db";
-import { buildCapacities, getExperience } from "@/lib/festival-experiences";
+import { buildCapacities, getExperience, experiencesTimeConflict } from "@/lib/festival-experiences";
 import { generateOtp, hashOtp, signSession, verifySession } from "@/lib/festival-otp";
 import { sendOtpSms, sendPromotionSms, sendCampingPromotionSms } from "@/lib/festival-sms";
 
@@ -154,6 +154,8 @@ export async function addMySignup(formData: FormData): Promise<void> {
   if (signups.some((s) => s.experience_key === key && (s.time_slot ?? "") === slot)) return;
   // 1인 1종목(배타 그룹) — 같은 그룹 이미 있으면 불가
   if (e.exclusiveGroup && signups.some((s) => getExperience(s.experience_key)?.exclusiveGroup === e.exclusiveGroup)) return;
+  // 같은 시간대 체험 중복 방지
+  if (signups.some((s) => experiencesTimeConflict(key, slot || null, s.experience_key, s.time_slot))) return;
 
   const caps = buildCapacities();
   const capKey = slot ? `${key}|${slot}` : key;

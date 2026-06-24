@@ -3,7 +3,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { lookupByPhone, type RegistrationRow } from "@/lib/festival-db";
 import { verifySession } from "@/lib/festival-otp";
-import { experienceLabel, CAMPING, EXPERIENCE_OPTIONS, getExperience } from "@/lib/festival-experiences";
+import { experienceLabel, CAMPING, EXPERIENCE_OPTIONS, getExperience, experiencesTimeConflict } from "@/lib/festival-experiences";
 import OtpGate from "./OtpGate";
 import { cancelMySignup, changeMyCamping, addMySignup, logoutMy } from "./actions";
 
@@ -134,6 +134,9 @@ export default async function FestivalMyPage() {
                           if (activeSet.has(o.value)) return false;
                           if (typeof o.minAge === "number" && p.age < o.minAge) return false;
                           if (o.exclusiveGroup === "activity" && hasActivity) return false;
+                          // 같은 시간대 이미 신청한 체험이 있으면 제외
+                          if (p.signups.some((s) => experiencesTimeConflict(o.key, o.slot, s.experience_key, s.time_slot)))
+                            return false;
                           return true;
                         });
                         return (

@@ -4,7 +4,7 @@ import { Resend } from "resend";
 import { SUBMISSIONS_OPEN } from "@/lib/festival-config";
 import { submitRegistration, type SubmitInput, type SubmitResult } from "@/lib/festival-db";
 import { sendConfirmSms } from "@/lib/festival-sms";
-import { EXPERIENCES, getExperience, experienceLabel } from "@/lib/festival-experiences";
+import { EXPERIENCES, getExperience, experienceLabel, experiencesTimeConflict } from "@/lib/festival-experiences";
 
 // 키가 없으면(로컬 등) 이메일은 건너뛴다. 운영(Vercel)엔 RESEND_API_KEY 설정됨.
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
@@ -84,6 +84,14 @@ export async function submitFestival(
         success: false,
         message: `${name}님: 서핑·SUP·랜드서핑·볼더링은 한 분당 1종목만 신청할 수 있습니다.`,
       };
+    }
+    // 같은 시간대 체험 중복 신청 방지
+    for (let i = 0; i < exps.length; i++) {
+      for (let j = i + 1; j < exps.length; j++) {
+        if (experiencesTimeConflict(exps[i].key, exps[i].slot ?? null, exps[j].key, exps[j].slot ?? null)) {
+          return { success: false, message: `${name}님: 같은 시간대 체험은 함께 신청할 수 없습니다.` };
+        }
+      }
     }
     for (const e of exps) {
       if (!VALID_KEYS.has(e.key)) {

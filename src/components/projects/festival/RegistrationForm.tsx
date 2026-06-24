@@ -11,6 +11,7 @@ import {
   onlineCapacity,
   nonSlotOnlineCap,
   getExperience,
+  experiencesTimeConflict,
   EXCLUSIVE_GROUP_LABELS,
 } from "@/lib/festival-experiences";
 
@@ -117,6 +118,8 @@ export default function RegistrationForm({ availability }: { availability: Avail
         if (o.exclusiveGroup) {
           kept = kept.filter((e) => getExperience(e.key)?.exclusiveGroup !== o.exclusiveGroup);
         }
+        // 같은 시간대로 겹치는 체험은 자동 해제 (중복 시간 신청 방지)
+        kept = kept.filter((e) => !experiencesTimeConflict(o.key, o.slot, e.key, e.slot));
         return { ...p, experiences: [...kept, { key: o.key, slot: o.slot }] };
       }),
     );
@@ -253,7 +256,7 @@ export default function RegistrationForm({ availability }: { availability: Avail
           서핑 · SUP · 랜드서핑 · 볼더링은 <b>한 분당 1종목만</b> 신청할 수 있습니다.
         </p>
         <p className="font-[family-name:var(--font-noto)] text-[12px] text-text-sub leading-relaxed mt-1">
-          이 4종(수상·클라이밍) 중 하나를 고르면 다른 하나는 자동 해제됩니다. 로컬쿠킹·비치러닝·요가·선셋 비치 테이블은 함께 신청할 수 있습니다.
+          이 4종(수상·클라이밍) 중 하나를 고르면 다른 하나는 자동 해제됩니다. 또한 <b>같은 시간대 체험</b>은 함께 신청할 수 없습니다(겹치면 자동 해제).
         </p>
       </div>
 

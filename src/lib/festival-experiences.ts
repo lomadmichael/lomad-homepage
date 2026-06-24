@@ -133,18 +133,53 @@ export const EXPERIENCES: Experience[] = [
     label: "해변 하이록스",
     location: "죽도",
     capacity: 30,
+    minAge: 13,
+    ageLimit: "만 13세 이상",
     time: "16:00~18:00",
     desc: "모래밭에서 펑셔널 운동으로 겨루는 비치 하이록스. 체력에 맞춰 누구나 도전.",
   },
   {
     key: "barre",
     label: "해변 선셋 바레",
-    location: "북분리",
+    location: "죽도",
     capacity: 20,
     time: "18:00",
     desc: "노을 지는 해변에서 즐기는 바레 클래스. 코어와 균형을 깨우는 힐링 운동.",
   },
 ];
+
+/**
+ * 시간 충돌 판정용 — 같은 시간대 체험 중복 신청 방지.
+ * day: 1 = 7/4(토), 2 = 7/5(일) · 분 단위 [start, end) (끝점은 겹침 아님).
+ * 시간 미지정 체험(surf·sup·landsurf)은 등록 안 함 → exclusiveGroup(1인1종목)으로만 관리.
+ */
+const TIME_RANGES: Record<string, { day: number; start: number; end: number }> = {
+  cooking: { day: 1, start: 13 * 60, end: 14 * 60 + 30 },
+  "boulder|16:00": { day: 1, start: 16 * 60, end: 17 * 60 },
+  "boulder|17:00": { day: 1, start: 17 * 60, end: 18 * 60 },
+  hyrox: { day: 1, start: 16 * 60, end: 18 * 60 },
+  running: { day: 1, start: 18 * 60, end: 19 * 60 },
+  sunset: { day: 1, start: 18 * 60, end: 20 * 60 },
+  barre: { day: 1, start: 18 * 60, end: 19 * 60 },
+  yoga: { day: 2, start: 10 * 60, end: 11 * 60 + 30 },
+};
+
+function timeRangeKey(key: string, slot?: string | null): string {
+  return slot ? `${key}|${slot}` : key;
+}
+
+/** 두 체험(+타임)이 같은 시간대로 겹치는지. */
+export function experiencesTimeConflict(
+  aKey: string,
+  aSlot: string | null,
+  bKey: string,
+  bSlot: string | null,
+): boolean {
+  const a = TIME_RANGES[timeRangeKey(aKey, aSlot)];
+  const b = TIME_RANGES[timeRangeKey(bKey, bSlot)];
+  if (!a || !b || a.day !== b.day) return false;
+  return a.start < b.end && b.start < a.end;
+}
 
 export interface CampingOption {
   key: "deck" | "noji";
