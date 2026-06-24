@@ -1,62 +1,69 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import Button from "@/components/ui/Button";
 import FadeIn from "@/components/ui/FadeIn";
 import CountdownTimer from "@/components/projects/festival/CountdownTimer";
 import Marquee from "@/components/projects/festival/Marquee";
-import { SUBMISSIONS_OPEN } from "@/lib/festival-config";
-import { EXPERIENCES, onlineCapacity, nonSlotOnlineCap } from "@/lib/festival-experiences";
+import {
+  EXPERIENCES,
+  onlineCapacity,
+  nonSlotOnlineCap,
+  LOCATION_EN,
+} from "@/lib/festival-experiences";
+
+const EMAIL = "lomad.coop@gmail.com";
+const MAILTO = `mailto:${EMAIL}?subject=${encodeURIComponent(
+  "Hyeonnam Life Festival — Inquiry",
+)}`;
 
 const MARQUEE_ITEMS = [
-  "2026.7.4 (SAT) ~ 7.5 (SUN)",
-  "Yangyang · 죽도 · 북분리",
-  "현남생활 페스티벌",
+  "Jul 4 (SAT) ~ 5 (SUN), 2026",
+  "Yangyang · Jukdo · Bukbun-ri",
+  "Hyeonnam Life Festival",
   "Surftown × Village",
-  "1박 2일 · 양양서핑로드",
+  "2 Days · Yangyang Surf Road",
   "Free Entry",
 ];
 
 const DAY1 = [
-  ["10:00", "개장 · 서프 패스 배포 · 부스 & 프리마켓"],
-  ["11:00", "액티비티 체험 — 서핑·SUP·랜드서핑·클라이밍 (선착순 110명)"],
-  ["13:00", "로컬 쿠킹클래스 — 블루베리 모찌 만들기 (북분리 · 50명)"],
-  ["16:00", "캠핑 체크인 · 정착 상담"],
-  ["18:00", "◎ 선셋 비치 테이블 (북분리) · 비치 러닝 (죽도)"],
-  ["19:00", "★ 서퍼's 나이트 — 밴드 라이브 (죽도)"],
-  ["21:00", "★★ 불꽃 피날레 (죽도)"],
+  ["10:00", "Opening · Surf Pass handout · Booths & Flea Market"],
+  ["11:00", "Activity sessions — Surfing·SUP·Land Surfing·Climbing (first 110)"],
+  ["13:00", "Local Cooking Class — Blueberry Mochi (Bukbun-ri · 50)"],
+  ["16:00", "Camping check-in · Settlement consulting"],
+  ["18:00", "◎ Sunset Beach Table (Bukbun-ri) · Beach Running (Jukdo)"],
+  ["19:00", "★ Surfer's Night — Live band (Jukdo)"],
+  ["21:00", "★★ Fireworks Finale (Jukdo)"],
 ];
 
 const DAY2 = [
-  ["10:00", "요가와 자연 만다라 (북분리)"],
-  ["11:00", "스탬프 이벤트 · 영수증 이벤트 상품 수령"],
-  ["12:00", "폐막"],
+  ["10:00", "Yoga & Nature Mandala (Bukbun-ri)"],
+  ["11:00", "Stamp event · Receipt-event prize pickup"],
+  ["12:00", "Closing"],
 ];
 
 export const metadata: Metadata = {
-  title: "현남생활 페스티벌 | LOMAD",
+  title: "Hyeonnam Life Festival (English) | LOMAD",
   description:
-    "서퍼와 마을이 한 상에 — 양양서핑로드 위에서 보내는 1박 2일. 2026.7.4(토)~7.5(일), 양양 죽도·북분리해변.",
+    "One night, two days on Yangyang Surf Road. July 4–5, 2026, at Jukdo & Bukbun-ri Beach, Yangyang, Korea. Free entry — an English guide for visitors.",
   alternates: {
-    canonical: "/projects/hyeonnam-festival",
+    canonical: "/projects/hyeonnam-festival/en",
     languages: {
       "ko-KR": "/projects/hyeonnam-festival",
       en: "/projects/hyeonnam-festival/en",
     },
   },
   openGraph: {
-    title: "현남생활 페스티벌 · 2026.7.4 — 7.5",
-    description: "양양서핑로드 위에서 보내는 1박 2일",
+    title: "Hyeonnam Life Festival · July 4–5, 2026",
+    description: "One night, two days on Yangyang Surf Road",
     images: ["/images/festival-hero-bg.png"],
   },
 };
 
-export default function HyeonnamFestivalPage() {
+export default function HyeonnamFestivalEnPage() {
   return (
     <main className="bg-black text-white">
       {/* ─── HERO ─────────────────────────────────────────────── */}
       <section className="relative min-h-screen flex flex-col overflow-hidden">
-        {/* 배경: 행사장 컨셉 이미지 (북분리 송림·텐트·페스티벌 무드) */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/festival-hero-bg.png"
@@ -67,7 +74,6 @@ export default function HyeonnamFestivalPage() {
             sizes="100vw"
           />
         </div>
-        {/* 가독성 확보를 위한 다층 오버레이 */}
         <div
           className="absolute inset-0 z-0"
           style={{
@@ -75,7 +81,6 @@ export default function HyeonnamFestivalPage() {
               "linear-gradient(180deg, rgba(11,31,58,0.55) 0%, rgba(11,31,58,0.35) 35%, rgba(11,31,58,0.65) 75%, rgba(11,31,58,0.85) 100%)",
           }}
         />
-        {/* 컬러 액센트 (살짝 산호·오션 톤) */}
         <div
           className="absolute inset-0 z-0 mix-blend-overlay opacity-50"
           style={{
@@ -102,43 +107,34 @@ export default function HyeonnamFestivalPage() {
             <a href="#zones" className="hover:text-white">Zones</a>
             <a href="#schedule" className="hover:text-white">Schedule</a>
             <a href="#programs" className="hover:text-white">Programs</a>
-            <a href="#signature" className="hover:text-white">Signature</a>
+            <a href="#visit" className="hover:text-white">Visit</a>
           </nav>
-          <div className="flex items-center gap-3 md:gap-4">
+          <div className="flex items-center gap-3">
             <Link
-              href="/projects/hyeonnam-festival/en"
+              href="/projects/hyeonnam-festival"
               className="font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[2px] uppercase text-white/70 hover:text-white"
             >
-              ENG
+              한국어
             </Link>
-            {SUBMISSIONS_OPEN ? (
-              <Link
-                href="/projects/hyeonnam-festival/register"
-                className="font-[family-name:var(--font-karla)] text-[11px] md:text-[12px] font-extrabold tracking-[2px] uppercase border border-white px-4 md:px-5 py-2.5 hover:bg-white hover:text-black transition-colors"
-              >
-                Register
-              </Link>
-            ) : (
-              <span
-                aria-disabled="true"
-                className="font-[family-name:var(--font-karla)] text-[11px] md:text-[12px] font-extrabold tracking-[2px] uppercase border border-white/40 text-white/60 px-4 md:px-5 py-2.5 cursor-not-allowed select-none"
-              >
-                Coming Soon
-              </span>
-            )}
+            <a
+              href={MAILTO}
+              className="font-[family-name:var(--font-karla)] text-[11px] md:text-[12px] font-extrabold tracking-[2px] uppercase border border-white px-4 md:px-5 py-2.5 hover:bg-white hover:text-black transition-colors"
+            >
+              Email Us
+            </a>
           </div>
         </header>
 
-        {/* Hero 콘텐츠 — 중앙 */}
+        {/* Hero 콘텐츠 */}
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 text-center">
           <p className="font-[family-name:var(--font-karla)] text-[10px] md:text-[12px] tracking-[4px] font-bold uppercase text-[#FF6B6B] mb-6">
             2026 · Yangyang Surf Road Festival
           </p>
-          <h1 className="font-[family-name:var(--font-noto)] text-[44px] md:text-[88px] font-black leading-[1.0] mb-5 tracking-tight">
-            현남생활 페스티벌
+          <h1 className="font-[family-name:var(--font-karla)] text-[34px] md:text-[68px] font-black leading-[1.05] mb-5 tracking-tight uppercase">
+            Hyeonnam Life Festival
           </h1>
-          <p className="font-[family-name:var(--font-noto)] text-[15px] md:text-[20px] text-white/80 mb-12 max-w-[640px] leading-relaxed">
-            양양서핑로드 위에서 보내는 1박 2일
+          <p className="font-[family-name:var(--font-karla)] text-[14px] md:text-[19px] text-white/80 mb-12 max-w-[640px] leading-relaxed tracking-wide">
+            One night, two days on Yangyang Surf Road
           </p>
 
           {/* D-DAY 카운트다운 */}
@@ -150,58 +146,37 @@ export default function HyeonnamFestivalPage() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-3">
-            {SUBMISSIONS_OPEN ? (
-              <Link
-                href="/projects/hyeonnam-festival/register"
-                className="font-[family-name:var(--font-karla)] text-[11px] md:text-[12px] font-extrabold tracking-[3px] uppercase bg-white text-black px-7 py-4 hover:bg-[#FF6B6B] hover:text-white transition-colors"
-              >
-                참가 신청 →
-              </Link>
-            ) : (
-              <span
-                aria-disabled="true"
-                className="font-[family-name:var(--font-karla)] text-[11px] md:text-[12px] font-extrabold tracking-[3px] uppercase bg-white/15 text-white/70 px-7 py-4 cursor-not-allowed select-none border border-white/30"
-              >
-                곧 접수 예정
-              </span>
-            )}
             <a
-              href="#about"
+              href="#programs"
+              className="font-[family-name:var(--font-karla)] text-[11px] md:text-[12px] font-extrabold tracking-[3px] uppercase bg-white text-black px-7 py-4 hover:bg-[#FF6B6B] hover:text-white transition-colors"
+            >
+              See Programs →
+            </a>
+            <a
+              href="#visit"
               className="font-[family-name:var(--font-karla)] text-[11px] md:text-[12px] font-extrabold tracking-[3px] uppercase border border-white/40 text-white px-7 py-4 hover:bg-white/10 transition-colors"
             >
-              자세히 보기
+              How to Join
             </a>
           </div>
-          {SUBMISSIONS_OPEN && (
-            <div className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 font-[family-name:var(--font-karla)] text-[10px] md:text-[11px] font-extrabold tracking-[2px] uppercase text-white/60">
-              <Link href="/projects/hyeonnam-festival/status" className="hover:text-white underline underline-offset-4">
-                접수 현황
-              </Link>
-              <Link href="/projects/hyeonnam-festival/my" className="hover:text-white underline underline-offset-4">
-                내 신청 조회 · 취소
-              </Link>
-            </div>
-          )}
-          {!SUBMISSIONS_OPEN && (
-            <p className="mt-5 font-[family-name:var(--font-noto)] text-[12px] md:text-[13px] text-white/60 tracking-wide">
-              접수는 준비가 완료되는 대로 별도 공지로 안내드립니다
-            </p>
-          )}
+          <p className="mt-5 font-[family-name:var(--font-karla)] text-[11px] md:text-[12px] text-white/60 tracking-wide">
+            Free entry · No online sign-up needed — register on-site on the day
+          </p>
         </div>
 
         {/* 하단 메타 */}
         <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 border-t border-white/15 text-white/80">
           {[
-            ["DATE", "2026.7.4 — 7.5"],
-            ["WHERE", "Yangyang · 죽도 · 북분리"],
+            ["DATE", "Jul 4 — 5, 2026"],
+            ["WHERE", "Yangyang · Jukdo · Bukbun-ri"],
             ["FORMAT", "2 Days · 2 Zones"],
-            ["ENTRY", "Free · 일부 사전예약"],
+            ["ENTRY", "Free · Some pre-booked"],
           ].map(([k, v]) => (
             <div key={k} className="px-4 md:px-8 py-5 border-r border-white/15 last:border-r-0">
               <p className="font-[family-name:var(--font-karla)] text-[9px] md:text-[10px] tracking-[2px] font-bold uppercase opacity-60 mb-1">
                 {k}
               </p>
-              <p className="font-[family-name:var(--font-noto)] text-[12px] md:text-[14px] font-black">
+              <p className="font-[family-name:var(--font-karla)] text-[12px] md:text-[14px] font-black">
                 {v}
               </p>
             </div>
@@ -216,14 +191,17 @@ export default function HyeonnamFestivalPage() {
             <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-text-muted mb-4">
               About
             </p>
-            <h2 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[44px] font-black mb-10 leading-tight">
-              단일 무대가 아닌, <br />
-              <span className="text-[#006B7A]">4거점을 순환하는</span> 분산형 페스티벌
+            <h2 className="font-[family-name:var(--font-karla)] text-[26px] md:text-[40px] font-black mb-10 leading-tight">
+              Not one stage, but a festival that{" "}
+              <span className="text-[#006B7A]">circles four spots</span>
             </h2>
-            <p className="font-[family-name:var(--font-noto)] text-[15px] md:text-[18px] leading-[2.0] text-text-sub max-w-[760px] mx-auto">
-              웨이브웍스에서 시작해 「현남 서프 패스」를 받고, 죽도·<span className="whitespace-nowrap">북분리</span>를 걸으며 참여 점포에서 소비하고,
-              <span className="text-text font-black"> <span className="whitespace-nowrap">북분리</span> 선셋 비치 테이블에서 마을과 한 상에</span>,
-              <span className="text-text font-black"> 21시 죽도 바다 불꽃 피날레</span>로 밤까지 머무는 축제.
+            <p className="font-[family-name:var(--font-karla)] text-[15px] md:text-[18px] leading-[1.9] text-text-sub max-w-[760px] mx-auto">
+              Start at WaveWorks and pick up your “Hyeonnam Surf Pass,” wander
+              between Jukdo and Bukbun-ri spending at local shops, share a meal
+              with the village at the{" "}
+              <span className="text-text font-black">Sunset Beach Table in Bukbun-ri</span>,
+              and stay into the night for the{" "}
+              <span className="text-text font-black">9 PM fireworks finale over Jukdo’s sea</span>.
             </p>
           </FadeIn>
         </div>
@@ -234,7 +212,7 @@ export default function HyeonnamFestivalPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/festival-vision-aurora.png"
-            alt="북분리 송림 오로라 캐노피 페스티벌 컨셉"
+            alt="Bukbun-ri pine-forest festival concept at dusk"
             fill
             className="object-cover"
             sizes="100vw"
@@ -250,16 +228,18 @@ export default function HyeonnamFestivalPage() {
         <FadeIn>
           <div className="relative z-10 text-center px-6 max-w-[900px]">
             <p className="font-[family-name:var(--font-karla)] text-[10px] md:text-[12px] tracking-[4px] font-bold uppercase text-[#FFD66E] mb-5">
-              First Look · Bukbunri Beach
+              First Look · Bukbun-ri Beach
             </p>
-            <h2 className="font-[family-name:var(--font-noto)] text-[32px] md:text-[64px] font-black leading-[1.1] mb-6 drop-shadow-lg">
-              해 질 녘, <br />
-              송림과 바다 사이에서
+            <h2 className="font-[family-name:var(--font-karla)] text-[30px] md:text-[58px] font-black leading-[1.1] mb-6 drop-shadow-lg">
+              At dusk, between
+              <br />
+              the pines and the sea
             </h2>
-            <p className="font-[family-name:var(--font-noto)] text-[14px] md:text-[17px] text-white/85 leading-relaxed max-w-[560px] mx-auto drop-shadow">
-              마을이 차린 한 상, 외지에서 온 손님, 송림 사이 앵두전구와 캠핑 텐트.
+            <p className="font-[family-name:var(--font-karla)] text-[14px] md:text-[17px] text-white/85 leading-relaxed max-w-[560px] mx-auto drop-shadow">
+              A table set by the village, guests from afar, fairy lights and
+              tents among the pines.
               <br className="hidden md:block" />
-              이 한 장이 페스티벌의 모든 것.
+              This one scene is the whole festival.
             </p>
           </div>
         </FadeIn>
@@ -268,11 +248,11 @@ export default function HyeonnamFestivalPage() {
       {/* ─── ZONES ─────────────────────────────────────────────── */}
       <section id="zones" className="relative">
         <FadeIn>
-          {/* Activity Zone — 죽도 / 오션 */}
+          {/* Activity Zone — Jukdo */}
           <div className="relative min-h-[600px] md:min-h-[680px] flex items-center text-white overflow-hidden">
             <Image
               src="/images/festival-zone-jukdo.png"
-              alt="죽도 액티비티 존 — 해변 페스티벌 컨셉"
+              alt="Jukdo Activity Zone — beach festival concept"
               fill
               className="object-cover z-0"
               sizes="100vw"
@@ -284,7 +264,6 @@ export default function HyeonnamFestivalPage() {
                   "linear-gradient(135deg, rgba(0,78,90,0.92) 0%, rgba(0,107,122,0.82) 50%, rgba(0,131,143,0.78) 100%)",
               }}
             />
-            {/* 데코 사인 큰 글자 */}
             <div
               className="absolute -bottom-10 md:-bottom-20 -right-4 md:right-10 font-[family-name:var(--font-karla)] font-black tracking-tighter text-white/[0.05] select-none pointer-events-none"
               style={{ fontSize: "clamp(180px, 30vw, 460px)", lineHeight: 1 }}
@@ -296,26 +275,28 @@ export default function HyeonnamFestivalPage() {
                 <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[4px] font-bold uppercase text-[#FF6B6B] mb-5">
                   Zone 01 · Daylight to Night
                 </p>
-                <h2 className="font-[family-name:var(--font-noto)] text-[44px] md:text-[80px] font-black mb-3 leading-[0.95]">
+                <h2 className="font-[family-name:var(--font-karla)] text-[44px] md:text-[80px] font-black mb-3 leading-[0.95]">
                   ACTIVITY
                 </h2>
-                <h3 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[36px] font-black mb-4">
-                  죽도 ZONE
+                <h3 className="font-[family-name:var(--font-karla)] text-[26px] md:text-[34px] font-black mb-4">
+                  Jukdo Zone
                 </h3>
-                <p className="font-[family-name:var(--font-noto)] text-[14px] md:text-[15px] text-white/70 italic mb-6">
-                  웨이브웍스 / 양양 서핑 1번지
+                <p className="font-[family-name:var(--font-karla)] text-[14px] md:text-[15px] text-white/70 italic mb-6">
+                  WaveWorks / Yangyang’s home of surfing
                 </p>
-                <p className="font-[family-name:var(--font-noto)] text-[14px] md:text-[16px] text-white/85 leading-[1.9] max-w-[440px]">
-                  서핑 라이프스타일이 압축된 낮부터 밤. 액티비티 체험 · 비치 러닝 · 서퍼's 나이트 · 불꽃놀이까지 액티비티 시그니처가 여기서.
+                <p className="font-[family-name:var(--font-karla)] text-[14px] md:text-[16px] text-white/85 leading-[1.9] max-w-[440px]">
+                  Surf-lifestyle energy from day to night. Activity sessions,
+                  beach running, Surfer’s Night, and the fireworks — the
+                  daytime signatures all happen here.
                 </p>
               </div>
-              <ul className="space-y-3 md:pt-12 text-[14px] md:text-[15px]">
+              <ul className="space-y-3 md:pt-12 text-[14px] md:text-[15px] font-[family-name:var(--font-karla)]">
                 {[
-                  ["액티비티 체험 — 서핑·SUP·랜드서핑·클라이밍 (110명)", true],
-                  ["메인 안내 · 현남생활 성과 공유 · 기념품", false],
-                  ["비치 러닝 (18:00)", false],
-                  ["서퍼's 나이트 (19:00)", true],
-                  ["불꽃 피날레 (21:00)", true],
+                  ["Activity sessions — Surfing·SUP·Land Surfing·Climbing (110)", true],
+                  ["Main info · Hyeonnam Life showcase · Merch", false],
+                  ["Beach Running (18:00)", false],
+                  ["Surfer’s Night (19:00)", true],
+                  ["Fireworks Finale (21:00)", true],
                 ].map(([txt, hi]) => (
                   <li key={String(txt)} className="flex items-start gap-3 py-2 border-b border-white/10">
                     <span className="text-[#FF6B6B] mt-0.5">●</span>
@@ -326,11 +307,11 @@ export default function HyeonnamFestivalPage() {
             </div>
           </div>
 
-          {/* Nature Zone — 북분리 / 포레스트·우든 */}
+          {/* Nature Zone — Bukbun-ri */}
           <div className="relative min-h-[600px] md:min-h-[680px] flex items-center text-white overflow-hidden">
             <Image
               src="/images/festival-zone-bukbunri.png"
-              alt="북분리 자연·체류 존 — 송림 캠핑·선셋 비치 테이블 컨셉"
+              alt="Bukbun-ri Nature Zone — pine-forest camping & Sunset Beach Table concept"
               fill
               className="object-cover z-0"
               sizes="100vw"
@@ -353,25 +334,26 @@ export default function HyeonnamFestivalPage() {
                 <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[4px] font-bold uppercase text-[#FFD66E] mb-5">
                   Zone 02 · Sleep Under the Stars
                 </p>
-                <h2 className="font-[family-name:var(--font-noto)] text-[44px] md:text-[80px] font-black mb-3 leading-[0.95]">
+                <h2 className="font-[family-name:var(--font-karla)] text-[44px] md:text-[80px] font-black mb-3 leading-[0.95]">
                   NATURE
                 </h2>
-                <h3 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[36px] font-black mb-4">
-                  북분리 ZONE
+                <h3 className="font-[family-name:var(--font-karla)] text-[26px] md:text-[34px] font-black mb-4">
+                  Bukbun-ri Zone
                 </h3>
-                <p className="font-[family-name:var(--font-noto)] text-[14px] md:text-[15px] text-white/70 italic mb-6">
-                  북분리 마을 캠핑장
+                <p className="font-[family-name:var(--font-karla)] text-[14px] md:text-[15px] text-white/70 italic mb-6">
+                  Bukbun-ri village campground
                 </p>
-                <p className="font-[family-name:var(--font-noto)] text-[14px] md:text-[16px] text-white/85 leading-[1.9] max-w-[440px] md:ml-auto">
-                  로컬 쿠킹클래스 · 선셋 비치 테이블 · 요가와 자연 만다라가 송림의 낮과 밤을 채운다.
+                <p className="font-[family-name:var(--font-karla)] text-[14px] md:text-[16px] text-white/85 leading-[1.9] max-w-[440px] md:ml-auto">
+                  A local cooking class, the Sunset Beach Table, and Yoga &
+                  Nature Mandala fill the pine forest’s day and night.
                 </p>
               </div>
-              <ul className="md:order-1 space-y-3 md:pt-12 text-[14px] md:text-[15px]">
+              <ul className="md:order-1 space-y-3 md:pt-12 text-[14px] md:text-[15px] font-[family-name:var(--font-karla)]">
                 {[
-                  ["캠핑 숙박 · 프리마켓", false],
-                  ["로컬 쿠킹클래스 — 블루베리 모찌 (13:00)", false],
-                  ["선셋 비치 테이블 (18:00)", true],
-                  ["요가와 자연 만다라 (일 10:00)", true],
+                  ["Camping stay · Flea market", false],
+                  ["Local Cooking Class — Blueberry Mochi (13:00)", false],
+                  ["Sunset Beach Table (18:00)", true],
+                  ["Yoga & Nature Mandala (Sun 10:00)", true],
                 ].map(([txt, hi]) => (
                   <li key={String(txt)} className="flex items-start gap-3 py-2 border-b border-white/10">
                     <span className="text-[#FFD66E] mt-0.5">●</span>
@@ -384,7 +366,7 @@ export default function HyeonnamFestivalPage() {
         </FadeIn>
 
         <p className="bg-black text-center py-5 font-[family-name:var(--font-karla)] text-[10px] md:text-[11px] tracking-[2px] uppercase text-white/50">
-          + 인구 · 동산 = 경유 서브 거점 · 스탬프투어 · 상권 회유
+          + Ingu · Dongsan = waypoint sub-spots · stamp tour · local shops
         </p>
       </section>
 
@@ -396,8 +378,8 @@ export default function HyeonnamFestivalPage() {
               <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-text-muted mb-4">
                 Schedule
               </p>
-              <h2 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[44px] font-black leading-tight">
-                1박 2일
+              <h2 className="font-[family-name:var(--font-karla)] text-[26px] md:text-[40px] font-black leading-tight">
+                Two Days, One Night
               </h2>
             </div>
             <div className="grid md:grid-cols-2 gap-8">
@@ -406,8 +388,8 @@ export default function HyeonnamFestivalPage() {
                   <p className="font-[family-name:var(--font-karla)] text-[36px] font-black leading-none">
                     DAY 1
                   </p>
-                  <p className="font-[family-name:var(--font-noto)] text-[14px] font-bold text-text-sub">
-                    7/4(토) — 메인 데이
+                  <p className="font-[family-name:var(--font-karla)] text-[14px] font-bold text-text-sub">
+                    Jul 4 (Sat) — Main Day
                   </p>
                 </div>
                 <ul className="space-y-2">
@@ -416,7 +398,7 @@ export default function HyeonnamFestivalPage() {
                       <span className="font-[family-name:var(--font-karla)] font-bold text-[#006B7A] w-14 shrink-0">
                         {time}
                       </span>
-                      <span className="font-[family-name:var(--font-noto)] flex-1">{prog}</span>
+                      <span className="font-[family-name:var(--font-karla)] flex-1">{prog}</span>
                     </li>
                   ))}
                 </ul>
@@ -426,8 +408,8 @@ export default function HyeonnamFestivalPage() {
                   <p className="font-[family-name:var(--font-karla)] text-[36px] font-black leading-none">
                     DAY 2
                   </p>
-                  <p className="font-[family-name:var(--font-noto)] text-[14px] font-bold text-text-sub">
-                    7/5(일)
+                  <p className="font-[family-name:var(--font-karla)] text-[14px] font-bold text-text-sub">
+                    Jul 5 (Sun)
                   </p>
                 </div>
                 <ul className="space-y-2">
@@ -436,7 +418,7 @@ export default function HyeonnamFestivalPage() {
                       <span className="font-[family-name:var(--font-karla)] font-bold text-[#FF6B6B] w-14 shrink-0">
                         {time}
                       </span>
-                      <span className="font-[family-name:var(--font-noto)] flex-1">{prog}</span>
+                      <span className="font-[family-name:var(--font-karla)] flex-1">{prog}</span>
                     </li>
                   ))}
                 </ul>
@@ -446,7 +428,7 @@ export default function HyeonnamFestivalPage() {
         </div>
       </section>
 
-      {/* ─── PROGRAMS (체험 프로그램) ───────────────────────────── */}
+      {/* ─── PROGRAMS ──────────────────────────────────────────── */}
       <section id="programs" className="bg-white text-text py-[120px] px-6">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
@@ -454,12 +436,14 @@ export default function HyeonnamFestivalPage() {
               <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-text-muted mb-4">
                 Programs
               </p>
-              <h2 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[44px] font-black leading-tight">
-                체험 프로그램
+              <h2 className="font-[family-name:var(--font-karla)] text-[26px] md:text-[40px] font-black leading-tight">
+                Things to Do
               </h2>
-              <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub mt-5 max-w-[660px] mx-auto leading-relaxed">
-                양양서핑로드 위에서 즐기는 체험들. 체험·캠핑 모두 <b>무료</b>이며(선셋 비치 테이블 2만원만 현장 결제),
-                정원의 <b>70%는 온라인 사전접수</b>, 30%는 현장 접수로 운영됩니다.
+              <p className="font-[family-name:var(--font-karla)] text-[14px] text-text-sub mt-5 max-w-[680px] mx-auto leading-relaxed">
+                Programs along Yangyang Surf Road. Most are <b>free</b> (only the
+                Sunset Beach Table is ₩20,000, paid on-site). Pre-booking is in
+                Korean only — <b>visitors can register on-site on the day</b>,
+                subject to remaining spots.
               </p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -475,40 +459,40 @@ export default function HyeonnamFestivalPage() {
                   <div key={exp.key} className="border border-border p-5 flex flex-col bg-[#FAF5EE]">
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-[family-name:var(--font-karla)] text-[10px] tracking-[2px] uppercase font-bold text-[#006B7A]">
-                        {exp.location}
+                        {LOCATION_EN[exp.location]}
                       </span>
-                      <span className={`font-[family-name:var(--font-noto)] text-[11px] font-bold ${exp.fee ? "text-[#b45309]" : "text-[#0B7A5A]"}`}>
-                        {exp.fee ?? "무료"}
+                      <span className={`font-[family-name:var(--font-karla)] text-[11px] font-bold ${exp.fee ? "text-[#b45309]" : "text-[#0B7A5A]"}`}>
+                        {exp.feeEn ?? (exp.fee ? exp.fee : "Free")}
                       </span>
                     </div>
-                    <h3 className="font-[family-name:var(--font-noto)] text-[17px] font-black mb-1.5 leading-snug">
-                      {exp.label}
+                    <h3 className="font-[family-name:var(--font-karla)] text-[17px] font-black mb-1.5 leading-snug">
+                      {exp.labelEn ?? exp.label}
                     </h3>
-                    <p className="font-[family-name:var(--font-noto)] text-[13px] text-text-sub leading-relaxed mb-4 flex-1">
-                      {exp.desc}
+                    <p className="font-[family-name:var(--font-karla)] text-[13px] text-text-sub leading-relaxed mb-4 flex-1">
+                      {exp.descEn ?? exp.desc}
                     </p>
-                    <div className="font-[family-name:var(--font-noto)] text-[12px] space-y-1 pt-3 border-t border-border">
+                    <div className="font-[family-name:var(--font-karla)] text-[12px] space-y-1 pt-3 border-t border-border">
                       <p>
-                        <span className="text-text-muted">정원</span> <b>{total}명</b>
-                        <span className="text-text-muted"> · 사전 {online} / 현장 {onsite}</span>
+                        <span className="text-text-muted">Capacity</span> <b>{total}</b>
+                        <span className="text-text-muted"> · pre {online} / on-site {onsite}</span>
                         {exp.slots && (
                           <span className="text-text-muted">
                             {" "}
-                            (타임당 {exp.slots[0].capacity}명 · {exp.slots.map((s) => s.slot).join("·")})
+                            ({exp.slots[0].capacity} per slot · {exp.slots.map((s) => s.slot).join("·")})
                           </span>
                         )}
                       </p>
                       <p>
-                        <span className="text-text-muted">연령</span> {exp.ageLimit ?? "전연령"}
+                        <span className="text-text-muted">Age</span> {exp.ageLimitEn ?? exp.ageLimit ?? "All ages"}
                       </p>
                       {(exp.time || exp.slots) && (
                         <p>
-                          <span className="text-text-muted">시간</span>{" "}
-                          {exp.slots ? exp.slots.map((s) => s.slot).join(" / ") : exp.time}
+                          <span className="text-text-muted">Time</span>{" "}
+                          {exp.slots ? exp.slots.map((s) => s.slot).join(" / ") : exp.timeEn ?? exp.time}
                         </p>
                       )}
                       {exp.exclusiveGroup === "activity" && (
-                        <p className="text-[#b45309] text-[11px]">※ 서핑·SUP·랜드서핑·볼더링 중 1인 1종목</p>
+                        <p className="text-[#b45309] text-[11px]">※ Surfing·SUP·Land Surfing·Bouldering — pick one</p>
                       )}
                     </div>
                   </div>
@@ -521,24 +505,20 @@ export default function HyeonnamFestivalPage() {
               <span className="font-[family-name:var(--font-karla)] text-[10px] tracking-[2px] uppercase font-bold text-[#FFD66E] shrink-0">
                 Camping
               </span>
-              <p className="font-[family-name:var(--font-noto)] text-[13px] md:text-[14px] leading-relaxed flex-1">
-                북분리 마을 캠핑장 사이트 예약 가능 — <b>데크 60면 · 노지 10면 모두 무료</b> (양양군 농업기술센터 후원). 1박 2일 캠핑객은 선셋 비치 테이블·일요일 요가까지 함께 즐기세요. (접수 폼에서 신청)
+              <p className="font-[family-name:var(--font-karla)] text-[13px] md:text-[14px] leading-relaxed flex-1">
+                Bukbun-ri village campground — <b>Deck (60 sites) · Field (10 sites), all free</b>{" "}
+                (sponsored by the Yangyang Agricultural Technology Center).
+                Overnight campers also enjoy the Sunset Beach Table and Sunday
+                yoga. Camping sign-up is handled in Korean — please email us to
+                arrange a spot.
               </p>
             </div>
-            {SUBMISSIONS_OPEN && (
-              <div className="text-center mt-12">
-                <Button variant="primary" href="/projects/hyeonnam-festival/register">
-                  사전 접수하기 →
-                </Button>
-              </div>
-            )}
           </FadeIn>
         </div>
       </section>
 
       {/* ─── SIGNATURE MOMENTS ─────────────────────────────────── */}
       <section
-        id="signature"
         className="text-white py-[120px] px-6"
         style={{ backgroundColor: "#0B1F3A" }}
       >
@@ -548,12 +528,12 @@ export default function HyeonnamFestivalPage() {
               <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-white/60 mb-4">
                 Signature Moments
               </p>
-              <h2 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[44px] font-black leading-tight">
-                두 개의 시그니처 모먼트
+              <h2 className="font-[family-name:var(--font-karla)] text-[26px] md:text-[40px] font-black leading-tight">
+                Two Signature Moments
               </h2>
             </div>
             <div className="grid md:grid-cols-2 gap-5">
-              {/* 18:00 선셋 비치 테이블 - 북분리 송림 롱테이블 사진 배경 */}
+              {/* 18:00 Sunset Beach Table */}
               <div
                 className="relative p-10 md:p-14 border text-center overflow-hidden min-h-[340px] md:min-h-[420px] flex flex-col items-center justify-center"
                 style={{ borderColor: "rgba(255,107,107,0.5)" }}
@@ -561,7 +541,7 @@ export default function HyeonnamFestivalPage() {
                 <div className="absolute inset-0 z-0">
                   <Image
                     src="/images/festival-sunset-table.png"
-                    alt="선셋 비치 테이블 컨셉"
+                    alt="Sunset Beach Table concept"
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -581,16 +561,16 @@ export default function HyeonnamFestivalPage() {
                   >
                     18:00
                   </p>
-                  <p className="font-[family-name:var(--font-noto)] text-[20px] md:text-[26px] font-black mb-3 drop-shadow">
-                    선셋 비치 테이블
+                  <p className="font-[family-name:var(--font-karla)] text-[20px] md:text-[26px] font-black mb-3 drop-shadow">
+                    Sunset Beach Table
                   </p>
-                  <p className="text-[13px] text-white/90 leading-relaxed drop-shadow">
-                    북분리 송림에서 마을 · 참가자 · 손님이 한 상에
+                  <p className="font-[family-name:var(--font-karla)] text-[13px] text-white/90 leading-relaxed drop-shadow">
+                    Village, guests and surfers share one table in Bukbun-ri’s pines
                   </p>
                 </div>
               </div>
 
-              {/* 21:00 불꽃 - 죽도 밤바다 불꽃 사진 배경 */}
+              {/* 21:00 Fireworks */}
               <div
                 className="relative p-10 md:p-14 border text-center overflow-hidden min-h-[340px] md:min-h-[420px] flex flex-col items-center justify-center"
                 style={{ borderColor: "rgba(127,221,208,0.5)" }}
@@ -598,7 +578,7 @@ export default function HyeonnamFestivalPage() {
                 <div className="absolute inset-0 z-0">
                   <Image
                     src="/images/festival-fireworks.png"
-                    alt="죽도 불꽃 피날레 컨셉"
+                    alt="Jukdo fireworks finale concept"
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -618,11 +598,11 @@ export default function HyeonnamFestivalPage() {
                   >
                     21:00
                   </p>
-                  <p className="font-[family-name:var(--font-noto)] text-[20px] md:text-[26px] font-black mb-3 drop-shadow">
-                    불꽃 피날레
+                  <p className="font-[family-name:var(--font-karla)] text-[20px] md:text-[26px] font-black mb-3 drop-shadow">
+                    Fireworks Finale
                   </p>
-                  <p className="text-[13px] text-white/90 leading-relaxed drop-shadow">
-                    죽도 밤바다 위에서 불꽃놀이와 함께 피날레
+                  <p className="font-[family-name:var(--font-karla)] text-[13px] text-white/90 leading-relaxed drop-shadow">
+                    A finale of fireworks over Jukdo’s night sea
                   </p>
                 </div>
               </div>
@@ -631,45 +611,65 @@ export default function HyeonnamFestivalPage() {
         </div>
       </section>
 
+      {/* ─── VISIT / GOOD TO KNOW ──────────────────────────────── */}
+      <section id="visit" className="bg-[#FAF5EE] text-text py-[120px] px-6">
+        <div className="max-w-[860px] mx-auto">
+          <FadeIn>
+            <div className="text-center mb-12">
+              <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-text-muted mb-4">
+                For Visitors
+              </p>
+              <h2 className="font-[family-name:var(--font-karla)] text-[26px] md:text-[40px] font-black leading-tight">
+                Good to Know
+              </h2>
+            </div>
+            <ul className="grid sm:grid-cols-2 gap-4 font-[family-name:var(--font-karla)] text-[14px] leading-relaxed">
+              {[
+                ["Free entry", "The festival grounds are free to enter — just come."],
+                ["Free vs paid", "Most programs are free. Only the Sunset Beach Table costs ₩20,000, paid on-site."],
+                ["How to join", "No online sign-up needed. Walk in and register on-site on the day, subject to remaining spots."],
+                ["Payment", "Bring some cash to be safe — not every booth accepts cards."],
+                ["Two locations", "Jukdo Beach (daytime activities) and Bukbun-ri Beach (sunset to night), both in Yangyang."],
+                ["Language", "This page is an English guide. On-site help is mainly in Korean — a translation app may come in handy."],
+              ].map(([title, body]) => (
+                <li key={title} className="border border-border bg-white p-5">
+                  <p className="font-black text-[15px] mb-1.5">{title}</p>
+                  <p className="text-text-sub">{body}</p>
+                </li>
+              ))}
+            </ul>
+          </FadeIn>
+        </div>
+      </section>
+
       {/* ─── BOTTOM CTA ────────────────────────────────────────── */}
       <section className="bg-black text-white py-[140px] px-6 text-center">
         <FadeIn>
           <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[4px] font-bold uppercase text-[#FF6B6B] mb-5">
-            Now Open
+            Join Us
           </p>
-          <h2 className="font-[family-name:var(--font-noto)] text-[32px] md:text-[56px] font-black mb-3 leading-tight">
-            양양서핑로드의 첫 마을 잔치
+          <h2 className="font-[family-name:var(--font-karla)] text-[30px] md:text-[52px] font-black mb-3 leading-tight">
+            The first village feast on Yangyang Surf Road
           </h2>
-          <p className="font-[family-name:var(--font-noto)] text-[15px] md:text-[17px] text-white/70 mb-10 max-w-[640px] mx-auto leading-relaxed">
-            서퍼와 마을이 한 상에 — 1박 2일 함께해 주세요
+          <p className="font-[family-name:var(--font-karla)] text-[15px] md:text-[17px] text-white/70 mb-10 max-w-[640px] mx-auto leading-relaxed">
+            Surfers and the village at one table — come spend two days with us.
           </p>
-          {SUBMISSIONS_OPEN ? (
-            <Link
-              href="/projects/hyeonnam-festival/register"
-              className="inline-block font-[family-name:var(--font-karla)] text-[12px] md:text-[14px] font-extrabold tracking-[3px] uppercase bg-[#FF6B6B] text-white px-10 py-5 hover:bg-white hover:text-black transition-colors"
-            >
-              지금 참가 신청 →
-            </Link>
-          ) : (
-            <>
-              <span
-                aria-disabled="true"
-                className="inline-block font-[family-name:var(--font-karla)] text-[12px] md:text-[14px] font-extrabold tracking-[3px] uppercase bg-white/15 text-white/70 px-10 py-5 cursor-not-allowed select-none border border-white/30"
-              >
-                곧 접수 예정
-              </span>
-              <p className="mt-5 font-[family-name:var(--font-noto)] text-[13px] text-white/60">
-                접수 오픈 일정은 별도 공지 예정입니다
-              </p>
-            </>
-          )}
-          <div className="mt-12 pt-12 border-t border-white/15 text-[11px] text-white/50">
+          <a
+            href={MAILTO}
+            className="inline-block font-[family-name:var(--font-karla)] text-[12px] md:text-[14px] font-extrabold tracking-[3px] uppercase bg-[#FF6B6B] text-white px-10 py-5 hover:bg-white hover:text-black transition-colors"
+          >
+            Questions? Email Us →
+          </a>
+          <p className="mt-5 font-[family-name:var(--font-karla)] text-[13px] text-white/60">
+            {EMAIL}
+          </p>
+          <div className="mt-12 pt-12 border-t border-white/15 text-[11px] text-white/50 font-[family-name:var(--font-karla)]">
             <p className="mb-2">
-              주최 · 주관 · <span className="text-white/80">로마드 협동조합</span>  ·  재원 · 농촌마을 활력화 사업
+              Hosted by <span className="text-white/80">LOMAD Cooperative</span> · Funded by the Rural Village Revitalization Program
             </p>
             <p>
-              <Link href={`/contact?type=${encodeURIComponent("프로그램 운영 문의")}`} className="underline hover:text-white">
-                파트너 · 점포 · 후원 협력 문의
+              <Link href="/projects/hyeonnam-festival" className="underline hover:text-white">
+                한국어 안내 보기 →
               </Link>
             </p>
           </div>

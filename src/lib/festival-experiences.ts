@@ -10,6 +10,12 @@
 
 export type FestivalLocation = "죽도" | "북분리";
 
+/** 영문 안내 페이지용 거점명 매핑. */
+export const LOCATION_EN: Record<FestivalLocation, string> = {
+  죽도: "Jukdo Beach",
+  북분리: "Bukbun-ri Beach",
+};
+
 export interface ExperienceSlot {
   /** 타임 식별자 (예: "16:00"). DB의 time_slot 값과 동일. */
   slot: string;
@@ -20,6 +26,8 @@ export interface ExperienceSlot {
 export interface Experience {
   key: string;
   label: string;
+  /** 영문 안내 페이지용 라벨 (없으면 label 폴백) */
+  labelEn?: string;
   location: FestivalLocation;
   /** 단일 정원 (slots 가 없을 때) */
   capacity?: number;
@@ -29,12 +37,18 @@ export interface Experience {
   slots?: ExperienceSlot[];
   /** 유료 안내 문구 (무료면 비움) */
   fee?: string;
+  /** 영문 유료 안내 문구 (없으면 fee 폴백) */
+  feeEn?: string;
   /** 검증용 최소 만 나이 (미정이면 undefined) */
   minAge?: number;
   /** 사용자 표시용 연령 안내 (미정이면 undefined) */
   ageLimit?: string;
+  /** 영문 연령 안내 (없으면 ageLimit 폴백) */
+  ageLimitEn?: string;
   /** 진행 시간 표시 (예: "13:00", "7/5(일) 10:00"). slots 가 있으면 슬롯 라벨이 시간을 대신함 */
   time?: string;
+  /** 영문 진행 시간 표시 (없으면 time 폴백 — 한글 포함된 경우만 명시) */
+  timeEn?: string;
   /**
    * 배타 그룹. 같은 그룹의 체험은 한 참가자당 1개만 신청 가능(택1).
    * 예: 수상·클라이밍 계열(서핑·SUP·랜드서핑·볼더링) = "activity".
@@ -42,6 +56,8 @@ export interface Experience {
   exclusiveGroup?: string;
   /** 설명 (초안) */
   desc: string;
+  /** 영문 설명 (없으면 desc 폴백) */
+  descEn?: string;
 }
 
 /** 1인 1종목만 신청 가능한 배타 그룹 안내 문구. */
@@ -49,100 +65,131 @@ export const EXCLUSIVE_GROUP_LABELS: Record<string, string> = {
   activity: "서핑 · SUP · 랜드서핑 · 볼더링은 한 분당 1종목만 신청할 수 있습니다.",
 };
 
+/** 배타 그룹 영문 안내 문구. */
+export const EXCLUSIVE_GROUP_LABELS_EN: Record<string, string> = {
+  activity: "Surfing · SUP · Land Surfing · Bouldering — choose one per person.",
+};
+
 export const EXPERIENCES: Experience[] = [
   {
     key: "surf",
     label: "서핑",
+    labelEn: "Surfing",
     location: "죽도",
     capacity: 80,
     minAge: 10,
     ageLimit: "만 10세 이상",
+    ageLimitEn: "Age 10+",
     exclusiveGroup: "activity",
     desc: "강사와 함께 죽도해변에서 파도를 타보는 입문 서핑. 보드·슈트 제공.",
+    descEn: "Beginner surf lesson at Jukdo Beach with an instructor. Board and wetsuit provided.",
   },
   {
     key: "sup",
     label: "SUP",
+    labelEn: "SUP",
     location: "죽도",
     capacity: 10,
     minAge: 10,
     ageLimit: "만 10세 이상",
+    ageLimitEn: "Age 10+",
     exclusiveGroup: "activity",
     desc: "스탠드업 패들보드 위에 서서 노를 저으며 잔잔한 물 위를 즐기는 체험.",
+    descEn: "Stand-up paddleboarding — glide across calm water standing on the board.",
   },
   {
     key: "landsurf",
     label: "랜드서핑",
+    labelEn: "Land Surfing",
     location: "죽도",
     capacity: 15,
     onlineCap: 10,
     minAge: 10,
     ageLimit: "만 10세 이상",
+    ageLimitEn: "Age 10+",
     exclusiveGroup: "activity",
     desc: "랜드서핑 보드로 땅 위에서 서핑 감각을 익히는 3시간 클래스.",
+    descEn: "A 3-hour class learning the feel of surfing on land with a land-surf board.",
   },
   {
     key: "boulder",
     label: "볼더링",
+    labelEn: "Bouldering",
     location: "죽도",
     minAge: 13,
     ageLimit: "만 13세 이상",
+    ageLimitEn: "Age 13+",
     exclusiveGroup: "activity",
     slots: [
       { slot: "16:00", label: "7/4(토) 오후 4시", capacity: 8 },
       { slot: "17:00", label: "7/4(토) 오후 5시", capacity: 8 },
     ],
     desc: "낮은 인공 암벽을 밧줄 없이 오르는 클라이밍 체험. 타임당 8명.",
+    descEn: "Rope-free climbing on a low artificial wall. 8 people per time slot.",
   },
   {
     key: "cooking",
     label: "로컬 쿠킹클래스 — 블루베리 모찌",
+    labelEn: "Local Cooking Class — Blueberry Mochi",
     location: "북분리",
     capacity: 50,
     time: "13:00",
     desc: "현남 블루베리로 만드는 모찌(찹쌀떡) 만들기 클래스.",
+    descEn: "Make mochi (sweet rice cakes) with locally grown Hyeonnam blueberries.",
   },
   {
     key: "running",
     label: "비치 러닝",
+    labelEn: "Beach Running",
     location: "죽도",
     capacity: 30,
     time: "18:00",
     desc: "죽도 해변을 함께 달리는 선셋 비치 러닝.",
+    descEn: "A sunset group run along Jukdo Beach.",
   },
   {
     key: "yoga",
     label: "요가와 자연 만다라",
+    labelEn: "Yoga & Nature Mandala",
     location: "북분리",
     capacity: 20,
     onlineCap: 15,
     time: "7/5(일) 10:00",
+    timeEn: "Sun, Jul 5 · 10:00",
     desc: "일요일 아침 북분리 해변에서 요가로 몸을 깨우고, 자연물로 만다라를 만드는 힐링 프로그램.",
+    descEn: "Sunday morning yoga on Bukbun-ri Beach, followed by making a mandala from natural materials.",
   },
   {
     key: "sunset",
     label: "선셋 비치 테이블",
+    labelEn: "Sunset Beach Table",
     location: "북분리",
     capacity: 80,
     time: "18:00",
     fee: "2만원 (현장 결제)",
+    feeEn: "₩20,000 (on-site)",
     desc: "노을 아래 긴 테이블에 둘러앉아 음식을 나누는 교류 만찬.",
+    descEn: "A communal dinner around one long table under the sunset — where surfers and the village share a meal.",
   },
   {
     key: "hyrox",
     label: "해변 하이록스",
+    labelEn: "Beach Hyrox",
     location: "죽도",
     capacity: 30,
     time: "16:00~18:00",
     desc: "모래밭에서 펑셔널 운동으로 겨루는 비치 하이록스. 체력에 맞춰 누구나 도전.",
+    descEn: "A functional-fitness beach challenge on the sand. Scale it to your own level — anyone can join.",
   },
   {
     key: "barre",
     label: "해변 선셋 바레",
+    labelEn: "Sunset Beach Barre",
     location: "죽도",
     capacity: 20,
     time: "18:00",
     desc: "노을 지는 해변에서 즐기는 바레 클래스. 코어와 균형을 깨우는 힐링 운동.",
+    descEn: "A barre class on the beach at sunset — wake up your core and balance.",
   },
 ];
 
@@ -191,6 +238,12 @@ export const CAMPING: CampingOption[] = [
   { key: "deck", label: "데크", capacity: 60, fee: "무료" },
   { key: "noji", label: "노지", capacity: 10, fee: "무료" },
 ];
+
+/** 영문 안내 페이지용 캠핑 라벨/요금 매핑. */
+export const CAMPING_EN: Record<CampingOption["key"], { label: string; fee: string }> = {
+  deck: { label: "Deck", fee: "Free" },
+  noji: { label: "Field", fee: "Free" },
+};
 
 /**
  * 온라인 사전접수 비율. 전체 정원의 70%만 온라인으로 받고, 나머지 30%는 현장 접수 몫으로 남긴다.
