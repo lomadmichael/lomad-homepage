@@ -133,8 +133,6 @@ export const EXPERIENCES: Experience[] = [
     label: "해변 하이록스",
     location: "죽도",
     capacity: 30,
-    minAge: 13,
-    ageLimit: "만 13세 이상",
     time: "16:00~18:00",
     desc: "모래밭에서 펑셔널 운동으로 겨루는 비치 하이록스. 체력에 맞춰 누구나 도전.",
   },
