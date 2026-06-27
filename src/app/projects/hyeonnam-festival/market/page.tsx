@@ -127,24 +127,38 @@ export default function FleaMarketPage() {
       </header>
 
       <div className="max-w-[1100px] w-full mx-auto px-6 py-[40px] md:py-[64px]">
-        {/* 상단 배너 */}
-        <aside
-          className="text-white p-7 md:p-9 mb-12"
-          style={{ background: "linear-gradient(135deg, #0B1F3A 0%, #004E5A 100%)" }}
-        >
-          <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-[#FF6B6B] mb-2">
-            Flea Market · {PUBLIC_VENDORS.length} Teams
-          </p>
-          <h1 className="font-[family-name:var(--font-noto)] text-[26px] md:text-[34px] font-black mb-3 leading-tight">
-            이번 프리마켓에서 만날 {PUBLIC_VENDORS.length}팀
-          </h1>
-          <p className="font-[family-name:var(--font-noto)] text-[13px] md:text-[14px] text-white/85 leading-relaxed max-w-[680px]">
-            핸드메이드·주얼리부터 비치웨어, 로컬 푸드, 현장 체험까지. 양양서핑로드 위
-            죽도·북분리에서 셀러들을 만나보세요.
-          </p>
-          <p className="font-[family-name:var(--font-karla)] text-[11px] tracking-[1px] text-white/60 mt-4">
-            2026.7.4(SAT) — 7.5(SUN) · Yangyang · 죽도 · 북분리
-          </p>
+        {/* 상단 배너 (컨셉 이미지 배경) */}
+        <aside className="relative overflow-hidden text-white p-7 md:p-9 mb-12 min-h-[260px] flex flex-col justify-end">
+          <Image
+            src="/images/festival-market-concept.jpg"
+            alt="현남생활 프리마켓 컨셉"
+            fill
+            className="object-cover"
+            sizes="1100px"
+            priority
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(11,31,58,0.86) 0%, rgba(0,78,90,0.72) 60%, rgba(11,31,58,0.9) 100%)",
+            }}
+          />
+          <div className="relative">
+            <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-[#FF6B6B] mb-2">
+              Flea Market · {PUBLIC_VENDORS.length} Teams
+            </p>
+            <h1 className="font-[family-name:var(--font-noto)] text-[26px] md:text-[34px] font-black mb-3 leading-tight">
+              이번 프리마켓에서 만날 {PUBLIC_VENDORS.length}팀
+            </h1>
+            <p className="font-[family-name:var(--font-noto)] text-[13px] md:text-[14px] text-white/90 leading-relaxed max-w-[680px] drop-shadow">
+              핸드메이드·주얼리부터 비치웨어, 로컬 푸드, 현장 체험까지. 양양서핑로드 위
+              죽도·북분리에서 셀러들을 만나보세요.
+            </p>
+            <p className="font-[family-name:var(--font-karla)] text-[11px] tracking-[1px] text-white/70 mt-4">
+              2026.7.4(SAT) — 7.5(SUN) · Yangyang · 죽도 · 북분리
+            </p>
+          </div>
         </aside>
 
         {/* 카테고리별 섹션 */}
