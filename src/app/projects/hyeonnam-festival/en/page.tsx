@@ -26,11 +26,13 @@ const MARQUEE_ITEMS = [
 ];
 
 const DAY1 = [
-  ["10:00", "Opening · Surf Pass handout · Booths & Flea Market"],
-  ["11:00", "Activity sessions — Surfing·SUP·Land Surfing·Climbing (first 110)"],
-  ["13:00", "Local Cooking Class — Blueberry Mochi (Bukbun-ri · 50)"],
-  ["16:00", "Camping check-in · Settlement consulting"],
-  ["18:00", "◎ Sunset Beach Table (Bukbun-ri) · Beach Running (Jukdo)"],
+  ["10:00", "Opening · Camping check-in (Jukdo·Bukbun-ri) · Surf Pass handout · Settlement consulting"],
+  ["11:00", "Flea Market opens (Jukdo · until 18:00) · Booths"],
+  ["13:00", "Surfing · SUP (Jukdo) · Local Cooking Class — Blueberry Mochi (Bukbun-ri · 50)"],
+  ["15:00", "Surfing · SUP · Land Surfing (Jukdo)"],
+  ["16:00", "Bouldering · Beach Hyrox (Jukdo · until 18:00)"],
+  ["17:00", "Bouldering (Jukdo)"],
+  ["18:00", "◎ Sunset Beach Table (Bukbun-ri) · Beach Running · Sunset Barre (Jukdo)"],
   ["19:00", "★ Surfer's Night — Live band (Jukdo)"],
   ["21:00", "★★ Fireworks Finale (Jukdo)"],
 ];
@@ -292,9 +294,9 @@ export default function HyeonnamFestivalEnPage() {
               </div>
               <ul className="space-y-3 md:pt-12 text-[14px] md:text-[15px] font-[family-name:var(--font-karla)]">
                 {[
-                  ["Activity sessions — Surfing·SUP·Land Surfing·Climbing (110)", true],
-                  ["Main info · Hyeonnam Life showcase · Merch", false],
-                  ["Beach Running (18:00)", false],
+                  ["Surfing·SUP·Land Surfing·Bouldering (13:00–17:00)", true],
+                  ["Beach Hyrox (16:00–18:00) · Sunset Barre (18:00)", false],
+                  ["Beach Running (18:00) · Main info · Merch", false],
                   ["Surfer’s Night (19:00)", true],
                   ["Fireworks Finale (21:00)", true],
                 ].map(([txt, hi]) => (
