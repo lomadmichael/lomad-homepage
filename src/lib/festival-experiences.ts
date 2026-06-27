@@ -178,8 +178,8 @@ export const EXPERIENCES: Experience[] = [
     location: "죽도",
     capacity: 30,
     time: "16:00~18:00",
-    desc: "모래밭에서 펑셔널 운동으로 겨루는 비치 하이록스. 체력에 맞춰 누구나 도전.",
-    descEn: "A functional-fitness beach challenge on the sand. Scale it to your own level — anyone can join.",
+    desc: "하이록스는 달리기와 기능성 운동(스쿼트·런지·버피 등)을 번갈아 하는 피트니스 프로그램이에요. 순위를 겨루는 대신, 모래밭에서 다 같이 땀 흘리는 그룹 운동으로 진행해요. 운동이 처음이어도 자기 페이스로 참여하면 됩니다.",
+    descEn: "Hyrox is a fitness program that alternates running with functional exercises like squats, lunges, and burpees. Instead of competing for rank, we do it together as a group workout on the sand — beginners can join at their own pace.",
   },
   {
     key: "barre",
@@ -188,8 +188,8 @@ export const EXPERIENCES: Experience[] = [
     location: "죽도",
     capacity: 20,
     time: "18:00",
-    desc: "노을 지는 해변에서 즐기는 바레 클래스. 코어와 균형을 깨우는 힐링 운동.",
-    descEn: "A barre class on the beach at sunset — wake up your core and balance.",
+    desc: "바레는 발레의 기본 동작에 필라테스·요가를 더한 전신 운동이에요. 작고 정교한 동작을 반복하며 코어와 자세·균형을 잡아줘요. 노을 지는 해변에서 누구나 따라 할 수 있는 힐링 클래스로 진행해요.",
+    descEn: "Barre blends ballet-inspired moves with pilates and yoga. Small, controlled movements wake up your core, posture, and balance — a relaxing class anyone can follow, on the beach at sunset.",
   },
 ];
 
@@ -235,7 +235,7 @@ export interface CampingOption {
 
 export const CAMPING: CampingOption[] = [
   // 양양군 농업기술센터 후원으로 데크 무료 제공 (2026-06)
-  { key: "deck", label: "데크", capacity: 60, fee: "무료" },
+  { key: "deck", label: "데크", capacity: 70, fee: "무료" },
   { key: "noji", label: "노지", capacity: 10, fee: "무료" },
 ];
 

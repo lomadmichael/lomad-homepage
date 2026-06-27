@@ -522,7 +522,7 @@ export default function HyeonnamFestivalPage() {
                 Camping
               </span>
               <p className="font-[family-name:var(--font-noto)] text-[13px] md:text-[14px] leading-relaxed flex-1">
-                북분리 마을 캠핑장 사이트 예약 가능 — <b>데크 60면 · 노지 10면 모두 무료</b> (양양군 농업기술센터 후원). 1박 2일 캠핑객은 선셋 비치 테이블·일요일 요가까지 함께 즐기세요. (접수 폼에서 신청)
+                북분리 마을 캠핑장 사이트 예약 가능 — <b>데크 70면 · 노지 10면 모두 무료</b> (양양군 농업기술센터 후원). 1박 2일 캠핑객은 선셋 비치 테이블·일요일 요가까지 함께 즐기세요. (접수 폼에서 신청)
               </p>
             </div>
             {SUBMISSIONS_OPEN && (

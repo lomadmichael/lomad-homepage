@@ -506,7 +506,7 @@ export default function HyeonnamFestivalEnPage() {
                 Camping
               </span>
               <p className="font-[family-name:var(--font-karla)] text-[13px] md:text-[14px] leading-relaxed flex-1">
-                Bukbun-ri village campground — <b>Deck (60 sites) · Field (10 sites), all free</b>{" "}
+                Bukbun-ri village campground — <b>Deck (70 sites) · Field (10 sites), all free</b>{" "}
                 (sponsored by the Yangyang Agricultural Technology Center).
                 Overnight campers also enjoy the Sunset Beach Table and Sunday
                 yoga. Camping sign-up is handled in Korean — please email us to
