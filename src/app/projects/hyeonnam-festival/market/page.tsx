@@ -8,7 +8,7 @@ import { FLEA_MARKET_PUBLISHED } from "@/lib/festival-config";
 import {
   VENDOR_CATEGORIES,
   vendorsByCategory,
-  VENDORS,
+  PUBLIC_VENDORS,
   type Vendor,
   type VendorCategory,
 } from "@/lib/festival-vendors";
@@ -16,7 +16,7 @@ import {
 export const metadata: Metadata = {
   title: "프리마켓 참여 업체 · 현남생활 페스티벌 | LOMAD",
   description:
-    "현남생활 페스티벌에서 만날 프리마켓 22팀 — 핸드메이드·주얼리·비치웨어·로컬푸드·체험·아트. 2026.7.4(토)~7.5(일), 양양 죽도·북분리.",
+    "현남생활 페스티벌에서 만날 프리마켓 25팀 — 핸드메이드·주얼리·비치웨어·로컬푸드·체험·아트. 2026.7.4(토)~7.5(일), 양양 죽도·북분리.",
   alternates: { canonical: "/projects/hyeonnam-festival/market" },
   // 미공개 동안 검색 색인 차단
   robots: FLEA_MARKET_PUBLISHED ? undefined : { index: false, follow: false },
@@ -133,10 +133,10 @@ export default function FleaMarketPage() {
           style={{ background: "linear-gradient(135deg, #0B1F3A 0%, #004E5A 100%)" }}
         >
           <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-[#FF6B6B] mb-2">
-            Flea Market · {VENDORS.length} Teams
+            Flea Market · {PUBLIC_VENDORS.length} Teams
           </p>
           <h1 className="font-[family-name:var(--font-noto)] text-[26px] md:text-[34px] font-black mb-3 leading-tight">
-            이번 프리마켓에서 만날 {VENDORS.length}팀
+            이번 프리마켓에서 만날 {PUBLIC_VENDORS.length}팀
           </h1>
           <p className="font-[family-name:var(--font-noto)] text-[13px] md:text-[14px] text-white/85 leading-relaxed max-w-[680px]">
             핸드메이드·주얼리부터 비치웨어, 로컬 푸드, 현장 체험까지. 양양서핑로드 위

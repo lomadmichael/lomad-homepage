@@ -1,9 +1,10 @@
 /**
- * 현남생활 페스티벌 프리마켓 참여 업체 단일 진실 소스 (확정 22팀).
+ * 현남생활 페스티벌 프리마켓 참여 업체 단일 진실 소스.
  *
+ * - 최종 신청자 26팀 (2026-06-27 확정). 공개 노출은 25팀
+ *   (뷰티 란제리는 상호명 민감 → hidden:true 로 공개 제외).
  * - 개인정보(전화번호)는 절대 포함하지 않는다. 공개 가능한 @핸들/홈페이지만.
- * - F&B 3팀(취소)·최소영(참가불가)은 제외.
- * - 변경 시 이 파일만 고치면 안내 페이지·캐러셀 데이터가 일괄 반영.
+ * - 제외: 빈콜렉터·약수누룽지·오솜사탕·양양술곳간 / F&B 3팀(취소).
  */
 
 export type VendorZone = "죽도" | "북분리" | "무관";
@@ -23,6 +24,8 @@ export interface Vendor {
   handleUrl?: string;
   zone: VendorZone;
   region?: string;
+  /** 공개 노출 제외 (상호명 민감 등). 내부 명단엔 남기되 페이지/캐러셀엔 안 보임. */
+  hidden?: boolean;
 }
 
 /** 카테고리 표시 정보 (페이지/캐러셀 공통 순서). */
@@ -34,17 +37,7 @@ export const VENDOR_CATEGORIES: { key: VendorCategory; label: string; sub: strin
 ];
 
 export const VENDORS: Vendor[] = [
-  // ── 핸드메이드 · 주얼리 · 소품 (10) ──────────────────────────
-  {
-    slug: "vincollector",
-    name: "빈콜렉터",
-    category: "handmade",
-    items: "",
-    handle: "@vincollector.kr",
-    handleUrl: "https://instagram.com/vincollector.kr",
-    zone: "죽도",
-    region: "서울",
-  },
+  // ── 핸드메이드 · 주얼리 · 소품 ──────────────────────────────
   {
     slug: "cord925",
     name: "Cord_925",
@@ -53,54 +46,6 @@ export const VENDORS: Vendor[] = [
     handle: "@cord_925",
     handleUrl: "https://instagram.com/Cord_925",
     zone: "무관",
-  },
-  {
-    slug: "hzkim",
-    name: "hzkim 헤르쯔킴",
-    category: "handmade",
-    items: "은 주얼리",
-    handle: "@hzkim_official",
-    handleUrl: "https://instagram.com/hzkim_official",
-    zone: "죽도",
-  },
-  {
-    slug: "bjork-alva",
-    name: "비요크엘바",
-    category: "handmade",
-    items: "자작나무 껍질 공예",
-    handle: "@bjork.alva_craft",
-    handleUrl: "https://instagram.com/bjork.alva_craft",
-    zone: "죽도",
-    region: "양양",
-  },
-  {
-    slug: "kitty-wave",
-    name: "키티웨이브",
-    category: "handmade",
-    items: "핸드메이드 서핑 굿즈 · 액세서리",
-    handle: "@kitty._.wave",
-    handleUrl: "https://instagram.com/kitty._.wave",
-    zone: "죽도",
-  },
-  {
-    slug: "hi-yellow",
-    name: "안녕옐로우",
-    category: "handmade",
-    items: "손뜨개 키링 · 소품",
-    handle: "@hi_yellow",
-    handleUrl: "https://instagram.com/hi_yellow",
-    zone: "죽도",
-    region: "속초",
-  },
-  {
-    slug: "re-ocean",
-    name: "리:오션",
-    category: "handmade",
-    items: "바다유리 업사이클링 방향제",
-    handle: "@reocean_yy",
-    handleUrl: "https://instagram.com/reocean_yy",
-    zone: "죽도",
-    region: "양양",
   },
   {
     slug: "hand-m-studio",
@@ -122,14 +67,91 @@ export const VENDORS: Vendor[] = [
     zone: "죽도",
   },
   {
+    slug: "hi-yellow",
+    name: "안녕옐로우",
+    category: "handmade",
+    items: "손뜨개 키링 · 소품",
+    handle: "@hi_yellow",
+    handleUrl: "https://instagram.com/hi_yellow",
+    zone: "죽도",
+    region: "속초",
+  },
+  {
     slug: "nana-jjuni",
     name: "나나쭈니",
     category: "handmade",
     items: "슈즈 소품 · 키캡 꾸미기",
     zone: "죽도",
   },
+  {
+    slug: "bjork-alva",
+    name: "비요크엘바",
+    category: "handmade",
+    items: "자작나무 껍질 공예",
+    handle: "@bjork.alva_craft",
+    handleUrl: "https://instagram.com/bjork.alva_craft",
+    zone: "죽도",
+    region: "양양",
+  },
+  {
+    slug: "hzkim",
+    name: "hzkim 헤르쯔킴",
+    category: "handmade",
+    items: "은 주얼리",
+    handle: "@hzkim_official",
+    handleUrl: "https://instagram.com/hzkim_official",
+    zone: "죽도",
+  },
+  {
+    slug: "laulea",
+    name: "라울레아디자인하우스",
+    category: "handmade",
+    items: "수제 액세서리 · 가방",
+    handle: "@laulea_designhouse",
+    handleUrl: "https://instagram.com/laulea_designhouse",
+    zone: "죽도",
+    region: "양양",
+  },
+  {
+    slug: "hasta",
+    name: "하스타 (Hasta)",
+    category: "handmade",
+    items: "핸드메이드 실버 주얼리",
+    handle: "@hasta__sea",
+    handleUrl: "https://instagram.com/hasta__sea",
+    zone: "죽도",
+  },
+  {
+    slug: "re-ocean",
+    name: "리:오션",
+    category: "handmade",
+    items: "바다유리 업사이클링 방향제",
+    handle: "@reocean_yy",
+    handleUrl: "https://instagram.com/reocean_yy",
+    zone: "죽도",
+    region: "양양",
+  },
+  {
+    slug: "kitty-wave",
+    name: "키티웨이브",
+    category: "handmade",
+    items: "핸드메이드 서핑 굿즈 · 액세서리",
+    handle: "@kitty._.wave",
+    handleUrl: "https://instagram.com/kitty._.wave",
+    zone: "죽도",
+    region: "속초",
+  },
+  {
+    // 상호명 민감 → 공개 제외. 헤어/액세서리만 판매(란제리 제품 제외).
+    slug: "beauty-acc",
+    name: "뷰티 란제리",
+    category: "handmade",
+    items: "헤어 · 액세서리",
+    zone: "무관",
+    hidden: true,
+  },
 
-  // ── 패션 · 비치 · 반려 (5) ──────────────────────────────────
+  // ── 패션 · 비치 · 반려 ──────────────────────────────────────
   {
     slug: "deniz",
     name: "데니즈",
@@ -139,6 +161,15 @@ export const VENDORS: Vendor[] = [
     handleUrl: "https://instagram.com/denizz.co.kr",
     zone: "죽도",
     region: "양양",
+  },
+  {
+    slug: "dangdang-zip",
+    name: "댕댕의상실",
+    category: "fashion",
+    items: "반려동물 의류 · 용품",
+    handle: "@dangdang_zip",
+    handleUrl: "https://instagram.com/dangdang_zip",
+    zone: "죽도",
   },
   {
     slug: "coral-coast",
@@ -168,37 +199,10 @@ export const VENDORS: Vendor[] = [
     handle: "@laon.sewing",
     handleUrl: "https://instagram.com/laon.sewing",
     zone: "죽도",
-    region: "인천",
-  },
-  {
-    slug: "dangdang-zip",
-    name: "댕댕의상실",
-    category: "fashion",
-    items: "반려동물 의류 · 용품",
-    handle: "@dangdang_zip",
-    handleUrl: "https://instagram.com/dangdang_zip",
-    zone: "죽도",
+    region: "고성",
   },
 
-  // ── 로컬 푸드 (4) ───────────────────────────────────────────
-  {
-    slug: "boksil-farm",
-    name: "복실농원.팜",
-    category: "food",
-    items: "패션푸르트 (열대과일)",
-    zone: "죽도",
-    region: "양양",
-  },
-  {
-    slug: "yaksu-nurungji",
-    name: "약수누룽지",
-    category: "food",
-    items: "누룽지",
-    handle: "@yaksunurungji",
-    handleUrl: "https://instagram.com/yaksunurungji",
-    zone: "북분리",
-    region: "양양",
-  },
+  // ── 로컬 푸드 ───────────────────────────────────────────────
   {
     slug: "yangnyang-jeombbang",
     name: "양냥점빵",
@@ -209,8 +213,43 @@ export const VENDORS: Vendor[] = [
     zone: "죽도",
     region: "양양",
   },
+  {
+    slug: "boksil-farm",
+    name: "복실농원.팜",
+    category: "food",
+    items: "패션푸르트 (열대과일)",
+    zone: "죽도",
+    region: "양양",
+  },
+  {
+    slug: "siso",
+    name: "시소",
+    category: "food",
+    items: "해양심층수 소금 · 생수",
+    handle: "@ryujimin8651",
+    handleUrl: "https://instagram.com/ryujimin8651",
+    zone: "죽도",
+    region: "고성",
+  },
+  {
+    slug: "yangyang-samnamae",
+    name: "양양세남매농장",
+    category: "food",
+    items: "농산물",
+    zone: "북분리",
+    region: "양양",
+  },
+  {
+    slug: "happyfarm",
+    name: "해피팜",
+    category: "food",
+    items: "땅콩버터 · 구운땅콩",
+    handle: "@happyfarmpeanut",
+    handleUrl: "https://instagram.com/happyfarmpeanut",
+    zone: "죽도",
+  },
 
-  // ── 체험 · 아트 (3) ─────────────────────────────────────────
+  // ── 체험 · 아트 ─────────────────────────────────────────────
   {
     slug: "terra-and-pick",
     name: "테라앤픽",
@@ -239,9 +278,19 @@ export const VENDORS: Vendor[] = [
     zone: "죽도",
     region: "양양",
   },
+  {
+    slug: "sadam-yoga",
+    name: "사담요가",
+    category: "experience",
+    items: "명상 · 심리상담 · 요가",
+    zone: "죽도",
+  },
 ];
 
-/** 카테고리별 업체 묶음 (표시 순서 유지). */
+/** 공개 노출 대상 업체 (hidden 제외). 페이지/캐러셀/카운트는 이걸 사용. */
+export const PUBLIC_VENDORS: Vendor[] = VENDORS.filter((v) => !v.hidden);
+
+/** 카테고리별 공개 업체 묶음 (hidden 제외, 표시 순서 유지). */
 export function vendorsByCategory(cat: VendorCategory): Vendor[] {
-  return VENDORS.filter((v) => v.category === cat);
+  return PUBLIC_VENDORS.filter((v) => v.category === cat);
 }
