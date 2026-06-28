@@ -227,7 +227,7 @@ export const VENDORS: Vendor[] = [
     name: "양양세남매농장",
     category: "food",
     items: "농산물",
-    zone: "북분리",
+    zone: "죽도",
     region: "양양",
   },
   {

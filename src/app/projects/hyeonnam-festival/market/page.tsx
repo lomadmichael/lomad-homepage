@@ -15,8 +15,7 @@ import {
 
 export const metadata: Metadata = {
   title: "프리마켓 참여 업체 · 현남생활 페스티벌 | LOMAD",
-  description:
-    "현남생활 페스티벌에서 만날 프리마켓 25팀 — 핸드메이드·주얼리·비치웨어·로컬푸드·체험·아트. 2026.7.4(토)~7.5(일), 양양 죽도·북분리.",
+  description: `현남생활 페스티벌에서 만날 프리마켓 ${PUBLIC_VENDORS.length}팀 — 핸드메이드·주얼리·비치웨어·로컬푸드·체험·아트. 2026.7.4(토), 양양 죽도해변.`,
   alternates: { canonical: "/projects/hyeonnam-festival/market" },
   // 미공개 동안 검색 색인 차단
   robots: FLEA_MARKET_PUBLISHED ? undefined : { index: false, follow: false },
@@ -153,10 +152,10 @@ export default function FleaMarketPage() {
             </h1>
             <p className="font-[family-name:var(--font-noto)] text-[13px] md:text-[14px] text-white/90 leading-relaxed max-w-[680px] drop-shadow">
               핸드메이드·주얼리부터 비치웨어, 로컬 푸드, 현장 체험까지. 양양서핑로드 위
-              죽도·북분리에서 셀러들을 만나보세요.
+              죽도해변에서 셀러들을 만나보세요.
             </p>
             <p className="font-[family-name:var(--font-karla)] text-[11px] tracking-[1px] text-white/70 mt-4">
-              2026.7.4(SAT) — 7.5(SUN) · Yangyang · 죽도 · 북분리
+              2026.7.4(SAT) · Yangyang · 죽도해변
             </p>
           </div>
         </aside>
@@ -189,8 +188,8 @@ export default function FleaMarketPage() {
         {/* 안내 + CTA */}
         <div className="border border-border bg-[#FAF5EE] p-6 md:p-7 text-center">
           <p className="font-[family-name:var(--font-noto)] text-[13px] text-text-sub leading-relaxed">
-            프리마켓은 대부분 <b>죽도 액티비티 존</b>에서, 일부는 <b>북분리 네이처 존</b>에서
-            운영됩니다. 참여 업체·품목은 현장 사정에 따라 변동될 수 있습니다.
+            프리마켓은 <b>7/4(토) 죽도해변</b>에서 운영됩니다. 참여 업체·품목은 현장
+            사정에 따라 변동될 수 있습니다.
           </p>
           <Link
             href="/projects/hyeonnam-festival"
