@@ -1,10 +1,10 @@
 /**
  * 현남생활 페스티벌 프리마켓 참여 업체 단일 진실 소스.
  *
- * - 최종 신청자 26팀 (2026-06-27 확정). 공개 노출은 25팀
+ * - 최종 신청자 25팀 (2026-06-28 헤르쯔킴 취소 반영). 공개 노출은 24팀
  *   (뷰티 란제리는 상호명 민감 → hidden:true 로 공개 제외).
  * - 개인정보(전화번호)는 절대 포함하지 않는다. 공개 가능한 @핸들/홈페이지만.
- * - 제외: 빈콜렉터·약수누룽지·오솜사탕·양양술곳간 / F&B 3팀(취소).
+ * - 제외: 빈콜렉터·약수누룽지·오솜사탕·양양술곳간 / F&B 3팀(취소) / 헤르쯔킴(취소).
  */
 
 export type VendorZone = "죽도" | "북분리" | "무관";
@@ -92,15 +92,6 @@ export const VENDORS: Vendor[] = [
     handleUrl: "https://instagram.com/bjork.alva_craft",
     zone: "죽도",
     region: "양양",
-  },
-  {
-    slug: "hzkim",
-    name: "hzkim 헤르쯔킴",
-    category: "handmade",
-    items: "은 주얼리",
-    handle: "@hzkim_official",
-    handleUrl: "https://instagram.com/hzkim_official",
-    zone: "죽도",
   },
   {
     slug: "laulea",
