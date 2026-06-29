@@ -35,6 +35,14 @@ const DAY2 = [
   ["12:00", "폐막"],
 ];
 
+// 서퍼's 나이트(19:00 · 죽도해변 웨이브웍스 앞) 라인업. Y.S.B는 사진 미제공 → 타이포 카드.
+const LINEUP: { name: string; en?: string; role: string; desc: string; img: string | null }[] = [
+  { name: "리피", en: "LEAFY", role: "Vocal", desc: "싱그러운 목소리로 자연을 노래하는 아티스트", img: "/images/festival-lineup-leafy.jpg" },
+  { name: "우람", role: "Singer", desc: "기타 한 대로 밤을 채우는 자유로운 싱어", img: "/images/festival-lineup-uram.jpg" },
+  { name: "Y.S.B", role: "Band · 양양고등학교", desc: "지역의 10대 뮤지션들이 처음 서는 진짜 무대", img: null },
+  { name: "스트링노스누들", role: "Band · 현북면", desc: "양양의 아이돌, 현북면 비주얼 밴드", img: "/images/festival-lineup-noodle.jpg" },
+];
+
 export const metadata: Metadata = {
   title: "현남생활 페스티벌 | LOMAD",
   description:
@@ -628,6 +636,68 @@ export default function HyeonnamFestivalPage() {
                   </p>
                 </div>
               </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ─── SURFER'S NIGHT LINE-UP ────────────────────────────── */}
+      <section
+        id="lineup"
+        className="text-white py-[120px] px-6"
+        style={{ background: "linear-gradient(180deg,#0B1F3A 0%,#081627 100%)" }}
+      >
+        <div className="max-w-[1100px] mx-auto">
+          <FadeIn>
+            <div className="text-center mb-14">
+              <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-[#FF6B6B] mb-4">
+                Surfer&apos;s Night · 19:00 · 죽도해변 웨이브웍스 앞
+              </p>
+              <h2 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[44px] font-black leading-tight">
+                서퍼&apos;s 나이트 라인업
+              </h2>
+              <p className="font-[family-name:var(--font-noto)] text-[14px] text-white/70 mt-5 max-w-[620px] mx-auto leading-relaxed">
+                노을이 지면 죽도해변이 무대가 됩니다. 네 팀의 라이브가 밤을 채워요.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {LINEUP.map((act) => (
+                <div key={act.name} className="flex flex-col">
+                  <div className="relative aspect-[4/5] overflow-hidden mb-3 border border-white/10">
+                    {act.img ? (
+                      <Image
+                        src={act.img}
+                        alt={`${act.name} — 서퍼's 나이트 라인업`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                      />
+                    ) : (
+                      <div
+                        className="absolute inset-0 flex flex-col items-center justify-center text-center px-3"
+                        style={{ background: "linear-gradient(155deg,#13294d 0%,#0B1F3A 55%,#3a1d2e 100%)" }}
+                      >
+                        <span className="font-[family-name:var(--font-karla)] text-[34px] md:text-[42px] font-black tracking-tight text-white/90">
+                          Y.S.B
+                        </span>
+                        <span className="font-[family-name:var(--font-noto)] text-[11px] text-[#FFD66E] mt-2">
+                          양양고등학교 밴드
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  <p className="font-[family-name:var(--font-karla)] text-[9px] tracking-[2px] uppercase font-bold text-[#FF6B6B] mb-1">
+                    {act.role}
+                  </p>
+                  <h3 className="font-[family-name:var(--font-noto)] text-[17px] md:text-[19px] font-black leading-tight">
+                    {act.name}
+                    {act.en && <span className="text-white/50 text-[13px] font-bold"> {act.en}</span>}
+                  </h3>
+                  <p className="font-[family-name:var(--font-noto)] text-[12px] text-white/65 leading-relaxed mt-1.5">
+                    {act.desc}
+                  </p>
+                </div>
+              ))}
             </div>
           </FadeIn>
         </div>
