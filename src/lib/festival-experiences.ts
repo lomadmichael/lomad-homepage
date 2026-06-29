@@ -159,8 +159,8 @@ export const EXPERIENCES: Experience[] = [
     onlineCap: 15,
     time: "7/5(일) 10:00",
     timeEn: "Sun, Jul 5 · 10:00",
-    desc: "일요일 아침 북분리 해변에서 요가로 몸을 깨우고, 자연물로 만다라를 만드는 힐링 프로그램.",
-    descEn: "Sunday morning yoga on Bukbun-ri Beach, followed by making a mandala from natural materials.",
+    desc: "일요일 아침 북분리 캠핑장 솔숲에서 요가로 몸을 깨우고, 자연물로 만다라를 만드는 힐링 프로그램.",
+    descEn: "Sunday morning yoga in the Bukbun-ri campground pine forest, followed by making a mandala from natural materials.",
   },
   {
     key: "sunset",
