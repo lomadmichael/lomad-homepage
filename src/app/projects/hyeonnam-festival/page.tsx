@@ -110,11 +110,12 @@ export default function HyeonnamFestivalPage() {
           <nav className="hidden md:flex items-center gap-7 font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[2px] uppercase text-white/70">
             <a href="#about" className="hover:text-white">About</a>
             <a href="#zones" className="hover:text-white">Zones</a>
-            <a href="#schedule" className="hover:text-white">Schedule</a>
-            <a href="#programs" className="hover:text-white">Programs</a>
             {FLEA_MARKET_PUBLISHED && (
               <a href="#market" className="text-[#FFD66E] hover:text-white">Market</a>
             )}
+            <a href="#lineup" className="hover:text-white">Line-up</a>
+            <a href="#programs" className="hover:text-white">Programs</a>
+            <a href="#schedule" className="hover:text-white">Schedule</a>
             <a href="#signature" className="hover:text-white">Signature</a>
           </nav>
           <div className="flex items-center gap-3 md:gap-4">
@@ -242,42 +243,6 @@ export default function HyeonnamFestivalPage() {
         </div>
       </section>
 
-      {/* ─── VISION CINEMATIC BANNER ────────────────────────────── */}
-      <section className="relative h-[60vh] min-h-[420px] md:h-[80vh] md:min-h-[560px] overflow-hidden flex items-center justify-center text-white">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/festival-vision-aurora.png"
-            alt="북분리 송림 오로라 캐노피 페스티벌 컨셉"
-            fill
-            className="object-cover"
-            sizes="100vw"
-          />
-        </div>
-        <div
-          className="absolute inset-0 z-0"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 40%, rgba(11,31,58,0.55) 100%)",
-          }}
-        />
-        <FadeIn>
-          <div className="relative z-10 text-center px-6 max-w-[900px]">
-            <p className="font-[family-name:var(--font-karla)] text-[10px] md:text-[12px] tracking-[4px] font-bold uppercase text-[#FFD66E] mb-5">
-              First Look · Bukbunri Beach
-            </p>
-            <h2 className="font-[family-name:var(--font-noto)] text-[32px] md:text-[64px] font-black leading-[1.1] mb-6 drop-shadow-lg">
-              해 질 녘, <br />
-              송림과 바다 사이에서
-            </h2>
-            <p className="font-[family-name:var(--font-noto)] text-[14px] md:text-[17px] text-white/85 leading-relaxed max-w-[560px] mx-auto drop-shadow">
-              마을이 차린 한 상, 외지에서 온 손님, 송림 사이 앵두전구와 캠핑 텐트.
-              <br className="hidden md:block" />
-              이 한 장이 페스티벌의 모든 것.
-            </p>
-          </div>
-        </FadeIn>
-      </section>
-
       {/* ─── ZONES ─────────────────────────────────────────────── */}
       <section id="zones" className="relative">
         <FadeIn>
@@ -401,59 +366,107 @@ export default function HyeonnamFestivalPage() {
         </p>
       </section>
 
-      {/* ─── SCHEDULE ──────────────────────────────────────────── */}
-      <section id="schedule" className="bg-[#FAF5EE] text-text py-[120px] px-6">
-        <div className="max-w-[960px] mx-auto">
+      {/* ─── FLEA MARKET (프리마켓 안내) ───────────────────────── */}
+      {FLEA_MARKET_PUBLISHED && (
+        <section id="market" className="relative text-white overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/images/festival-market-concept.jpg"
+              alt="현남생활 페스티벌 프리마켓"
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+          </div>
+          <div
+            className="absolute inset-0 z-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(11,31,58,0.62) 0%, rgba(11,31,58,0.78) 60%, rgba(0,0,0,0.86) 100%)",
+            }}
+          />
+          <div className="relative z-10 max-w-[1000px] mx-auto px-6 py-[120px] md:py-[150px] text-center">
+            <FadeIn>
+              <p className="font-[family-name:var(--font-karla)] text-[10px] md:text-[11px] tracking-[4px] font-bold uppercase text-[#FFD66E] mb-5">
+                Flea Market
+              </p>
+              <h2 className="font-[family-name:var(--font-noto)] text-[36px] md:text-[64px] font-black leading-[1.05] mb-5">
+                프리마켓 26팀
+              </h2>
+              <p className="font-[family-name:var(--font-noto)] text-[15px] md:text-[18px] text-white/90 max-w-[660px] mx-auto leading-relaxed mb-3">
+                핸드메이드·주얼리·비치웨어·로컬푸드·체험까지, 양양 죽도해변에 스물여섯 팀이 한자리에 모입니다.
+              </p>
+              <p className="font-[family-name:var(--font-noto)] text-[13px] md:text-[15px] text-white/70 mb-10">
+                7. 4(토) 11:00~18:00 · 죽도해변 랜드서핑파크 건너편 · 입장 무료
+              </p>
+              <Link
+                href="/projects/hyeonnam-festival/market"
+                className="inline-block font-[family-name:var(--font-karla)] text-[12px] md:text-[14px] font-extrabold tracking-[3px] uppercase bg-[#FF6B6B] text-white px-10 py-5 hover:bg-white hover:text-black transition-colors"
+              >
+                참여 업체 보기 →
+              </Link>
+            </FadeIn>
+          </div>
+        </section>
+      )}
+
+      {/* ─── SURFER'S NIGHT LINE-UP ────────────────────────────── */}
+      <section
+        id="lineup"
+        className="text-white py-[120px] px-6"
+        style={{ background: "linear-gradient(180deg,#0B1F3A 0%,#081627 100%)" }}
+      >
+        <div className="max-w-[1100px] mx-auto">
           <FadeIn>
             <div className="text-center mb-14">
-              <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-text-muted mb-4">
-                Schedule
+              <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-[#FF6B6B] mb-4">
+                Surfer&apos;s Night · 19:00 · 죽도해변 웨이브웍스 앞
               </p>
               <h2 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[44px] font-black leading-tight">
-                1박 2일
+                서퍼&apos;s 나이트 라인업
               </h2>
+              <p className="font-[family-name:var(--font-noto)] text-[14px] text-white/70 mt-5 max-w-[620px] mx-auto leading-relaxed">
+                노을이 지면 죽도해변이 무대가 됩니다. 네 팀의 라이브가 밤을 채워요.
+              </p>
             </div>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <div className="flex items-baseline gap-4 mb-6 pb-4 border-b border-text">
-                  <p className="font-[family-name:var(--font-karla)] text-[36px] font-black leading-none">
-                    DAY 1
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {LINEUP.map((act) => (
+                <div key={act.name} className="flex flex-col">
+                  <div className="relative aspect-[4/5] overflow-hidden mb-3 border border-white/10">
+                    {act.img ? (
+                      <Image
+                        src={act.img}
+                        alt={`${act.name} — 서퍼's 나이트 라인업`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                      />
+                    ) : (
+                      <div
+                        className="absolute inset-0 flex flex-col items-center justify-center text-center px-3"
+                        style={{ background: "linear-gradient(155deg,#13294d 0%,#0B1F3A 55%,#3a1d2e 100%)" }}
+                      >
+                        <span className="font-[family-name:var(--font-karla)] text-[34px] md:text-[42px] font-black tracking-tight text-white/90">
+                          Y.S.B
+                        </span>
+                        <span className="font-[family-name:var(--font-noto)] text-[11px] text-[#FFD66E] mt-2">
+                          양양고등학교 밴드
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  <p className="font-[family-name:var(--font-karla)] text-[9px] tracking-[2px] uppercase font-bold text-[#FF6B6B] mb-1">
+                    {act.role}
                   </p>
-                  <p className="font-[family-name:var(--font-noto)] text-[14px] font-bold text-text-sub">
-                    7/4(토) — 메인 데이
+                  <h3 className="font-[family-name:var(--font-noto)] text-[17px] md:text-[19px] font-black leading-tight">
+                    {act.name}
+                    {act.en && <span className="text-white/50 text-[13px] font-bold"> {act.en}</span>}
+                  </h3>
+                  <p className="font-[family-name:var(--font-noto)] text-[12px] text-white/65 leading-relaxed mt-1.5">
+                    {act.desc}
                   </p>
                 </div>
-                <ul className="space-y-2">
-                  {DAY1.map(([time, prog]) => (
-                    <li key={time} className="flex gap-4 py-2 border-b border-border text-[13px]">
-                      <span className="font-[family-name:var(--font-karla)] font-bold text-[#006B7A] w-14 shrink-0">
-                        {time}
-                      </span>
-                      <span className="font-[family-name:var(--font-noto)] flex-1">{prog}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <div className="flex items-baseline gap-4 mb-6 pb-4 border-b border-text">
-                  <p className="font-[family-name:var(--font-karla)] text-[36px] font-black leading-none">
-                    DAY 2
-                  </p>
-                  <p className="font-[family-name:var(--font-noto)] text-[14px] font-bold text-text-sub">
-                    7/5(일)
-                  </p>
-                </div>
-                <ul className="space-y-2">
-                  {DAY2.map(([time, prog]) => (
-                    <li key={time} className="flex gap-4 py-2 border-b border-border text-[13px]">
-                      <span className="font-[family-name:var(--font-karla)] font-bold text-[#FF6B6B] w-14 shrink-0">
-                        {time}
-                      </span>
-                      <span className="font-[family-name:var(--font-noto)] flex-1">{prog}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              ))}
             </div>
           </FadeIn>
         </div>
@@ -549,49 +562,63 @@ export default function HyeonnamFestivalPage() {
         </div>
       </section>
 
-      {/* ─── FLEA MARKET (프리마켓 안내) ───────────────────────── */}
-      {FLEA_MARKET_PUBLISHED && (
-        <section id="market" className="relative text-white overflow-hidden">
-          <div className="absolute inset-0 z-0">
-            <Image
-              src="/images/festival-market-concept.jpg"
-              alt="현남생활 페스티벌 프리마켓"
-              fill
-              className="object-cover"
-              sizes="100vw"
-            />
-          </div>
-          <div
-            className="absolute inset-0 z-0"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(11,31,58,0.62) 0%, rgba(11,31,58,0.78) 60%, rgba(0,0,0,0.86) 100%)",
-            }}
-          />
-          <div className="relative z-10 max-w-[1000px] mx-auto px-6 py-[120px] md:py-[150px] text-center">
-            <FadeIn>
-              <p className="font-[family-name:var(--font-karla)] text-[10px] md:text-[11px] tracking-[4px] font-bold uppercase text-[#FFD66E] mb-5">
-                Flea Market
+      {/* ─── SCHEDULE ──────────────────────────────────────────── */}
+      <section id="schedule" className="bg-[#FAF5EE] text-text py-[120px] px-6">
+        <div className="max-w-[960px] mx-auto">
+          <FadeIn>
+            <div className="text-center mb-14">
+              <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-text-muted mb-4">
+                Schedule
               </p>
-              <h2 className="font-[family-name:var(--font-noto)] text-[36px] md:text-[64px] font-black leading-[1.05] mb-5">
-                프리마켓 26팀
+              <h2 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[44px] font-black leading-tight">
+                1박 2일
               </h2>
-              <p className="font-[family-name:var(--font-noto)] text-[15px] md:text-[18px] text-white/90 max-w-[660px] mx-auto leading-relaxed mb-3">
-                핸드메이드·주얼리·비치웨어·로컬푸드·체험까지, 양양 죽도해변에 스물여섯 팀이 한자리에 모입니다.
-              </p>
-              <p className="font-[family-name:var(--font-noto)] text-[13px] md:text-[15px] text-white/70 mb-10">
-                7. 4(토) 11:00~18:00 · 죽도해변 랜드서핑파크 건너편 · 입장 무료
-              </p>
-              <Link
-                href="/projects/hyeonnam-festival/market"
-                className="inline-block font-[family-name:var(--font-karla)] text-[12px] md:text-[14px] font-extrabold tracking-[3px] uppercase bg-[#FF6B6B] text-white px-10 py-5 hover:bg-white hover:text-black transition-colors"
-              >
-                참여 업체 보기 →
-              </Link>
-            </FadeIn>
-          </div>
-        </section>
-      )}
+            </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <div className="flex items-baseline gap-4 mb-6 pb-4 border-b border-text">
+                  <p className="font-[family-name:var(--font-karla)] text-[36px] font-black leading-none">
+                    DAY 1
+                  </p>
+                  <p className="font-[family-name:var(--font-noto)] text-[14px] font-bold text-text-sub">
+                    7/4(토) — 메인 데이
+                  </p>
+                </div>
+                <ul className="space-y-2">
+                  {DAY1.map(([time, prog]) => (
+                    <li key={time} className="flex gap-4 py-2 border-b border-border text-[13px]">
+                      <span className="font-[family-name:var(--font-karla)] font-bold text-[#006B7A] w-14 shrink-0">
+                        {time}
+                      </span>
+                      <span className="font-[family-name:var(--font-noto)] flex-1">{prog}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <div className="flex items-baseline gap-4 mb-6 pb-4 border-b border-text">
+                  <p className="font-[family-name:var(--font-karla)] text-[36px] font-black leading-none">
+                    DAY 2
+                  </p>
+                  <p className="font-[family-name:var(--font-noto)] text-[14px] font-bold text-text-sub">
+                    7/5(일)
+                  </p>
+                </div>
+                <ul className="space-y-2">
+                  {DAY2.map(([time, prog]) => (
+                    <li key={time} className="flex gap-4 py-2 border-b border-border text-[13px]">
+                      <span className="font-[family-name:var(--font-karla)] font-bold text-[#FF6B6B] w-14 shrink-0">
+                        {time}
+                      </span>
+                      <span className="font-[family-name:var(--font-noto)] flex-1">{prog}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
 
       {/* ─── SIGNATURE MOMENTS ─────────────────────────────────── */}
       <section
@@ -683,68 +710,6 @@ export default function HyeonnamFestivalPage() {
                   </p>
                 </div>
               </div>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* ─── SURFER'S NIGHT LINE-UP ────────────────────────────── */}
-      <section
-        id="lineup"
-        className="text-white py-[120px] px-6"
-        style={{ background: "linear-gradient(180deg,#0B1F3A 0%,#081627 100%)" }}
-      >
-        <div className="max-w-[1100px] mx-auto">
-          <FadeIn>
-            <div className="text-center mb-14">
-              <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-[#FF6B6B] mb-4">
-                Surfer&apos;s Night · 19:00 · 죽도해변 웨이브웍스 앞
-              </p>
-              <h2 className="font-[family-name:var(--font-noto)] text-[28px] md:text-[44px] font-black leading-tight">
-                서퍼&apos;s 나이트 라인업
-              </h2>
-              <p className="font-[family-name:var(--font-noto)] text-[14px] text-white/70 mt-5 max-w-[620px] mx-auto leading-relaxed">
-                노을이 지면 죽도해변이 무대가 됩니다. 네 팀의 라이브가 밤을 채워요.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {LINEUP.map((act) => (
-                <div key={act.name} className="flex flex-col">
-                  <div className="relative aspect-[4/5] overflow-hidden mb-3 border border-white/10">
-                    {act.img ? (
-                      <Image
-                        src={act.img}
-                        alt={`${act.name} — 서퍼's 나이트 라인업`}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 50vw, 25vw"
-                      />
-                    ) : (
-                      <div
-                        className="absolute inset-0 flex flex-col items-center justify-center text-center px-3"
-                        style={{ background: "linear-gradient(155deg,#13294d 0%,#0B1F3A 55%,#3a1d2e 100%)" }}
-                      >
-                        <span className="font-[family-name:var(--font-karla)] text-[34px] md:text-[42px] font-black tracking-tight text-white/90">
-                          Y.S.B
-                        </span>
-                        <span className="font-[family-name:var(--font-noto)] text-[11px] text-[#FFD66E] mt-2">
-                          양양고등학교 밴드
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                  <p className="font-[family-name:var(--font-karla)] text-[9px] tracking-[2px] uppercase font-bold text-[#FF6B6B] mb-1">
-                    {act.role}
-                  </p>
-                  <h3 className="font-[family-name:var(--font-noto)] text-[17px] md:text-[19px] font-black leading-tight">
-                    {act.name}
-                    {act.en && <span className="text-white/50 text-[13px] font-bold"> {act.en}</span>}
-                  </h3>
-                  <p className="font-[family-name:var(--font-noto)] text-[12px] text-white/65 leading-relaxed mt-1.5">
-                    {act.desc}
-                  </p>
-                </div>
-              ))}
             </div>
           </FadeIn>
         </div>
