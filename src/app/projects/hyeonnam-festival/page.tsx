@@ -5,7 +5,7 @@ import Button from "@/components/ui/Button";
 import FadeIn from "@/components/ui/FadeIn";
 import CountdownTimer from "@/components/projects/festival/CountdownTimer";
 import Marquee from "@/components/projects/festival/Marquee";
-import { SUBMISSIONS_OPEN } from "@/lib/festival-config";
+import { SUBMISSIONS_OPEN, FLEA_MARKET_PUBLISHED } from "@/lib/festival-config";
 import { EXPERIENCES, onlineCapacity, nonSlotOnlineCap } from "@/lib/festival-experiences";
 
 const MARQUEE_ITEMS = [
@@ -112,6 +112,9 @@ export default function HyeonnamFestivalPage() {
             <a href="#zones" className="hover:text-white">Zones</a>
             <a href="#schedule" className="hover:text-white">Schedule</a>
             <a href="#programs" className="hover:text-white">Programs</a>
+            {FLEA_MARKET_PUBLISHED && (
+              <a href="#market" className="text-[#FFD66E] hover:text-white">Market</a>
+            )}
             <a href="#signature" className="hover:text-white">Signature</a>
           </nav>
           <div className="flex items-center gap-3 md:gap-4">
@@ -545,6 +548,50 @@ export default function HyeonnamFestivalPage() {
           </FadeIn>
         </div>
       </section>
+
+      {/* ─── FLEA MARKET (프리마켓 안내) ───────────────────────── */}
+      {FLEA_MARKET_PUBLISHED && (
+        <section id="market" className="relative text-white overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/images/festival-market-concept.jpg"
+              alt="현남생활 페스티벌 프리마켓"
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+          </div>
+          <div
+            className="absolute inset-0 z-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(11,31,58,0.62) 0%, rgba(11,31,58,0.78) 60%, rgba(0,0,0,0.86) 100%)",
+            }}
+          />
+          <div className="relative z-10 max-w-[1000px] mx-auto px-6 py-[120px] md:py-[150px] text-center">
+            <FadeIn>
+              <p className="font-[family-name:var(--font-karla)] text-[10px] md:text-[11px] tracking-[4px] font-bold uppercase text-[#FFD66E] mb-5">
+                Flea Market
+              </p>
+              <h2 className="font-[family-name:var(--font-noto)] text-[36px] md:text-[64px] font-black leading-[1.05] mb-5">
+                프리마켓 26팀
+              </h2>
+              <p className="font-[family-name:var(--font-noto)] text-[15px] md:text-[18px] text-white/90 max-w-[660px] mx-auto leading-relaxed mb-3">
+                핸드메이드·주얼리·비치웨어·로컬푸드·체험까지, 양양 죽도해변에 스물여섯 팀이 한자리에 모입니다.
+              </p>
+              <p className="font-[family-name:var(--font-noto)] text-[13px] md:text-[15px] text-white/70 mb-10">
+                7. 4(토) 11:00~18:00 · 죽도해변 랜드서핑파크 건너편 · 입장 무료
+              </p>
+              <Link
+                href="/projects/hyeonnam-festival/market"
+                className="inline-block font-[family-name:var(--font-karla)] text-[12px] md:text-[14px] font-extrabold tracking-[3px] uppercase bg-[#FF6B6B] text-white px-10 py-5 hover:bg-white hover:text-black transition-colors"
+              >
+                참여 업체 보기 →
+              </Link>
+            </FadeIn>
+          </div>
+        </section>
+      )}
 
       {/* ─── SIGNATURE MOMENTS ─────────────────────────────────── */}
       <section

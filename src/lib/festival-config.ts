@@ -10,4 +10,4 @@ export const SUBMISSIONS_OPEN = true;
  * false: 메인 페이지에 링크 없음 + 검색 noindex (직접 URL로만 미리보기).
  * true 로 바꾸면: 메인 페이지에 링크 노출 + 검색 색인 허용.
  */
-export const FLEA_MARKET_PUBLISHED = false;
+export const FLEA_MARKET_PUBLISHED = true;
