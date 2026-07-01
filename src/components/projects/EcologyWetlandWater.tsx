@@ -4,7 +4,7 @@ import "./ecology-wetland.css";
 // 6월 컴포넌트(EcologyWetlandSummer)의 디자인 시스템·class를 그대로 사용하고
 // 콘텐츠/일러스트만 7-8월 물속 생물용으로 갈음.
 const INQUIRY_TEL = "010-9542-3775";
-const FORMPAY_URL = "https://forms.gle/7bfM3x5Zhk55iQcz9"; // TODO: 7-8월 전용 접수 폼 확정되면 교체
+const REGISTER_URL = "/ecology/register"; // 자체 접수 페이지
 
 const INLINE_HTML = `
 <div class="crumb">
@@ -26,7 +26,7 @@ const INLINE_HTML = `
         물속 생명의 세계와 맑은 물의 소중함을 생태지도사와 함께 만나봅니다.
       </p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="${FORMPAY_URL}" target="_blank" rel="noopener noreferrer">
+        <a class="btn btn-primary" href="${REGISTER_URL}">
           7/11·18·25 · 8/1·8 정규 접수
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 4h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14L20 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -195,7 +195,7 @@ const INLINE_HTML = `
             <div class="pc-meta-v">남대천 (양양군 서면 용천리 일원)<br><span style="color: var(--coral); font-weight:600;">집결: 양양군 평생학습관 (양양읍 안산1길 36)</span></div>
           </div>
         </div>
-        <a href="${FORMPAY_URL}" target="_blank" rel="noopener noreferrer" class="pc-cta">
+        <a href="${REGISTER_URL}" class="pc-cta">
           접수하기
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 4h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14L20 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -576,9 +576,7 @@ export default function EcologyWetlandWater() {
                 background: "var(--sun)",
                 color: "var(--forest)",
               }}
-              href={FORMPAY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={REGISTER_URL}
             >
               <svg
                 width="16"
