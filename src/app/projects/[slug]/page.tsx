@@ -7,6 +7,7 @@ import Button from "@/components/ui/Button";
 import FadeIn from "@/components/ui/FadeIn";
 import EcologyWetlandSpring from "@/components/projects/EcologyWetlandSpring";
 import EcologyWetlandSummer from "@/components/projects/EcologyWetlandSummer";
+import EcologyWetlandWater from "@/components/projects/EcologyWetlandWater";
 // 현남생활 페스티벌은 정적 라우트(/projects/hyeonnam-festival/) 로 분리됨
 import { PROJECTS, getProjectBySlug } from "@/data/projects";
 import { getServiceById } from "@/data/services";
@@ -47,6 +48,9 @@ export default async function ProjectDetailPage({
   }
   if (project.slug === "ecology-wetland-summer") {
     return <EcologyWetlandSummer />;
+  }
+  if (project.slug === "ecology-wetland-water") {
+    return <EcologyWetlandWater />;
   }
 
   const service = getServiceById(project.category);
