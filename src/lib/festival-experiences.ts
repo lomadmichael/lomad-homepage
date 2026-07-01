@@ -168,6 +168,8 @@ export const EXPERIENCES: Experience[] = [
     labelEn: "Sunset Beach Table",
     location: "북분리",
     capacity: 80,
+    // 온라인 신청 60명 + 마을 주민 초대 20명(현장 배정) = 80석
+    onlineCap: 60,
     time: "18:00",
     fee: "2만원 (현장 결제)",
     feeEn: "₩20,000 (on-site)",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import { submitFestival, type FestivalFormState } from "@/lib/festival-action";
@@ -87,8 +87,19 @@ export default function RegistrationForm({ availability }: { availability: Avail
   // 폼 액션(useActionState) 후 React가 라디오를 native reset → controlled 상태와 desync.
   // state가 바뀔 때(제출 후) 라디오 그룹을 리마운트해 상태값으로 다시 그린다.
   const [resetKey, setResetKey] = useState(0);
+  // 서버 검증 실패(예: 볼더링 연령 미달) 시 에러 메시지가 폼 상단에 뜨는데,
+  // 하단 제출 버튼에서 누른 사용자에겐 화면 밖이라 안 보인다 → 에러 박스로 스크롤.
+  const errorRef = useRef<HTMLDivElement>(null);
+  const mountedRef = useRef(false);
   useEffect(() => {
     setResetKey((k) => k + 1);
+    if (!mountedRef.current) {
+      mountedRef.current = true;
+      return;
+    }
+    if (!state.success && state.message) {
+      errorRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
   }, [state]);
 
   function availKey(o: { key: string; slot: string | null }) {
@@ -261,7 +272,10 @@ export default function RegistrationForm({ availability }: { availability: Avail
       </div>
 
       {state.message && !state.success && (
-        <div className="mb-6 p-4 text-[13px] font-[family-name:var(--font-noto)] font-medium bg-[#C4A8A8]/20 text-[#6b3a3a]">
+        <div
+          ref={errorRef}
+          className="mb-6 p-4 text-[13px] font-[family-name:var(--font-noto)] font-medium bg-[#C4A8A8]/20 text-[#6b3a3a] scroll-mt-6"
+        >
           {state.message}
         </div>
       )}

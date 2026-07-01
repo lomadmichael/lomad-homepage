@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
+  // 상위 폴더(ClaudeCode)의 lockfile 때문에 Turbopack이 워크스페이스 루트를
+  // 잘못 추론하는 문제 방지 — 이 프로젝트를 루트로 고정.
+  turbopack: {
+    root: path.resolve(__dirname),
+  },
   async redirects() {
     return [
       {
