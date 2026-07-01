@@ -105,7 +105,7 @@ export const EXPERIENCES: Experience[] = [
     labelEn: "Land Surfing",
     location: "죽도",
     capacity: 15,
-    onlineCap: 10,
+    onlineCap: 14,
     minAge: 10,
     ageLimit: "만 10세 이상",
     ageLimitEn: "Age 10+",
@@ -156,7 +156,7 @@ export const EXPERIENCES: Experience[] = [
     labelEn: "Yoga & Nature Mandala",
     location: "북분리",
     capacity: 20,
-    onlineCap: 15,
+    onlineCap: 18,
     time: "7/5(일) 10:00",
     timeEn: "Sun, Jul 5 · 10:00",
     desc: "일요일 아침 북분리 캠핑장 솔숲에서 요가로 몸을 깨우고, 자연물로 만다라를 만드는 힐링 프로그램.",
@@ -252,7 +252,7 @@ export const CAMPING_EN: Record<CampingOption["key"], { label: string; fee: stri
  * 온라인 사전접수 비율. 전체 정원의 70%만 온라인으로 받고, 나머지 30%는 현장 접수 몫으로 남긴다.
  * 정원 판정(확정/대기)·폼/현황 표시는 모두 "온라인 정원" 기준.
  */
-export const ONLINE_RATIO = 0.7;
+export const ONLINE_RATIO = 0.9;
 
 /** 전체 정원 → 온라인 사전접수 정원(70%, 반올림). */
 export function onlineCapacity(total: number): number {
