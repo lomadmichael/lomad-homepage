@@ -673,3 +673,10 @@
   .ecology-wetland-page section.band { padding: 70px 0; }
   .ecology-wetland-page .hero { padding: 40px 0 80px; }
 }
+
+/* 7-8월 물속 생물 회차 전용: 흐름 4칸 / 타임라인 5칸은 데스크톱에서만.
+   모바일(≤900px)에서는 위 규칙(.learn-grid→1fr, .timeline→1fr 1fr)으로 자동 접힘. */
+@media (min-width: 901px) {
+  .ecology-wetland-page .learn-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .ecology-wetland-page .timeline.cols-5 { grid-template-columns: repeat(5, 1fr); }
+}

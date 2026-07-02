@@ -184,7 +184,7 @@ const INLINE_HTML = `
           </div>
           <div class="pc-meta-item">
             <div class="pc-meta-k">운영시간</div>
-            <div class="pc-meta-v">오전 10:00 – 12:00<br><span style="color: var(--ink-soft); font-size:12px;">회당 120분 · 오전 2개반 운영</span></div>
+            <div class="pc-meta-v">오전 10:00 – 12:00<br><span style="color: rgba(245,239,224,0.78); font-size:12px;">회당 120분 · 오전 2개반 운영</span></div>
           </div>
           <div class="pc-meta-item">
             <div class="pc-meta-k">참여대상</div>
@@ -212,7 +212,7 @@ const INLINE_HTML = `
         <h2 class="section-title">달력 위의 다섯 번의 만남</h2>
       </div>
     </div>
-    <div class="timeline" style="grid-template-columns: repeat(5, 1fr);">
+    <div class="timeline cols-5">
       <div class="tl-node">
         <div class="tl-dot active"></div>
         <div class="tl-date">7월 11일</div>
@@ -256,7 +256,7 @@ const INLINE_HTML = `
       </div>
       <p class="section-sub">생태지도사의 안내를 따라 네 단계로 물속 생명을 만납니다. 생명을 소중히 다루는 마음도 함께 배워요.</p>
     </div>
-    <div class="learn-grid" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="learn-grid cols-4">
       <div class="learn-card">
         <div class="lc-num">01 / 채집</div>
         <div class="lc-illust">
@@ -365,7 +365,7 @@ const INLINE_HTML = `
             </g>
           </svg>
         </div>
-        <div class="creature-name">연어 <span style="font-size:11px; color:var(--ink-soft); font-weight:400;">(회귀 어종)</span></div>
+        <div class="creature-name">연어 <span style="font-size:11px; color:rgba(245,239,224,0.6); font-weight:400;">(회귀 어종)</span></div>
         <div class="creature-lat">Oncorhynchus keta · 연어과</div>
         <div class="creature-desc">바다에서 자라 알을 낳으러 남대천으로 돌아오는 대표 회귀 어종. 남대천은 우리나라 연어가 돌아오는 손꼽히는 하천입니다. 이번 만들기 주인공이기도 해요.</div>
       </div>
@@ -383,7 +383,7 @@ const INLINE_HTML = `
             </g>
           </svg>
         </div>
-        <div class="creature-name">은어 <span style="font-size:11px; color:var(--ink-soft); font-weight:400;">(여름 대표 어종)</span></div>
+        <div class="creature-name">은어 <span style="font-size:11px; color:rgba(245,239,224,0.6); font-weight:400;">(여름 대표 어종)</span></div>
         <div class="creature-lat">Plecoglossus altivelis · 바다빙어과</div>
         <div class="creature-desc">맑고 찬 물에서만 사는 여름 대표 민물고기. 수박 향이 난다고 해서 '수박 물고기'로도 불려요. 깨끗한 남대천의 여울에서 만날 수 있습니다.</div>
       </div>
@@ -398,7 +398,7 @@ const INLINE_HTML = `
             </g>
           </svg>
         </div>
-        <div class="creature-name">다슬기 <span style="font-size:11px; color:var(--ink-soft); font-weight:400;">(맑은 물 지표)</span></div>
+        <div class="creature-name">다슬기 <span style="font-size:11px; color:rgba(245,239,224,0.6); font-weight:400;">(맑은 물 지표)</span></div>
         <div class="creature-lat">Semisulcospira · 다슬기과</div>
         <div class="creature-desc">돌 위를 천천히 기어 다니며 이끼를 먹는 나선형 고둥. 맑은 1급수 물에서만 살아 물이 깨끗한지 알려주는 지표 생물이에요.</div>
       </div>
@@ -416,7 +416,7 @@ const INLINE_HTML = `
             </g>
           </svg>
         </div>
-        <div class="creature-name">수서곤충 <span style="font-size:11px; color:var(--ink-soft); font-weight:400;">(물자라·물방개 등)</span></div>
+        <div class="creature-name">수서곤충 <span style="font-size:11px; color:rgba(245,239,224,0.6); font-weight:400;">(물자라·물방개 등)</span></div>
         <div class="creature-lat">Aquatic insects · 물속 곤충</div>
         <div class="creature-desc">물속에서 살아가는 작은 곤충들. 물자라·물방개·잠자리 애벌레처럼 종류마다 사는 물이 달라, 수질을 알려주는 소중한 이웃이에요.</div>
       </div>
@@ -526,13 +526,13 @@ export default function EcologyWetlandWater() {
       <div dangerouslySetInnerHTML={{ __html: INLINE_HTML }} />
 
       {/* CTA section with real React links for FormPay + tel */}
-      <section className="cta-band" id="apply">
+      <section className="cta-band" id="apply" style={{ paddingTop: 52 }}>
         <div className="wrap">
           <svg
             width="80"
             height="80"
             viewBox="0 0 80 80"
-            style={{ marginBottom: 24 }}
+            style={{ marginBottom: 14 }}
             aria-hidden="true"
           >
             <circle cx="40" cy="40" r="38" fill="#4A7A8A" opacity="0.25" />
@@ -607,7 +607,7 @@ export default function EcologyWetlandWater() {
                   strokeLinejoin="round"
                 />
               </svg>
-              7/11·18·25 · 8/1·8 정규 프로그램 접수
+              정규 프로그램 접수
             </a>
             <a
               className="btn"
