@@ -209,15 +209,15 @@ export const EXPERIENCES: Experience[] = [
   },
   {
     key: "yoga_sadam",
-    label: "요가와 자연 만다라 — 사담요가",
-    labelEn: "Yoga & Nature Mandala — Sadam Yoga",
+    label: "숲과 사담요가",
+    labelEn: "Forest & Sadam Yoga",
     location: "북분리",
     capacity: 40,
     onlineCap: 40,
     time: "7/5(일) 10:00",
     timeEn: "Sun, Jul 5 · 10:00",
-    desc: "일요일 아침 북분리 캠핑장 솔숲에서 진행하는 요가와 자연 만다라. 사담요가 진행 · 추가 개설 클래스.",
-    descEn: "Sunday morning yoga & nature mandala in the Bukbun-ri pine forest, led by Sadam Yoga. An added class.",
+    desc: "일요일 아침 북분리 캠핑장 솔숲에서 사담요가와 함께하는 모닝 요가. 인기로 추가 개설된 클래스.",
+    descEn: "A Sunday morning yoga session with Sadam Yoga in the Bukbun-ri pine forest. An added class due to high demand.",
   },
 ];
 
