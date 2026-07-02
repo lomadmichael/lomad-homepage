@@ -11,9 +11,10 @@ function db(): SupabaseClient {
   return _client;
 }
 
-export interface EcologyChild {
+export interface EcologyParticipant {
   name: string;
   age: number;
+  category: string | null; // 성인 / 만14세이상 / 만14세미만 (만나이로 자동 판정)
 }
 export interface EcologyRegistrationRow {
   id: string;
@@ -23,7 +24,10 @@ export interface EcologyRegistrationRow {
   session_key: string;
   status: "confirmed" | "waitlist" | "cancelled";
   note: string | null;
-  children: EcologyChild[];
+  email: string | null;
+  health_note: string | null;
+  consent_media?: boolean;
+  participants: EcologyParticipant[];
 }
 export interface EcologyAvailabilityRow {
   session_key: string;
@@ -35,7 +39,12 @@ export interface EcologySubmitInput {
   phone: string;
   session_key: string;
   note: string;
-  children: EcologyChild[];
+  email: string;
+  health_note: string;
+  consent_privacy: boolean;
+  consent_notice: boolean;
+  consent_media: boolean;
+  participants: EcologyParticipant[];
 }
 export interface EcologySubmitResult {
   registration_id: string;

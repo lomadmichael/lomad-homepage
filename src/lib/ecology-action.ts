@@ -1,7 +1,11 @@
 "use server";
 
 import { SUBMISSIONS_OPEN, CAPACITY, SESSIONS } from "@/lib/ecology-config";
-import { submitRegistration, type EcologyChild, type EcologySubmitResult } from "@/lib/ecology-db";
+import {
+  submitRegistration,
+  type EcologyParticipant,
+  type EcologySubmitResult,
+} from "@/lib/ecology-db";
 import { sendApplicationSms } from "@/lib/ecology-sms";
 
 export interface EcologyFormState {
@@ -11,6 +15,13 @@ export interface EcologyFormState {
 }
 
 const VALID_SESSIONS = new Set(SESSIONS.map((s) => s.key));
+
+/** 만나이 → 구분 자동 판정. */
+function deriveCategory(age: number): string {
+  if (age >= 19) return "성인";
+  if (age >= 14) return "만14세이상";
+  return "만14세미만";
+}
 
 export async function submitEcology(
   _prev: EcologyFormState,
@@ -22,48 +33,64 @@ export async function submitEcology(
 
   const guardian = (formData.get("guardian_name") as string | null)?.trim() ?? "";
   const phoneRaw = (formData.get("phone") as string | null)?.trim() ?? "";
+  const email = (formData.get("email") as string | null)?.trim() ?? "";
   const session = (formData.get("session_key") as string | null)?.trim() ?? "";
   const note = (formData.get("note") as string | null)?.trim() ?? "";
-  const consent = (formData.get("consent") as string | null) === "on";
-  const childrenJson = (formData.get("children_json") as string | null) ?? "[]";
+  const healthNote = (formData.get("health_note") as string | null)?.trim() ?? "";
+  const consentPrivacy = (formData.get("consent_privacy") as string | null) === "on";
+  const consentNotice = (formData.get("consent_notice") as string | null) === "on";
+  const consentMedia = (formData.get("consent_media") as string | null) === "on";
+  const participantsJson = (formData.get("participants_json") as string | null) ?? "[]";
 
-  if (!guardian || !phoneRaw) return { success: false, message: "보호자 이름과 연락처는 필수입니다." };
-  if (!consent) return { success: false, message: "개인정보 수집·이용에 동의해 주세요." };
+  if (!guardian || !phoneRaw) return { success: false, message: "신청자 이름과 연락처는 필수입니다." };
   if (!VALID_SESSIONS.has(session)) return { success: false, message: "참여 회차를 선택해 주세요." };
+  if (!consentPrivacy) return { success: false, message: "개인정보 수집·이용에 동의해 주세요." };
+  if (!consentNotice) return { success: false, message: "안내사항 확인에 체크해 주세요." };
 
   const phone = phoneRaw.replace(/\D/g, "");
   if (phone.length < 10 || phone.length > 11) {
     return { success: false, message: "유효한 연락처를 입력해 주세요." };
   }
 
-  let children: EcologyChild[];
+  let participants: { name?: unknown; age?: unknown }[];
   try {
-    children = JSON.parse(childrenJson);
+    participants = JSON.parse(participantsJson);
   } catch {
-    return { success: false, message: "참가 어린이 정보를 다시 입력해 주세요." };
+    return { success: false, message: "참가자 정보를 다시 입력해 주세요." };
   }
-  if (!Array.isArray(children) || children.length === 0) {
-    return { success: false, message: "참가 어린이를 최소 1명 추가해 주세요." };
+  if (!Array.isArray(participants) || participants.length === 0) {
+    return { success: false, message: "참가자를 최소 1명 추가해 주세요." };
   }
 
-  const cleaned: EcologyChild[] = [];
-  for (const c of children) {
-    const name = String(c?.name ?? "").trim();
-    const age = Number(c?.age);
-    if (!name) return { success: false, message: "어린이 이름을 모두 입력해 주세요." };
-    if (!Number.isFinite(age) || age < 5 || age > 19) {
+  const cleaned: EcologyParticipant[] = [];
+  for (const p of participants) {
+    const name = String(p?.name ?? "").trim();
+    const age = Number(p?.age);
+    if (!name) return { success: false, message: "참가자 이름을 모두 입력해 주세요." };
+    if (!Number.isFinite(age) || age < 6 || age > 100) {
       return {
         success: false,
-        message: `${name}: 만 나이를 올바르게 입력해 주세요. (미취학 아동은 안전상 참가 불가)`,
+        message: `${name}: 만 나이를 정확히 입력해 주세요. (참가 어린이는 초등학생 이상, 미취학 아동은 참가 불가)`,
       };
     }
-    cleaned.push({ name, age });
+    cleaned.push({ name, age, category: deriveCategory(age) });
   }
 
   let result: EcologySubmitResult;
   try {
     result = await submitRegistration(
-      { guardian_name: guardian, phone, session_key: session, note, children: cleaned },
+      {
+        guardian_name: guardian,
+        phone,
+        session_key: session,
+        note,
+        email,
+        health_note: healthNote,
+        consent_privacy: consentPrivacy,
+        consent_notice: consentNotice,
+        consent_media: consentMedia,
+        participants: cleaned,
+      },
       CAPACITY,
     );
   } catch (e) {

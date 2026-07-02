@@ -6,9 +6,17 @@ import { SESSIONS, CAPACITY } from "@/lib/ecology-config";
 
 const initial: EcologyFormState = { success: false, message: "" };
 
-interface ChildRow {
+interface PartRow {
   name: string;
   age: string;
+}
+
+function categoryLabel(ageStr: string): string {
+  const age = Number(ageStr);
+  if (!Number.isFinite(age) || ageStr === "") return "";
+  if (age >= 19) return "성인";
+  if (age >= 14) return "만14세 이상";
+  return "만14세 미만";
 }
 
 export default function RegisterForm({
@@ -17,10 +25,10 @@ export default function RegisterForm({
   availability: Record<string, { confirmed: number; waitlist: number }>;
 }) {
   const [state, formAction, pending] = useActionState(submitEcology, initial);
-  const [children, setChildren] = useState<ChildRow[]>([{ name: "", age: "" }]);
+  const [participants, setParticipants] = useState<PartRow[]>([{ name: "", age: "" }]);
 
-  const childrenJson = JSON.stringify(
-    children.map((c) => ({ name: c.name.trim(), age: Number(c.age) })),
+  const participantsJson = JSON.stringify(
+    participants.map((p) => ({ name: p.name.trim(), age: Number(p.age) })),
   );
 
   if (state.success) {
@@ -44,7 +52,7 @@ export default function RegisterForm({
 
   return (
     <form action={formAction} className="space-y-8">
-      <input type="hidden" name="children_json" value={childrenJson} />
+      <input type="hidden" name="participants_json" value={participantsJson} />
 
       {/* 회차 선택 */}
       <fieldset>
@@ -74,83 +82,120 @@ export default function RegisterForm({
         </div>
       </fieldset>
 
-      {/* 보호자 */}
-      <div className="grid sm:grid-cols-2 gap-4">
-        <Field name="guardian_name" label="보호자 이름" required />
-        <Field name="phone" label="휴대폰 번호" placeholder="010-1234-5678" required inputMode="tel" />
+      {/* 신청자(대표) */}
+      <div>
+        <p className="font-[family-name:var(--font-noto)] text-[14px] font-black mb-3">신청자 정보</p>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <Field name="guardian_name" label="신청자(대표) 이름" required />
+          <Field name="phone" label="휴대폰 번호" placeholder="010-1234-5678" required inputMode="tel" />
+        </div>
+        <div className="mt-4">
+          <Field name="email" label="이메일 (선택)" placeholder="확인·안내용" inputMode="email" />
+        </div>
       </div>
 
-      {/* 어린이 */}
+      {/* 참가자 */}
       <fieldset>
         <legend className="font-[family-name:var(--font-noto)] text-[14px] font-black mb-1">
-          참가 어린이
+          참가자
         </legend>
         <p className="text-[12px] text-text-muted mb-3">
-          초등학생 이상만 참가할 수 있어요. 형제자매는 + 버튼으로 추가하세요.
+          함께 참여하는 분을 모두 추가해 주세요 (동반 보호자 포함). 참가 어린이는 초등학생 이상입니다.
+          <br />
+          회차당 <strong>참가자 전원 {CAPACITY}명</strong>까지 접수됩니다.
         </p>
         <div className="space-y-2">
-          {children.map((c, i) => (
-            <div key={i} className="flex gap-2">
-              <input
-                value={c.name}
-                placeholder="이름"
-                onChange={(e) =>
-                  setChildren((p) => p.map((x, j) => (j === i ? { ...x, name: e.target.value } : x)))
-                }
-                className="flex-1 bg-input-bg h-11 px-3 text-[14px] border border-border outline-none focus:border-text"
-              />
-              <input
-                value={c.age}
-                placeholder="만 나이"
-                inputMode="numeric"
-                onChange={(e) =>
-                  setChildren((p) =>
-                    p.map((x, j) => (j === i ? { ...x, age: e.target.value.replace(/\D/g, "") } : x)),
-                  )
-                }
-                className="w-24 bg-input-bg h-11 px-3 text-[14px] border border-border outline-none focus:border-text"
-              />
-              {children.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => setChildren((p) => p.filter((_, j) => j !== i))}
-                  className="w-11 h-11 border border-border text-text-muted hover:text-[#b45309]"
-                >
-                  ×
-                </button>
-              )}
-            </div>
-          ))}
+          {participants.map((p, i) => {
+            const cat = categoryLabel(p.age);
+            return (
+              <div key={i} className="flex gap-2 items-center">
+                <input
+                  value={p.name}
+                  placeholder="성명"
+                  onChange={(e) =>
+                    setParticipants((prev) =>
+                      prev.map((x, j) => (j === i ? { ...x, name: e.target.value } : x)),
+                    )
+                  }
+                  className="flex-1 bg-input-bg h-11 px-3 text-[14px] border border-border outline-none focus:border-text"
+                />
+                <div className="relative">
+                  <input
+                    value={p.age}
+                    placeholder="만 나이"
+                    inputMode="numeric"
+                    onChange={(e) =>
+                      setParticipants((prev) =>
+                        prev.map((x, j) =>
+                          j === i ? { ...x, age: e.target.value.replace(/\D/g, "") } : x,
+                        ),
+                      )
+                    }
+                    className="w-28 bg-input-bg h-11 px-3 pr-14 text-[14px] border border-border outline-none focus:border-text"
+                  />
+                  {cat && (
+                    <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-text-muted pointer-events-none">
+                      {cat}
+                    </span>
+                  )}
+                </div>
+                {participants.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => setParticipants((prev) => prev.filter((_, j) => j !== i))}
+                    className="w-11 h-11 border border-border text-text-muted hover:text-[#b45309] shrink-0"
+                  >
+                    ×
+                  </button>
+                )}
+              </div>
+            );
+          })}
         </div>
         <button
           type="button"
-          onClick={() => setChildren((p) => [...p, { name: "", age: "" }])}
+          onClick={() => setParticipants((prev) => [...prev, { name: "", age: "" }])}
           className="mt-2 text-[12px] font-[family-name:var(--font-karla)] font-extrabold tracking-[1px] uppercase border border-text px-3 py-2 hover:bg-text hover:text-bg"
         >
-          + 어린이 추가
+          + 참가자 추가
         </button>
       </fieldset>
 
-      {/* 비고 */}
+      {/* 건강 특이사항 */}
       <div>
-        <label className="font-[family-name:var(--font-noto)] text-[14px] font-black block mb-2">
-          요청사항 (선택)
+        <label className="font-[family-name:var(--font-noto)] text-[14px] font-black block mb-1">
+          건강 특이사항 (선택)
         </label>
+        <p className="text-[12px] text-text-muted mb-2">
+          알레르기·복용약·활동 제한 등 안전상 참고할 사항. 없으면 비워두세요.
+        </p>
         <textarea
-          name="note"
+          name="health_note"
           rows={2}
           className="w-full bg-input-bg px-3 py-2 text-[14px] border border-border outline-none focus:border-text"
         />
       </div>
 
       {/* 동의 */}
-      <label className="flex items-start gap-2 text-[13px] text-text-sub">
-        <input type="checkbox" name="consent" className="accent-text mt-1" />
-        <span>
-          개인정보 수집·이용에 동의합니다. (수집 항목: 보호자명·연락처·어린이 이름·나이 / 목적:
-          접수·안내 / 보유: 프로그램 종료 후 파기)
-        </span>
-      </label>
+      <div className="space-y-3 border-t border-border pt-6">
+        <Consent
+          name="consent_privacy"
+          required
+          label="[필수] 개인정보 수집·이용 동의"
+          desc="수집 항목: 신청자·참가자 성명, 만나이, 연락처, 이메일. 목적: 접수·안내·안전관리. 보유: 프로그램 종료 후 1년 이내 파기. 동의하지 않으면 참가가 제한됩니다."
+        />
+        <Consent
+          name="consent_notice"
+          required
+          label="[필수] 안내사항 확인"
+          desc="야외에서 진행되며 기상 상황에 따라 일정이 변경·취소될 수 있습니다. 운영진의 안전 안내를 준수하며, 본인 부주의로 인한 사고는 보상이 제한될 수 있습니다."
+        />
+        <Consent
+          name="consent_media"
+          label="[선택] 사진·영상 활용 및 양양군 제공 동의"
+          desc="프로그램 중 촬영된 사진·영상을 성과보고·홍보에 활용하고, 성명·연락처 등을 양양군에 성과보고·운영 확인 목적으로 제공하는 데 동의합니다. 동의하지 않아도 참가할 수 있습니다."
+        />
+      </div>
 
       {state.message && !state.success && (
         <p className="text-[13px] text-[#b45309] font-[family-name:var(--font-noto)]">
@@ -180,7 +225,7 @@ function Field({
   label: string;
   required?: boolean;
   placeholder?: string;
-  inputMode?: "tel";
+  inputMode?: "tel" | "email";
 }) {
   return (
     <div>
@@ -196,5 +241,28 @@ function Field({
         className="w-full bg-input-bg h-11 px-3 text-[14px] border border-border outline-none focus:border-text"
       />
     </div>
+  );
+}
+
+function Consent({
+  name,
+  label,
+  desc,
+  required,
+}: {
+  name: string;
+  label: string;
+  desc: string;
+  required?: boolean;
+}) {
+  return (
+    <label className="flex items-start gap-2.5 text-[13px] text-text-sub cursor-pointer">
+      <input type="checkbox" name={name} required={required} className="accent-text mt-1 shrink-0" />
+      <span>
+        <span className="font-semibold text-text">{label}</span>
+        <br />
+        {desc}
+      </span>
+    </label>
   );
 }

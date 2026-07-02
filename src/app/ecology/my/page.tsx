@@ -90,7 +90,7 @@ export default async function EcologyMyPage() {
                       </div>
                       <p className="text-[13px] text-text-sub mb-2">{sessionLabel(r.session_key)}</p>
                       <p className="text-[13px]">
-                        참가 어린이: {r.children.map((c) => `${c.name}(만 ${c.age}세)`).join(", ")}
+                        참가자: {r.participants.map((c) => `${c.name}(만 ${c.age}세)`).join(", ")}
                       </p>
                     </div>
                   );

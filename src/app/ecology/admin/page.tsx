@@ -27,8 +27,8 @@ export default async function EcologyAdminPage() {
   }
 
   const bySession = (key: string) => rows.filter((r) => r.session_key === key);
-  const childCount = (rs: EcologyRegistrationRow[], status: string) =>
-    rs.filter((r) => r.status === status).reduce((n, r) => n + r.children.length, 0);
+  const partCount = (rs: EcologyRegistrationRow[], status: string) =>
+    rs.filter((r) => r.status === status).reduce((n, r) => n + r.participants.length, 0);
 
   return (
     <main className="min-h-screen bg-bg">
@@ -51,8 +51,8 @@ export default async function EcologyAdminPage() {
       <div className="max-w-[1100px] mx-auto px-6 py-10 space-y-10">
         {SESSIONS.map((s) => {
           const rs = bySession(s.key);
-          const conf = childCount(rs, "confirmed");
-          const wait = childCount(rs, "waitlist");
+          const conf = partCount(rs, "confirmed");
+          const wait = partCount(rs, "waitlist");
           return (
             <section key={s.key}>
               <h2 className="font-[family-name:var(--font-noto)] text-[16px] font-black mb-1">
@@ -68,10 +68,10 @@ export default async function EcologyAdminPage() {
                   <thead>
                     <tr className="text-left text-text-muted border-b border-border">
                       <th className="py-2 pr-3">상태</th>
-                      <th className="py-2 pr-3">보호자</th>
+                      <th className="py-2 pr-3">신청자</th>
                       <th className="py-2 pr-3">연락처</th>
-                      <th className="py-2 pr-3">어린이</th>
-                      <th className="py-2">비고</th>
+                      <th className="py-2 pr-3">참가자</th>
+                      <th className="py-2">건강/비고</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -81,9 +81,11 @@ export default async function EcologyAdminPage() {
                         <td className="py-2 pr-3">{r.guardian_name}</td>
                         <td className="py-2 pr-3">{r.phone}</td>
                         <td className="py-2 pr-3">
-                          {r.children.map((c) => `${c.name}(${c.age})`).join(", ")}
+                          {r.participants.map((c) => `${c.name}(${c.age})`).join(", ")}
                         </td>
-                        <td className="py-2 text-text-sub">{r.note ?? ""}</td>
+                        <td className="py-2 text-text-sub">
+                          {[r.health_note, r.note].filter(Boolean).join(" / ")}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
