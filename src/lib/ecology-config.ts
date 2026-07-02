@@ -2,7 +2,7 @@
 // 회차가 바뀌면 SESSIONS/PLACE만 갱신하고 SUBMISSIONS_OPEN 토글.
 
 /** true 로 바꾸면 접수 페이지 폼 + 서버 액션이 열린다. 오픈 시 이 값만 바꾸고 배포. */
-export const SUBMISSIONS_OPEN = false;
+export const SUBMISSIONS_OPEN = true;
 
 /** 회차당 어린이 정원. */
 export const CAPACITY = 12;
