@@ -196,6 +196,29 @@ export const EXPERIENCES: Experience[] = [
     desc: "바레는 발레의 기본 동작에 필라테스·요가를 더한 전신 운동이에요. 작고 정교한 동작을 반복하며 코어와 자세·균형을 잡아줘요. 노을 지는 해변에서 누구나 따라 할 수 있는 힐링 클래스로 진행해요.",
     descEn: "Barre blends ballet-inspired moves with pilates and yoga. Small, controlled movements wake up your core, posture, and balance — a relaxing class anyone can follow, on the beach at sunset.",
   },
+  {
+    key: "cooking_pm",
+    label: "로컬 쿠킹클래스 — 블루베리 모찌 (2회차)",
+    labelEn: "Local Cooking Class — Blueberry Mochi (2nd)",
+    location: "북분리",
+    capacity: 50,
+    onlineCap: 50,
+    time: "14:00",
+    desc: "현남 블루베리로 만드는 모찌(찹쌀떡) 만들기 클래스. 뜨거운 인기로 추가 개설된 14:00 회차.",
+    descEn: "Make mochi with locally grown Hyeonnam blueberries. An added 14:00 session due to high demand.",
+  },
+  {
+    key: "yoga_sadam",
+    label: "요가와 자연 만다라 — 사담요가",
+    labelEn: "Yoga & Nature Mandala — Sadam Yoga",
+    location: "북분리",
+    capacity: 40,
+    onlineCap: 40,
+    time: "7/5(일) 10:00",
+    timeEn: "Sun, Jul 5 · 10:00",
+    desc: "일요일 아침 북분리 캠핑장 솔숲에서 진행하는 요가와 자연 만다라. 사담요가 진행 · 추가 개설 클래스.",
+    descEn: "Sunday morning yoga & nature mandala in the Bukbun-ri pine forest, led by Sadam Yoga. An added class.",
+  },
 ];
 
 /**
@@ -205,6 +228,7 @@ export const EXPERIENCES: Experience[] = [
  */
 const TIME_RANGES: Record<string, { day: number; start: number; end: number }> = {
   cooking: { day: 1, start: 13 * 60, end: 14 * 60 + 30 },
+  cooking_pm: { day: 1, start: 14 * 60, end: 15 * 60 + 30 },
   "boulder|16:00": { day: 1, start: 16 * 60, end: 17 * 60 },
   "boulder|17:00": { day: 1, start: 17 * 60, end: 18 * 60 },
   hyrox: { day: 1, start: 16 * 60, end: 18 * 60 },
@@ -212,6 +236,7 @@ const TIME_RANGES: Record<string, { day: number; start: number; end: number }> =
   sunset: { day: 1, start: 18 * 60, end: 20 * 60 },
   barre: { day: 1, start: 18 * 60, end: 19 * 60 },
   yoga: { day: 2, start: 10 * 60, end: 11 * 60 + 30 },
+  yoga_sadam: { day: 2, start: 10 * 60, end: 11 * 60 + 30 },
 };
 
 function timeRangeKey(key: string, slot?: string | null): string {
