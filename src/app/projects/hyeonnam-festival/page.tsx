@@ -117,6 +117,7 @@ export default function HyeonnamFestivalPage() {
             <a href="#programs" className="hover:text-white">Programs</a>
             <a href="#schedule" className="hover:text-white">Schedule</a>
             <a href="#signature" className="hover:text-white">Signature</a>
+            <Link href="/projects/hyeonnam-festival/guide" className="text-[#FFD66E] hover:text-white">Guide</Link>
           </nav>
           <div className="flex items-center gap-3 md:gap-4">
             <Link
@@ -615,6 +616,54 @@ export default function HyeonnamFestivalPage() {
                   ))}
                 </ul>
               </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ─── 참가자 안내 (배치도·주차·오시는 길) ───────────────── */}
+      <section className="bg-white text-text py-[100px] px-6">
+        <div className="max-w-[1100px] mx-auto">
+          <FadeIn>
+            <p className="font-[family-name:var(--font-karla)] text-[10px] md:text-[11px] tracking-[4px] font-bold uppercase text-[#FF6B6B] mb-4">
+              Official Guide
+            </p>
+            <h2 className="font-[family-name:var(--font-noto)] text-[30px] md:text-[44px] font-black leading-tight mb-4">
+              참가자 안내
+            </h2>
+            <p className="font-[family-name:var(--font-noto)] text-[14px] md:text-[15px] text-text-sub leading-relaxed mb-10 max-w-[560px]">
+              행사장 배치도, 주차장, 화장실, 버스·택시로 오시는 길까지 —
+              방문 전 꼭 확인하세요.
+            </p>
+          </FadeIn>
+          <FadeIn>
+            <div className="grid md:grid-cols-2 gap-4 mb-10">
+              <Link href="/projects/hyeonnam-festival/guide" className="group block border border-border overflow-hidden">
+                <Image
+                  src="/images/festival-map-jukdo.jpg"
+                  alt="죽도 ZONE 배치도"
+                  width={1800}
+                  height={1004}
+                  className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-500"
+                />
+              </Link>
+              <Link href="/projects/hyeonnam-festival/guide" className="group block border border-border overflow-hidden">
+                <Image
+                  src="/images/festival-map-bukbun.jpg"
+                  alt="북분리 ZONE 배치도"
+                  width={1800}
+                  height={1004}
+                  className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-500"
+                />
+              </Link>
+            </div>
+            <div className="text-center">
+              <Link
+                href="/projects/hyeonnam-festival/guide"
+                className="inline-block font-[family-name:var(--font-karla)] text-[12px] md:text-[13px] font-extrabold tracking-[2px] uppercase border-2 border-text px-8 py-4 hover:bg-text hover:text-white transition-colors"
+              >
+                주차 · 오시는 길 전체 안내 보기 →
+              </Link>
             </div>
           </FadeIn>
         </div>
