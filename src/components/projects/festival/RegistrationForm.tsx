@@ -83,7 +83,6 @@ export default function RegistrationForm({ availability }: { availability: Avail
   const [camping, setCamping] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [region, setRegion] = useState<string>("");
-  const [tent, setTent] = useState<string>("no");
   // 폼 액션(useActionState) 후 React가 라디오를 native reset → controlled 상태와 desync.
   // state가 바뀔 때(제출 후) 라디오 그룹을 리마운트해 상태값으로 다시 그린다.
   const [resetKey, setResetKey] = useState(0);
@@ -285,7 +284,8 @@ export default function RegistrationForm({ availability }: { availability: Avail
 
         <input type="hidden" name="rep_name" value={participants[0]?.name.trim() ?? ""} />
         <input type="hidden" name="camping" value={camping} />
-        <input type="hidden" name="tent_rental" value={camping ? tent : "no"} />
+        {/* 텐트 대여 미운영 기간 — 항상 no 고정 (재개 시 tent state + UI 라디오 복구) */}
+        <input type="hidden" name="tent_rental" value="no" />
 
         <div className="space-y-5">
           {/* 대표 신청자(본인) */}
@@ -399,34 +399,11 @@ export default function RegistrationForm({ availability }: { availability: Avail
               {camping !== "" && (
                 <div className="mt-3 border border-border bg-bg p-3 md:p-4">
                   <p className={labelCls} style={{ marginBottom: 6 }}>
-                    텐트 대여 필요 여부
+                    텐트 안내
                   </p>
-                  <div key={`tent-${resetKey}`} className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <label className={radioCardCls}>
-                      <input
-                        type="radio"
-                        name="tent_ui"
-                        value="no"
-                        checked={tent === "no"}
-                        onChange={() => setTent("no")}
-                        className="accent-text"
-                      />
-                      <span>텐트 직접 지참</span>
-                    </label>
-                    <label className={radioCardCls}>
-                      <input
-                        type="radio"
-                        name="tent_ui"
-                        value="yes"
-                        checked={tent === "yes"}
-                        onChange={() => setTent("yes")}
-                        className="accent-text"
-                      />
-                      <span>텐트 대여 필요</span>
-                    </label>
-                  </div>
-                  <p className="mt-2 text-[11px] text-text-muted">
-                    대여 희망 시 협의된 업체를 통해 결제하시면 되십니다. (금액 추후 안내)
+                  <p className="text-[13px] text-text">텐트는 직접 지참해 주세요.</p>
+                  <p className="mt-1 text-[11px] text-text-muted">
+                    현재 텐트 대여는 운영하지 않습니다. 개인 텐트를 준비해 주시기 바랍니다.
                   </p>
                 </div>
               )}
