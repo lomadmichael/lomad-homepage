@@ -7,6 +7,7 @@ import {
   type EcologySubmitResult,
 } from "@/lib/ecology-db";
 import { sendApplicationSms } from "@/lib/ecology-sms";
+import { notifyAdmin } from "@/lib/ecology-admin-notify";
 
 export interface EcologyFormState {
   success: boolean;
@@ -110,6 +111,21 @@ export async function submitEcology(
     });
   } catch (e) {
     console.error("[ecology] application SMS failed:", e);
+  }
+
+  // 관리자(로마드) 알림 — 문자 + 이메일 (실패해도 접수 성공 처리)
+  try {
+    await notifyAdmin({
+      guardianName: guardian,
+      phone,
+      email,
+      sessionKey: session,
+      status: result.status,
+      participants: cleaned,
+      healthNote,
+    });
+  } catch (e) {
+    console.error("[ecology] admin notify failed:", e);
   }
 
   const msg =

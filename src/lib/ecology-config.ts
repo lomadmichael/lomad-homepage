@@ -12,6 +12,10 @@ export const PLACE = "양양군 평생학습관 (양양읍 안산1길 36)";
 export const EXPERIENCE_SITE = "남대천 (양양군 서면 용천리 일원)";
 export const INQUIRY_TEL = "010-9542-3775";
 
+/** 관리자(로마드) 접수 알림 수신처 — 접수 들어올 때 문자+이메일 발송. */
+export const ADMIN_ALERT_PHONE = "01095423775";
+export const ADMIN_ALERT_EMAIL = "lomad.coop@gmail.com";
+
 export interface EcologySession {
   key: string; // ecology_submit/lookup 의 session_key
   label: string; // 사람이 읽는 일시
