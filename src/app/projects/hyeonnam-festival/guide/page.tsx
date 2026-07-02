@@ -139,6 +139,20 @@ export default function FestivalGuidePage() {
             <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub leading-relaxed mb-6">
               행사장 주변 교통 혼잡 방지를 위해 지정된 공식 주차 구역을 이용해 주세요.
             </p>
+            <figure className="mb-6">
+              <div className="relative w-full border border-border overflow-hidden">
+                <Image
+                  src="/images/festival-parking-jukdo.jpg"
+                  alt="죽도 축제장 주차장 위치 — P1 인구중앙길 122, P2 시변리 5, P3 시변리 13-1, P4 창리 36(생활체육공원)"
+                  width={1158}
+                  height={739}
+                  className="w-full h-auto"
+                />
+              </div>
+              <figcaption className="mt-2 font-[family-name:var(--font-noto)] text-[12px] text-text-muted">
+                죽도 축제장 주차장 위치 (P1~P4)
+              </figcaption>
+            </figure>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="border border-border bg-bg-soft p-6">
                 <h3 className="font-[family-name:var(--font-noto)] text-[16px] font-black mb-4">
@@ -146,17 +160,27 @@ export default function FestivalGuidePage() {
                 </h3>
                 <ul className="space-y-3">
                   {[
-                    { name: "제1주차장", addr: "동산큰길 6" },
-                    { name: "제2주차장", addr: "시변리 산 1-8" },
-                    { name: "제3주차장", addr: "시변리 13-1" },
+                    { name: "P1", addr: "인구중앙길 122", query: "양양군 현남면 인구중앙길 122" },
+                    { name: "P2", addr: "시변리 5", query: "양양군 현남면 시변리 5" },
+                    { name: "P3", addr: "시변리 13-1", query: "양양군 현남면 시변리 13-1" },
                   ].map((p) => (
                     <li key={p.name} className="flex items-center justify-between gap-2">
                       <span className="font-[family-name:var(--font-noto)] text-[13.5px]">
                         <b>{p.name}</b> · {p.addr}
                       </span>
-                      <MapButton label="지도" query={`양양군 현남면 ${p.addr}`} />
+                      <MapButton label="지도" query={p.query} />
                     </li>
                   ))}
+                  <li className="flex items-center justify-between gap-2 pt-3 border-t border-border">
+                    <span className="font-[family-name:var(--font-noto)] text-[13.5px]">
+                      <b className="text-[#FF6B6B]">P4</b> · 창리 36 (생활체육공원)
+                      <br />
+                      <span className="text-[12px] text-text-muted">
+                        위 주차장이 모두 만차일 때 이용해 주세요
+                      </span>
+                    </span>
+                    <MapButton label="지도" query="양양군 현남면 창리 36" />
+                  </li>
                 </ul>
                 <p className="mt-4 pt-4 border-t border-border font-[family-name:var(--font-noto)] text-[12px] text-text-muted leading-relaxed">
                   내비게이션에 위 지번 주소를 검색하면 주차장으로 바로 안내됩니다.
