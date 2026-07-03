@@ -28,8 +28,9 @@ const MARQUEE_ITEMS = [
 const DAY1 = [
   ["10:00", "Opening · Camping check-in (Jukdo·Bukbun-ri) · Surf Pass handout · Settlement consulting"],
   ["11:00", "Flea Market opens (Jukdo · until 18:00) · Booths"],
-  ["13:00", "Surfing · SUP (Jukdo) · Local Cooking Class — Blueberry Mochi (Bukbun-ri · 50)"],
-  ["15:00", "Surfing · SUP · Land Surfing (Jukdo)"],
+  ["13:00", "Surfing · SUP (Jukdo) · Local Cooking Class — Blueberry Mochi 1st (Bukbun-ri)"],
+  ["14:00", "Blueberry Mochi 2nd session (Bukbun-ri)"],
+  ["15:00", "Surfing · SUP · Land Surfing (Jukdo) · Muldeun Book Picnic (Bukbun-ri · until 18:00 · walk-in)"],
   ["16:00", "Bouldering · Beach Hyrox (Jukdo · until 18:00)"],
   ["17:00", "Bouldering (Jukdo)"],
   ["18:00", "◎ Sunset Beach Table (Bukbun-ri) · Beach Running · Sunset Barre (Jukdo)"],
