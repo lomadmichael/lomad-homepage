@@ -38,9 +38,9 @@ const DAY1 = [
 ];
 
 const DAY2 = [
-  ["10:00", "Yoga & Nature Mandala (Bukbun-ri)"],
-  ["11:00", "Stamp event · Receipt-event prize pickup"],
-  ["12:00", "Closing"],
+  ["10:00", "Yoga & Nature Mandala · Forest & Sadam Yoga (Bukbun-ri)"],
+  ["11:00", "Receipt-event prize pickup (until 14:00 · Jukdo HQ)"],
+  ["14:00", "Closing"],
 ];
 
 export const metadata: Metadata = {
