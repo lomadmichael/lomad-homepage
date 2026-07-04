@@ -31,7 +31,8 @@ export async function submitFestival(
   if (!SUBMISSIONS_OPEN) {
     return {
       success: false,
-      message: "정식 접수는 아직 시작되지 않았습니다. 오픈 일정은 별도 공지 예정입니다.",
+      message:
+        "온라인 접수가 마감되었습니다. 현장 접수처 — 죽도존: 웨이브웍스 내 운영본부 · 북분리존: 캠핑장 관리사무소",
     };
   }
 

@@ -135,12 +135,12 @@ export default function HyeonnamFestivalPage() {
                 Register
               </Link>
             ) : (
-              <span
-                aria-disabled="true"
-                className="font-[family-name:var(--font-karla)] text-[11px] md:text-[12px] font-extrabold tracking-[2px] uppercase border border-white/40 text-white/60 px-4 md:px-5 py-2.5 cursor-not-allowed select-none"
+              <Link
+                href="/projects/hyeonnam-festival/register"
+                className="font-[family-name:var(--font-karla)] text-[11px] md:text-[12px] font-extrabold tracking-[2px] uppercase border border-white px-4 md:px-5 py-2.5 hover:bg-white hover:text-black transition-colors"
               >
-                Coming Soon
-              </span>
+                On-site
+              </Link>
             )}
           </div>
         </header>
@@ -174,12 +174,12 @@ export default function HyeonnamFestivalPage() {
                 참가 신청 →
               </Link>
             ) : (
-              <span
-                aria-disabled="true"
-                className="font-[family-name:var(--font-karla)] text-[11px] md:text-[12px] font-extrabold tracking-[3px] uppercase bg-white/15 text-white/70 px-7 py-4 cursor-not-allowed select-none border border-white/30"
+              <Link
+                href="/projects/hyeonnam-festival/register"
+                className="font-[family-name:var(--font-karla)] text-[11px] md:text-[12px] font-extrabold tracking-[3px] uppercase bg-white text-black px-7 py-4 hover:bg-[#FF6B6B] hover:text-white transition-colors"
               >
-                곧 접수 예정
-              </span>
+                현장 접수 안내 →
+              </Link>
             )}
             <a
               href="#about"
@@ -188,19 +188,17 @@ export default function HyeonnamFestivalPage() {
               자세히 보기
             </a>
           </div>
-          {SUBMISSIONS_OPEN && (
-            <div className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 font-[family-name:var(--font-karla)] text-[10px] md:text-[11px] font-extrabold tracking-[2px] uppercase text-white/60">
-              <Link href="/projects/hyeonnam-festival/status" className="hover:text-white underline underline-offset-4">
-                접수 현황
-              </Link>
-              <Link href="/projects/hyeonnam-festival/my" className="hover:text-white underline underline-offset-4">
-                내 신청 조회 · 취소
-              </Link>
-            </div>
-          )}
+          <div className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 font-[family-name:var(--font-karla)] text-[10px] md:text-[11px] font-extrabold tracking-[2px] uppercase text-white/60">
+            <Link href="/projects/hyeonnam-festival/status" className="hover:text-white underline underline-offset-4">
+              접수 현황
+            </Link>
+            <Link href="/projects/hyeonnam-festival/my" className="hover:text-white underline underline-offset-4">
+              내 신청 조회 · 취소
+            </Link>
+          </div>
           {!SUBMISSIONS_OPEN && (
             <p className="mt-5 font-[family-name:var(--font-noto)] text-[12px] md:text-[13px] text-white/60 tracking-wide">
-              접수는 준비가 완료되는 대로 별도 공지로 안내드립니다
+              온라인 접수 마감 — 현장 접수 · 죽도존 웨이브웍스 내 / 북분리존 캠핑장 관리사무소
             </p>
           )}
         </div>
@@ -550,16 +548,14 @@ export default function HyeonnamFestivalPage() {
                 Camping
               </span>
               <p className="font-[family-name:var(--font-noto)] text-[13px] md:text-[14px] leading-relaxed flex-1">
-                북분리 마을 캠핑장 사이트 예약 가능 — <b>데크 70면 · 노지 10면 모두 무료</b> (양양군 농업기술센터 후원). 1박 2일 캠핑객은 선셋 비치 테이블·일요일 요가까지 함께 즐기세요. (접수 폼에서 신청)
+                북분리 마을 캠핑장 — <b>데크 70면 · 노지 10면 모두 무료</b> (양양군 농업기술센터 후원). 1박 2일 캠핑객은 선셋 비치 테이블·일요일 요가까지 함께 즐기세요. (온라인 접수 마감 — 잔여분 현장 접수: 캠핑장 관리사무소)
               </p>
             </div>
-            {SUBMISSIONS_OPEN && (
-              <div className="text-center mt-12">
-                <Button variant="primary" href="/projects/hyeonnam-festival/register">
-                  사전 접수하기 →
-                </Button>
-              </div>
-            )}
+            <div className="text-center mt-12">
+              <Button variant="primary" href="/projects/hyeonnam-festival/register">
+                {SUBMISSIONS_OPEN ? "사전 접수하기 →" : "현장 접수 안내 →"}
+              </Button>
+            </div>
           </FadeIn>
         </div>
       </section>
@@ -769,7 +765,7 @@ export default function HyeonnamFestivalPage() {
       <section className="bg-black text-white py-[140px] px-6 text-center">
         <FadeIn>
           <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[4px] font-bold uppercase text-[#FF6B6B] mb-5">
-            Now Open
+            {SUBMISSIONS_OPEN ? "Now Open" : "Festival Day"}
           </p>
           <h2 className="font-[family-name:var(--font-noto)] text-[32px] md:text-[56px] font-black mb-3 leading-tight">
             양양서핑로드의 첫 마을 잔치
@@ -786,14 +782,14 @@ export default function HyeonnamFestivalPage() {
             </Link>
           ) : (
             <>
-              <span
-                aria-disabled="true"
-                className="inline-block font-[family-name:var(--font-karla)] text-[12px] md:text-[14px] font-extrabold tracking-[3px] uppercase bg-white/15 text-white/70 px-10 py-5 cursor-not-allowed select-none border border-white/30"
+              <Link
+                href="/projects/hyeonnam-festival/register"
+                className="inline-block font-[family-name:var(--font-karla)] text-[12px] md:text-[14px] font-extrabold tracking-[3px] uppercase bg-[#FF6B6B] text-white px-10 py-5 hover:bg-white hover:text-black transition-colors"
               >
-                곧 접수 예정
-              </span>
+                현장 접수 안내 →
+              </Link>
               <p className="mt-5 font-[family-name:var(--font-noto)] text-[13px] text-white/60">
-                접수 오픈 일정은 별도 공지 예정입니다
+                온라인 접수 마감 — 현장 접수 · 죽도존 웨이브웍스 내 / 북분리존 캠핑장 관리사무소
               </p>
             </>
           )}
