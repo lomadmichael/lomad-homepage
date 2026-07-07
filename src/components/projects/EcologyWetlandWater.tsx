@@ -27,7 +27,7 @@ const INLINE_HTML = `
       </p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="${REGISTER_URL}">
-          7/11·18·25 · 8/1·8 정규 접수
+          7/11·18·25 · 8/8 정규 접수
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 4h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14L20 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a class="btn btn-ghost" href="#programs">프로그램 살펴보기</a>
@@ -180,7 +180,7 @@ const INLINE_HTML = `
         <div class="pc-meta">
           <div class="pc-meta-item">
             <div class="pc-meta-k">운영일</div>
-            <div class="pc-meta-v">7월 11·18·25일 / 8월 1·8일 (토)</div>
+            <div class="pc-meta-v">7월 11·18·25일 / 8월 8일 (토)</div>
           </div>
           <div class="pc-meta-item">
             <div class="pc-meta-k">운영시간</div>
@@ -209,10 +209,10 @@ const INLINE_HTML = `
     <div class="band-title-row">
       <div>
         <div class="section-label">7-8월의 일정</div>
-        <h2 class="section-title">달력 위의 다섯 번의 만남</h2>
+        <h2 class="section-title">달력 위의 네 번의 만남</h2>
       </div>
     </div>
-    <div class="timeline cols-5">
+    <div class="timeline">
       <div class="tl-node">
         <div class="tl-dot active"></div>
         <div class="tl-date">7월 11일</div>
@@ -233,15 +233,9 @@ const INLINE_HTML = `
       </div>
       <div class="tl-node">
         <div class="tl-dot"></div>
-        <div class="tl-date">8월 1일</div>
-        <div class="tl-day">토요일</div>
-        <div class="tl-label">정규 생태체험 4회차<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오전 2개반</span></div>
-      </div>
-      <div class="tl-node">
-        <div class="tl-dot"></div>
         <div class="tl-date">8월 8일</div>
         <div class="tl-day">토요일</div>
-        <div class="tl-label">정규 생태체험 5회차<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오전 2개반</span></div>
+        <div class="tl-label">정규 생태체험 4회차<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오전 2개반</span></div>
       </div>
     </div>
   </div>
@@ -559,7 +553,7 @@ export default function EcologyWetlandWater() {
             남대천에서 만나요
           </h2>
           <p>
-            7월 11·18·25일, 8월 1·8일 정규 프로그램 접수가 진행 중입니다.<br />
+            7월 11·18·25일, 8월 8일 정규 프로그램 접수가 진행 중입니다.<br />
             회차별 선착순 12명, 마감 시 조기 종료될 수 있어요.
           </p>
           <div
