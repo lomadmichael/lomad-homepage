@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
-import { adminList, type EcologyRegistrationRow } from "@/lib/ecology-db";
+import { adminList, getSessionStates, type EcologyRegistrationRow } from "@/lib/ecology-db";
 import { SESSIONS, CAPACITY, sessionLabel } from "@/lib/ecology-config";
 import { verifyAdmin, ADMIN_COOKIE } from "./auth";
-import { adminLogout } from "./actions";
+import { adminLogout, setSessionOpenAction } from "./actions";
 import AdminLogin from "./AdminLogin";
 
 export const dynamic = "force-dynamic";
@@ -20,8 +20,10 @@ export default async function EcologyAdminPage() {
   }
 
   let rows: EcologyRegistrationRow[] = [];
+  let states: Record<string, boolean> = {};
   try {
     rows = await adminList();
+    states = await getSessionStates();
   } catch (e) {
     console.error("[ecology] admin list failed:", e);
   }
@@ -53,11 +55,26 @@ export default async function EcologyAdminPage() {
           const rs = bySession(s.key);
           const conf = partCount(rs, "confirmed");
           const wait = partCount(rs, "waitlist");
+          const isOpen = states[s.key] !== false;
           return (
             <section key={s.key}>
-              <h2 className="font-[family-name:var(--font-noto)] text-[16px] font-black mb-1">
-                {sessionLabel(s.key)}
-              </h2>
+              <div className="flex items-center flex-wrap gap-3 mb-1">
+                <h2 className="font-[family-name:var(--font-noto)] text-[16px] font-black">
+                  {sessionLabel(s.key)}
+                </h2>
+                <span
+                  className={`text-[11px] font-bold px-2 py-0.5 rounded ${isOpen ? "text-[#0B7A5A] bg-[#0B7A5A]/10" : "text-[#b45309] bg-[#b45309]/10"}`}
+                >
+                  {isOpen ? "접수중" : "마감"}
+                </span>
+                <form action={setSessionOpenAction}>
+                  <input type="hidden" name="session_key" value={s.key} />
+                  <input type="hidden" name="open" value={isOpen ? "false" : "true"} />
+                  <button className="text-[11px] font-[family-name:var(--font-karla)] font-extrabold tracking-[1px] uppercase border border-text px-2.5 py-1 hover:bg-text hover:text-bg transition-colors">
+                    {isOpen ? "마감하기" : "다시 열기"}
+                  </button>
+                </form>
+              </div>
               <p className="text-[12px] text-text-sub mb-3">
                 확정 {conf}/{CAPACITY}명 · 대기 {wait}명 · 신청 {rs.length}건
               </p>

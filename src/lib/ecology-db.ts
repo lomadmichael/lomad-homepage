@@ -103,6 +103,21 @@ export async function adminList(): Promise<EcologyRegistrationRow[]> {
   if (error) throw new Error(`ecology_admin_list: ${error.message}`);
   return (data ?? []) as EcologyRegistrationRow[];
 }
+/** 회차별 오픈/마감 상태 맵. 테이블에 없는 회차는 open(true) 기본. */
+export async function getSessionStates(): Promise<Record<string, boolean>> {
+  const { data, error } = await db().rpc("ecology_session_states");
+  if (error) throw new Error(`ecology_session_states: ${error.message}`);
+  return (data ?? {}) as Record<string, boolean>;
+}
+/** 회차 오픈/마감 설정 (admin). */
+export async function setSessionOpen(sessionKey: string, open: boolean): Promise<void> {
+  const { error } = await db().rpc("ecology_set_session", {
+    p_session_key: sessionKey,
+    p_open: open,
+  });
+  if (error) throw new Error(`ecology_set_session: ${error.message}`);
+}
+
 export async function otpSet(phone: string, codeHash: string, ttl: number): Promise<void> {
   const { error } = await db().rpc("ecology_otp_set", {
     p_phone: phone,

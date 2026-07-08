@@ -2,7 +2,9 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { makeToken, ADMIN_COOKIE, ADMIN_COOKIE_PATH, ADMIN_TTL } from "./auth";
+import { revalidatePath } from "next/cache";
+import { makeToken, verifyAdmin, ADMIN_COOKIE, ADMIN_COOKIE_PATH, ADMIN_TTL } from "./auth";
+import { setSessionOpen } from "@/lib/ecology-db";
 
 export interface AdminLoginState {
   error?: string;
@@ -30,4 +32,19 @@ export async function adminLogout(): Promise<void> {
   const store = await cookies();
   store.delete({ name: ADMIN_COOKIE, path: ADMIN_COOKIE_PATH });
   redirect("/ecology/admin");
+}
+
+/** 회차 오픈/마감 토글 (admin 전용). */
+export async function setSessionOpenAction(formData: FormData): Promise<void> {
+  const store = await cookies();
+  if (!verifyAdmin(store.get(ADMIN_COOKIE)?.value)) return;
+  const sessionKey = (formData.get("session_key") as string | null) ?? "";
+  const open = (formData.get("open") as string | null) === "true";
+  if (!sessionKey) return;
+  try {
+    await setSessionOpen(sessionKey, open);
+  } catch (e) {
+    console.error("[ecology] setSessionOpen failed:", e);
+  }
+  revalidatePath("/ecology/admin");
 }

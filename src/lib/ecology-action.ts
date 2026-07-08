@@ -3,6 +3,7 @@
 import { SUBMISSIONS_OPEN, CAPACITY, SESSIONS } from "@/lib/ecology-config";
 import {
   submitRegistration,
+  getSessionStates,
   type EcologyParticipant,
   type EcologySubmitResult,
 } from "@/lib/ecology-db";
@@ -45,6 +46,17 @@ export async function submitEcology(
 
   if (!guardian || !phoneRaw) return { success: false, message: "신청자 이름과 연락처는 필수입니다." };
   if (!VALID_SESSIONS.has(session)) return { success: false, message: "참여 회차를 선택해 주세요." };
+
+  // 수동 마감된 회차 차단
+  try {
+    const states = await getSessionStates();
+    if (states[session] === false) {
+      return { success: false, message: "선택하신 회차는 접수가 마감되었습니다. 다른 회차를 선택해 주세요." };
+    }
+  } catch (e) {
+    console.error("[ecology] session state check failed:", e);
+  }
+
   if (!consentPrivacy) return { success: false, message: "개인정보 수집·이용에 동의해 주세요." };
   if (!consentNotice) return { success: false, message: "안내사항 확인에 체크해 주세요." };
 

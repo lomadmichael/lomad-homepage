@@ -21,8 +21,10 @@ function categoryLabel(ageStr: string): string {
 
 export default function RegisterForm({
   availability,
+  sessionStates,
 }: {
   availability: Record<string, { confirmed: number; waitlist: number }>;
+  sessionStates: Record<string, boolean>;
 }) {
   const [state, formAction, pending] = useActionState(submitEcology, initial);
   const [participants, setParticipants] = useState<PartRow[]>([{ name: "", age: "" }]);
@@ -64,18 +66,34 @@ export default function RegisterForm({
             const a = availability[s.key] ?? { confirmed: 0, waitlist: 0 };
             const remain = Math.max(0, CAPACITY - a.confirmed);
             const full = remain === 0;
+            const closed = sessionStates[s.key] === false;
             return (
               <label
                 key={s.key}
-                className="flex items-center gap-3 border border-border px-4 py-3 cursor-pointer hover:border-text text-[14px]"
+                className={`flex items-center gap-3 border border-border px-4 py-3 text-[14px] ${
+                  closed
+                    ? "opacity-50 cursor-not-allowed bg-bg-soft"
+                    : "cursor-pointer hover:border-text"
+                }`}
               >
-                <input type="radio" name="session_key" value={s.key} required className="accent-text" />
+                <input
+                  type="radio"
+                  name="session_key"
+                  value={s.key}
+                  required
+                  disabled={closed}
+                  className="accent-text"
+                />
                 <span className="flex-1">{s.label}</span>
-                <span
-                  className={`text-[12px] font-bold ${full ? "text-[#b45309]" : "text-[#0B7A5A]"}`}
-                >
-                  {full ? "대기접수 (마감)" : `잔여 ${remain}석`}
-                </span>
+                {closed ? (
+                  <span className="text-[12px] font-bold text-text-muted">접수 마감</span>
+                ) : (
+                  <span
+                    className={`text-[12px] font-bold ${full ? "text-[#b45309]" : "text-[#0B7A5A]"}`}
+                  >
+                    {full ? "대기접수" : `잔여 ${remain}석`}
+                  </span>
+                )}
               </label>
             );
           })}
