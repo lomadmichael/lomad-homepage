@@ -176,7 +176,7 @@ const INLINE_HTML = `
         </div>
         <div class="pc-type">PROGRAM · 정규 생태체험 프로그램</div>
         <h3 class="pc-title">생태지도사와 함께<br>물속 생명의 비밀을 찾는 시간</h3>
-        <p class="pc-desc">남대천은 얼마나 깨끗할까요? 족대로 민물고기와 수서곤충을 직접 채집해 종류별로 나눠보고, 어떤 생물이 사는지로 물의 깨끗함을 배웁니다. 관찰이 끝난 생물은 다시 강으로 돌려보내고, 연어 팔찌·아기연어 열쇠고리 만들기로 마무리합니다.</p>
+        <p class="pc-desc">남대천은 얼마나 깨끗할까요? 족대로 민물고기와 수서곤충을 직접 채집해 종류별로 나눠보고, 어떤 생물이 사는지로 물의 깨끗함을 배웁니다. 관찰이 끝난 생물은 다시 강으로 돌려보내고, 잠자리 프로펠러 만들기로 마무리합니다.</p>
         <div class="pc-meta">
           <div class="pc-meta-item">
             <div class="pc-meta-k">운영일</div>
@@ -361,7 +361,7 @@ const INLINE_HTML = `
         </div>
         <div class="creature-name">연어 <span style="font-size:11px; color:rgba(245,239,224,0.6); font-weight:400;">(회귀 어종)</span></div>
         <div class="creature-lat">Oncorhynchus keta · 연어과</div>
-        <div class="creature-desc">바다에서 자라 알을 낳으러 남대천으로 돌아오는 대표 회귀 어종. 남대천은 우리나라 연어가 돌아오는 손꼽히는 하천입니다. 이번 만들기 주인공이기도 해요.</div>
+        <div class="creature-desc">바다에서 자라 알을 낳으러 남대천으로 돌아오는 대표 회귀 어종. 남대천은 우리나라 연어가 돌아오는 대표적인 하천입니다.</div>
       </div>
       <div class="creature">
         <div class="creature-illust">
@@ -454,7 +454,7 @@ const INLINE_HTML = `
           <li><span class="chk" style="background: var(--moss); border-color: var(--moss);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l5 5L20 7" stroke="#F5EFE0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>생태관광 지도사 해설</li>
           <li><span class="chk" style="background: var(--moss); border-color: var(--moss);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l5 5L20 7" stroke="#F5EFE0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>채집·관찰 도구 (족대·뜰채·루페·관찰통)</li>
           <li><span class="chk" style="background: var(--moss); border-color: var(--moss);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l5 5L20 7" stroke="#F5EFE0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>장화 · 접이식 양동이 등 체험 장비</li>
-          <li><span class="chk" style="background: var(--sun); border-color: var(--sun);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l5 5L20 7" stroke="#F5EFE0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><strong>만들기 체험 · 연어 팔찌 또는 아기연어 열쇠고리</strong></li>
+          <li><span class="chk" style="background: var(--sun); border-color: var(--sun);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l5 5L20 7" stroke="#F5EFE0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><strong>만들기 체험 · 잠자리 프로펠러</strong></li>
         </ul>
       </div>
     </div>
