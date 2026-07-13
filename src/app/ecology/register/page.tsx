@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import RegisterForm from "@/components/projects/ecology/RegisterForm";
 import { SUBMISSIONS_OPEN, PLACE, EXPERIENCE_SITE } from "@/lib/ecology-config";
-import { getAvailability, availabilityMap, getSessionStates } from "@/lib/ecology-db";
+import {
+  getAvailability,
+  availabilityMap,
+  getSessionStates,
+  getSessionCapacities,
+} from "@/lib/ecology-db";
 
 export const dynamic = "force-dynamic";
 
@@ -16,10 +21,12 @@ export const metadata: Metadata = {
 export default async function EcologyRegisterPage() {
   let availability: Record<string, { confirmed: number; waitlist: number }> = {};
   let sessionStates: Record<string, boolean> = {};
+  let capacities: Record<string, number> = {};
   if (SUBMISSIONS_OPEN) {
     try {
       availability = availabilityMap(await getAvailability());
       sessionStates = await getSessionStates();
+      capacities = await getSessionCapacities();
     } catch (e) {
       console.error("[ecology] availability fetch failed:", e);
     }
@@ -70,7 +77,11 @@ export default async function EcologyRegisterPage() {
         </aside>
 
         {SUBMISSIONS_OPEN ? (
-          <RegisterForm availability={availability} sessionStates={sessionStates} />
+          <RegisterForm
+            availability={availability}
+            sessionStates={sessionStates}
+            capacities={capacities}
+          />
         ) : (
           <div className="border border-border bg-bg-soft p-8 md:p-12">
             <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-[#E8A845] mb-4">

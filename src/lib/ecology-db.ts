@@ -117,6 +117,20 @@ export async function setSessionOpen(sessionKey: string, open: boolean): Promise
   });
   if (error) throw new Error(`ecology_set_session: ${error.message}`);
 }
+/** 회차별 정원 오버라이드 맵. 없는 회차는 기본 정원 사용. */
+export async function getSessionCapacities(): Promise<Record<string, number>> {
+  const { data, error } = await db().rpc("ecology_session_capacities");
+  if (error) throw new Error(`ecology_session_capacities: ${error.message}`);
+  return (data ?? {}) as Record<string, number>;
+}
+/** 회차 정원 설정 (admin). */
+export async function setSessionCapacity(sessionKey: string, capacity: number): Promise<void> {
+  const { error } = await db().rpc("ecology_set_capacity", {
+    p_session_key: sessionKey,
+    p_capacity: capacity,
+  });
+  if (error) throw new Error(`ecology_set_capacity: ${error.message}`);
+}
 
 export async function otpSet(phone: string, codeHash: string, ttl: number): Promise<void> {
   const { error } = await db().rpc("ecology_otp_set", {

@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { makeToken, verifyAdmin, ADMIN_COOKIE, ADMIN_COOKIE_PATH, ADMIN_TTL } from "./auth";
-import { setSessionOpen } from "@/lib/ecology-db";
+import { setSessionOpen, setSessionCapacity } from "@/lib/ecology-db";
 
 export interface AdminLoginState {
   error?: string;
@@ -45,6 +45,21 @@ export async function setSessionOpenAction(formData: FormData): Promise<void> {
     await setSessionOpen(sessionKey, open);
   } catch (e) {
     console.error("[ecology] setSessionOpen failed:", e);
+  }
+  revalidatePath("/ecology/admin");
+}
+
+/** 회차 정원 설정 (admin 전용). */
+export async function setCapacityAction(formData: FormData): Promise<void> {
+  const store = await cookies();
+  if (!verifyAdmin(store.get(ADMIN_COOKIE)?.value)) return;
+  const sessionKey = (formData.get("session_key") as string | null) ?? "";
+  const cap = Number(formData.get("capacity"));
+  if (!sessionKey || !Number.isFinite(cap) || cap < 0 || cap > 999) return;
+  try {
+    await setSessionCapacity(sessionKey, Math.floor(cap));
+  } catch (e) {
+    console.error("[ecology] setCapacity failed:", e);
   }
   revalidatePath("/ecology/admin");
 }

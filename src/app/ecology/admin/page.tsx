@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
-import { adminList, getSessionStates, type EcologyRegistrationRow } from "@/lib/ecology-db";
+import {
+  adminList,
+  getSessionStates,
+  getSessionCapacities,
+  type EcologyRegistrationRow,
+} from "@/lib/ecology-db";
 import { SESSIONS, CAPACITY, sessionLabel } from "@/lib/ecology-config";
 import { verifyAdmin, ADMIN_COOKIE } from "./auth";
-import { adminLogout, setSessionOpenAction } from "./actions";
+import { adminLogout, setSessionOpenAction, setCapacityAction } from "./actions";
 import AdminLogin from "./AdminLogin";
 
 export const dynamic = "force-dynamic";
@@ -21,9 +26,11 @@ export default async function EcologyAdminPage() {
 
   let rows: EcologyRegistrationRow[] = [];
   let states: Record<string, boolean> = {};
+  let capacities: Record<string, number> = {};
   try {
     rows = await adminList();
     states = await getSessionStates();
+    capacities = await getSessionCapacities();
   } catch (e) {
     console.error("[ecology] admin list failed:", e);
   }
@@ -56,6 +63,7 @@ export default async function EcologyAdminPage() {
           const conf = partCount(rs, "confirmed");
           const wait = partCount(rs, "waitlist");
           const isOpen = states[s.key] !== false;
+          const cap = capacities[s.key] ?? CAPACITY;
           return (
             <section key={s.key}>
               <div className="flex items-center flex-wrap gap-3 mb-1">
@@ -74,9 +82,24 @@ export default async function EcologyAdminPage() {
                     {isOpen ? "마감하기" : "다시 열기"}
                   </button>
                 </form>
+                <form action={setCapacityAction} className="flex items-center gap-1.5">
+                  <input type="hidden" name="session_key" value={s.key} />
+                  <label className="text-[11px] text-text-muted">정원</label>
+                  <input
+                    type="number"
+                    name="capacity"
+                    defaultValue={cap}
+                    min={0}
+                    max={999}
+                    className="w-14 h-7 px-2 text-[12px] border border-border bg-input-bg outline-none focus:border-text"
+                  />
+                  <button className="text-[11px] font-[family-name:var(--font-karla)] font-extrabold tracking-[1px] uppercase border border-text px-2 py-1 hover:bg-text hover:text-bg transition-colors">
+                    저장
+                  </button>
+                </form>
               </div>
               <p className="text-[12px] text-text-sub mb-3">
-                확정 {conf}/{CAPACITY}명 · 대기 {wait}명 · 신청 {rs.length}건
+                확정 {conf}/{cap}명 · 대기 {wait}명 · 신청 {rs.length}건
               </p>
               {rs.length === 0 ? (
                 <p className="text-[13px] text-text-muted">신청 없음</p>

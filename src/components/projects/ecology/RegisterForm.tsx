@@ -22,9 +22,11 @@ function categoryLabel(ageStr: string): string {
 export default function RegisterForm({
   availability,
   sessionStates,
+  capacities,
 }: {
   availability: Record<string, { confirmed: number; waitlist: number }>;
   sessionStates: Record<string, boolean>;
+  capacities: Record<string, number>;
 }) {
   const [state, formAction, pending] = useActionState(submitEcology, initial);
   const [participants, setParticipants] = useState<PartRow[]>([{ name: "", age: "" }]);
@@ -64,7 +66,8 @@ export default function RegisterForm({
         <div className="space-y-2">
           {SESSIONS.map((s) => {
             const a = availability[s.key] ?? { confirmed: 0, waitlist: 0 };
-            const remain = Math.max(0, CAPACITY - a.confirmed);
+            const cap = capacities[s.key] ?? CAPACITY;
+            const remain = Math.max(0, cap - a.confirmed);
             const full = remain === 0;
             const closed = sessionStates[s.key] === false;
             return (
