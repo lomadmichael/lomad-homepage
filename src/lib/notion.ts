@@ -47,44 +47,66 @@ function mapPageToNotice(page: any): Notice {
   };
 }
 
-export async function getNotices(): Promise<Notice[]> {
-  const dataSourceId = await getDataSourceId();
-  const response = (await notion.dataSources.query({
-    data_source_id: dataSourceId,
-    filter: {
-      property: "상태",
-      select: { equals: "공개" },
-    },
-    sorts: [{ property: "발행일", direction: "descending" }],
-  } as any)) as any;
+// Notion(외부 CMS) 장애·토큰 만료 시에도 빌드/렌더가 죽지 않도록 안전 폴백을 반환한다.
+// (공지 한 페이지의 장애가 사이트 전체 배포를 브릭시키는 것을 방지)
+function warnNotion(fn: string, err: unknown) {
+  const msg = err instanceof Error ? err.message : String(err);
+  console.warn(`[notion] ${fn} 실패 — 폴백 반환: ${msg}`);
+}
 
-  return response.results
-    .filter((p: any) => "properties" in p)
-    .map(mapPageToNotice);
+export async function getNotices(): Promise<Notice[]> {
+  try {
+    const dataSourceId = await getDataSourceId();
+    const response = (await notion.dataSources.query({
+      data_source_id: dataSourceId,
+      filter: {
+        property: "상태",
+        select: { equals: "공개" },
+      },
+      sorts: [{ property: "발행일", direction: "descending" }],
+    } as any)) as any;
+
+    return response.results
+      .filter((p: any) => "properties" in p)
+      .map(mapPageToNotice);
+  } catch (err) {
+    warnNotion("getNotices", err);
+    return [];
+  }
 }
 
 export async function getNoticeBySlug(slug: string): Promise<Notice | null> {
-  const dataSourceId = await getDataSourceId();
-  const response = (await notion.dataSources.query({
-    data_source_id: dataSourceId,
-    filter: {
-      and: [
-        { property: "Slug", rich_text: { equals: slug } },
-        { property: "상태", select: { equals: "공개" } },
-      ],
-    },
-  } as any)) as any;
+  try {
+    const dataSourceId = await getDataSourceId();
+    const response = (await notion.dataSources.query({
+      data_source_id: dataSourceId,
+      filter: {
+        and: [
+          { property: "Slug", rich_text: { equals: slug } },
+          { property: "상태", select: { equals: "공개" } },
+        ],
+      },
+    } as any)) as any;
 
-  if (response.results.length === 0) return null;
-  const page = response.results[0];
-  if (!("properties" in page)) return null;
-  return mapPageToNotice(page);
+    if (response.results.length === 0) return null;
+    const page = response.results[0];
+    if (!("properties" in page)) return null;
+    return mapPageToNotice(page);
+  } catch (err) {
+    warnNotion("getNoticeBySlug", err);
+    return null;
+  }
 }
 
 export async function getNoticeBlocks(pageId: string) {
-  const response = await notion.blocks.children.list({
-    block_id: pageId,
-    page_size: 100,
-  });
-  return response.results;
+  try {
+    const response = await notion.blocks.children.list({
+      block_id: pageId,
+      page_size: 100,
+    });
+    return response.results;
+  } catch (err) {
+    warnNotion("getNoticeBlocks", err);
+    return [];
+  }
 }
