@@ -28,6 +28,7 @@ export const SESSIONS: EcologySession[] = [
   { key: "2026-07-29", label: "7월 29일(수) 오후 2:00–4:00" },
   { key: "2026-08-05", label: "8월 5일(수) 오후 2:00–4:00" },
   { key: "2026-08-08", label: "8월 8일(토) 오전 10:00–12:00" },
+  { key: "2026-08-14", label: "8월 14일(금) 오전 10:00–12:00" },
 ];
 
 export function sessionLabel(key: string): string {

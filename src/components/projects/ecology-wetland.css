@@ -680,4 +680,5 @@
   .ecology-wetland-page .learn-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
   .ecology-wetland-page .timeline.cols-5 { grid-template-columns: repeat(5, 1fr); }
   .ecology-wetland-page .timeline.cols-6 { grid-template-columns: repeat(6, 1fr); }
+  .ecology-wetland-page .timeline.cols-7 { grid-template-columns: repeat(7, 1fr); }
 }
