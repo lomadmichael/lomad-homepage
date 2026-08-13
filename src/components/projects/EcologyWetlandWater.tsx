@@ -180,7 +180,7 @@ const INLINE_HTML = `
         <div class="pc-meta">
           <div class="pc-meta-item">
             <div class="pc-meta-k">운영일</div>
-            <div class="pc-meta-v">7월 11·18·25일 · 8월 8일 (토) 오전<br><span style="color: rgba(245,239,224,0.78); font-size:12px;">🎉 추가 클래스 · 7/29·8/5(수) 오후 2~4시 · 8/14(금) 오전 10~12시</span></div>
+            <div class="pc-meta-v">7월 11·18·25일 · 8월 8일 (토) 오전<br><span style="color: rgba(245,239,224,0.78); font-size:12px;">🎉 추가 클래스 · 7/29·8/5(수) 오후 2~4시 · 8/14(금)·8/22(토) 오전 10~12시</span></div>
           </div>
           <div class="pc-meta-item">
             <div class="pc-meta-k">운영시간</div>
@@ -209,10 +209,10 @@ const INLINE_HTML = `
     <div class="band-title-row">
       <div>
         <div class="section-label">7-8월의 일정</div>
-        <h2 class="section-title">달력 위의 일곱 번의 만남</h2>
+        <h2 class="section-title">달력 위의 여덟 번의 만남</h2>
       </div>
     </div>
-    <div class="timeline cols-7">
+    <div class="timeline cols-8">
       <div class="tl-node">
         <div class="tl-dot"></div>
         <div class="tl-date">7월 11일</div>
@@ -253,6 +253,12 @@ const INLINE_HTML = `
         <div class="tl-dot active"></div>
         <div class="tl-date">8월 14일</div>
         <div class="tl-day">금요일</div>
+        <div class="tl-label">추가 클래스 🎉<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오전 10:00~12:00</span></div>
+      </div>
+      <div class="tl-node">
+        <div class="tl-dot active"></div>
+        <div class="tl-date">8월 22일</div>
+        <div class="tl-day">토요일</div>
         <div class="tl-label">추가 클래스 🎉<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오전 10:00~12:00</span></div>
       </div>
     </div>
@@ -571,7 +577,7 @@ export default function EcologyWetlandWater() {
             남대천에서 만나요
           </h2>
           <p>
-            7-8월 정규 프로그램과 7월 29일·8월 5일(수)·8월 14일(금) 추가 클래스 접수가 진행 중입니다.<br />
+            7-8월 정규 프로그램과 7월 29일·8월 5일(수)·8월 14일(금)·8월 22일(토) 추가 클래스 접수가 진행 중입니다.<br />
             회차별 선착순 12명, 마감 시 조기 종료될 수 있어요.
           </p>
           <div
