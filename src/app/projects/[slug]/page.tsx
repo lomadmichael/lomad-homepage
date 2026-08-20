@@ -27,10 +27,32 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProjectBySlug(slug);
   if (!project) return { title: "Not Found" };
+  const title = `${project.name} | LOMAD Projects`;
+  const url = `/projects/${slug}`;
+  // 전용 OG 이미지가 있으면 사용하고, 없으면 사이트 기본 OG 이미지(app/opengraph-image)를 따른다.
+  const images = project.ogImage
+    ? [{ url: project.ogImage, width: 1200, height: 630, alt: project.name }]
+    : undefined;
+
   return {
-    title: `${project.name} | LOMAD Projects`,
+    title,
     description: project.oneLiner,
-    alternates: { canonical: `/projects/${slug}` },
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description: project.oneLiner,
+      url,
+      siteName: "로마드 협동조합",
+      locale: "ko_KR",
+      type: "article",
+      ...(images ? { images } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: project.oneLiner,
+      ...(images ? { images: images.map((i) => i.url) } : {}),
+    },
   };
 }
 
