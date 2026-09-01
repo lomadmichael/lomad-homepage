@@ -77,6 +77,11 @@ const TERMINALS: { name: string; addr: string; note: string }[] = [
     addr: "강릉시 하슬라로 27 (홍제동)",
     note: "시외·고속 터미널이 한 자리에 붙어 있습니다.",
   },
+  {
+    name: "강릉역 (KTX)",
+    addr: "강릉시 용지로 176 (교동)",
+    note: "서울역·청량리역에서 KTX로 오실 수 있습니다. 강릉역에서도 픽업해 드립니다.",
+  },
 ];
 
 const FAQ: { q: string; a: React.ReactNode }[] = [
@@ -307,9 +312,9 @@ export default function GuidePage() {
           <section className="mb-16">
             <h2 className={`${SECTION} ${H2}`}>오시는 길</h2>
             <p className={`${SECTION} ${LEAD}`}>
-              <strong className="text-text">9월 3일(목) 오후 1시까지</strong> 아래 터미널 중 한 곳에
-              도착해 주세요. 터미널에서 현남면까지는 <strong className="text-text">운영진이 픽업</strong>
-              해 드립니다. 도착 예정 터미널과 시간을 미리 알려 주시면 이동이 수월합니다.
+              <strong className="text-text">9월 3일(목) 오후 1시까지</strong> 아래 터미널이나 역 중 한 곳에
+              도착해 주세요. 현남면까지는 <strong className="text-text">운영진이 픽업</strong>
+              해 드립니다. 도착 예정 장소와 시간을 미리 알려 주시면 이동이 수월합니다.
             </p>
             <div className="border-2 border-text px-5 py-5 mb-6">
               <p className={`${SECTION} text-[11px] tracking-[2px] font-extrabold uppercase text-text-sub mb-2`}>
@@ -325,7 +330,7 @@ export default function GuidePage() {
               </p>
             </div>
 
-            <p className={`${SECTION} text-[13px] font-bold mb-3`}>도착 가능한 터미널</p>
+            <p className={`${SECTION} text-[13px] font-bold mb-3`}>도착 가능한 터미널 · 역</p>
             <div className="space-y-3">
               {TERMINALS.map((t) => (
                 <div key={t.name} className="border border-border px-5 py-4">
@@ -336,8 +341,8 @@ export default function GuidePage() {
               ))}
             </div>
             <p className={`${SECTION} text-[13px] text-text-sub leading-relaxed mt-4`}>
-              버스 시간은 <strong>버스타고</strong>나 <strong>고속버스통합예매</strong>에서 확인하실 수
-              있습니다. 오후 1시 도착이 어려우시면 미리 연락 주세요 — 도착 시간에 맞춰 조율해
+              버스 시간은 <strong>버스타고</strong>·<strong>고속버스통합예매</strong>에서, KTX는{" "}
+              <strong>코레일</strong>에서 확인하실 수 있습니다. 오후 1시 도착이 어려우시면 미리 연락 주세요 — 도착 시간에 맞춰 조율해
               드리겠습니다.
               <br />
               자차로 오시는 분은 집합 장소인 <strong>죽도해변 웨이브웍스</strong>로 바로 오시면 됩니다.
