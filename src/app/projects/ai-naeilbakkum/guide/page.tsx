@@ -18,7 +18,7 @@ const SCHEDULE: { day: string; date: string; items: [string, string][] }[] = [
     date: "9월 3일 (목)",
     items: [
       ["~ 13:00", "터미널 도착 · 픽업"],
-      ["~ 14:00", "집합 및 현생 체크인"],
+      ["~ 14:00", "웨이브웍스 집합 및 현생 체크인"],
       ["14:00 – 16:00", "오리엔테이션 · 자기소개"],
       ["16:00 – 18:00", "Ai 기본 세팅"],
       ["18:00 ~", "숙소 체크인 · 네트워킹"],
@@ -140,9 +140,9 @@ const FAQ: { q: string; a: React.ReactNode }[] = [
     q: "식사는 제공되나요?",
     a: (
       <>
-        프로그램 중 함께하는 식사는 운영진이 준비합니다. 다만 <strong>일정 외 자유시간의 식사는 각자
-        현남면의 가게들을 이용</strong>하시게 됩니다. 지역 상점을 둘러보는 것도 프로그램의 일부라고
-        생각해 주세요. 알레르기나 못 드시는 음식이 있으면 미리 알려 주세요.
+        <strong>1일차 저녁 식사는 주최 측에서 준비</strong>합니다. 그 외 식사(점심 등)는{" "}
+        <strong>현남면의 지역 상점에서 각자 해결</strong>하시면 됩니다. 동네 가게들을 직접 둘러보는
+        것도 현남생활의 일부라고 생각해 주세요. 알레르기나 못 드시는 음식이 있으면 미리 알려 주세요.
       </>
     ),
   },
@@ -253,6 +253,9 @@ export default function GuidePage() {
                 <strong>9월 3일(목) 오후 1시까지</strong> 터미널 도착 — 도착하시면 픽업해 드립니다
               </li>
               <li>
+                집합 장소는 <strong>죽도해변 웨이브웍스</strong> (양양군 현남면 인구중앙길 110)
+              </li>
+              <li>
                 <strong>노트북 필수 지참</strong> — 충전기도 잊지 마세요
               </li>
               <li>
@@ -308,6 +311,21 @@ export default function GuidePage() {
               도착해 주세요. 터미널에서 현남면까지는 <strong className="text-text">운영진이 픽업</strong>
               해 드립니다. 도착 예정 터미널과 시간을 미리 알려 주시면 이동이 수월합니다.
             </p>
+            <div className="border-2 border-text px-5 py-5 mb-6">
+              <p className={`${SECTION} text-[11px] tracking-[2px] font-extrabold uppercase text-text-sub mb-2`}>
+                집합 장소
+              </p>
+              <p className={`${SECTION} text-[18px] font-black mb-1`}>죽도해변 웨이브웍스</p>
+              <p className={`${SECTION} text-[14px] text-text-sub mb-3`}>
+                강원특별자치도 양양군 현남면 인구중앙길 110
+              </p>
+              <p className={`${SECTION} text-[13px] leading-relaxed`}>
+                죽도해변 바로 앞에 있는 공유 오피스입니다. 1일차 오후 2시 오리엔테이션이 이곳에서
+                시작됩니다. 터미널에서 오시는 분은 픽업해 드리니 이곳까지 직접 오실 필요는 없습니다.
+              </p>
+            </div>
+
+            <p className={`${SECTION} text-[13px] font-bold mb-3`}>도착 가능한 터미널</p>
             <div className="space-y-3">
               {TERMINALS.map((t) => (
                 <div key={t.name} className="border border-border px-5 py-4">
@@ -322,8 +340,7 @@ export default function GuidePage() {
               있습니다. 오후 1시 도착이 어려우시면 미리 연락 주세요 — 도착 시간에 맞춰 조율해
               드리겠습니다.
               <br />
-              자차로 오시는 분은 숙소로 바로 오시면 됩니다. 정확한 집합 장소는 출발 전 개별
-              안내드립니다.
+              자차로 오시는 분은 집합 장소인 <strong>죽도해변 웨이브웍스</strong>로 바로 오시면 됩니다.
             </p>
           </section>
 
