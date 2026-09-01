@@ -16,7 +16,7 @@ const INLINE_HTML = `
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow"><span class="pulse"></span> 2026년 7-8월 · 양양 남대천</div>
+      <div class="eyebrow"><span class="pulse"></span> 2026년 9월 · 양양 남대천</div>
       <h1 class="hero-title">
         남대천 물속<br>
         <span class="flow">생물 이야기</span>
@@ -27,7 +27,7 @@ const INLINE_HTML = `
       </p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="${REGISTER_URL}">
-          정규 · 추가 클래스 접수
+          9월 생태체험 접수
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 4h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14L20 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a class="btn btn-ghost" href="#programs">프로그램 살펴보기</a>
@@ -154,7 +154,7 @@ const INLINE_HTML = `
   <div class="wrap">
     <div class="band-title-row">
       <div>
-        <div class="section-label">7-8월 정규 프로그램</div>
+        <div class="section-label">9월 정규 프로그램</div>
         <h2 class="section-title">남대천 물속에서<br>이런 걸 만나요</h2>
       </div>
       <p class="section-sub">족대와 뜰채로 민물고기와 수서곤충을 직접 채집하고, 루페로 자세히 관찰한 뒤 다시 강으로 돌려보냅니다. 어떤 생물이 사는지로 남대천의 물이 얼마나 맑은지 함께 알아봐요.</p>
@@ -180,11 +180,11 @@ const INLINE_HTML = `
         <div class="pc-meta">
           <div class="pc-meta-item">
             <div class="pc-meta-k">운영일</div>
-            <div class="pc-meta-v">7월 11·18·25일 · 8월 8일 (토) 오전<br><span style="color: rgba(245,239,224,0.78); font-size:12px;">🎉 추가 클래스 · 7/29·8/5(수) 오후 2~4시 · 8/14(금)·8/22(토) 오전 10~12시</span></div>
+            <div class="pc-meta-v">9월 5·6·12·13·19·20일 (토·일) 오전<br><span style="color: rgba(245,239,224,0.78); font-size:12px;">매주 토·일 오전 10:00~12:00 · 회차별 선착순 12명</span></div>
           </div>
           <div class="pc-meta-item">
             <div class="pc-meta-k">운영시간</div>
-            <div class="pc-meta-v">오전 10:00 – 12:00<br><span style="color: rgba(245,239,224,0.78); font-size:12px;">회당 120분 · 오전 2개반 운영</span></div>
+            <div class="pc-meta-v">오전 10:00 – 12:00<br><span style="color: rgba(245,239,224,0.78); font-size:12px;">회당 120분 진행</span></div>
           </div>
           <div class="pc-meta-item">
             <div class="pc-meta-k">참여대상</div>
@@ -208,58 +208,46 @@ const INLINE_HTML = `
   <div class="wrap">
     <div class="band-title-row">
       <div>
-        <div class="section-label">7-8월의 일정</div>
-        <h2 class="section-title">달력 위의 여덟 번의 만남</h2>
+        <div class="section-label">9월의 일정</div>
+        <h2 class="section-title">달력 위의 여섯 번의 만남</h2>
       </div>
     </div>
-    <div class="timeline cols-8">
+    <div class="timeline cols-6">
       <div class="tl-node">
-        <div class="tl-dot"></div>
-        <div class="tl-date">7월 11일</div>
+        <div class="tl-dot active"></div>
+        <div class="tl-date">9월 5일</div>
         <div class="tl-day">토요일</div>
-        <div class="tl-label">정규 생태체험 1회차<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오전 2개반</span></div>
-      </div>
-      <div class="tl-node">
-        <div class="tl-dot"></div>
-        <div class="tl-date">7월 18일</div>
-        <div class="tl-day">토요일</div>
-        <div class="tl-label">정규 생태체험 2회차<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오전 2개반</span></div>
-      </div>
-      <div class="tl-node">
-        <div class="tl-dot"></div>
-        <div class="tl-date">7월 25일</div>
-        <div class="tl-day">토요일</div>
-        <div class="tl-label">정규 생태체험 3회차<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오전 2개반</span></div>
+        <div class="tl-label">생태체험 1회차<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오전 10:00~12:00</span></div>
       </div>
       <div class="tl-node">
         <div class="tl-dot active"></div>
-        <div class="tl-date">7월 29일</div>
-        <div class="tl-day">수요일</div>
-        <div class="tl-label">추가 클래스 🎉<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오후 2:00~4:00</span></div>
+        <div class="tl-date">9월 6일</div>
+        <div class="tl-day">일요일</div>
+        <div class="tl-label">생태체험 2회차<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오전 10:00~12:00</span></div>
       </div>
       <div class="tl-node">
         <div class="tl-dot active"></div>
-        <div class="tl-date">8월 5일</div>
-        <div class="tl-day">수요일</div>
-        <div class="tl-label">추가 클래스 🎉<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오후 2:00~4:00</span></div>
-      </div>
-      <div class="tl-node">
-        <div class="tl-dot"></div>
-        <div class="tl-date">8월 8일</div>
+        <div class="tl-date">9월 12일</div>
         <div class="tl-day">토요일</div>
-        <div class="tl-label">정규 생태체험 4회차<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오전 2개반</span></div>
+        <div class="tl-label">생태체험 3회차<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오전 10:00~12:00</span></div>
       </div>
       <div class="tl-node">
         <div class="tl-dot active"></div>
-        <div class="tl-date">8월 14일</div>
-        <div class="tl-day">금요일</div>
-        <div class="tl-label">추가 클래스 🎉<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오전 10:00~12:00</span></div>
+        <div class="tl-date">9월 13일</div>
+        <div class="tl-day">일요일</div>
+        <div class="tl-label">생태체험 4회차<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오전 10:00~12:00</span></div>
       </div>
       <div class="tl-node">
         <div class="tl-dot active"></div>
-        <div class="tl-date">8월 22일</div>
+        <div class="tl-date">9월 19일</div>
         <div class="tl-day">토요일</div>
-        <div class="tl-label">추가 클래스 🎉<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오전 10:00~12:00</span></div>
+        <div class="tl-label">생태체험 5회차<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오전 10:00~12:00</span></div>
+      </div>
+      <div class="tl-node">
+        <div class="tl-dot active"></div>
+        <div class="tl-date">9월 20일</div>
+        <div class="tl-day">일요일</div>
+        <div class="tl-label">생태체험 6회차<br><span style="color: var(--ink-soft); font-weight: 400;">남대천 · 오전 10:00~12:00</span></div>
       </div>
     </div>
   </div>
@@ -573,11 +561,11 @@ export default function EcologyWetlandWater() {
             className="section-title"
             style={{ color: "var(--cream)", margin: "0 auto 20px" }}
           >
-            7-8월의 토요일 오전,<br />
+            9월의 주말 오전,<br />
             남대천에서 만나요
           </h2>
           <p>
-            7-8월 정규 프로그램과 7월 29일·8월 5일(수)·8월 14일(금)·8월 22일(토) 추가 클래스 접수가 진행 중입니다.<br />
+            9월 생태체험 프로그램(9/5·6·12·13·19·20) 접수가 진행 중입니다.<br />
             회차별 선착순 12명, 마감 시 조기 종료될 수 있어요.
           </p>
           <div
