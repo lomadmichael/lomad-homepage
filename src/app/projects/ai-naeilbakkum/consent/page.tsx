@@ -66,7 +66,7 @@ export default function ConsentPage() {
       <footer className="border-t border-border">
         <div className="max-w-[1200px] mx-auto px-6 md:px-12 py-6">
           <p className="font-[family-name:var(--font-noto)] text-[12px] text-text-sub">
-            로마드협동조합 · 문의 lomad.coop@naver.com · 010-9542-3775
+            로마드협동조합 · 문의 lomad.coop@gmail.com · 010-9542-3775
           </p>
         </div>
       </footer>

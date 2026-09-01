@@ -127,7 +127,7 @@ export default function ConsentForm() {
         <p className={HELP}>
           수정이 필요하시면 같은 휴대전화 번호로 다시 제출하시면 됩니다.
           <br />
-          문의 lomad.coop@naver.com · 010-9542-3775
+          문의 lomad.coop@gmail.com · 010-9542-3775
         </p>
       </div>
     );
@@ -415,7 +415,7 @@ export default function ConsentForm() {
       <p className={HELP + " text-center"}>
         제출 후 수정이 필요하시면 같은 휴대전화 번호로 다시 제출하시면 됩니다.
         <br />
-        문의 lomad.coop@naver.com · 010-9542-3775
+        문의 lomad.coop@gmail.com · 010-9542-3775
       </p>
     </form>
   );
