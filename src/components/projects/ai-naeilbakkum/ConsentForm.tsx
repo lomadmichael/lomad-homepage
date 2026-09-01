@@ -1,7 +1,20 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useCallback, useEffect, useRef, useState } from "react";
 import { submitAinbConsent, type ConsentFormState } from "@/lib/ainb-consent-action";
+
+const POSTCODE_SRC = "https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
+
+declare global {
+  interface Window {
+    daum?: {
+      Postcode: new (opts: {
+        oncomplete: (data: { roadAddress: string; jibunAddress: string; zonecode: string }) => void;
+        onclose?: () => void;
+      }) => { open: () => void };
+    };
+  }
+}
 
 const initial: ConsentFormState = { success: false, message: "" };
 
@@ -16,15 +29,23 @@ function Check({
   required = true,
   title,
   desc,
+  defaultChecked,
 }: {
   name: string;
   required?: boolean;
   title: string;
   desc?: string;
+  defaultChecked?: boolean;
 }) {
   return (
     <label className="flex gap-3 border border-border bg-bg px-4 py-4 cursor-pointer hover:border-text transition-colors">
-      <input type="checkbox" name={name} className="accent-text mt-[3px] shrink-0" />
+      <input
+        type="checkbox"
+        name={name}
+        required={required}
+        defaultChecked={defaultChecked}
+        className="accent-text mt-[3px] shrink-0"
+      />
       <span>
         <span className="font-[family-name:var(--font-noto)] text-[14px] font-bold">
           {required && <span className="text-[#C0392B] mr-1">*</span>}
@@ -38,6 +59,54 @@ function Check({
 
 export default function ConsentForm() {
   const [state, formAction, pending] = useActionState(submitAinbConsent, initial);
+  // 검증에 걸려 되돌아왔을 때 입력값을 그대로 복원한다(주민등록번호만 다시 입력).
+  const prev = state.values;
+
+  // 주소: 다음(카카오) 우편번호 서비스로 검색 → 상세주소만 직접 입력
+  const [baseAddr, setBaseAddr] = useState("");
+  const [detailAddr, setDetailAddr] = useState("");
+  const [zonecode, setZonecode] = useState("");
+  const [scriptReady, setScriptReady] = useState(false);
+  const detailRef = useRef<HTMLInputElement>(null);
+
+  // 검증 실패로 돌아왔을 때 이전 주소 복원
+  useEffect(() => {
+    if (prev?.address && !baseAddr && !detailAddr) setBaseAddr(prev.address);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [prev?.address]);
+
+  useEffect(() => {
+    if (window.daum?.Postcode) {
+      setScriptReady(true);
+      return;
+    }
+    const existing = document.querySelector<HTMLScriptElement>(`script[src="${POSTCODE_SRC}"]`);
+    if (existing) {
+      existing.addEventListener("load", () => setScriptReady(true));
+      return;
+    }
+    const el = document.createElement("script");
+    el.src = POSTCODE_SRC;
+    el.async = true;
+    el.onload = () => setScriptReady(true);
+    document.body.appendChild(el);
+  }, []);
+
+  const openPostcode = useCallback(() => {
+    if (!window.daum?.Postcode) return;
+    new window.daum.Postcode({
+      oncomplete: (data) => {
+        setZonecode(data.zonecode);
+        setBaseAddr(data.roadAddress || data.jibunAddress);
+        setTimeout(() => detailRef.current?.focus(), 50);
+      },
+    }).open();
+  }, []);
+
+  const fullAddress = [zonecode ? `(${zonecode})` : "", baseAddr, detailAddr]
+    .filter(Boolean)
+    .join(" ")
+    .trim();
 
   if (state.success) {
     return (
@@ -84,7 +153,7 @@ export default function ConsentForm() {
             </div>
           ))}
         </div>
-        <Check name="consent_privacy" title="개인정보 수집 및 이용에 동의합니다." />
+        <Check defaultChecked={prev?.consent_privacy} name="consent_privacy" title="개인정보 수집 및 이용에 동의합니다." />
       </fieldset>
 
       {/* 참가자 확인 */}
@@ -103,7 +172,14 @@ export default function ConsentForm() {
                   key={c}
                   className="flex-1 flex items-center justify-center gap-2 border border-border bg-bg px-4 py-3 text-[14px] cursor-pointer hover:border-text transition-colors"
                 >
-                  <input type="radio" name="cohort" value={c} className="accent-text" required />
+                  <input
+                    type="radio"
+                    name="cohort"
+                    value={c}
+                    defaultChecked={prev?.cohort === c}
+                    className="accent-text"
+                    required
+                  />
                   <span className="font-[family-name:var(--font-noto)] font-bold">{c}</span>
                   <span className="font-[family-name:var(--font-noto)] text-[12px] text-text-sub">
                     {c === "1기" ? "9/3~9/6" : "9/10~9/13"}
@@ -117,7 +193,14 @@ export default function ConsentForm() {
               <label className={LABEL} htmlFor="name">
                 <span className="text-[#C0392B] mr-1">*</span>성명
               </label>
-              <input id="name" name="name" className={INPUT} required placeholder="신청하신 성함" />
+              <input
+                id="name"
+                name="name"
+                className={INPUT}
+                required
+                defaultValue={prev?.name}
+                placeholder="신청하신 성함"
+              />
             </div>
             <div>
               <label className={LABEL} htmlFor="phone">
@@ -129,6 +212,9 @@ export default function ConsentForm() {
                 className={INPUT}
                 required
                 inputMode="numeric"
+                defaultValue={prev?.phone}
+                pattern="01[016789][- ]?[0-9]{3,4}[- ]?[0-9]{4}"
+                title="휴대전화 번호를 정확히 입력해 주세요 (예: 010-1234-5678)"
                 placeholder="010-0000-0000"
               />
             </div>
@@ -137,7 +223,14 @@ export default function ConsentForm() {
             <label className={LABEL} htmlFor="email">
               이메일 <span className="text-text-sub font-normal">(선택)</span>
             </label>
-            <input id="email" name="email" type="email" className={INPUT} placeholder="선택 입력" />
+            <input
+              id="email"
+              name="email"
+              type="email"
+              className={INPUT}
+              defaultValue={prev?.email}
+              placeholder="선택 입력"
+            />
           </div>
         </div>
       </fieldset>
@@ -148,10 +241,11 @@ export default function ConsentForm() {
           프로그램 및 보험 동의
         </legend>
         <Check
+          defaultChecked={prev?.consent_program}
           name="consent_program"
           title="2. 바들바들 현남생활 프로그램을 숙지하였고, 일정 및 내용에 동의합니다."
         />
-        <Check name="consent_insurance" title="3. 여행자 보험 가입에 동의합니다." />
+        <Check defaultChecked={prev?.consent_insurance} name="consent_insurance" title="3. 여행자 보험 가입에 동의합니다." />
       </fieldset>
 
       {/* 4·5·6. 보험 가입 정보 */}
@@ -169,20 +263,46 @@ export default function ConsentForm() {
               name="insured_name"
               className={INPUT}
               required
+              defaultValue={prev?.insured_name}
               placeholder="주민등록상 이름"
             />
           </div>
           <div>
-            <label className={LABEL} htmlFor="address">
+            <label className={LABEL} htmlFor="address_base">
               <span className="text-[#C0392B] mr-1">*</span>5. 보험 가입을 위한 주소
             </label>
-            <input
-              id="address"
-              name="address"
-              className={INPUT}
-              required
-              placeholder="예) 서울특별시 성동구 성수동 00로 00, 000호"
-            />
+            <div className="space-y-2">
+              <div className="flex gap-2">
+                <input
+                  id="address_base"
+                  className={INPUT + " flex-1 bg-bg-soft"}
+                  value={zonecode ? `(${zonecode}) ${baseAddr}` : baseAddr}
+                  readOnly
+                  placeholder="주소 검색을 눌러 주세요"
+                  onClick={openPostcode}
+                />
+                <button
+                  type="button"
+                  onClick={openPostcode}
+                  disabled={!scriptReady}
+                  className="shrink-0 px-5 bg-text text-bg font-[family-name:var(--font-noto)] text-[14px] font-bold disabled:opacity-40 hover:opacity-90 transition-opacity"
+                >
+                  주소 검색
+                </button>
+              </div>
+              <input
+                ref={detailRef}
+                className={INPUT}
+                value={detailAddr}
+                onChange={(e) => setDetailAddr(e.target.value)}
+                placeholder="상세주소 (동·호수 등)"
+              />
+              {/* 서버로는 합쳐진 전체 주소를 보낸다 */}
+              <input type="hidden" name="address" value={fullAddress} />
+            </div>
+            <p className={HELP}>
+              주소 검색 버튼을 눌러 주소를 선택하신 뒤, 상세주소를 입력해 주세요.
+            </p>
           </div>
           <div>
             <label className={LABEL} htmlFor="rrn">
@@ -195,6 +315,8 @@ export default function ConsentForm() {
               required
               inputMode="numeric"
               autoComplete="off"
+              pattern="[0-9]{6}[- ]?[0-9]{7}"
+              title="주민등록번호 13자리를 입력해 주세요 (예: 900101-1234567)"
               placeholder="000000-0000000"
             />
             <p className={HELP}>
@@ -237,6 +359,7 @@ export default function ConsentForm() {
               name="refund_account"
               className={INPUT}
               required
+              defaultValue={prev?.refund_account}
               placeholder="예) 농협 301-0000-0000-00 홍길동"
             />
             <p className={HELP}>계좌번호 / 은행명 / 예금주를 함께 기입해 주시면 됩니다.</p>
@@ -265,7 +388,14 @@ export default function ConsentForm() {
         <label className={LABEL} htmlFor="note">
           남기실 말씀 <span className="text-text-sub font-normal">(선택)</span>
         </label>
-        <textarea id="note" name="note" rows={3} className={INPUT} placeholder="알레르기, 복용약 등 운영진이 알아야 할 사항이 있으면 적어주세요." />
+        <textarea
+          id="note"
+          name="note"
+          rows={3}
+          className={INPUT}
+          defaultValue={prev?.note}
+          placeholder="알레르기, 복용약 등 운영진이 알아야 할 사항이 있으면 적어주세요."
+        />
       </fieldset>
 
       {state.message && !state.success && (
