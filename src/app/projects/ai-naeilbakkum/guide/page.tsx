@@ -31,7 +31,7 @@ const SCHEDULE: { day: string; date: string; items: [string, string, string?][] 
     items: [
       ["08:00 까지", "러닝 집합", "인구 어린이공원"],
       ["08:00 – 09:00", "현남면 러닝", "인구 어린이공원"],
-      ["10:00 – 12:00", "Ai 기본 교육", "웨이브파크"],
+      ["10:00 – 12:00", "Ai 기본 교육", "웨이브웍스"],
       ["13:00 – 18:00", "지역 멘토 로컬투어"],
       ["18:00 ~", "자유시간 · 저녁식사"],
     ],
@@ -222,14 +222,12 @@ const PLACE_COLOR: Record<string, string> = {
   "어스투라운지": "#1F6FB2",
   "인구 어린이공원": "#0B7A5A",
   "죽도해변": "#0B7A5A",
-  "웨이브파크": "#7A4FBF",
 };
 
 const VENUES: { name: string; addr: string }[] = [
   { name: "웨이브웍스", addr: "양양군 현남면 인구중앙길 110 · 죽도해변 앞" },
   { name: "어스투라운지", addr: "양양군 현남면 인구길 64 1층" },
   { name: "인구 어린이공원", addr: "인구해수욕장 남쪽 · 2일차 러닝 집합 장소" },
-  { name: "웨이브파크", addr: "2일차 Ai 기본 교육" },
 ];
 
 const SECTION = "font-[family-name:var(--font-noto)]";
