@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 };
 
 const CONSENT_URL = "/projects/ai-naeilbakkum/consent";
+const CURRICULUM_URL = "/projects/ai-naeilbakkum/curriculum";
 const TEL = "010-9542-3775";
 
 const SCHEDULE: { day: string; date: string; items: [string, string, string?][] }[] = [
@@ -284,6 +285,11 @@ export default function GuidePage() {
                 <strong>9월 1일(화)까지 참가 동의서 작성</strong> —{" "}
                 <Link href={CONSENT_URL} className="underline font-bold">
                   작성하러 가기
+                </Link>
+              </li>
+              <li>
+                <Link href={CURRICULUM_URL} className="underline font-bold">
+                  실습 가이드 보기 →
                 </Link>
               </li>
             </ul>
