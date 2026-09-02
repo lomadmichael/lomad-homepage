@@ -12,26 +12,28 @@ export const metadata: Metadata = {
 const CONSENT_URL = "/projects/ai-naeilbakkum/consent";
 const TEL = "010-9542-3775";
 
-const SCHEDULE: { day: string; date: string; items: [string, string][] }[] = [
+const SCHEDULE: { day: string; date: string; items: [string, string, string?][] }[] = [
   {
     day: "1일차",
     date: "9월 3일 (목)",
     items: [
-      ["~ 13:00", "터미널 도착 · 픽업"],
-      ["~ 14:00", "웨이브웍스 집합 및 현생 체크인"],
-      ["14:00 – 16:00", "오리엔테이션 · 자기소개"],
-      ["16:00 – 18:00", "Ai 기본 세팅"],
-      ["18:00 ~", "숙소 체크인 · 네트워킹"],
+      ["~ 13:00", "터미널 · 강릉역 도착 → 픽업"],
+      ["~ 14:00", "집합 및 현생 체크인", "웨이브웍스"],
+      ["14:00 – 16:00", "오리엔테이션 · 자기소개", "웨이브웍스"],
+      ["16:00 – 18:00", "Ai 기본 세팅", "웨이브웍스"],
+      ["18:00 ~", "숙소 체크인"],
+      ["18:30 ~", "네트워킹 · 저녁식사", "웨이브웍스"],
     ],
   },
   {
     day: "2일차",
     date: "9월 4일 (금)",
     items: [
-      ["08:00 – 09:00", "현남면 러닝"],
-      ["10:00 – 12:00", "Ai 기본 교육"],
+      ["08:00 까지", "러닝 집합", "인구 어린이공원"],
+      ["08:00 – 09:00", "현남면 러닝", "인구 어린이공원"],
+      ["10:00 – 12:00", "Ai 기본 교육", "웨이브파크"],
       ["13:00 – 18:00", "지역 멘토 로컬투어"],
-      ["18:00 ~", "자유시간"],
+      ["18:00 ~", "자유시간 · 저녁식사"],
     ],
   },
   {
@@ -39,10 +41,10 @@ const SCHEDULE: { day: string; date: string; items: [string, string][] }[] = [
     date: "9월 5일 (토)",
     items: [
       ["09:00 – 10:00", "현남생활 굿즈 만들기"],
-      ["10:00 – 12:00", "서핑"],
-      ["14:00 – 18:00", "Ai 교육 · 산출물 만들기"],
-      ["18:00 – 19:00", "요가"],
-      ["19:00 ~", "자유시간"],
+      ["10:00 – 12:00", "서핑", "죽도해변"],
+      ["14:00 – 18:00", "Ai 교육 · 산출물 만들기", "어스투라운지"],
+      ["18:00 – 19:00", "요가", "웨이브웍스"],
+      ["19:00 ~", "자유시간 · 저녁식사"],
     ],
   },
   {
@@ -50,7 +52,7 @@ const SCHEDULE: { day: string; date: string; items: [string, string][] }[] = [
     date: "9월 6일 (일)",
     items: [
       ["~ 10:00", "숙소 체크아웃"],
-      ["10:00 – 12:00", "Ai 산출물 · 현남생활 발표회"],
+      ["10:00 – 12:00", "Ai 산출물 · 현남생활 발표회", "어스투라운지"],
       ["12:00 ~", "현생 체크아웃 및 귀가"],
     ],
   },
@@ -215,6 +217,21 @@ const FAQ: { q: string; a: React.ReactNode }[] = [
   },
 ];
 
+const PLACE_COLOR: Record<string, string> = {
+  "웨이브웍스": "#E8611C",
+  "어스투라운지": "#1F6FB2",
+  "인구 어린이공원": "#0B7A5A",
+  "죽도해변": "#0B7A5A",
+  "웨이브파크": "#7A4FBF",
+};
+
+const VENUES: { name: string; addr: string }[] = [
+  { name: "웨이브웍스", addr: "양양군 현남면 인구중앙길 110 · 죽도해변 앞" },
+  { name: "어스투라운지", addr: "양양군 현남면 인구길 64 1층" },
+  { name: "인구 어린이공원", addr: "인구해수욕장 남쪽 · 2일차 러닝 집합 장소" },
+  { name: "웨이브파크", addr: "2일차 Ai 기본 교육" },
+];
+
 const SECTION = "font-[family-name:var(--font-noto)]";
 const H2 = "text-[22px] md:text-[26px] font-black mb-2";
 const LEAD = "text-[14px] text-text-sub leading-[1.9] mb-6";
@@ -291,7 +308,7 @@ export default function GuidePage() {
                     <span className={`${SECTION} text-[13px] text-text-sub`}>{d.date}</span>
                   </div>
                   <ul>
-                    {d.items.map(([time, what]) => (
+                    {d.items.map(([time, what, place]) => (
                       <li
                         key={time + what}
                         className="flex gap-4 px-5 py-3 border-b border-border last:border-b-0"
@@ -301,10 +318,42 @@ export default function GuidePage() {
                         >
                           {time}
                         </span>
-                        <span className={`${SECTION} text-[14px]`}>{what}</span>
+                        <span className={`${SECTION} text-[14px]`}>
+                          {what}
+                          {place && (
+                            <span
+                              className="ml-2 inline-block rounded-full px-2 py-[2px] text-[11px] font-bold text-white align-[1px] whitespace-nowrap"
+                              style={{ backgroundColor: PLACE_COLOR[place] ?? "#6b6558" }}
+                            >
+                              {place}
+                            </span>
+                          )}
+                        </span>
                       </li>
                     ))}
                   </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* 1-2. 장소 안내 */}
+          <section className="mb-16">
+            <h2 className={`${SECTION} ${H2}`}>프로그램 장소</h2>
+            <p className={`${SECTION} ${LEAD}`}>
+              일정에 따라 장소가 다릅니다. 매일 아침 단톡방으로 그날 장소를 다시 안내드립니다.
+            </p>
+            <div className="space-y-3">
+              {VENUES.map((v) => (
+                <div key={v.name} className="flex gap-3 border border-border px-5 py-4">
+                  <span
+                    className="mt-[6px] h-[10px] w-[10px] shrink-0 rounded-full"
+                    style={{ backgroundColor: PLACE_COLOR[v.name] ?? "#6b6558" }}
+                  />
+                  <div>
+                    <p className={`${SECTION} text-[15px] font-black`}>{v.name}</p>
+                    <p className={`${SECTION} text-[13px] text-text-sub mt-1`}>{v.addr}</p>
+                  </div>
                 </div>
               ))}
             </div>
