@@ -167,26 +167,36 @@ export default function ConsentForm() {
               <span className="text-[#C0392B] mr-1">*</span>참가 기수
             </label>
             <div className="flex gap-3">
-              {["1기", "2기"].map((c) => (
+              {[
+                { key: "1기", date: "9/3~9/6", closed: true },
+                { key: "2기", date: "9/10~9/13", closed: false },
+              ].map((c) => (
                 <label
-                  key={c}
-                  className="flex-1 flex items-center justify-center gap-2 border border-border bg-bg px-4 py-3 text-[14px] cursor-pointer hover:border-text transition-colors"
+                  key={c.key}
+                  className={
+                    "flex-1 flex items-center justify-center gap-2 border px-4 py-3 text-[14px] transition-colors " +
+                    (c.closed
+                      ? "border-border bg-bg-soft opacity-50 cursor-not-allowed"
+                      : "border-border bg-bg cursor-pointer hover:border-text")
+                  }
                 >
                   <input
                     type="radio"
                     name="cohort"
-                    value={c}
-                    defaultChecked={prev?.cohort === c}
+                    value={c.key}
+                    defaultChecked={prev?.cohort === c.key}
+                    disabled={c.closed}
                     className="accent-text"
                     required
                   />
-                  <span className="font-[family-name:var(--font-noto)] font-bold">{c}</span>
+                  <span className="font-[family-name:var(--font-noto)] font-bold">{c.key}</span>
                   <span className="font-[family-name:var(--font-noto)] text-[12px] text-text-sub">
-                    {c === "1기" ? "9/3~9/6" : "9/10~9/13"}
+                    {c.closed ? "접수 마감" : c.date}
                   </span>
                 </label>
               ))}
             </div>
+            <p className={HELP}>1기는 접수가 마감되어 2기만 선택하실 수 있습니다.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-5">
             <div>
