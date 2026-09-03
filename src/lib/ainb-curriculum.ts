@@ -159,7 +159,7 @@ export const DAYS: Day[] = [
           { kind: "text", body: "이제 딱 한 번, Vercel 로그인만 직접 합니다. 화면 오른쪽 위 터미널 아이콘(>_)을 눌러 앱 안의 터미널을 열고, 내 노트북에 맞는 탭의 명령을 복사해 붙여넣고 Enter." },
           { kind: "command", os: "windows", code: "npx.cmd vercel login", note: "Windows는 npx 대신 npx.cmd 를 써야 합니다. 처음엔 도구를 받느라 30초쯤 걸립니다." },
           { kind: "command", os: "mac", code: "npx vercel login", note: "처음엔 도구를 받느라 30초쯤 걸립니다." },
-          { kind: "text", body: "명령을 실행하면 먼저 "Need to install the following packages: vercel... Ok to proceed? (y)"가 나옵니다 — y 를 입력하고 Enter(그냥 Enter도 됩니다). 도구를 받는 데 30초쯤 걸립니다. 그다음 로그인 방법 선택지가 뜨면 화살표로 'Continue with Google'을 고르고 Enter → 브라우저가 열리면 ai○○ 계정 선택 → 'Success' 표시 → 앱으로 돌아옵니다. 이제 대화창에서 배포를 시킵니다." },
+          { kind: "text", body: "명령을 실행하면 먼저 'Need to install the following packages: vercel... Ok to proceed? (y)'가 나옵니다 — y 를 입력하고 Enter(그냥 Enter도 됩니다). 도구를 받는 데 30초쯤 걸립니다. 그다음 로그인 방법 선택지가 뜨면 화살표로 'Continue with Google'을 고르고 Enter → 브라우저가 열리면 ai○○ 계정 선택 → 'Success' 표시 → 앱으로 돌아옵니다. 이제 대화창에서 배포를 시킵니다." },
           { kind: "prompt", title: "Code 탭에 붙여넣기", text: "어제 만든 인사 웹페이지를 Vercel에 배포해줘. 질문 없이 기본값(--yes)으로 진행하고 실서비스(production)로 올려줘. Windows면 npx 대신 npx.cmd 를 써. 끝나면 접속 주소를 알려줘.", tip: "주소가 나오면 스마트폰으로 열어 보세요 — 그게 오늘의 첫 인증입니다. 단체방에 주소를 올리고 서로 방문해 보세요." },
           { kind: "warn", text: "로그인 선택지에 Google이 없고 이메일만 있으면 ai○○@lomadcoop.com을 입력하세요 — 확인 메일이 ai 계정 gmail로 옵니다. 터미널이 멈춘 것처럼 보이면 브라우저 창을 확인하세요(로그인 대기 중)." },
           { kind: "check", text: "폰에서 내 페이지 주소가 열리면 완료 → 단체방에 주소 공유" },
