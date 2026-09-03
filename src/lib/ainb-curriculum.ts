@@ -84,7 +84,9 @@ export const DAYS: Day[] = [
         minutes: "15분",
         blocks: [
           { kind: "text", body: "Claude 앱 자체에는 필요 없지만, 3일차에 여러분 작품을 인터넷에 올리는 배포 도구(Vercel)가 쓰는 부품입니다. LTS 버전을 받아 '다음 → 다음 → 설치'만 누르면 됩니다. 와이파이가 느리면 운영진 USB로 설치하세요." },
-          { kind: "link", label: "Node.js 다운로드 (LTS)", href: "https://nodejs.org" },
+          { kind: "text", body: "내 노트북에 맞는 버튼 하나만 누르면 설치 파일이 바로 내려옵니다. 내려받은 파일을 더블클릭 → 계속/다음 → 설치 → 완료. 와이파이가 느리면 운영진 USB에 같은 파일이 있습니다." },
+          { kind: "link", label: "Mac용 Node.js 설치 파일 (.pkg)", href: "https://nodejs.org/dist/v24.20.0/node-v24.20.0.pkg", note: "Mac 종류(M1·M2·인텔) 상관없이 이 파일 하나면 됩니다. 설치 중 Mac 로그인 비밀번호를 물으면 입력하세요." },
+          { kind: "link", label: "Windows용 Node.js 설치 파일 (.msi)", href: "https://nodejs.org/dist/v24.20.0/node-v24.20.0-x64.msi", note: "설치 화면에서 체크박스는 건드리지 말고 Next만 누르세요. 'Tools for Native Modules' 체크는 하지 않아도 됩니다." },
           { kind: "text", body: "설치가 끝났는지 직접 확인하지 말고, Code 탭의 Claude에게 시켜 보세요. 여러분이 처음으로 Ai에게 컴퓨터 일을 시키는 순간입니다." },
           { kind: "prompt", title: "Code 탭에 붙여넣기", text: "node 버전을 확인해서 알려줘. 설치가 안 되어 있으면 어떻게 해야 하는지도 알려줘." },
           { kind: "check", text: "버전 숫자(예: v22.x)를 알려주면 완료" },
