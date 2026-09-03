@@ -58,7 +58,8 @@ export const DAYS: Day[] = [
         title: "Claude 계정 — 초대 메일 수락",
         minutes: "20분",
         blocks: [
-          { kind: "text", body: "어제 보내드린 'Lomadcoop 팀 초대' 메일을 열어 수락 버튼을 누르세요. 비밀번호를 새로 만들 필요는 없습니다 — 이메일로 오는 인증 코드나 구글 로그인으로 들어갑니다." },
+          { kind: "text", body: "참가자마다 실습용 로그인 주소를 하나씩 드립니다 — 체크카드에 적힌 'ainb○○@lomadcoop.com'이 여러분의 Claude 아이디입니다. 이 주소로 오는 메일은 전부 여러분의 개인 메일(gmail·네이버)로 자동 전달되니, 받은편지함에서 'Lomadcoop 팀 초대' 메일을 열어 수락 버튼을 누르세요." },
+          { kind: "warn", text: "로그인할 때 이메일 칸에는 반드시 ainb○○@lomadcoop.com을 입력하세요. '구글로 로그인' 버튼은 누르지 마세요 — 그러면 개인 계정으로 들어가 팀 시트가 연결되지 않습니다. 인증 코드는 개인 메일함에 도착합니다." },
           { kind: "link", label: "claude.ai 열기", href: "https://claude.ai", note: "초대 메일이 없으면 스팸함을 확인하고, 그래도 없으면 손을 들어 주세요. 바로 다시 보내드립니다." },
           { kind: "prompt", title: "첫 인사 (채팅창에 붙여넣기)", text: "안녕! 나는 오늘 Ai를 처음 제대로 배우기 시작했어. 앞으로 4일 동안 내 비서가 되어 줘. 어려운 말은 쉬운 우리말로 풀어서 설명해줘. 먼저 네가 나 같은 사람에게 도와줄 수 있는 일 5가지만 알려줘.", tip: "답이 오면 계정 세팅 성공입니다." },
           { kind: "check", text: "채팅에 답이 오면 완료" },
@@ -70,7 +71,7 @@ export const DAYS: Day[] = [
         minutes: "25분",
         blocks: [
           { kind: "text", body: "'말로 시키는 컴퓨터'인 Claude Code는 Claude 데스크톱 앱 안에 들어 있습니다. 앱만 설치하면 됩니다 — 터미널도, 별도 설치도 필요 없습니다." },
-          { kind: "link", label: "Claude 데스크톱 앱 다운로드", href: "https://claude.ai/download", note: "내 노트북(Windows / Mac)에 맞는 설치 파일이 자동으로 내려옵니다. 실행해서 설치한 뒤 앱을 열고, STEP 2에서 만든 계정으로 로그인하세요." },
+          { kind: "link", label: "Claude 데스크톱 앱 다운로드", href: "https://claude.ai/download", note: "내 노트북(Windows / Mac)에 맞는 설치 파일이 자동으로 내려옵니다. 실행해서 설치한 뒤 앱을 열고, STEP 2와 같은 방법으로 로그인하세요 — 이메일 칸에 ainb○○@lomadcoop.com, 코드는 개인 메일함에서." },
           { kind: "link", label: "Git 설치 (Windows 노트북만)", href: "https://git-scm.com/downloads/win", note: "Windows에서는 Code 탭이 내 폴더를 열 때 Git이 필요합니다. 설치 화면은 전부 '다음(Next)'만 누르면 됩니다. Mac은 이미 들어 있어 건너뛰세요 — 단, 폴더를 열 때 '명령어 라인 개발자 도구를 설치하시겠습니까?' 창이 뜨면 '설치'를 누르고 5~10분 기다리면 됩니다(새 Mac에서 한 번만)." },
           { kind: "text", body: "앱 상단 가운데의 세 탭(Chat · Cowork · Code) 중 'Code'를 누릅니다. 왼쪽에서 'Local'을 고른 뒤 'Select folder'(폴더 선택)를 눌러, 바탕화면에 '내일바꿈'이라는 새 폴더를 만들고 그 폴더를 선택하세요. 보내기 버튼 옆 권한 모드는 'Auto'로 두면 됩니다." },
           { kind: "prompt", title: "Code 탭에 붙여넣기 (첫 인사)", text: "안녕! 지금 열려 있는 폴더 이름이 뭔지 알려주고, 앞으로 이 폴더에서 네가 나를 어떻게 도와줄 수 있는지 세 줄로 설명해줘.", tip: "폴더 이름('내일바꿈')을 맞게 답하면 Code 탭이 내 컴퓨터와 연결된 것입니다." },
