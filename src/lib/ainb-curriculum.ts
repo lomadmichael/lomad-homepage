@@ -89,7 +89,7 @@ export const DAYS: Day[] = [
           { kind: "link", label: "Windows용 Node.js 설치 파일 (.msi)", href: "https://nodejs.org/dist/v24.20.0/node-v24.20.0-x64.msi", note: "설치 화면에서 체크박스는 건드리지 말고 Next만 누르세요. 'Tools for Native Modules' 체크는 하지 않아도 됩니다." },
           { kind: "text", body: "설치가 끝났는지 직접 확인하지 말고, Code 탭의 Claude에게 시켜 보세요. 여러분이 처음으로 Ai에게 컴퓨터 일을 시키는 순간입니다." },
           { kind: "prompt", title: "Code 탭에 붙여넣기", text: "node 버전을 확인해서 알려줘. 설치가 안 되어 있으면 어떻게 해야 하는지도 알려줘." },
-          { kind: "check", text: "버전 숫자(예: v22.x)를 알려주면 완료" },
+          { kind: "check", text: "버전 숫자(예: v24.x)를 알려주면 완료" },
         ],
       },
       {
@@ -107,8 +107,9 @@ export const DAYS: Day[] = [
         title: "Supabase 가입 — 데이터를 저장할 곳",
         minutes: "15분",
         blocks: [
-          { kind: "text", body: "방명록·예약·기록처럼 '저장'이 필요한 작품을 위한 데이터베이스입니다. 역시 구글 로그인 권장. 조직 이름은 본인 이름으로 두면 됩니다." },
-          { kind: "link", label: "Supabase 가입하기", href: "https://supabase.com/dashboard/sign-up", note: "프로젝트 생성은 3일차에 함께 합니다. 지금 만들면 비밀번호 분실 사고만 늘어요." },
+          { kind: "text", body: "방명록·예약·기록처럼 '저장'이 필요한 작품을 위한 데이터베이스입니다. Supabase는 Google 가입 버튼이 없으니 이메일로 가입합니다: 이메일 칸에 ai○○@lomadcoop.com, 비밀번호는 체크카드의 비밀번호를 그대로 써도 됩니다 → 가입 후 인증 메일이 그 계정 gmail(STEP 1에서 로그인한 받은편지함)로 오니 링크를 클릭하세요. 조직 이름은 본인 이름으로 두면 됩니다." },
+          { kind: "link", label: "Supabase 가입하기 (이메일로)", href: "https://supabase.com/dashboard/sign-up", note: "GitHub 버튼은 누르지 마세요(계정 없음). 프로젝트 생성은 3일차에 함께 합니다." },
+          { kind: "warn", text: "인증 메일이 안 오면 gmail 스팸함을 확인하고, 그래도 없으면 로그인 화면에서 'Resend'(다시 보내기)를 누르세요." },
           { kind: "check", text: "대시보드 화면이 뜨면 완료" },
         ],
       },
