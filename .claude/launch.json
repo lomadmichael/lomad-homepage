@@ -4,9 +4,15 @@
     {
       "name": "lomad-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "--port", "3005"],
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "3005"
+      ],
       "port": 3005,
-      "cwd": "lomad-homepage"
+      "cwd": "C:\\Users\\hongk\\Desktop\\ClaudeCode\\lomad-homepage"
     }
   ]
 }
