@@ -99,9 +99,13 @@ export function tourByKey(key: string): Tour | undefined {
   return TOURS.find((t) => t.key === key);
 }
 
-/** 1기 참가자 명단 — 본인 확인용 (선정 20명 + 초대 참가 이호진) */
-export const ROSTER: { name: string; phone: string }[] = [
+/**
+ * 1기 참가자 명단 — 본인 확인용 (선정 20명 + 초대 참가 이호진).
+ * staff: true 는 운영진 테스트용이라 미신청자 집계에서 제외한다.
+ */
+export const ROSTER: { name: string; phone: string; staff?: boolean }[] = [
   { name: "이호진", phone: "01027375201" },
+  { name: "이홍래", phone: "01037985676", staff: true },
   { name: "강지현", phone: "01036033773" },
   { name: "권동현", phone: "01085688774" },
   { name: "김림", phone: "01090525477" },
@@ -123,6 +127,9 @@ export const ROSTER: { name: string; phone: string }[] = [
   { name: "최효빈", phone: "01087955232" },
   { name: "황경묵", phone: "01028491349" },
 ];
+
+/** 실제 참가자만 (운영진 테스트 계정 제외) */
+export const PARTICIPANTS = ROSTER.filter((r) => !r.staff);
 
 /** 명단에 있는 참가자인지 확인하고, 등록된 성명을 돌려준다. */
 export function findParticipant(phone: string): { name: string } | null {

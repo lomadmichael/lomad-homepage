@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { verifyAdmin, ADMIN_COOKIE } from "../../consent/admin/auth";
 import AdminLogin from "../../consent/admin/AdminLogin";
 import { listSignups } from "@/lib/ainb-tour-db";
-import { TOURS, ROSTER } from "@/lib/ainb-tour-config";
+import { TOURS, PARTICIPANTS } from "@/lib/ainb-tour-config";
 
 export const dynamic = "force-dynamic";
 export const metadata = { robots: { index: false, follow: false } };
@@ -20,7 +20,7 @@ export default async function TourAdminPage() {
   const rows = await listSignups();
   const byTour = new Map(TOURS.map((t) => [t.key, rows.filter((r) => r.tour_key === t.key)]));
   const doneNames = new Set(rows.map((r) => r.name));
-  const pending = ROSTER.filter((r) => !doneNames.has(r.name));
+  const pending = PARTICIPANTS.filter((r) => !doneNames.has(r.name));
 
   return (
     <main className="min-h-screen bg-bg">
@@ -29,7 +29,7 @@ export default async function TourAdminPage() {
           멘토투어 신청 현황
         </h1>
         <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub mb-10">
-          1기 · 신청 {rows.length}명 / 참가자 {ROSTER.length}명
+          1기 · 신청 {rows.length}명 / 참가자 {PARTICIPANTS.length}명
         </p>
 
         <div className="space-y-8">

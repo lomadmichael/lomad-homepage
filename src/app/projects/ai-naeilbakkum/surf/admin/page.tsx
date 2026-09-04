@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { verifyAdmin, ADMIN_COOKIE } from "../../consent/admin/auth";
 import AdminLogin from "../../consent/admin/AdminLogin";
 import { listSurf, EXPERIENCE_LABEL, GEAR_LABEL } from "@/lib/ainb-surf-db";
-import { ROSTER } from "@/lib/ainb-tour-config";
+import { PARTICIPANTS } from "@/lib/ainb-tour-config";
 
 export const dynamic = "force-dynamic";
 export const metadata = { robots: { index: false, follow: false } };
@@ -16,7 +16,7 @@ export default async function SurfAdminPage() {
 
   const rows = await listSurf();
   const done = new Set(rows.map((r) => r.name));
-  const pending = ROSTER.filter((r) => !done.has(r.name));
+  const pending = PARTICIPANTS.filter((r) => !done.has(r.name));
 
   const suit = rows.filter((r) => r.gear === "suit");
   const rash = rows.filter((r) => r.gear === "rashguard");
@@ -33,7 +33,7 @@ export default async function SurfAdminPage() {
           서핑 참가 신청 현황
         </h1>
         <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub mb-8">
-          1기 · 신청 {rows.length}명 / 참가자 {ROSTER.length}명
+          1기 · 신청 {rows.length}명 / 참가자 {PARTICIPANTS.length}명
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
