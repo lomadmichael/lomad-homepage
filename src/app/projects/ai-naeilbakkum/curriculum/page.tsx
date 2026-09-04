@@ -2,12 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import CurriculumTabs from "@/components/projects/ai-naeilbakkum/CurriculumTabs";
 import { DAYS } from "@/lib/ainb-curriculum";
+import { ainbOg } from "@/lib/ainb-og";
 
 export const metadata: Metadata = {
   title: "실습 가이드 · 바들바들 현남생활 Ai 내일바꿈 | LOMAD",
   description:
     "「바들바들 현남생활 – Ai 내일바꿈」 1기 실습 가이드 — 일차별 STEP, 붙여넣을 명령어와 프롬프트.",
   alternates: { canonical: "/projects/ai-naeilbakkum/curriculum" },
+  ...ainbOg({
+    title: "실습 가이드 · 바들바들 현남생활 Ai 내일바꿈 | LOMAD",
+    description:
+      "「바들바들 현남생활 – Ai 내일바꿈」 1기 실습 가이드 — 일차별 STEP, 붙여넣을 명령어와 프롬프트.",
+    path: "/projects/ai-naeilbakkum/curriculum",
+  }),
   robots: { index: false, follow: false },
 };
 

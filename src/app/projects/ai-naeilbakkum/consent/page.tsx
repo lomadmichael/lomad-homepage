@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ConsentForm from "@/components/projects/ai-naeilbakkum/ConsentForm";
+import { ainbOg } from "@/lib/ainb-og";
 
 export const dynamic = "force-dynamic";
 
@@ -9,6 +10,12 @@ export const metadata: Metadata = {
   description:
     "「바들바들 현남생활 – Ai 내일바꿈」 참가자 동의서. 여행자 보험 가입과 참가비 환불을 위해 작성해 주세요.",
   alternates: { canonical: "/projects/ai-naeilbakkum/consent" },
+  ...ainbOg({
+    title: "참가 동의서 · 바들바들 현남생활 Ai 내일바꿈 | LOMAD",
+    description:
+      "「바들바들 현남생활 – Ai 내일바꿈」 참가자 동의서. 여행자 보험 가입과 참가비 환불을 위해 작성해 주세요.",
+    path: "/projects/ai-naeilbakkum/consent",
+  }),
   robots: { index: false, follow: false },
 };
 

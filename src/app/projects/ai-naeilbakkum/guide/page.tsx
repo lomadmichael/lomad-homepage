@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ainbOg } from "@/lib/ainb-og";
 
 export const metadata: Metadata = {
   title: "참가자 안내 · 바들바들 현남생활 Ai 내일바꿈 | LOMAD",
   description:
     "「바들바들 현남생활 – Ai 내일바꿈」 참가자 안내 — 일정, 도착 시간과 터미널, 준비물, 자주 묻는 질문.",
   alternates: { canonical: "/projects/ai-naeilbakkum/guide" },
+  ...ainbOg({
+    title: "참가자 안내 · 바들바들 현남생활 Ai 내일바꿈 | LOMAD",
+    description:
+      "「바들바들 현남생활 – Ai 내일바꿈」 참가자 안내 — 일정, 도착 시간과 터미널, 준비물, 자주 묻는 질문.",
+    path: "/projects/ai-naeilbakkum/guide",
+  }),
   robots: { index: false, follow: false },
 };
 
