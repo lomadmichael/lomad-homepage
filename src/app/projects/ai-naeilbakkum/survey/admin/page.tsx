@@ -126,6 +126,7 @@ export default async function SurveyAdminPage() {
             {[
               ["가장 좋았던 프로그램", "best"],
               ["아쉬웠던 점 · 개선 요청", "improve"],
+              ["다음 기수 참가자에게 하는 조언", "advice"],
               ["그 밖의 이야기", "free_note"],
             ].map(([label, key]) => {
               const list = rows.filter((r) => (r as unknown as Record<string, string>)[key as string]);

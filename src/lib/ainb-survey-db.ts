@@ -22,6 +22,7 @@ export interface SurveyResponse {
   live_reason: string | null;
   best: string | null;
   improve: string | null;
+  advice: string | null;
   free_note: string | null;
   created_at: string;
 }
@@ -35,6 +36,7 @@ export interface SurveyInput {
   live_reason: string;
   best: string;
   improve: string;
+  advice: string;
   free_note: string;
 }
 
@@ -49,6 +51,7 @@ export async function submitSurvey(input: SurveyInput): Promise<void> {
     live_reason: input.live_reason || null,
     best: input.best || null,
     improve: input.improve || null,
+    advice: input.advice || null,
     free_note: input.free_note || null,
   });
   if (error) throw error;

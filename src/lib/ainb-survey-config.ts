@@ -11,14 +11,17 @@ export interface SurveyItem {
 
 /** 5점 척도 프로그램 문항 */
 export const SURVEY_ITEMS: SurveyItem[] = [
+  {
+    key: "ai_education",
+    label: "Ai 교육",
+    hint: "기본 세팅부터 산출물 만들기까지 전체 과정",
+    day: "Ai 교육",
+  },
   { key: "orientation", label: "오리엔테이션 · 자기소개", day: "1일차" },
-  { key: "ai_setup", label: "Ai 기본 세팅", hint: "계정 만들기, 도구 설치", day: "1일차" },
   { key: "running", label: "현남면 러닝", hint: "인구 어린이공원 출발", day: "2일차" },
-  { key: "ai_basic", label: "Ai 기본 교육", day: "2일차" },
   { key: "mentor_tour", label: "멘토투어", hint: "지역 멘토와 함께한 로컬투어", day: "2일차" },
   { key: "goods", label: "현남생활 굿즈 만들기", day: "3일차" },
   { key: "surfing", label: "서핑 체험", hint: "죽도해변", day: "3일차" },
-  { key: "ai_project", label: "Ai 교육 · 산출물 만들기", day: "3일차" },
   { key: "yoga", label: "요가", hint: "웨이브웍스", day: "3일차" },
   { key: "showcase", label: "산출물 · 현남생활 발표회", day: "4일차" },
   { key: "lodging", label: "숙소", day: "공통" },

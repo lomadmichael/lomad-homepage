@@ -62,6 +62,7 @@ export async function submitSurveyForm(
       live_reason: liveReason,
       best: get("best"),
       improve: get("improve"),
+      advice: get("advice"),
       free_note: get("free_note"),
     });
     return { success: true, message: "설문에 응해주셔서 감사합니다." };

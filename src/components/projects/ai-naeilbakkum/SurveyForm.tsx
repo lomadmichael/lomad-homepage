@@ -188,6 +188,15 @@ export default function SurveyForm() {
           <textarea name="improve" rows={3} className={`${INPUT} resize-none`} />
         </label>
         <label className="block">
+          <span className={LABEL}>다음 기수 참가자에게 조언을 해준다면</span>
+          <textarea
+            name="advice"
+            rows={3}
+            placeholder="이렇게 준비하면 좋다, 이건 꼭 해봐라 같은 이야기를 남겨 주세요."
+            className={`${INPUT} resize-none`}
+          />
+        </label>
+        <label className="block">
           <span className={LABEL}>그 밖에 하고 싶은 이야기</span>
           <textarea name="free_note" rows={3} className={`${INPUT} resize-none`} />
         </label>
