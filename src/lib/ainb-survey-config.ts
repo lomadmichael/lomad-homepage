@@ -23,7 +23,6 @@ export const SURVEY_ITEMS: SurveyItem[] = [
   { key: "yoga", label: "요가", hint: "웨이브웍스", day: "3일차" },
   { key: "showcase", label: "산출물 · 현남생활 발표회", day: "4일차" },
   { key: "lodging", label: "숙소", day: "공통" },
-  { key: "operation", label: "운영진 안내와 진행", day: "공통" },
 ];
 
 export const SCALE = [1, 2, 3, 4, 5];
