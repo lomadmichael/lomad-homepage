@@ -112,7 +112,10 @@ export default function SurveyForm() {
       <section className="border-t-2 border-text pt-8 space-y-7">
         <div>
           <p className="font-[family-name:var(--font-noto)] text-[15px] font-bold mb-3">
-            전반적인 「Ai 내일바꿈」 만족도는 어떠셨나요?
+            3박 4일 전체를 돌아보면 어떠셨나요?
+          </p>
+          <p className="font-[family-name:var(--font-noto)] text-[12px] text-text-sub mb-3 -mt-2">
+            개별 프로그램이 아니라 「Ai 내일바꿈」 전체에 대한 만족도입니다
           </p>
           <Scale name="overall" low="매우 불만족" high="매우 만족" />
         </div>

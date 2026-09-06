@@ -15,7 +15,7 @@ export const SURVEY_ITEMS: SurveyItem[] = [
     key: "ai_education",
     label: "Ai 교육",
     hint: "기본 세팅부터 산출물 만들기까지 전체 과정",
-    day: "Ai 교육",
+    day: "1~3일차",
   },
   { key: "orientation", label: "오리엔테이션 · 자기소개", day: "1일차" },
   { key: "running", label: "현남면 러닝", hint: "인구 어린이공원 출발", day: "2일차" },
