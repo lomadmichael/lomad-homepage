@@ -13,7 +13,6 @@ export interface SurveyItem {
 export const SURVEY_ITEMS: SurveyItem[] = [
   { key: "orientation", label: "오리엔테이션 · 자기소개", day: "1일차" },
   { key: "ai_setup", label: "Ai 기본 세팅", hint: "계정 만들기, 도구 설치", day: "1일차" },
-  { key: "networking", label: "참가자 네트워킹", hint: "웨이브웍스에서의 첫날 저녁", day: "1일차" },
   { key: "running", label: "현남면 러닝", hint: "인구 어린이공원 출발", day: "2일차" },
   { key: "ai_basic", label: "Ai 기본 교육", day: "2일차" },
   { key: "mentor_tour", label: "멘토투어", hint: "지역 멘토와 함께한 로컬투어", day: "2일차" },
