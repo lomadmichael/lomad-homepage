@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useRef, useState } from "react";
 import { submitSurveyForm, type SurveyFormState } from "@/lib/ainb-survey-action";
 import {
   SURVEY_ITEMS,
@@ -15,23 +15,60 @@ const LABEL = "font-[family-name:var(--font-noto)] text-[13px] font-bold block m
 const INPUT =
   "w-full border border-border px-4 py-3 font-[family-name:var(--font-noto)] text-[15px] bg-bg focus:border-text outline-none";
 
-/** 1~5 라디오 한 줄 */
-function Scale({ name, low, high }: { name: string; low: string; high: string }) {
+/**
+ * 1~5 척도.
+ * 선택 표시를 CSS has(:checked) 대신 상태로 직접 칠한다 —
+ * 카카오톡 인앱 브라우저 등 구형 웹뷰에서 :has()가 동작하지 않아
+ * "눌러도 아무 반응이 없다"고 느끼는 문제가 있었다.
+ */
+function Scale({
+  name,
+  low,
+  high,
+  value,
+  onPick,
+  invalid,
+}: {
+  name: string;
+  low: string;
+  high: string;
+  value: number | null;
+  onPick: (n: number) => void;
+  invalid?: boolean;
+}) {
   return (
     <div className="flex items-center gap-2">
       <span className="font-[family-name:var(--font-noto)] text-[11px] text-text-sub w-[52px] shrink-0 leading-tight">
         {low}
       </span>
       <div className="flex-1 grid grid-cols-5 gap-1.5">
-        {SCALE.map((n) => (
-          <label
-            key={n}
-            className="flex flex-col items-center gap-1 border border-border py-2 cursor-pointer has-[:checked]:border-text has-[:checked]:border-2 has-[:checked]:bg-[#00000008]"
-          >
-            <input type="radio" name={name} value={n} required className="accent-[#1A1A1A]" />
-            <span className="font-[family-name:var(--font-noto)] text-[12px] font-bold">{n}</span>
-          </label>
-        ))}
+        {SCALE.map((n) => {
+          const on = value === n;
+          return (
+            <label
+              key={n}
+              className={`flex flex-col items-center gap-1 py-2.5 cursor-pointer border-2 transition-colors ${
+                on
+                  ? "border-text bg-text text-bg"
+                  : invalid
+                    ? "border-[#C0392B]"
+                    : "border-border"
+              }`}
+            >
+              <input
+                type="radio"
+                name={name}
+                value={n}
+                checked={on}
+                onChange={() => onPick(n)}
+                className="sr-only"
+              />
+              <span className="font-[family-name:var(--font-noto)] text-[15px] font-black leading-none">
+                {n}
+              </span>
+            </label>
+          );
+        })}
       </div>
       <span className="font-[family-name:var(--font-noto)] text-[11px] text-text-sub w-[52px] shrink-0 text-right leading-tight">
         {high}
@@ -42,7 +79,12 @@ function Scale({ name, low, high }: { name: string; low: string; high: string })
 
 export default function SurveyForm() {
   const [state, formAction, pending] = useActionState(submitSurveyForm, initial);
+  const [ratings, setRatings] = useState<Record<string, number>>({});
+  const [overall, setOverall] = useState<number | null>(null);
+  const [recommend, setRecommend] = useState<number | null>(null);
   const [live, setLive] = useState<number | null>(null);
+  const [missing, setMissing] = useState<string[]>([]);
+  const formRef = useRef<HTMLFormElement>(null);
 
   if (state.success) {
     return (
@@ -62,13 +104,56 @@ export default function SurveyForm() {
     );
   }
 
+  /** 제출 전에 빠진 항목을 직접 찾아 알려준다 (브라우저 기본 경고는 위치를 알기 어렵다) */
+  function check(e: React.FormEvent<HTMLFormElement>) {
+    const form = e.currentTarget;
+    const gaps: string[] = [];
+    const name = (form.elements.namedItem("name") as HTMLInputElement)?.value.trim();
+    const reason = (form.elements.namedItem("live_reason") as HTMLTextAreaElement)?.value.trim();
+
+    if (!name) gaps.push("성명");
+    for (const item of SURVEY_ITEMS) if (!ratings[item.key]) gaps.push(item.label);
+    if (!overall) gaps.push("3박 4일 전체 만족도");
+    if (!recommend) gaps.push("추천 의향");
+    if (!live) gaps.push("생활해보고 싶은 마음");
+    if (!reason) gaps.push("그렇게 생각한 이유");
+
+    if (gaps.length) {
+      e.preventDefault();
+      setMissing(gaps);
+      formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    setMissing([]);
+  }
+
+  const gapSet = new Set(missing);
+
   let currentDay = "";
 
   return (
-    <form action={formAction} className="space-y-10">
+    <form ref={formRef} action={formAction} onSubmit={check} noValidate className="space-y-10">
+      {missing.length > 0 && (
+        <div className="border-2 border-[#C0392B] bg-[#FDECEA] px-5 py-4">
+          <p className="font-[family-name:var(--font-noto)] text-[14px] font-black text-[#8E2A20] mb-2">
+            아직 답하지 않은 항목이 {missing.length}개 있습니다
+          </p>
+          <p className="font-[family-name:var(--font-noto)] text-[13px] leading-[1.9] text-[#8E2A20]">
+            {missing.join(" · ")}
+          </p>
+          <p className="font-[family-name:var(--font-noto)] text-[12px] leading-[1.8] text-[#8E2A20] mt-2">
+            빨간 테두리로 표시된 곳을 채워 주세요.
+          </p>
+        </div>
+      )}
+
       <label className="block">
         <span className={LABEL}>성명</span>
-        <input name="name" required autoComplete="name" className={INPUT} />
+        <input
+          name="name"
+          autoComplete="name"
+          className={`${INPUT} ${gapSet.has("성명") ? "border-[#C0392B] border-2" : ""}`}
+        />
       </label>
 
       {/* 프로그램별 만족도 */}
@@ -100,7 +185,14 @@ export default function SurveyForm() {
                   </p>
                 )}
                 <div className={item.hint ? "" : "mt-3"}>
-                  <Scale name={`r_${item.key}`} low="만족하지 않는다" high="만족한다" />
+                  <Scale
+                    name={`r_${item.key}`}
+                    low="만족하지 않는다"
+                    high="만족한다"
+                    value={ratings[item.key] ?? null}
+                    onPick={(n) => setRatings((p) => ({ ...p, [item.key]: n }))}
+                    invalid={gapSet.has(item.label)}
+                  />
                 </div>
               </div>
             );
@@ -111,19 +203,33 @@ export default function SurveyForm() {
       {/* 전반 */}
       <section className="border-t-2 border-text pt-8 space-y-7">
         <div>
-          <p className="font-[family-name:var(--font-noto)] text-[15px] font-bold mb-3">
+          <p className="font-[family-name:var(--font-noto)] text-[15px] font-bold mb-1">
             3박 4일 전체를 돌아보면 어떠셨나요?
           </p>
-          <p className="font-[family-name:var(--font-noto)] text-[12px] text-text-sub mb-3 -mt-2">
+          <p className="font-[family-name:var(--font-noto)] text-[12px] text-text-sub mb-3">
             개별 프로그램이 아니라 「Ai 내일바꿈」 전체에 대한 만족도입니다
           </p>
-          <Scale name="overall" low="매우 불만족" high="매우 만족" />
+          <Scale
+            name="overall"
+            low="매우 불만족"
+            high="매우 만족"
+            value={overall}
+            onPick={setOverall}
+            invalid={gapSet.has("3박 4일 전체 만족도")}
+          />
         </div>
         <div>
           <p className="font-[family-name:var(--font-noto)] text-[15px] font-bold mb-3">
             주변에 이 프로그램을 추천하고 싶으신가요?
           </p>
-          <Scale name="recommend" low="전혀 아니다" high="꼭 추천한다" />
+          <Scale
+            name="recommend"
+            low="전혀 아니다"
+            high="꼭 추천한다"
+            value={recommend}
+            onPick={setRecommend}
+            invalid={gapSet.has("추천 의향")}
+          />
         </div>
       </section>
 
@@ -140,22 +246,36 @@ export default function SurveyForm() {
           이 지역에서 생활해보고 싶다는 생각이 들었나요?
         </p>
         <div className="space-y-2.5">
-          {[5, 4, 3, 2, 1].map((n) => (
-            <label
-              key={n}
-              className="flex items-center gap-3 border border-border px-4 py-3 cursor-pointer has-[:checked]:border-text has-[:checked]:border-2 font-[family-name:var(--font-noto)] text-[15px]"
-            >
-              <input
-                type="radio"
-                name="live_intent"
-                value={n}
-                required
-                onChange={() => setLive(n)}
-                className="accent-[#1A1A1A]"
-              />
-              <span>{LIVE_INTENT_LABEL[n]}</span>
-            </label>
-          ))}
+          {[5, 4, 3, 2, 1].map((n) => {
+            const on = live === n;
+            return (
+              <label
+                key={n}
+                className={`flex items-center gap-3 px-4 py-3.5 cursor-pointer border-2 transition-colors font-[family-name:var(--font-noto)] text-[15px] ${
+                  on
+                    ? "border-text bg-text text-bg font-bold"
+                    : gapSet.has("생활해보고 싶은 마음")
+                      ? "border-[#C0392B]"
+                      : "border-border"
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="live_intent"
+                  value={n}
+                  checked={on}
+                  onChange={() => setLive(n)}
+                  className="sr-only"
+                />
+                <span
+                  className={`w-4 h-4 rounded-full border-2 shrink-0 ${
+                    on ? "border-bg bg-bg" : "border-text-sub"
+                  }`}
+                />
+                <span>{LIVE_INTENT_LABEL[n]}</span>
+              </label>
+            );
+          })}
         </div>
 
         <label className="block mt-6">
@@ -165,7 +285,6 @@ export default function SurveyForm() {
           <textarea
             name="live_reason"
             rows={4}
-            required
             placeholder={
               live === null
                 ? "위에서 먼저 선택해 주세요."
@@ -175,13 +294,18 @@ export default function SurveyForm() {
                     ? "예: 일자리가 마땅치 않다, 교통이 불편하다, 겨울이 걱정된다…"
                     : "예: 좋았지만 현실적으로 정리할 것이 많다…"
             }
-            className={`${INPUT} resize-none`}
+            className={`${INPUT} resize-none ${
+              gapSet.has("그렇게 생각한 이유") ? "border-[#C0392B] border-2" : ""
+            }`}
           />
         </label>
       </section>
 
       {/* 자유 서술 */}
       <section className="border-t-2 border-text pt-8 space-y-6">
+        <p className="font-[family-name:var(--font-noto)] text-[13px] text-text-sub -mb-2">
+          아래 네 가지는 쓰고 싶은 만큼만 적으셔도 됩니다.
+        </p>
         <label className="block">
           <span className={LABEL}>가장 좋았던 프로그램과 그 이유</span>
           <textarea name="best" rows={3} className={`${INPUT} resize-none`} />
@@ -218,6 +342,9 @@ export default function SurveyForm() {
       >
         {pending ? "제출 중…" : "설문 제출하기"}
       </button>
+      <p className="font-[family-name:var(--font-noto)] text-[12px] text-text-sub text-center -mt-6">
+        제출이 안 되면 010-9542-3775로 연락 주세요.
+      </p>
     </form>
   );
 }
