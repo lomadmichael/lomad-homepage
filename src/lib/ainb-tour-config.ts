@@ -100,11 +100,13 @@ export function tourByKey(key: string): Tour | undefined {
 }
 
 /**
- * 1기 참가자 명단 — 본인 확인용 (선정 20명 + 초대 참가 이호진).
- * staff: true 는 운영진 테스트용이라 미신청자 집계에서 제외한다.
+ * 1기 참가자 명단 — 본인 확인용 (선정 20명 + 초대 참가 이호진 + 운영진).
+ * staff: true 는 신청·응답은 할 수 있지만 집계(참가자 수·미응답자)에서 제외한다.
+ * 이호진님은 선정 절차를 거치지 않은 초대 참가라, 공식 성과 수치를 선정 20명
+ * 기준으로 내기 위해 집계에서 뺀다(응답 데이터 자체는 그대로 보존).
  */
 export const ROSTER: { name: string; phone: string; staff?: boolean }[] = [
-  { name: "이호진", phone: "01027375201" },
+  { name: "이호진", phone: "01027375201", staff: true },
   { name: "이홍래", phone: "01037985676", staff: true },
   { name: "강지현", phone: "01036033773" },
   { name: "권동현", phone: "01085688774" },
@@ -128,8 +130,11 @@ export const ROSTER: { name: string; phone: string; staff?: boolean }[] = [
   { name: "황경묵", phone: "01028491349" },
 ];
 
-/** 실제 참가자만 (운영진 테스트 계정 제외) */
+/** 실제 참가자만 (초대 참가·운영진 제외) — 공식 성과 수치의 모집단 */
 export const PARTICIPANTS = ROSTER.filter((r) => !r.staff);
+
+/** 집계에서 제외할 이름 */
+export const STAFF_NAMES = new Set(ROSTER.filter((r) => r.staff).map((r) => r.name));
 
 /** 명단에 있는 참가자인지 확인하고, 등록된 성명을 돌려준다. */
 export function findParticipant(phone: string): { name: string } | null {

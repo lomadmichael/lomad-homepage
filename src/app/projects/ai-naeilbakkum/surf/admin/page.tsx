@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { verifyAdmin, ADMIN_COOKIE } from "../../consent/admin/auth";
 import AdminLogin from "../../consent/admin/AdminLogin";
 import { listSurf, EXPERIENCE_LABEL, GEAR_LABEL } from "@/lib/ainb-surf-db";
-import { PARTICIPANTS } from "@/lib/ainb-tour-config";
+import { PARTICIPANTS, STAFF_NAMES } from "@/lib/ainb-tour-config";
 
 export const dynamic = "force-dynamic";
 export const metadata = { robots: { index: false, follow: false } };
@@ -14,7 +14,7 @@ export default async function SurfAdminPage() {
   const token = (await cookies()).get(ADMIN_COOKIE)?.value;
   if (!verifyAdmin(token)) return <AdminLogin />;
 
-  const rows = await listSurf();
+  const rows = (await listSurf()).filter((r) => !STAFF_NAMES.has(r.name));
   const done = new Set(rows.map((r) => r.name));
   const pending = PARTICIPANTS.filter((r) => !done.has(r.name));
 

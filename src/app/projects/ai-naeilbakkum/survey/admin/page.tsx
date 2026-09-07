@@ -3,7 +3,7 @@ import { verifyAdmin, ADMIN_COOKIE } from "../../consent/admin/auth";
 import AdminLogin from "../../consent/admin/AdminLogin";
 import { listSurvey, summarize } from "@/lib/ainb-survey-db";
 import { SURVEY_ITEMS, LIVE_INTENT_LABEL } from "@/lib/ainb-survey-config";
-import { PARTICIPANTS } from "@/lib/ainb-tour-config";
+import { PARTICIPANTS, STAFF_NAMES } from "@/lib/ainb-tour-config";
 
 export const dynamic = "force-dynamic";
 export const metadata = { robots: { index: false, follow: false } };
@@ -20,7 +20,8 @@ export default async function SurveyAdminPage() {
   const token = (await cookies()).get(ADMIN_COOKIE)?.value;
   if (!verifyAdmin(token)) return <AdminLogin />;
 
-  const rows = await listSurvey();
+  // 초대 참가·운영진 응답은 공식 수치에서 제외한다 (데이터는 DB에 그대로 남는다)
+  const rows = (await listSurvey()).filter((r) => !STAFF_NAMES.has(r.name));
   const n = rows.length;
   const done = new Set(rows.map((r) => r.name));
   const pending = PARTICIPANTS.filter((p) => !done.has(p.name));
