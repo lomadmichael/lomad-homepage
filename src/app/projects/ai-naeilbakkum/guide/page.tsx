@@ -23,7 +23,7 @@ const TEL = "010-9542-3775";
 const SCHEDULE: { day: string; date: string; items: [string, string, string?][] }[] = [
   {
     day: "1일차",
-    date: "9월 3일 (목)",
+    date: "9월 10일 (목)",
     items: [
       ["~ 13:00", "터미널 · 강릉역 도착 → 픽업"],
       ["~ 14:00", "집합 및 현생 체크인", "웨이브웍스"],
@@ -35,18 +35,18 @@ const SCHEDULE: { day: string; date: string; items: [string, string, string?][] 
   },
   {
     day: "2일차",
-    date: "9월 4일 (금)",
+    date: "9월 11일 (금)",
     items: [
       ["08:00 까지", "러닝 집합", "인구 어린이공원"],
       ["08:00 – 09:00", "현남면 러닝", "인구 어린이공원"],
-      ["10:00 – 12:00", "Ai 기본 교육", "웨이브웍스"],
+      ["10:00 – 12:00", "Ai 기본 교육", "어스투라운지"],
       ["13:00 – 18:00", "지역 멘토 로컬투어"],
       ["18:00 ~", "자유시간 · 저녁식사"],
     ],
   },
   {
     day: "3일차",
-    date: "9월 5일 (토)",
+    date: "9월 12일 (토)",
     items: [
       ["09:00 – 10:00", "현남생활 굿즈 만들기", "어스투라운지"],
       ["10:00 – 12:00", "서핑", "죽도해변"],
@@ -57,13 +57,19 @@ const SCHEDULE: { day: string; date: string; items: [string, string, string?][] 
   },
   {
     day: "4일차",
-    date: "9월 6일 (일)",
+    date: "9월 13일 (일)",
     items: [
       ["~ 10:00", "숙소 체크아웃"],
       ["10:00 – 12:00", "Ai 산출물 · 현남생활 발표회", "어스투라운지"],
       ["12:00 ~", "현생 체크아웃 및 귀가"],
     ],
   },
+];
+
+/** 동서울종합터미널 → 동산해변정류장 직통 (하루 11회 · 약 2시간 9분) */
+const DONGSAN_BUS = [
+  "06:50", "08:10", "09:20", "10:20", "11:40",
+  "13:00", "14:20", "17:00", "18:20", "20:10", "22:10",
 ];
 
 const TERMINALS: { name: string; addr: string; note: string }[] = [
@@ -205,7 +211,7 @@ const FAQ: { q: string; a: React.ReactNode }[] = [
     a: (
       <>
         <strong>여행자 보험 가입</strong>과 <strong>보증금 환불</strong>에 필요합니다. 보험 가입을 일정
-        시작 전에 마쳐야 해서 <strong>9월 1일(화)까지</strong> 작성 부탁드립니다. 입력하신 주민등록번호는
+        시작 전에 마쳐야 해서 <strong>9월 8일(화)까지</strong> 작성 부탁드립니다. 입력하신 주민등록번호는
         암호화해 보관하고 보험 가입 완료 즉시 파기합니다.
         <br />
         <Link href={CONSENT_URL} className="underline font-bold">
@@ -280,7 +286,7 @@ export default function GuidePage() {
             </h2>
             <ul className={`${SECTION} text-[14px] leading-[2] text-[#A8410F] space-y-1`}>
               <li>
-                <strong>9월 3일(목) 오후 1시까지</strong> 터미널 도착 — 도착하시면 픽업해 드립니다
+                <strong>9월 10일(목) 오후 1시까지</strong> 터미널 도착 — 도착하시면 픽업해 드립니다
               </li>
               <li>
                 집합 장소는 <strong>죽도해변 웨이브웍스</strong> (양양군 현남면 인구중앙길 110)
@@ -289,7 +295,7 @@ export default function GuidePage() {
                 <strong>노트북 필수 지참</strong> — 충전기도 잊지 마세요
               </li>
               <li>
-                <strong>9월 1일(화)까지 참가 동의서 작성</strong> —{" "}
+                <strong>9월 8일(화)까지 참가 동의서 작성</strong> —{" "}
                 <Link href={CONSENT_URL} className="underline font-bold">
                   작성하러 가기
                 </Link>
@@ -306,7 +312,7 @@ export default function GuidePage() {
           <section className="mb-16">
             <h2 className={`${SECTION} ${H2}`}>일정</h2>
             <p className={`${SECTION} ${LEAD}`}>
-              1기 9월 3일(목) ~ 9월 6일(일) 3박 4일 · 양양군 현남면 일원
+              2기 9월 10일(목) ~ 9월 13일(일) 3박 4일 · 양양군 현남면 일원
               <br />
               일정 외 시간은 식사와 지역살이 탐색으로 자유롭게 보내시면 됩니다. 여건에 따라 일부
               조정될 수 있습니다.
@@ -374,7 +380,7 @@ export default function GuidePage() {
           <section className="mb-16">
             <h2 className={`${SECTION} ${H2}`}>오시는 길</h2>
             <p className={`${SECTION} ${LEAD}`}>
-              <strong className="text-text">9월 3일(목) 오후 1시까지</strong> 아래 터미널이나 역 중 한 곳에
+              <strong className="text-text">9월 10일(목) 오후 1시까지</strong> 아래 터미널이나 역 중 한 곳에
               도착해 주세요. 현남면까지는 <strong className="text-text">운영진이 픽업</strong>
               해 드립니다. 도착 예정 장소와 시간을 미리 알려 주시면 이동이 수월합니다.
             </p>
@@ -392,7 +398,45 @@ export default function GuidePage() {
               </p>
             </div>
 
-            <p className={`${SECTION} text-[13px] font-bold mb-3`}>도착 가능한 터미널 · 역</p>
+            {/* 가장 편한 경로 — 동서울 직통 */}
+            <div className="border-2 border-[#E8611C] bg-[#FDEBD9] px-5 py-5 mb-6">
+              <p className={`${SECTION} text-[11px] tracking-[2px] font-extrabold uppercase text-[#A8410F] mb-2`}>
+                가장 편한 경로
+              </p>
+              <p className={`${SECTION} text-[17px] font-black text-[#A8410F] mb-1`}>
+                동서울종합터미널 → 동산해변
+              </p>
+              <p className={`${SECTION} text-[13px] leading-relaxed text-[#A8410F] mb-4`}>
+                수도권에서 오신다면 이 노선이 가장 빠르고 편합니다. 양양터미널을 거치지 않고
+                <strong> 현남면 바로 앞</strong>에 내려 드립니다. 약 <strong>2시간 9분</strong> 걸리고
+                우등 기준 <strong>20,400원</strong>입니다. 하루 11회 운행합니다.
+              </p>
+              <p className={`${SECTION} text-[12px] font-black text-[#A8410F] mb-2`}>동서울 출발 시각</p>
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {DONGSAN_BUS.map((t) => {
+                  const ok = t <= "10:20";
+                  return (
+                    <span
+                      key={t}
+                      className={`${SECTION} text-[13px] font-bold px-2.5 py-1 border ${
+                        ok
+                          ? "border-[#A8410F] bg-[#A8410F] text-white"
+                          : "border-[#D9A07C] text-[#A8410F]"
+                      }`}
+                    >
+                      {t}
+                    </span>
+                  );
+                })}
+              </div>
+              <p className={`${SECTION} text-[12px] leading-relaxed text-[#A8410F]`}>
+                진하게 표시된 <strong>10:20 이전 차편</strong>을 타시면 오후 1시 집합에 여유 있게
+                도착합니다. 11:40 차는 13:49 도착이라 늦습니다. 동산해변에 내리시면 픽업해 드리니
+                도착 시간을 미리 알려 주세요.
+              </p>
+            </div>
+
+            <p className={`${SECTION} text-[13px] font-bold mb-3`}>그 밖에 도착 가능한 터미널 · 역</p>
             <div className="space-y-3">
               {TERMINALS.map((t) => (
                 <div key={t.name} className="border border-border px-5 py-4">
@@ -403,7 +447,7 @@ export default function GuidePage() {
               ))}
             </div>
             <p className={`${SECTION} text-[13px] text-text-sub leading-relaxed mt-4`}>
-              버스 시간은 <strong>버스타고</strong>·<strong>고속버스통합예매</strong>에서, KTX는{" "}
+              동산해변 노선을 포함한 버스 시간은 <strong>버스타고</strong>·<strong>고속버스통합예매</strong>에서, KTX는{" "}
               <strong>코레일</strong>에서 확인하실 수 있습니다. 오후 1시 도착이 어려우시면 미리 연락 주세요 — 도착 시간에 맞춰 조율해
               드리겠습니다.
               <br />
