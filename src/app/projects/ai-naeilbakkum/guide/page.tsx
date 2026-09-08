@@ -414,7 +414,7 @@ export default function GuidePage() {
               <p className={`${SECTION} text-[12px] font-black text-[#A8410F] mb-2`}>동서울 출발 시각</p>
               <div className="flex flex-wrap gap-1.5 mb-4">
                 {DONGSAN_BUS.map((t) => {
-                  const ok = t <= "10:20";
+                  const ok = t <= "11:40";
                   return (
                     <span
                       key={t}
@@ -430,9 +430,10 @@ export default function GuidePage() {
                 })}
               </div>
               <p className={`${SECTION} text-[12px] leading-relaxed text-[#A8410F]`}>
-                진하게 표시된 <strong>10:20 이전 차편</strong>을 타시면 오후 1시 집합에 여유 있게
-                도착합니다. 11:40 차는 13:49 도착이라 늦습니다. 동산해변에 내리시면 픽업해 드리니
-                도착 시간을 미리 알려 주세요.
+                오리엔테이션은 <strong>오후 2시</strong>에 시작합니다. 진하게 표시된{" "}
+                <strong>11:40 이전 차편</strong>을 타시면 시간에 맞출 수 있습니다. 다만 11:40 차는
+                13:49 도착이라 바로 이동해야 하니, 여유 있게 오시려면 <strong>10:20 이전</strong> 차편을
+                권합니다. 동산해변에 내리시면 픽업해 드리니 도착 시간을 미리 알려 주세요.
               </p>
             </div>
 
