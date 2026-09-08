@@ -258,6 +258,19 @@ export default function SetupWizard({
     };
   }, []);
 
+  /* 같은 탭에서 해시만 바뀌어도(운영진이 보낸 #mac-1 링크 등) 그 단계로 이동 */
+  useEffect(() => {
+    const onHash = () => {
+      const fromHash = parseHash(window.location.hash);
+      if (!fromHash) return;
+      setPicking(false);
+      setOsOverride(fromHash.os);
+      setIndexOverride(fromHash.index);
+    };
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+
   /* 저장 */
   useEffect(() => {
     if (!ready) return;
