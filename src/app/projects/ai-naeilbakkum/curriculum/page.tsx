@@ -7,12 +7,12 @@ import { ainbOg } from "@/lib/ainb-og";
 export const metadata: Metadata = {
   title: "실습 가이드 · 바들바들 현남생활 Ai 내일바꿈 | LOMAD",
   description:
-    "「바들바들 현남생활 – Ai 내일바꿈」 1기 실습 가이드 — 일차별 STEP, 붙여넣을 명령어와 프롬프트.",
+    "「바들바들 현남생활 – Ai 내일바꿈」 2기 실습 가이드 — 일차별 STEP, 붙여넣을 명령어와 프롬프트.",
   alternates: { canonical: "/projects/ai-naeilbakkum/curriculum" },
   ...ainbOg({
     title: "실습 가이드 · 바들바들 현남생활 Ai 내일바꿈 | LOMAD",
     description:
-      "「바들바들 현남생활 – Ai 내일바꿈」 1기 실습 가이드 — 일차별 STEP, 붙여넣을 명령어와 프롬프트.",
+      "「바들바들 현남생활 – Ai 내일바꿈」 2기 실습 가이드 — 일차별 STEP, 붙여넣을 명령어와 프롬프트.",
     path: "/projects/ai-naeilbakkum/curriculum",
   }),
   robots: { index: false, follow: false },
@@ -43,7 +43,7 @@ export default function CurriculumPage() {
             Curriculum
           </p>
           <h1 className={`${SECTION} text-[30px] md:text-[38px] font-black leading-[1.25] mb-5`}>
-            Ai 내일바꿈 1기
+            Ai 내일바꿈 2기
             <br />
             실습 가이드
           </h1>

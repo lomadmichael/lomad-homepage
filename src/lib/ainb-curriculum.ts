@@ -1,4 +1,4 @@
-// Ai 내일바꿈 1기 실습 가이드 콘텐츠 — 일자별 STEP / 명령어 / 프롬프트
+// Ai 내일바꿈 2기 실습 가이드 콘텐츠 — 일자별 STEP / 명령어 / 프롬프트
 // 페이지: /projects/ai-naeilbakkum/curriculum
 
 export type Block =
@@ -37,7 +37,7 @@ export const DAYS: Day[] = [
   {
     id: "day1",
     label: "1일차",
-    date: "9월 3일 (목)",
+    date: "9월 10일 (목)",
     time: "16:00 – 18:00",
     place: "웨이브웍스",
     theme: "Ai 기본 세팅",
@@ -46,50 +46,13 @@ export const DAYS: Day[] = [
     steps: [
       {
         id: "d1-1",
-        title: "Claude 계정 — 초대 메일 수락",
-        minutes: "20분",
+        title: "설치 가이드 따라 세팅하기 — Claude 계정·앱·Git·Node.js",
+        minutes: "60분",
         blocks: [
-          { kind: "text", body: "참가자마다 실습용 구글 계정을 하나씩 드립니다 — 체크카드에 적힌 'ai○○@lomadcoop.com'과 비밀번호가 여러분의 아이디입니다. 먼저 gmail.com에서 이 계정으로 로그인하세요(처음이라 약관 동의 화면이 뜨면 '동의', 복구 전화번호 등록은 '건너뛰기'). 받은편지함에 'Lomadcoop 팀 초대' 메일이 와 있으니 열어서 수락 버튼을 누르세요." },
-          { kind: "link", label: "gmail.com 열기", href: "https://mail.google.com", note: "이미 개인 구글 계정으로 로그인돼 있으면 오른쪽 위 프로필 → '다른 계정 추가'로 ai○○ 계정을 추가하세요." },
-          { kind: "warn", text: "Claude 로그인 화면에서는 「Google로 로그인」을 누르고, 반드시 방금 로그인한 ai○○@lomadcoop.com 계정을 선택하세요. 개인 구글 계정을 고르면 팀 시트가 연결되지 않습니다." },
-          { kind: "link", label: "claude.ai 열기", href: "https://claude.ai", note: "초대 메일이 없으면 스팸함을 확인하고, 그래도 없으면 손을 들어 주세요. 바로 다시 보내드립니다." },
-          { kind: "warn", text: "'유효하지 않은 초대 링크 — 이 초대 링크는 다른 계정용입니다'가 뜨면, 이미 다른 Claude 계정(개인 계정)으로 로그인돼 있는 것입니다. 화면의 '로그아웃'을 누른 뒤 초대 메일의 링크를 다시 클릭하세요." },
-          { kind: "prompt", title: "첫 인사 (채팅창에 붙여넣기)", text: "안녕! 나는 오늘 Ai를 처음 제대로 배우기 시작했어. 앞으로 4일 동안 내 비서가 되어 줘. 어려운 말은 쉬운 우리말로 풀어서 설명해줘. 먼저 네가 나 같은 사람에게 도와줄 수 있는 일 5가지만 알려줘.", tip: "답이 오면 계정 세팅 성공입니다." },
-          { kind: "check", text: "채팅에 답이 오면 완료" },
-        ],
-      },
-      {
-        id: "d1-2",
-        title: "Claude 데스크톱 앱 설치 + Code 탭 열기",
-        minutes: "25분",
-        blocks: [
-          { kind: "text", body: "'말로 시키는 컴퓨터'인 Claude Code는 Claude 데스크톱 앱 안에 들어 있습니다. 앱만 설치하면 됩니다 — 터미널도, 별도 설치도 필요 없습니다." },
-          { kind: "link", label: "Claude 데스크톱 앱 다운로드", href: "https://claude.ai/download", note: "내 노트북(Windows / Mac)에 맞는 설치 파일이 자동으로 내려옵니다. 실행해서 설치한 뒤 앱을 열고, STEP 1과 같은 방법으로 로그인하세요 — 「Google로 로그인」 → ai○○@lomadcoop.com 선택." },
-          { kind: "link", label: "Git 설치 (Windows 노트북만)", href: "https://git-scm.com/downloads/win", note: "Windows에서는 Code 탭이 내 폴더를 열 때 Git이 필요합니다. 설치 화면은 전부 '다음(Next)'만 누르면 됩니다. Mac은 아래 'Mac 사용자' 안내대로 개발자 도구를 설치하세요(새 Mac에서 한 번만)." },
-          { kind: "text", body: "Mac 사용자 — Code 탭에서 폴더 선택이 안 되면 '명령어 라인 개발자 도구'가 없는 것입니다. 터미널을 열어(Cmd + Space → '터미널' 입력 → Enter) 아래 명령을 붙여넣고 Enter → '설치하시겠습니까?' 팝업에서 '설치' → 약관 '동의' → 5~10분 대기(진행 막대가 멈춘 것처럼 보여도 그대로 두세요). 끝나면 Claude 앱을 Cmd + Q로 완전히 종료했다가 다시 실행하고 폴더를 선택하세요. 기다리는 동안 STEP 4·5(Vercel·Supabase 가입)를 먼저 해도 됩니다." },
-          { kind: "command", os: "mac", code: "xcode-select --install", note: "'이미 설치되어 있습니다'라고 나오면 그대로 진행하면 됩니다." },
-          { kind: "command", os: "windows", code: "(Windows는 위 Git 설치 버튼으로 설치 — 이 명령은 Mac 전용)" },
-          { kind: "warn", text: "설치를 중간에 '중지'했거나, '이미 설치되어 있습니다'라고 나오는데도 폴더 선택이 안 되면 반쯤 남은 설치 흔적을 지우고 다시 설치해야 합니다. 아래 명령을 붙여넣고 Enter → Mac 로그인 비밀번호 입력(타이핑해도 화면에 안 보이는 게 정상) → Enter → 그다음 위의 xcode-select --install 을 다시 실행하세요." },
-          { kind: "command", os: "mac", code: "sudo rm -rf /Library/Developer/CommandLineTools" },
-          { kind: "command", os: "windows", code: "(Mac 전용)" },
-          { kind: "text", body: "로그인 직후 뜨는 '커넥터 연결' 안내는 '완료', '이 컴퓨터에 연결' 배너는 '나중에'를 눌러 넘기세요(채팅용 설정이라 오늘은 안 씁니다). 그다음 앱 왼쪽 위 토글 '채팅 및 Cowork | Code'에서 'Code'를 누릅니다. 왼쪽 위 '+ 새로 생성'을 누르면 입력창 아래에 '로컬' 칩과 폴더 아이콘이 보입니다. 폴더 아이콘을 눌러 바탕화면에 '내일바꿈'이라는 새 폴더를 만들어 선택하세요. 입력창 아래 칩에 '내일바꿈'이 표시되면 연결된 것입니다. 권한 모드는 기본이 '자동'이라 그대로 두면 됩니다." },
-          { kind: "prompt", title: "Code 탭에 붙여넣기 (첫 인사)", text: "안녕! 지금 열려 있는 폴더 이름이 뭔지 알려주고, 앞으로 이 폴더에서 네가 나를 어떻게 도와줄 수 있는지 세 줄로 설명해줘.", tip: "폴더 이름('내일바꿈')을 맞게 답하면 Code 탭이 내 컴퓨터와 연결된 것입니다." },
-          { kind: "warn", text: "Code 탭을 눌렀는데 '업그레이드' 안내가 뜨면 팀 시트가 아직 안 붙은 것 — 손을 들어 주세요. '온라인 로그인'을 요구하면 완료 후 앱을 껐다 켜세요." },
-          { kind: "check", text: "Code 탭에서 '내일바꿈' 폴더가 열리고 답이 오면 완료" },
-        ],
-      },
-      {
-        id: "d1-3",
-        title: "Node.js 설치 — 그리고 Ai에게 첫 심부름",
-        minutes: "15분",
-        blocks: [
-          { kind: "text", body: "Claude 앱 자체에는 필요 없지만, 3일차에 여러분 작품을 인터넷에 올리는 배포 도구(Vercel)가 쓰는 부품입니다. LTS 버전을 받아 '다음 → 다음 → 설치'만 누르면 됩니다. 와이파이가 느리면 운영진 USB로 설치하세요." },
-          { kind: "text", body: "내 노트북에 맞는 버튼 하나만 누르면 설치 파일이 바로 내려옵니다. 내려받은 파일을 더블클릭 → 계속/다음 → 설치 → 완료. 와이파이가 느리면 운영진 USB에 같은 파일이 있습니다." },
-          { kind: "link", label: "Mac용 Node.js 설치 파일 (.pkg)", href: "https://nodejs.org/dist/v24.20.0/node-v24.20.0.pkg", note: "Mac 종류(M1·M2·인텔) 상관없이 이 파일 하나면 됩니다. 설치 중 Mac 로그인 비밀번호를 물으면 입력하세요." },
-          { kind: "link", label: "Windows용 Node.js 설치 파일 (.msi)", href: "https://nodejs.org/dist/v24.20.0/node-v24.20.0-x64.msi", note: "설치 화면에서 체크박스는 건드리지 말고 Next만 누르세요. 'Tools for Native Modules' 체크는 하지 않아도 됩니다." },
-          { kind: "text", body: "설치가 끝났는지 직접 확인하지 말고, Code 탭의 Claude에게 시켜 보세요. 여러분이 처음으로 Ai에게 컴퓨터 일을 시키는 순간입니다." },
-          { kind: "prompt", title: "Code 탭에 붙여넣기", text: "node 버전을 확인해서 알려줘. 설치가 안 되어 있으면 어떻게 해야 하는지도 알려줘." },
-          { kind: "check", text: "버전 숫자(예: v24.x)를 알려주면 완료" },
+          { kind: "text", body: "오늘의 세팅은 별도 페이지 '설치 가이드'로 합니다. 노트북 화면은 설치 창에 가려지니, 아래 버튼을 눌러 폰으로 열어 두고 한 화면씩 따라 하세요. 처음에 내 노트북(Windows / Mac)을 고르면 그 뒤로는 내 것만 보입니다. 각 단계마다 스크린샷과 '이 화면이 보이면 성공'이 있습니다." },
+          { kind: "link", label: "설치 가이드 열기 (폰으로)", href: "/projects/ai-naeilbakkum/setup", note: "6단계: 계정 로그인 → 앱 설치 → Git(Windows) 또는 개발자 도구(Mac) → Node.js → Code 탭 폴더 연결 → 첫 인사. 체크카드의 ai○○@lomadcoop.com 계정과 비밀번호가 필요합니다." },
+          { kind: "warn", text: "Mac 사용자는 '개발자 도구' 설치가 10분 넘게 걸립니다. 설치 가이드가 그것부터 시키니 순서대로만 가세요. 막히면 화면을 캡처해 손을 들어 주세요." },
+          { kind: "check", text: "설치 가이드 6단계를 끝내고, Code 탭에서 Claude가 폴더 이름 '내일바꿈'과 node 버전을 답하면 완료" },
         ],
       },
       {
@@ -119,7 +82,7 @@ export const DAYS: Day[] = [
         minutes: "15분",
         blocks: [
           { kind: "text", body: "Code 탭('내일바꿈' 폴더가 열린 상태)에 아래를 붙여넣되, ○○○를 본인 이름으로 바꾸세요." },
-          { kind: "prompt", title: "Code 탭에 붙여넣기", text: "이 폴더 안에 \"안녕하세요, ○○○입니다. Ai 내일바꿈 1기 시작!\"이라는 인사말이 예쁘게 나오는 웹페이지를 만들고, 브라우저로 열어서 보여줘.", tip: "브라우저(또는 앱 안의 미리보기 창)에 내 인사 페이지가 뜨면 스크린샷을 찍어 단체방에 올리세요. 그게 오늘의 수료 도장입니다." },
+          { kind: "prompt", title: "Code 탭에 붙여넣기", text: "이 폴더 안에 \"안녕하세요, ○○○입니다. Ai 내일바꿈 2기 시작!\"이라는 인사말이 예쁘게 나오는 웹페이지를 만들고, 브라우저로 열어서 보여줘.", tip: "브라우저(또는 앱 안의 미리보기 창)에 내 인사 페이지가 뜨면 스크린샷을 찍어 단체방에 올리세요. 그게 오늘의 수료 도장입니다." },
           { kind: "check", text: "스크린샷을 단체방에 올리면 1일차 완료 🎉" },
           { kind: "warn", text: "오늘 못 끝내도 괜찮습니다. 저녁 식사 후 운영진이 개별로 도와드립니다 — 아무도 두고 가지 않습니다." },
         ],
@@ -131,7 +94,7 @@ export const DAYS: Day[] = [
   {
     id: "day2",
     label: "2일차",
-    date: "9월 4일 (금)",
+    date: "9월 11일 (금)",
     time: "10:00 – 12:00",
     place: "웨이브웍스",
     theme: "배포·데이터 연결 → 작업 규칙 → 계획 모드로 내 프로젝트 시작",
@@ -225,7 +188,7 @@ export const DAYS: Day[] = [
   {
     id: "day3",
     label: "3일차",
-    date: "9월 5일 (토)",
+    date: "9월 12일 (토)",
     time: "14:00 – 18:00",
     place: "어스투라운지",
     theme: "Ai 교육 · 산출물 만들기",
@@ -319,7 +282,7 @@ export const DAYS: Day[] = [
   {
     id: "day4",
     label: "4일차",
-    date: "9월 6일 (일)",
+    date: "9월 13일 (일)",
     time: "10:00 – 12:00",
     place: "어스투라운지",
     theme: "Ai 산출물 · 현남생활 발표회",
