@@ -408,7 +408,7 @@ export default function GuidePage() {
               </p>
               <p className={`${SECTION} text-[13px] leading-relaxed text-[#A8410F] mb-4`}>
                 수도권에서 오신다면 이 노선이 가장 빠르고 편합니다. 양양터미널을 거치지 않고
-                <strong> 현남면 바로 앞</strong>에 내려 드립니다. 약 <strong>2시간 9분</strong> 걸리고
+                <strong> 현남면 바로 앞</strong>에 내려 드리고, 집합 장소까지 걸어서 갈 수 있습니다. 약 <strong>2시간 9분</strong> 걸리고
                 우등 기준 <strong>20,400원</strong>입니다. 하루 11회 운행합니다.
               </p>
               <p className={`${SECTION} text-[12px] font-black text-[#A8410F] mb-2`}>동서울 출발 시각</p>
@@ -433,7 +433,10 @@ export default function GuidePage() {
                 오리엔테이션은 <strong>오후 2시</strong>에 시작합니다. 진하게 표시된{" "}
                 <strong>11:40 이전 차편</strong>을 타시면 시간에 맞출 수 있습니다. 다만 11:40 차는
                 13:49 도착이라 바로 이동해야 하니, 여유 있게 오시려면 <strong>10:20 이전</strong> 차편을
-                권합니다. 동산해변에 내리시면 픽업해 드리니 도착 시간을 미리 알려 주세요.
+                권합니다.
+                <br />
+                <strong>동산해변에 내리시면 집합 장소까지 걸어서 오실 수 있습니다.</strong> 픽업을
+                기다리실 필요 없이 바로 웨이브웍스로 오시면 됩니다.
               </p>
             </div>
 
