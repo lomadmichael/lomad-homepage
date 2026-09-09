@@ -188,7 +188,7 @@ const INLINE_HTML = `
           </div>
           <div class="pc-meta-item">
             <div class="pc-meta-k">참여대상</div>
-            <div class="pc-meta-v">초등학생 이상 어린이 및 동반 가족<br><span style="color: var(--sun); font-weight:600;">회차별 최대 12명</span> · 보호자 동반 필수</div>
+            <div class="pc-meta-v">어린이 및 동반 가족<br><span style="color: var(--sun); font-weight:600;">회차별 최대 12명</span> · 보호자 동반 필수</div>
           </div>
           <div class="pc-meta-item">
             <div class="pc-meta-k">장소</div>

@@ -80,10 +80,10 @@ export async function submitEcology(
     const name = String(p?.name ?? "").trim();
     const age = Number(p?.age);
     if (!name) return { success: false, message: "참가자 이름을 모두 입력해 주세요." };
-    if (!Number.isFinite(age) || age < 6 || age > 100) {
+    if (!Number.isFinite(age) || age < 0 || age > 120) {
       return {
         success: false,
-        message: `${name}: 만 나이를 정확히 입력해 주세요. (참가 어린이는 초등학생 이상, 미취학 아동은 참가 불가)`,
+        message: `${name}: 만 나이를 정확히 입력해 주세요.`,
       };
     }
     cleaned.push({ name, age, category: deriveCategory(age) });

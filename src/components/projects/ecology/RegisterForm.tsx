@@ -121,7 +121,7 @@ export default function RegisterForm({
           참가자
         </legend>
         <p className="text-[12px] text-text-muted mb-3">
-          함께 참여하는 분을 모두 추가해 주세요 (동반 보호자 포함). 참가 어린이는 초등학생 이상입니다.
+          함께 참여하는 분을 모두 추가해 주세요 (동반 보호자 포함).
           <br />
           회차당 <strong>참가자 전원 {CAPACITY}명</strong>까지 접수됩니다.
         </p>
