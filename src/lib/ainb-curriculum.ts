@@ -60,7 +60,7 @@ export const DAYS: Day[] = [
         title: "Vercel 가입 — 내 작품을 올릴 곳",
         minutes: "15분",
         blocks: [
-          { kind: "text", body: "만든 웹페이지를 전 세계에서 접속할 수 있게 올려 주는 서비스입니다. 구글 로그인으로 가입하면 가장 빠릅니다. 무료(Hobby) 플랜을 고르세요." },
+          { kind: "text", body: "만든 웹페이지를 전 세계에서 접속할 수 있게 올려 주는 서비스입니다. 여기부터는 실습 ai 계정이 아니라 내 개인 구글 계정(gmail)으로 가입합니다 — 프로그램이 끝나도 내 작품이 내 것으로 남게 하기 위해서입니다. 「Continue with Google」을 누르고 계정 선택 화면에서 개인 계정을 고르세요(ai○○ 계정이 위에 보여도 고르지 마세요). 무료(Hobby) 플랜을 고르세요." },
           { kind: "link", label: "Vercel 가입하기", href: "https://vercel.com/signup", note: "오늘은 가입만 합니다. 프로젝트는 3일차에 Claude Code가 만들어 줍니다." },
           { kind: "check", text: "대시보드 화면이 뜨면 완료" },
         ],
@@ -70,8 +70,8 @@ export const DAYS: Day[] = [
         title: "Supabase 가입 — 데이터를 저장할 곳",
         minutes: "15분",
         blocks: [
-          { kind: "text", body: "방명록·예약·기록처럼 '저장'이 필요한 작품을 위한 데이터베이스입니다. Supabase는 Google 가입 버튼이 없으니 이메일로 가입합니다: 이메일 칸에 ai○○@lomadcoop.com, 비밀번호는 체크카드의 비밀번호를 그대로 써도 됩니다 → 가입 후 인증 메일이 그 계정 gmail(STEP 1에서 로그인한 받은편지함)로 오니 링크를 클릭하세요. 조직 이름은 본인 이름으로 두면 됩니다." },
-          { kind: "link", label: "Supabase 가입하기 (이메일로)", href: "https://supabase.com/dashboard/sign-up", note: "GitHub 버튼은 누르지 마세요(계정 없음). 프로젝트 생성은 3일차에 함께 합니다." },
+          { kind: "text", body: "방명록·예약·기록처럼 '저장'이 필요한 작품을 위한 데이터베이스입니다. 이것도 내 개인 gmail로 가입합니다. Supabase는 Google 가입 버튼이 없으니 이메일로 가입합니다: 이메일 칸에 내 개인 gmail 주소, 비밀번호는 체크카드의 비밀번호를 그대로 써도 됩니다 → 가입 후 인증 메일이 내 개인 gmail로 오니 열어서 「Confirm your mail」 링크를 클릭하세요(안 오면 스팸함). 인증 후 로그인하면 조직을 만들라고 합니다 — 이름은 본인 이름으로 두면 되고, Free 플랜으로 「Create organization」." },
+          { kind: "link", label: "Supabase 가입하기 (이메일로)", href: "https://supabase.com/dashboard/sign-up", note: "GitHub 버튼은 누르지 마세요(계정 없음). ai○○ 계정이 아니라 내 개인 gmail 주소로 가입합니다. 프로젝트 생성은 3일차에 함께 합니다." },
           { kind: "warn", text: "인증 메일이 안 오면 gmail 스팸함을 확인하고, 그래도 없으면 로그인 화면에서 'Resend'(다시 보내기)를 누르세요." },
           { kind: "check", text: "대시보드 화면이 뜨면 완료" },
         ],
@@ -108,7 +108,7 @@ export const DAYS: Day[] = [
         blocks: [
           { kind: "text", body: "먼저 어제 작업하던 자리로 돌아갑니다 — Claude 앱을 열고 왼쪽 위 'Code'를 누른 뒤, 왼쪽 목록에서 어제 쓰던 세션을 클릭하세요. 세션이 안 보이면 '+ 새로 생성' → 입력창 아래 폴더 아이콘 → 바탕화면의 '내일바꿈' 폴더 선택. 입력창 아래 칩에 '내일바꿈'이 보이면 준비 완료입니다." },
           { kind: "text", body: "① Vercel — 딱 한 번, 로그인만 직접 합니다. 화면 오른쪽 위 터미널 아이콘(>_)을 눌러 앱 안의 터미널을 열고, 내 노트북에 맞는 탭의 명령을 복사해 붙여넣고 Enter." },
-          { kind: "command", os: "windows", code: "npx.cmd vercel login", note: "Windows는 npx 대신 npx.cmd 를 써야 합니다." },
+          { kind: "command", os: "windows", code: "npx.cmd vercel login", note: "Windows는 npx 대신 npx.cmd 를 써야 합니다. 브라우저가 열리면 「Continue with Google」 → 어제 Vercel에 가입한 내 개인 gmail 계정을 고르세요(ai○○ 계정 아님)." },
           { kind: "command", os: "mac", code: "npx vercel login" },
           { kind: "text", body: "명령을 실행하면 먼저 'Need to install the following packages: vercel... Ok to proceed? (y)'가 나옵니다 — y 를 입력하고 Enter(그냥 Enter도 됩니다). 도구를 받는 데 30초쯤 걸립니다. 그다음 로그인 방법 선택지가 뜨면 화살표로 'Continue with Google'을 고르고 Enter → 브라우저가 열리면 ai○○ 계정 선택 → 'Success' 표시 → 앱으로 돌아옵니다. 이제 대화창에서 배포를 시킵니다." },
           { kind: "prompt", title: "Code 탭에 붙여넣기 — 어제 페이지 실배포", text: "어제 만든 인사 웹페이지를 Vercel에 배포해줘. 질문 없이 기본값(--yes)으로 진행하고 실서비스(production)로 올려줘. Windows면 npx 대신 npx.cmd 를 써. 끝나면 접속 주소를 알려줘.", tip: "주소가 나오면 스마트폰으로 열어 보세요 — 전 세계 어디서나 열리는 내 페이지입니다. 단체방에 주소를 올리고 서로 방문해 보세요." },
@@ -266,7 +266,7 @@ export const DAYS: Day[] = [
         minutes: "20분",
         blocks: [
           { kind: "text", body: "오늘의 마지막 미션입니다. 지금까지 만든 과정·막혔던 것·해결·잘 통한 프롬프트를 Notion 문서 한 장으로 남깁니다. 이 문서는 웹사이트가 없어도 그 자체로 결과물이고, 내일 발표 대본의 재료이며, 다음 기수가 같은 곳에서 덜 헤매게 하는 기록입니다. 작성은 Claude가 합니다 — 여러분은 물어보는 것에 답만 하면 됩니다." },
-          { kind: "text", body: "준비: Notion 계정이 없으면 notion.so에서 'Google로 계속' → 실습 ai 계정으로 가입(무료). 로그인한 뒤 새 페이지를 하나 만들고 제목을 '내일바꿈 작업기록'으로 두세요. Claude가 이 페이지 아래에 문서를 만듭니다." },
+          { kind: "text", body: "준비: Notion 계정이 없으면 notion.so에서 'Google로 계속' → 내 개인 gmail 계정으로 가입(무료, Vercel·Supabase와 마찬가지로 ai 계정이 아니라 내 계정). 로그인한 뒤 새 페이지를 하나 만들고 제목을 '내일바꿈 작업기록'으로 두세요. Claude가 이 페이지 아래에 문서를 만듭니다." },
           { kind: "text", body: "연결: Supabase 때와 같은 방법입니다. 아래 문장을 Code 탭에 보내 파일을 만든 뒤, 입력창에 /mcp → notion → 로그인 → 브라우저에서 Notion 로그인 → 접근 허용할 페이지에서 '내일바꿈 작업기록' 선택 → 허용. (Supabase를 「+」→ 커넥터 메뉴로 연결했던 분은 같은 메뉴에서 Notion을 연결해도 됩니다.)" },
           { kind: "prompt", title: "① Notion 연결 (Code 탭)", text: "이 폴더의 .mcp.json에 notion 서버를 추가해줘(파일이 없으면 만들어줘): {\"type\":\"http\",\"url\":\"https://mcp.notion.com/mcp\"}. 그다음 내가 /mcp 로 로그인할게." },
           { kind: "prompt", title: "② 작업 기록 페이지 만들기 (Code 탭)", text: "HANDOFF.md, docs 폴더의 설계·계획 문서, git 커밋 기록을 읽고, Notion의 '내일바꿈 작업기록' 페이지 아래에 '(내 이름) — (서비스 이름)' 페이지를 만들어줘. 구성은 이렇게:\n1. 무엇을 만들었나 — 누가·어떤 문제를·어떻게, 한 문단 + 배포 주소\n2. 만든 과정 — 1일차부터 오늘까지 날짜별로 한 일\n3. 막혔던 것과 해결 — 에러·원인·해결을 표로 (설치, 로그인, 연결, 코드 순서대로)\n4. Claude에게 잘 통했던 프롬프트 3개 — 원문 그대로\n5. 다음 버전에서 할 것\n6. 다음 기수에게 한마디\n내용이 부족한 항목은 나에게 물어봐서 채워줘. 다 만들면 페이지 링크를 알려줘.", tip: "Claude가 '막혔던 것'을 물어보면 오늘 손 들었던 순간들을 떠올려 답하세요. 그게 다음 기수에게 가장 값진 부분입니다. 배포 주소가 없어도 됩니다 — 이 문서가 결과물입니다." },
