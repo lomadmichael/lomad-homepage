@@ -28,6 +28,9 @@ export type Trouble = {
   /** 이렇게 하세요 */
   fix: string;
   command?: string;
+  /** 참고 화면(선택) — 파일이 있을 때만 표시 */
+  img?: string;
+  imgAlt?: string;
 };
 
 export type SetupStep = {
@@ -60,12 +63,14 @@ const M = (n: number) => `/ainb/setup/mac/M${String(n).padStart(2, "0")}.png`;
 
 /* ───────────────────────── 공통 조각 ───────────────────────── */
 
-const LOGIN_SHOTS = (img: { addAccount?: string; claudeLogin?: string }): Shot[] => [
+// 2기(9/9 형님 결정): 1기 계정은 팀에서 제거 후 재초대 → 1기와 같이 「초대 메일 수락 → 로그인」 흐름.
+// 1기 원문 백업: `커리큘럼개발/교재용_백업_1기_계정초대수락_로그인절차.md`
+const LOGIN_SHOTS = (img: { addAccount?: string; claudeLogin?: string; pickAccount?: string; cont?: string }): Shot[] => [
   {
     img: img.addAccount,
     alt: "gmail 오른쪽 위 프로필 → '다른 계정 추가' 메뉴",
     action: "① gmail.com을 열고, 오른쪽 위 동그란 프로필 → 「다른 계정 추가」를 누르세요.",
-    note: "체크카드에 적힌 ai○○@lomadcoop.com 과 비밀번호를 입력합니다. 처음이라 약관 화면이 뜨면 「동의」, 복구 전화번호는 「건너뛰기」.",
+    note: "체크카드에 적힌 ai○○@lomadcoop.com 과 비밀번호를 입력합니다. 약관 화면이 뜨면 「동의」, 복구 전화번호는 「건너뛰기」.",
     link: { label: "gmail.com 열기", href: "https://mail.google.com" },
   },
   {
@@ -75,18 +80,24 @@ const LOGIN_SHOTS = (img: { addAccount?: string; claudeLogin?: string }): Shot[]
   },
   {
     img: img.claudeLogin,
-    alt: "claude.ai 로그인 화면 — 「Google로 로그인」 버튼",
-    action: "③ claude.ai 로그인 화면에서 「Google로 로그인」을 누르세요.",
+    alt: "claude.ai 첫 화면 — 「Google로 계속하기」 버튼",
+    action: "③ claude.ai 로그인 화면에서 「Google로 계속하기」를 누르세요.",
     link: { label: "claude.ai 열기", href: "https://claude.ai" },
   },
   {
+    img: img.pickAccount,
     alt: "Google 계정 선택 화면 — ai○○@lomadcoop.com 선택",
     action: "④ 계정 목록에서 반드시 방금 로그인한 ai○○@lomadcoop.com 을 고르세요.",
     note: "개인 구글 계정을 고르면 팀 시트가 연결되지 않아 Code 탭이 안 열립니다.",
   },
   {
+    img: img.cont,
+    alt: "Claude 로그인 확인 화면 — 「계속」 버튼",
+    action: "⑤ 「계속」을 누르세요.",
+  },
+  {
     alt: "Claude 채팅 화면",
-    action: "⑤ 채팅창에 아래 첫 인사를 붙여넣고 답이 오면 이 단계는 끝입니다.",
+    action: "⑥ 채팅창에 아래 첫 인사를 붙여넣고 답이 오면 이 단계는 끝입니다.",
     prompt:
       "안녕! 나는 오늘 Ai를 처음 제대로 배우기 시작했어. 앞으로 4일 동안 내 비서가 되어 줘. 어려운 말은 쉬운 우리말로 풀어서 설명해줘. 먼저 네가 나 같은 사람에게 도와줄 수 있는 일 5가지만 알려줘.",
   },
@@ -105,37 +116,66 @@ const LOGIN_TROUBLES: Trouble[] = [
     symptom: "Google 로그인 화면에 ai○○ 계정이 목록에 없다",
     fix: "「다른 계정 사용」을 누르고 ai○○@lomadcoop.com 과 비밀번호를 직접 입력하세요.",
   },
+  {
+    symptom: "「Google로 계속하기」가 안 되거나 개인 계정으로 자꾸 들어간다",
+    fix: "「이메일로 계속하기」 칸에 ai○○@lomadcoop.com 을 넣고 계속 → gmail 받은편지함에 「Claude.ai의 보안 링크가 도착했습니다」 메일이 옵니다 → 그 안의 「로그인」 버튼을 누르세요(10분 안에). 코드 6자리가 뜨면 그 숫자를 원래 창에 입력.",
+    img: W(33),
+    imgAlt: "gmail의 Claude 로그인 메일 — 「로그인」 버튼",
+  },
 ];
 
-const CODE_TAB_SHOTS = (img: { toggle?: string; codeHome?: string; picker?: string }): Shot[] => [
+const CODE_TAB_SHOTS = (img: { toggle?: string; codeHome?: string; newFolder?: string; folderName?: string; picker?: string; autoMode?: string; model?: string }): Shot[] => [
   {
     img: img.toggle,
-    alt: "Claude 앱 왼쪽 위 「채팅 및 Cowork ｜ Code」 토글",
+    alt: "Claude 앱 왼쪽 위 「홈 ｜ Code」 토글",
     action: "① 앱 왼쪽 위 토글에서 「Code」를 누르세요.",
     note: "로그인 직후 뜨는 '커넥터 연결' 안내는 「완료」, '이 컴퓨터에 연결' 배너는 「나중에」로 넘기세요. 오늘은 안 씁니다.",
   },
   {
     img: img.codeHome,
-    alt: "Code 탭 첫 화면 — 「+ 새로 생성」, 입력창 아래 「로컬」 칩과 폴더 아이콘",
-    action: "② 왼쪽 위 「+ 새로 생성」을 누른 뒤, 입력창 아래의 폴더 아이콘을 누르세요.",
+    alt: "Code 탭 입력창 아래 「로컬 · 폴더 없음」 칩 → 「폴더 열기…」",
+    action: "② 입력창 아래 「폴더 없음」 칩을 누르고 「폴더 열기…」를 고르세요.",
+  },
+  {
+    img: img.newFolder,
+    alt: "바탕화면 빈 곳 오른쪽 클릭 → 「새 폴더」",
+    action: "③ 폴더 선택 창이 뜨면 왼쪽에서 「바탕 화면」을 고르고, 빈 곳을 오른쪽 클릭 → 「새 폴더」.",
+    note: "이미 바탕화면에 폴더를 만들어 뒀다면 이 단계는 건너뛰고 그 폴더를 고르면 됩니다.",
+  },
+  {
+    img: img.folderName,
+    alt: `새 폴더 이름을 「${SETUP_FOLDER}」으로 입력`,
+    action: `④ 이름을 「${SETUP_FOLDER}」으로 치고 Enter.`,
   },
   {
     img: img.picker,
-    alt: `폴더 선택 창 — 바탕화면에 새 폴더 '${SETUP_FOLDER}' 만들기`,
-    action: `③ 바탕화면으로 가서 「새 폴더」를 만들고 이름을 「${SETUP_FOLDER}」으로 한 뒤, 그 폴더를 선택하세요.`,
-    note: "권한 모드는 기본이 「자동」입니다. 그대로 두면 됩니다.",
+    alt: `폴더 선택 창 — 「${SETUP_FOLDER}」 안에서 「폴더 선택」 버튼`,
+    action: `⑤ 「${SETUP_FOLDER}」 폴더를 한 번 클릭한 뒤 아래 「폴더 선택」을 누르세요.`,
+  },
+  {
+    img: img.autoMode,
+    alt: "'자동 모드를 기본 권한 모드로 설정하시겠어요?' 창",
+    action: "⑥ '자동 모드로 설정하시겠어요?'가 뜨면 「자동으로 전환」을 누르세요.",
+    note: "안 뜨면 입력창 아래 「수동」 칩을 눌러 「자동」으로 바꾸면 됩니다. 자동이어야 Claude가 파일을 만들 때마다 묻지 않습니다.",
+  },
+  {
+    img: img.model,
+    alt: "모델 선택 — 「Opus 5」",
+    action: "⑦ 입력창 오른쪽 아래 모델 이름(Sonnet 5)을 눌러 「Opus 5」로 바꾸세요.",
+    note: "한도 경고가 뜨면 그때 Sonnet으로 내리면 됩니다.",
   },
 ];
 
 const CODE_TAB_SUCCESS = (img?: string) => ({
   img,
   alt: `입력창 아래 칩에 '${SETUP_FOLDER}'이 표시된 화면`,
-  text: `입력창 아래 칩에 「${SETUP_FOLDER}」이 보이면 내 컴퓨터와 연결된 것입니다.`,
+  text: `입력창 아래에 「${SETUP_FOLDER}」 칩과 「자동 · Opus 5」가 보이면 내 컴퓨터와 연결된 것입니다.`,
 });
 
 const FIRST_HELLO_SHOTS: Shot[] = [
   {
-    alt: "Code 탭 입력창",
+    img: W(38),
+    alt: "Code 탭 입력창에 첫 인사 프롬프트를 붙여넣은 화면",
     action: "① 아래 문장을 Code 탭 입력창에 붙여넣고 Enter.",
     prompt: "안녕! 지금 열려 있는 폴더 이름이 뭔지 알려주고, 앞으로 이 폴더에서 네가 나를 어떻게 도와줄 수 있는지 세 줄로 설명해줘.",
     note: `폴더 이름(${SETUP_FOLDER})을 맞게 답하면 연결 성공입니다.`,
@@ -179,8 +219,8 @@ const WINDOWS: SetupTrack = {
       title: "Claude 계정 — 초대 수락하고 로그인",
       minutes: "10분",
       goal: "실습용 구글 계정으로 Claude에 로그인해서 채팅 답을 한 번 받습니다.",
-      shots: LOGIN_SHOTS({ addAccount: W(1), claudeLogin: W(3) }),
-      success: { text: "채팅에 답이 오면 성공. 이 브라우저 창은 닫지 말고 두세요." },
+      shots: LOGIN_SHOTS({ addAccount: W(1), claudeLogin: W(3), pickAccount: W(26), cont: W(27) }),
+      success: { img: W(28), alt: "Claude 첫 화면 — 가운데 입력창", text: "이런 첫 화면이 뜨고 채팅에 답이 오면 성공. 이 브라우저 창은 닫지 말고 두세요." },
       troubles: LOGIN_TROUBLES,
     },
     {
@@ -209,12 +249,27 @@ const WINDOWS: SetupTrack = {
         },
         {
           img: W(8),
-          alt: "Claude 앱 로그인 화면",
-          action: "④ 「Google로 로그인」 → 브라우저가 열리면 ai○○@lomadcoop.com 선택 → 앱으로 돌아오기.",
+          alt: "Claude 앱 로그인 화면 — 「Google로 계속하기」",
+          action: "④ 앱의 로그인 화면에서 「Google로 계속하기」를 누르세요. 브라우저가 열립니다.",
+        },
+        {
+          img: W(29),
+          alt: "브라우저의 Google 계정 선택 — ai○○@lomadcoop.com",
+          action: "⑤ 브라우저의 계정 목록에 ai○○@lomadcoop.com 이 있으면 그것을, 없으면 「다른 계정 사용」을 눌러 ai○○@lomadcoop.com 을 입력하세요.",
           note: "1단계와 똑같은 계정이어야 합니다.",
         },
+        {
+          img: W(30),
+          alt: "Claude 로그인 확인 — 「계속」",
+          action: "⑥ 「계속」.",
+        },
+        {
+          img: W(31),
+          alt: "'Claude 앱에서 로그인 완료하기' — 「Claude 열기」",
+          action: "⑦ 「Claude 열기」를 눌러 앱으로 돌아오세요. 브라우저가 '열겠습니까?'라고 물으면 「Claude 열기」.",
+        },
       ],
-      success: { alt: "앱이 열리고 채팅 화면이 보이는 상태", text: "앱이 열리고 채팅 화면이 보이면 성공. 다음 단계에서 Git과 Node.js를 설치한 뒤에 Code 탭을 엽니다." },
+      success: { img: W(9), alt: "Claude 앱 첫 화면 — 왼쪽 위 「홈 ｜ Code」 토글", text: "앱이 열리고 채팅 화면이 보이면 성공. 다음 단계에서 Git과 Node.js를 설치한 뒤에 Code 탭을 엽니다." },
       troubles: [
         {
           symptom: "'Windows의 PC 보호' 파란 창이 뜬다",
@@ -286,7 +341,7 @@ const WINDOWS: SetupTrack = {
           alt: "Node.js 설치 파일 다운로드",
           action: "① 아래 버튼을 누르면 설치 파일(.msi)이 바로 내려옵니다. 다 받으면 실행하세요.",
           link: { label: "Windows용 Node.js 설치 파일 (.msi)", href: NODE_WIN },
-          note: "와이파이가 느리면 운영진 USB에 같은 파일이 있습니다.",
+          note: "와이파이가 느리면 운영진 USB에 같은 파일이 있습니다. 화면의 버전 숫자(v24.xx)가 조금 달라도 정상입니다.",
         },
         {
           img: W(15),
@@ -320,7 +375,6 @@ const WINDOWS: SetupTrack = {
           action: "⑦ 「Install」 → '허용하시겠습니까?'에 「예」.",
         },
         {
-          img: W(21),
           alt: "Node.js 설치 완료 화면 — 「Finish」",
           action: "⑧ 「Finish」.",
         },
@@ -348,7 +402,7 @@ const WINDOWS: SetupTrack = {
           action: "① Git·Node.js를 설치했으니 Claude 앱을 완전히 껐다가 다시 여세요.",
           note: "앱 오른쪽 위 ✕로 닫은 뒤 다시 실행. 새로 설치한 프로그램을 앱이 인식하게 하는 과정입니다.",
         },
-        ...CODE_TAB_SHOTS({ toggle: W(22), codeHome: W(23), picker: W(24) }),
+        ...CODE_TAB_SHOTS({ toggle: W(22), codeHome: W(23), newFolder: W(35), folderName: W(36), picker: W(24), autoMode: W(37), model: W(39) }),
       ],
       success: CODE_TAB_SUCCESS(W(25)),
       troubles: [
@@ -442,8 +496,8 @@ const MAC: SetupTrack = {
       title: "Claude 계정 — 초대 수락하고 로그인 (기다리는 동안)",
       minutes: "10분",
       goal: "실습용 구글 계정으로 Claude에 로그인해서 채팅 답을 한 번 받습니다.",
-      shots: LOGIN_SHOTS({}),
-      success: { text: "채팅에 답이 오면 성공. 이 브라우저 창은 닫지 말고 두세요." },
+      shots: LOGIN_SHOTS({ addAccount: W(1), claudeLogin: W(3), pickAccount: W(26), cont: W(27) }),
+      success: { img: W(28), alt: "Claude 첫 화면 — 가운데 입력창", text: "이런 첫 화면이 뜨고 채팅에 답이 오면 성공. 이 브라우저 창은 닫지 말고 두세요." },
       troubles: LOGIN_TROUBLES,
     },
     {
@@ -476,7 +530,7 @@ const MAC: SetupTrack = {
         {
           img: M(13),
           alt: "Claude 앱 로그인 화면",
-          action: "⑤ 「Google로 로그인」 → 브라우저에서 ai○○@lomadcoop.com 선택 → 앱으로 돌아오기.",
+          action: "⑤ 「Google로 계속하기」 → 브라우저에서 ai○○@lomadcoop.com 선택 → 「계속」 → 「Claude 열기」로 앱으로 돌아오기.",
           note: "2단계와 똑같은 계정이어야 합니다.",
         },
       ],
@@ -548,7 +602,7 @@ const MAC: SetupTrack = {
           action: "① 1단계 개발자 도구 설치가 「완료」되었는지 확인하고, Claude 앱을 Cmd + Q로 완전히 종료했다가 다시 여세요.",
           note: "앱을 다시 켜야 방금 설치한 개발자 도구를 인식합니다. 창만 닫으면(빨간 버튼) 종료가 아닙니다. 꼭 Cmd + Q.",
         },
-        ...CODE_TAB_SHOTS({ toggle: M(16), codeHome: M(17), picker: M(18) }),
+        ...CODE_TAB_SHOTS({ toggle: M(16), codeHome: M(17), picker: M(18), autoMode: W(37), model: W(39) }),
       ],
       success: CODE_TAB_SUCCESS(M(24)),
       troubles: [

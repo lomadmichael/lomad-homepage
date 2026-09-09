@@ -194,7 +194,15 @@ function ShotView({
 
 /* ───────────────────────── 트러블슈팅 ───────────────────────── */
 
-function TroubleItem({ trouble }: { trouble: Trouble }) {
+function TroubleItem({
+  trouble,
+  available,
+  onOpen,
+}: {
+  trouble: Trouble;
+  available: Set<string>;
+  onOpen: (shot: { src: string; alt: string }) => void;
+}) {
   return (
     <details className="border border-border bg-input-bg px-4 py-3 mb-2">
       <summary className={cn(SECTION, "text-[14px] font-black leading-[1.6] cursor-pointer")}>
@@ -202,6 +210,11 @@ function TroubleItem({ trouble }: { trouble: Trouble }) {
         {trouble.symptom}
       </summary>
       <p className={cn(SECTION, "text-[13px] text-text-sub leading-[1.9] mt-3")}>{trouble.fix}</p>
+      {trouble.img && available.has(trouble.img) && (
+        <div className="mt-3">
+          <ShotFrame img={trouble.img} alt={trouble.imgAlt ?? trouble.symptom} available={available} onOpen={onOpen} />
+        </div>
+      )}
       {trouble.command && (
         <div className="mt-3">
           <div className="flex items-center justify-end mb-2">
@@ -573,7 +586,7 @@ export default function SetupWizard({
               이렇게 나오면?
             </p>
             {step.troubles.map((t, i) => (
-              <TroubleItem key={i} trouble={t} />
+              <TroubleItem key={i} trouble={t} available={available} onOpen={openLightbox} />
             ))}
           </div>
         )}
