@@ -39,7 +39,7 @@ const INLINE_HTML = `
         </div>
         <div>
           <div class="k">참여 대상</div>
-          <div class="v">초등학생 이상 · 가족</div>
+          <div class="v">전 연령 · 가족</div>
         </div>
         <div>
           <div class="k">모집 인원</div>
@@ -496,7 +496,7 @@ const INLINE_HTML = `
       </div>
       <div class="note-card">
         <strong>👨‍👩‍👧 가족 체험 프로그램</strong><br>
-        본 프로그램은 가족 단위로 진행됩니다. 초등학생 이상 어린이와 <strong>보호자가 함께 신청</strong>해 주세요.
+        본 프로그램은 가족 단위로 진행됩니다. 어린이와 <strong>보호자가 함께 신청</strong>해 주세요.
       </div>
     </div>
 
@@ -511,7 +511,7 @@ const INLINE_HTML = `
       </details>
       <details>
         <summary>몇 살부터 참여할 수 있나요?</summary>
-        <p>초등학생 이상의 어린이와 동반 가족이 대상입니다. 물에서 진행되는 체험이라 <strong>안전을 위해 미취학 아동은 참가하실 수 없습니다.</strong></p>
+        <p>어린이와 동반 가족 누구나 참여하실 수 있습니다. 다만 물에서 진행되는 체험이라, 어린 자녀는 <strong>보호자가 안전을 충분히 살펴주실 수 있는 경우</strong> 함께해 주세요.</p>
       </details>
       <details>
         <summary>어디로 모이나요? 주차는요?</summary>
