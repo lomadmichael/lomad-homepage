@@ -244,13 +244,11 @@ const WINDOWS: SetupTrack = {
           note: "와이파이가 느리면 운영진 USB에 같은 파일이 있습니다.",
         },
         {
-          img: W(11),
           alt: "Git 설치 첫 화면 — 사용권(License) 화면",
           action: "② 받은 파일을 실행하면 이 화면이 뜹니다. 「Next」.",
           note: "'이 앱이 디바이스를 변경하도록 허용하시겠습니까?'가 먼저 뜨면 「예」.",
         },
         {
-          img: W(12),
           alt: "Git 설치 중간 화면 예 — Select Components",
           action: "③ 이런 화면이 계속 나옵니다. 체크박스·선택지는 건드리지 말고 「Next」만 누르세요.",
           note: "설치 위치, 구성요소, 편집기, 브랜치 이름, PATH, SSH, HTTPS, 줄바꿈, 터미널, pull, 자격증명, 추가 옵션 순서로 지나갑니다. 전부 기본값이 정답입니다.",

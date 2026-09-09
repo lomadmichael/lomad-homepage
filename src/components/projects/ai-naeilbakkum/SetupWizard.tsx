@@ -100,7 +100,10 @@ function ShotFrame({
   available: Set<string>;
   onOpen: (shot: { src: string; alt: string }) => void;
 }) {
-  if (!img || !available.has(img)) {
+  // 원고에서 이미지를 아예 지정하지 않은 행동은 문장만 (자리표시 없음)
+  if (!img) return null;
+  // 지정은 됐지만 아직 파일이 없는 경우(예: Mac 촬영 전) — 자리표시
+  if (!available.has(img)) {
     return (
       <div className="border border-border bg-[#f3f1ec] min-h-[120px] flex items-center justify-center px-4 py-6 mb-3">
         <p className={cn(SECTION, "text-[12px] text-text-muted leading-[1.7] text-center")}>
