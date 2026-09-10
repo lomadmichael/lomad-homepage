@@ -96,7 +96,7 @@ export function tourByKey(key: string): Tour | undefined {
 }
 
 /**
- * 2기 참가자 명단 — 본인 확인용 (선정 20명 + 동반 박시호 + 초대 Joseph).
+ * 2기 참가자 명단 — 본인 확인용 (선정 20명 + 초대 Joseph).
  * staff: true 는 신청·응답은 할 수 있지만 집계(참가자 수·미신청자)에서 제외한다.
  */
 export const ROSTER: { name: string; phone: string; staff?: boolean }[] = [
@@ -111,7 +111,7 @@ export const ROSTER: { name: string; phone: string; staff?: boolean }[] = [
   { name: "노효진", phone: "01094860551" },
   { name: "문보람", phone: "01041099068" },
   { name: "민인애", phone: "01021910860" },
-  { name: "박선옥", phone: "01052259791" },
+  { name: "박시호", phone: "01052259791" },
   { name: "박소현", phone: "01074265114" },
   { name: "박이안", phone: "01051204313" },
   { name: "박지혜", phone: "01043039212" },
