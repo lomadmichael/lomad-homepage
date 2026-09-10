@@ -46,7 +46,7 @@ export const TOURS: Tour[] = [
     title: "뚜록 투어",
     mentor: "황두현 · 홍상록",
     belong: "카와이오또코 · 글라이더스 양양",
-    capacity: 9,
+    capacity: 8,
     program: ["점심", "티타임", "랜드 스케이트"],
     rain: "비가 오면 양양 장날 구경과 낙산사 또는 오색 케이블카 투어로 대체됩니다.",
     fee: 20000,
