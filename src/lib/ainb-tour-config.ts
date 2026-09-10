@@ -1,7 +1,7 @@
 /** 「Ai 내일바꿈」 2기 · 2일차 멘토투어 설정 */
 
 export const TOUR_COHORT = "2기";
-export const TOUR_MEET = "9월 11일(금) 오후 1시 · 웨이브웍스";
+export const TOUR_MEET = "9월 11일(금) 오후 12시 30분 · 웨이브웍스";
 export const TOUR_MEET_ADDR = "양양군 현남면 인구중앙길 110 (죽도해변 앞)";
 export const TOUR_TEL = "010-9542-3775";
 /** 코스 사진이 들어 있는 public 하위 폴더 */
