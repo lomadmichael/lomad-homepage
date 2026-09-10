@@ -33,7 +33,7 @@ export default async function SurfAdminPage() {
           서핑 참가 신청 현황
         </h1>
         <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub mb-8">
-          1기 · 신청 {rows.length}명 / 참가자 {PARTICIPANTS.length}명
+          2기 · 신청 {rows.length}명 / 참가자 {PARTICIPANTS.length}명
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">

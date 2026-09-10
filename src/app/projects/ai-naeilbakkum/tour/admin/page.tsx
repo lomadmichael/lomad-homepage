@@ -29,7 +29,7 @@ export default async function TourAdminPage() {
           멘토투어 신청 현황
         </h1>
         <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub mb-10">
-          1기 · 신청 {rows.length}명 / 참가자 {PARTICIPANTS.length}명
+          2기 · 신청 {rows.length}명 / 참가자 {PARTICIPANTS.length}명
         </p>
 
         <div className="space-y-8">

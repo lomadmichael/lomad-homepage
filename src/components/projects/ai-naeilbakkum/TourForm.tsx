@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useActionState, useState } from "react";
 import { submitTourChoice, type TourFormState } from "@/lib/ainb-tour-action";
-import { TOURS, TOUR_MEET, TOUR_MEET_ADDR, TOUR_TEL, tourByKey } from "@/lib/ainb-tour-config";
+import { TOURS, TOUR_MEET, TOUR_MEET_ADDR, TOUR_TEL, TOUR_PHOTO_DIR, tourByKey } from "@/lib/ainb-tour-config";
 
 const initial: TourFormState = { success: false, message: "" };
 
@@ -75,7 +75,7 @@ export default function TourForm({ counts }: { counts: Record<string, number> })
                 {t.photos.slice(0, 3).map((p, i) => (
                   <div key={p} className={`relative bg-bg ${i === 0 ? "aspect-[4/5]" : "aspect-[4/5]"}`}>
                     <Image
-                      src={`/ainb/tour/${p}.jpg`}
+                      src={`${TOUR_PHOTO_DIR}/${p}.jpg`}
                       alt=""
                       fill
                       sizes="(max-width: 760px) 33vw, 240px"

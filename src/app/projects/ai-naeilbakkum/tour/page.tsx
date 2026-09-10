@@ -9,12 +9,12 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "멘토투어 신청 · 바들바들 현남생활 Ai 내일바꿈 | LOMAD",
-  description: "「바들바들 현남생활 – Ai 내일바꿈」 1기 2일차 멘토투어 신청",
+  description: "「바들바들 현남생활 – Ai 내일바꿈」 2기 2일차 멘토투어 신청",
   alternates: { canonical: "/projects/ai-naeilbakkum/tour" },
   ...ainbOg({
     title: "멘토투어 신청 · 바들바들 현남생활 Ai 내일바꿈 | LOMAD",
     description:
-      "「바들바들 현남생활 – Ai 내일바꿈」 1기 2일차 멘토투어 신청",
+      "「바들바들 현남생활 – Ai 내일바꿈」 2기 2일차 멘토투어 신청",
     path: "/projects/ai-naeilbakkum/tour",
   }),
   robots: { index: false, follow: false },
