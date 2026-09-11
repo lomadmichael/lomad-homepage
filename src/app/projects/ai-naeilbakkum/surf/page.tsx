@@ -8,12 +8,12 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "서핑 참가 신청 · 바들바들 현남생활 Ai 내일바꿈 | LOMAD",
-  description: "「바들바들 현남생활 – Ai 내일바꿈」 1기 서핑 참가 신청 — 슈트·보드 준비를 위한 정보를 알려주세요.",
+  description: "「바들바들 현남생활 – Ai 내일바꿈」 2기 서핑 참가 신청 — 슈트·보드 준비를 위한 정보를 알려주세요.",
   alternates: { canonical: "/projects/ai-naeilbakkum/surf" },
   ...ainbOg({
     title: "서핑 참가 신청 · 바들바들 현남생활 Ai 내일바꿈 | LOMAD",
     description:
-      "「바들바들 현남생활 – Ai 내일바꿈」 1기 서핑 참가 신청 — 슈트·보드 준비를 위한 정보를 알려주세요.",
+      "「바들바들 현남생활 – Ai 내일바꿈」 2기 서핑 참가 신청 — 슈트·보드 준비를 위한 정보를 알려주세요.",
     path: "/projects/ai-naeilbakkum/surf",
   }),
   robots: { index: false, follow: false },
@@ -55,7 +55,7 @@ export default function SurfPage() {
 
           <div className="border border-[#E8611C] bg-[#FDEBD9] px-5 py-4 mb-12">
             <p className="font-[family-name:var(--font-noto)] text-[14px] font-black text-[#A8410F] mb-1">
-              9월 5일(토) 오전 10시 ~ 12시 · 죽도해변
+              9월 12일(토) 오전 10시 ~ 12시 · 죽도해변 모쿠서프 (현남면 인구중앙길 95-1)
             </p>
             <p className="font-[family-name:var(--font-noto)] text-[13px] leading-[1.8] text-[#A8410F]">
               장비(보드·슈트)는 현장에서 제공합니다. 수영복 또는 래쉬가드, 여벌 수건을 챙겨 주세요.
