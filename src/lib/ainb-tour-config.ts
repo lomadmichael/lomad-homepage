@@ -129,6 +129,10 @@ export const PARTICIPANTS = ROSTER.filter((r) => !r.staff);
 
 /** 집계에서 제외할 이름 */
 export const STAFF_NAMES = new Set(ROSTER.filter((r) => r.staff).map((r) => r.name));
+/** 운영진 테스트 계정 — 어떤 집계에도 넣지 않는다 (Joseph는 초대 참가라 참석 인원 집계에는 포함) */
+export const TEST_ACCOUNT_NAMES = new Set(["이홍래"]);
+/** 참석 인원 집계 모집단 = 참가자 20 + Joseph (테스트 계정 제외) */
+export const HEADCOUNT_ROSTER = ROSTER.filter((r) => !TEST_ACCOUNT_NAMES.has(r.name));
 
 /** 명단에 있는 참가자인지 확인하고, 등록된 성명을 돌려준다. */
 export function findParticipant(phone: string): { name: string } | null {

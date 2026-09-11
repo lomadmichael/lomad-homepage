@@ -31,11 +31,15 @@ export interface SurfSignup {
   id: string;
   name: string;
   phone: string;
-  gender: string;
-  height_cm: number;
-  weight_kg: number;
-  experience: Experience;
-  gear: Gear;
+  /** 2기부터. 1기 행은 null */
+  yoga_attend: boolean | null;
+  surf_attend: boolean | null;
+  /** 서핑 불참(surf_attend=false)이면 아래 신체·장비 값은 null */
+  gender: string | null;
+  height_cm: number | null;
+  weight_kg: number | null;
+  experience: Experience | null;
+  gear: Gear | null;
   note: string | null;
   created_at: string;
   updated_at: string;
@@ -44,11 +48,13 @@ export interface SurfSignup {
 export interface SurfInput {
   name: string;
   phone: string;
-  gender: string;
-  height_cm: number;
-  weight_kg: number;
-  experience: Experience;
-  gear: Gear;
+  yoga_attend: boolean;
+  surf_attend: boolean;
+  gender: string | null;
+  height_cm: number | null;
+  weight_kg: number | null;
+  experience: Experience | null;
+  gear: Gear | null;
   note: string;
 }
 

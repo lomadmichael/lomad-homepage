@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { verifyAdmin, ADMIN_COOKIE } from "../../consent/admin/auth";
 import AdminLogin from "../../consent/admin/AdminLogin";
 import { listSurf, EXPERIENCE_LABEL, GEAR_LABEL } from "@/lib/ainb-surf-db";
-import { PARTICIPANTS, STAFF_NAMES } from "@/lib/ainb-tour-config";
+import { HEADCOUNT_ROSTER, TEST_ACCOUNT_NAMES } from "@/lib/ainb-tour-config";
 
 export const dynamic = "force-dynamic";
 export const metadata = { robots: { index: false, follow: false } };
@@ -10,38 +10,64 @@ export const metadata = { robots: { index: false, follow: false } };
 const TH = "px-3 py-2 text-left font-[family-name:var(--font-noto)] text-[12px] font-black whitespace-nowrap";
 const TD = "px-3 py-2 font-[family-name:var(--font-noto)] text-[13px] whitespace-nowrap";
 
+function Attend({ v }: { v: boolean | null }) {
+  if (v === null) return <span className="text-text-sub">—</span>;
+  return v ? <span className="font-bold">참석</span> : <span className="text-[#C0392B]">불참</span>;
+}
+
 export default async function SurfAdminPage() {
   const token = (await cookies()).get(ADMIN_COOKIE)?.value;
   if (!verifyAdmin(token)) return <AdminLogin />;
 
-  const rows = (await listSurf()).filter((r) => !STAFF_NAMES.has(r.name));
+  // 집계 모집단 = 참가자 20 + Joseph (형님 지시 9/11: 인원수 카운팅에 Joseph 포함). 테스트 계정만 제외
+  const rows = (await listSurf()).filter((r) => !TEST_ACCOUNT_NAMES.has(r.name));
   const done = new Set(rows.map((r) => r.name));
-  const pending = PARTICIPANTS.filter((r) => !done.has(r.name));
+  const pending = HEADCOUNT_ROSTER.filter((r) => !done.has(r.name));
 
-  const suit = rows.filter((r) => r.gear === "suit");
-  const rash = rows.filter((r) => r.gear === "rashguard");
-  const byExp = {
-    none: rows.filter((r) => r.experience === "none").length,
-    beginner: rows.filter((r) => r.experience === "beginner").length,
-    experienced: rows.filter((r) => r.experience === "experienced").length,
-  };
+  const yogaYes = rows.filter((r) => r.yoga_attend === true);
+  const yogaNo = rows.filter((r) => r.yoga_attend === false);
+  const surfYes = rows.filter((r) => r.surf_attend === true);
+  const surfNo = rows.filter((r) => r.surf_attend === false);
+
+  const suit = surfYes.filter((r) => r.gear === "suit");
+  const rash = surfYes.filter((r) => r.gear === "rashguard");
+  const expNone = surfYes.filter((r) => r.experience === "none").length;
+  const expSome = surfYes.length - expNone;
 
   return (
     <main className="min-h-screen bg-bg">
       <div className="max-w-[1000px] mx-auto px-6 py-12">
         <h1 className="font-[family-name:var(--font-noto)] text-[24px] font-black mb-1">
-          서핑 참가 신청 현황
+          3일차 참석 조사 · 서핑 신청 현황
         </h1>
         <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub mb-8">
-          2기 · 신청 {rows.length}명 / 참가자 {PARTICIPANTS.length}명
+          2기 · 응답 {rows.length}명 / 대상 {HEADCOUNT_ROSTER.length}명 (참가자 + Joseph)
         </p>
 
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4">
+          {[
+            ["요가 참석", `${yogaYes.length}명`],
+            ["요가 불참", `${yogaNo.length}명`],
+            ["서핑 참석", `${surfYes.length}명`],
+            ["서핑 불참", `${surfNo.length}명`],
+            ["미응답", `${pending.length}명`],
+          ].map(([k, v]) => (
+            <div key={k} className="border border-border px-4 py-3">
+              <p className="font-[family-name:var(--font-noto)] text-[12px] text-text-sub mb-1">{k}</p>
+              <p className="font-[family-name:var(--font-noto)] text-[20px] font-black">{v}</p>
+            </div>
+          ))}
+        </div>
+
+        <p className="font-[family-name:var(--font-noto)] text-[12px] text-text-sub mb-2">
+          서핑 참석자 {surfYes.length}명 기준 장비 준비
+        </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
           {[
             ["슈트 필요", `${suit.length}명`],
             ["래쉬가드", `${rash.length}명`],
-            ["경험 없음", `${byExp.none}명`],
-            ["경험 있음", `${byExp.beginner + byExp.experienced}명`],
+            ["경험 없음", `${expNone}명`],
+            ["경험 있음", `${expSome}명`],
           ].map(([k, v]) => (
             <div key={k} className="border border-border px-4 py-3">
               <p className="font-[family-name:var(--font-noto)] text-[12px] text-text-sub mb-1">{k}</p>
@@ -52,7 +78,7 @@ export default async function SurfAdminPage() {
 
         {rows.length === 0 ? (
           <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub">
-            아직 신청자가 없습니다.
+            아직 응답자가 없습니다.
           </p>
         ) : (
           <div className="overflow-x-auto border border-border">
@@ -60,6 +86,8 @@ export default async function SurfAdminPage() {
               <thead className="border-b border-border bg-[#00000008]">
                 <tr>
                   <th className={TH}>성명</th>
+                  <th className={TH}>요가</th>
+                  <th className={TH}>서핑</th>
                   <th className={TH}>성별</th>
                   <th className={TH}>키</th>
                   <th className={TH}>몸무게</th>
@@ -69,19 +97,28 @@ export default async function SurfAdminPage() {
                 </tr>
               </thead>
               <tbody>
-                {rows.map((r) => (
-                  <tr key={r.id} className="border-b border-border last:border-0">
-                    <td className={`${TD} font-bold`}>{r.name}</td>
-                    <td className={TD}>{r.gender}</td>
-                    <td className={TD}>{r.height_cm}cm</td>
-                    <td className={TD}>{r.weight_kg}kg</td>
-                    <td className={TD}>{EXPERIENCE_LABEL[r.experience]}</td>
-                    <td className={`${TD} ${r.gear === "suit" ? "font-bold" : "text-text-sub"}`}>
-                      {GEAR_LABEL[r.gear]}
-                    </td>
-                    <td className={`${TD} whitespace-normal text-text-sub`}>{r.note ?? ""}</td>
-                  </tr>
-                ))}
+                {rows.map((r) => {
+                  const s = r.surf_attend === true;
+                  return (
+                    <tr key={r.id} className="border-b border-border last:border-0">
+                      <td className={`${TD} font-bold`}>{r.name}</td>
+                      <td className={TD}>
+                        <Attend v={r.yoga_attend} />
+                      </td>
+                      <td className={TD}>
+                        <Attend v={r.surf_attend} />
+                      </td>
+                      <td className={TD}>{s ? r.gender : ""}</td>
+                      <td className={TD}>{s && r.height_cm != null ? `${r.height_cm}cm` : ""}</td>
+                      <td className={TD}>{s && r.weight_kg != null ? `${r.weight_kg}kg` : ""}</td>
+                      <td className={TD}>{s && r.experience ? EXPERIENCE_LABEL[r.experience] : ""}</td>
+                      <td className={`${TD} ${r.gear === "suit" ? "font-bold" : "text-text-sub"}`}>
+                        {s && r.gear ? GEAR_LABEL[r.gear] : ""}
+                      </td>
+                      <td className={`${TD} whitespace-normal text-text-sub`}>{r.note ?? ""}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -90,11 +127,11 @@ export default async function SurfAdminPage() {
         <section className="mt-10 border border-border">
           <div className="px-5 py-4 border-b border-border">
             <h2 className="font-[family-name:var(--font-noto)] text-[17px] font-black">
-              미신청 {pending.length}명
+              미응답 {pending.length}명
             </h2>
           </div>
           <p className="px-5 py-4 font-[family-name:var(--font-noto)] text-[14px] leading-[2]">
-            {pending.length === 0 ? "전원 신청 완료했습니다." : pending.map((p) => p.name).join(" · ")}
+            {pending.length === 0 ? "전원 응답 완료했습니다." : pending.map((p) => p.name).join(" · ")}
           </p>
         </section>
       </div>

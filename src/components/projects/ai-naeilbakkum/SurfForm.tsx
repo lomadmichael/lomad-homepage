@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { submitSurfForm, type SurfFormState } from "@/lib/ainb-surf-action";
 
 const initial: SurfFormState = { success: false, message: "" };
@@ -16,13 +16,36 @@ const GEARS = [
   { value: "rashguard", label: "래쉬가드 착용", hint: "본인 래쉬가드를 입고 참여합니다" },
 ];
 
+const ATTEND = [
+  { value: "yes", label: "참석" },
+  { value: "no", label: "불참" },
+];
+
 const LABEL = "font-[family-name:var(--font-noto)] text-[13px] font-bold block mb-2";
 const INPUT =
   "w-full border border-border px-4 py-3 font-[family-name:var(--font-noto)] text-[15px] bg-bg focus:border-text outline-none";
 
+/**
+ * 선택 표시는 CSS :has(:checked)가 아니라 상태값으로 직접 칠한다.
+ * (카톡 인앱 브라우저에서 :has가 안 먹혀 "눌러도 반응 없다"가 됐던 9/7 사고)
+ */
+function optionClass(selected: boolean, extra = "") {
+  return `flex items-center gap-3 px-4 py-3 cursor-pointer font-[family-name:var(--font-noto)] text-[15px] ${
+    selected ? "border-2 border-text bg-[#00000006]" : "border border-border"
+  } ${extra}`;
+}
+
 export default function SurfForm() {
   const [state, formAction, pending] = useActionState(submitSurfForm, initial);
   const prev = state.values;
+
+  const [yoga, setYoga] = useState(prev?.yoga ?? "");
+  const [surf, setSurf] = useState(prev?.surf ?? "");
+  const [gender, setGender] = useState(prev?.gender ?? "");
+  const [experience, setExperience] = useState(prev?.experience ?? "");
+  const [gear, setGear] = useState(prev?.gear ?? "");
+
+  const surfYes = surf === "yes";
 
   if (state.success) {
     return (
@@ -34,8 +57,12 @@ export default function SurfForm() {
           {state.message}
         </h2>
         <p className="font-[family-name:var(--font-noto)] text-[14px] leading-[1.9] text-text-sub">
-          알려주신 키·몸무게에 맞춰 장비를 준비하겠습니다.
-          <br />
+          {surfYes ? (
+            <>
+              알려주신 키·몸무게에 맞춰 장비를 준비하겠습니다.
+              <br />
+            </>
+          ) : null}
           내용을 바꾸시려면 같은 번호로 다시 제출하시면 됩니다.
         </p>
         <button
@@ -71,106 +98,151 @@ export default function SurfForm() {
         </label>
       </div>
 
-      {/* 성별 */}
-      <div>
-        <span className={LABEL}>성별</span>
-        <div className="grid grid-cols-2 gap-3">
-          {["남", "여"].map((g) => (
-            <label
-              key={g}
-              className="flex items-center justify-center gap-2 border border-border px-4 py-3 cursor-pointer has-[:checked]:border-text has-[:checked]:border-2 font-[family-name:var(--font-noto)] text-[15px]"
-            >
-              <input
-                type="radio"
-                name="gender"
-                value={g}
-                required
-                defaultChecked={prev?.gender === g}
-                className="accent-[#1A1A1A]"
-              />
-              <span>{g}</span>
-            </label>
-          ))}
+      {/* 참석 여부 */}
+      <div className="space-y-6 border-t border-border pt-8">
+        <div>
+          <span className={LABEL}>
+            해변 요가{" "}
+            <span className="font-normal text-text-sub">· 오전 8시 ~ 9시 · 웨이브웍스 앞 해변</span>
+          </span>
+          <div className="grid grid-cols-2 gap-3">
+            {ATTEND.map((a) => (
+              <label key={a.value} className={optionClass(yoga === a.value, "justify-center")}>
+                <input
+                  type="radio"
+                  name="yoga"
+                  value={a.value}
+                  checked={yoga === a.value}
+                  onChange={() => setYoga(a.value)}
+                  className="accent-[#1A1A1A]"
+                />
+                <span>{a.label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <span className={LABEL}>
+            서핑{" "}
+            <span className="font-normal text-text-sub">· 오전 10시 ~ 12시 · 죽도해변 모쿠서프</span>
+          </span>
+          <div className="grid grid-cols-2 gap-3">
+            {ATTEND.map((a) => (
+              <label key={a.value} className={optionClass(surf === a.value, "justify-center")}>
+                <input
+                  type="radio"
+                  name="surf"
+                  value={a.value}
+                  checked={surf === a.value}
+                  onChange={() => setSurf(a.value)}
+                  className="accent-[#1A1A1A]"
+                />
+                <span>{a.label}</span>
+              </label>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* 키 · 몸무게 */}
-      <div className="grid gap-5 md:grid-cols-2">
-        <label className="block">
-          <span className={LABEL}>키 (cm)</span>
-          <input
-            name="height"
-            required
-            inputMode="numeric"
-            placeholder="170"
-            defaultValue={prev?.height}
-            className={INPUT}
-          />
-        </label>
-        <label className="block">
-          <span className={LABEL}>몸무게 (kg)</span>
-          <input
-            name="weight"
-            required
-            inputMode="numeric"
-            placeholder="65"
-            defaultValue={prev?.weight}
-            className={INPUT}
-          />
-        </label>
-      </div>
-      <p className="font-[family-name:var(--font-noto)] text-[13px] leading-[1.8] text-text-sub -mt-4">
-        슈트와 보드 사이즈를 맞추기 위해서만 사용하고, 프로그램이 끝나면 폐기합니다.
-      </p>
+      {/* 서핑 참석자만: 장비 준비 정보 */}
+      {surfYes && (
+        <div className="space-y-8 border-t border-border pt-8">
+          <p className="font-[family-name:var(--font-noto)] text-[14px] leading-[1.8] text-text-sub -mb-2">
+            슈트와 보드를 몸에 맞게 준비하기 위해 몇 가지만 더 여쭙습니다.
+          </p>
 
-      {/* 서핑 경험 */}
-      <div>
-        <span className={LABEL}>서핑 경험</span>
-        <div className="space-y-3">
-          {EXPERIENCES.map((e) => (
-            <label
-              key={e.value}
-              className="flex items-center gap-3 border border-border px-4 py-3 cursor-pointer has-[:checked]:border-text has-[:checked]:border-2 font-[family-name:var(--font-noto)] text-[15px]"
-            >
-              <input
-                type="radio"
-                name="experience"
-                value={e.value}
-                required
-                defaultChecked={prev?.experience === e.value}
-                className="accent-[#1A1A1A]"
-              />
-              <span>{e.label}</span>
-            </label>
-          ))}
-        </div>
-      </div>
+          {/* 성별 */}
+          <div>
+            <span className={LABEL}>성별</span>
+            <div className="grid grid-cols-2 gap-3">
+              {["남", "여"].map((g) => (
+                <label key={g} className={optionClass(gender === g, "justify-center")}>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value={g}
+                    checked={gender === g}
+                    onChange={() => setGender(g)}
+                    className="accent-[#1A1A1A]"
+                  />
+                  <span>{g}</span>
+                </label>
+              ))}
+            </div>
+          </div>
 
-      {/* 슈트 여부 */}
-      <div>
-        <span className={LABEL}>슈트 착용 여부</span>
-        <div className="space-y-3">
-          {GEARS.map((g) => (
-            <label
-              key={g.value}
-              className="flex items-start gap-3 border border-border px-4 py-3 cursor-pointer has-[:checked]:border-text has-[:checked]:border-2"
-            >
+          {/* 키 · 몸무게 */}
+          <div className="grid gap-5 md:grid-cols-2">
+            <label className="block">
+              <span className={LABEL}>키 (cm)</span>
               <input
-                type="radio"
-                name="gear"
-                value={g.value}
-                required
-                defaultChecked={prev?.gear === g.value}
-                className="accent-[#1A1A1A] mt-1"
+                name="height"
+                inputMode="numeric"
+                placeholder="170"
+                defaultValue={prev?.height}
+                className={INPUT}
               />
-              <span className="font-[family-name:var(--font-noto)] text-[15px]">
-                {g.label}
-                <span className="block text-[13px] text-text-sub mt-0.5">{g.hint}</span>
-              </span>
             </label>
-          ))}
+            <label className="block">
+              <span className={LABEL}>몸무게 (kg)</span>
+              <input
+                name="weight"
+                inputMode="numeric"
+                placeholder="65"
+                defaultValue={prev?.weight}
+                className={INPUT}
+              />
+            </label>
+          </div>
+          <p className="font-[family-name:var(--font-noto)] text-[13px] leading-[1.8] text-text-sub -mt-4">
+            슈트와 보드 사이즈를 맞추기 위해서만 사용하고, 프로그램이 끝나면 폐기합니다.
+          </p>
+
+          {/* 서핑 경험 */}
+          <div>
+            <span className={LABEL}>서핑 경험</span>
+            <div className="space-y-3">
+              {EXPERIENCES.map((e) => (
+                <label key={e.value} className={optionClass(experience === e.value)}>
+                  <input
+                    type="radio"
+                    name="experience"
+                    value={e.value}
+                    checked={experience === e.value}
+                    onChange={() => setExperience(e.value)}
+                    className="accent-[#1A1A1A]"
+                  />
+                  <span>{e.label}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          {/* 슈트 여부 */}
+          <div>
+            <span className={LABEL}>슈트 착용 여부</span>
+            <div className="space-y-3">
+              {GEARS.map((g) => (
+                <label key={g.value} className={optionClass(gear === g.value, "items-start")}>
+                  <input
+                    type="radio"
+                    name="gear"
+                    value={g.value}
+                    checked={gear === g.value}
+                    onChange={() => setGear(g.value)}
+                    className="accent-[#1A1A1A] mt-1"
+                  />
+                  <span>
+                    {g.label}
+                    <span className="block text-[13px] text-text-sub mt-0.5">{g.hint}</span>
+                  </span>
+                </label>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* 비고 */}
       <label className="block">
@@ -195,7 +267,7 @@ export default function SurfForm() {
         disabled={pending}
         className="w-full py-4 bg-text text-bg font-[family-name:var(--font-noto)] text-[16px] font-black disabled:opacity-40"
       >
-        {pending ? "제출 중…" : "서핑 참가 신청하기"}
+        {pending ? "제출 중…" : "제출하기"}
       </button>
     </form>
   );
