@@ -42,7 +42,7 @@ export default async function SurveyAdminPage() {
           만족도 조사 결과
         </h1>
         <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub mb-10">
-          1기 · 응답 {n}명 / 참가자 {PARTICIPANTS.length}명
+          2기 · 응답 {n}명 / 참가자 {PARTICIPANTS.length}명
           {PARTICIPANTS.length > 0 && ` (${Math.round((n / PARTICIPANTS.length) * 100)}%)`}
         </p>
 

@@ -1,6 +1,6 @@
-/** 「Ai 내일바꿈」 1기 만족도 조사 문항 (2026. 9. 3.~9. 6. 실제 진행 프로그램 기준) */
+/** 「Ai 내일바꿈」 2기 만족도 조사 문항 (2026. 9. 10.~9. 13. 실제 진행 프로그램 기준) */
 
-export const SURVEY_COHORT = "1기";
+export const SURVEY_COHORT = "2기";
 
 export interface SurveyItem {
   key: string;
@@ -21,8 +21,8 @@ export const SURVEY_ITEMS: SurveyItem[] = [
   { key: "running", label: "현남면 러닝", hint: "인구 어린이공원 출발", day: "2일차" },
   { key: "mentor_tour", label: "멘토투어", hint: "지역 멘토와 함께한 로컬투어", day: "2일차" },
   { key: "goods", label: "현남생활 굿즈 만들기", day: "3일차" },
-  { key: "surfing", label: "서핑 체험", hint: "죽도해변", day: "3일차" },
-  { key: "yoga", label: "요가", hint: "웨이브웍스", day: "3일차" },
+  { key: "surfing", label: "서핑 체험", hint: "죽도해변 모쿠서프", day: "3일차" },
+  { key: "yoga", label: "해변 요가", hint: "웨이브웍스 앞 해변", day: "3일차" },
   { key: "showcase", label: "산출물 · 현남생활 발표회", day: "4일차" },
   { key: "lodging", label: "숙소", day: "공통" },
 ];

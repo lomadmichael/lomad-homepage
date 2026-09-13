@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 const TITLE = "만족도 조사 · 바들바들 현남생활 Ai 내일바꿈 | LOMAD";
 const DESC =
-  "「바들바들 현남생활 – Ai 내일바꿈」 1기 만족도 조사 — 더 나은 프로그램을 위해 의견을 들려주세요.";
+  "「바들바들 현남생활 – Ai 내일바꿈」 2기 만족도 조사 — 더 나은 프로그램을 위해 의견을 들려주세요.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -48,7 +48,7 @@ export default function SurveyPage() {
 
           <div className="border-l-2 border-text pl-5 mb-10">
             <p className="font-[family-name:var(--font-noto)] text-[15px] leading-[1.9] text-text-sub">
-              「Ai 내일바꿈」 1기가 끝났습니다. 함께해 주셔서 고맙습니다.
+              「Ai 내일바꿈」 2기가 끝났습니다. 함께해 주셔서 고맙습니다.
               <br />
               좋았던 것도, 아쉬웠던 것도 있는 그대로 남겨 주세요.{" "}
               <strong className="text-text">다음 기수를 준비하는 데 그대로 쓰겠습니다.</strong>
