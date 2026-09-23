@@ -26,7 +26,8 @@ export async function GET(request: Request) {
     failed = 0;
   try {
     const rows = await adminList();
-    const todo = rows.filter((r) => r.session_key === target && r.status === "confirmed");
+    // session_key 는 "YYYY-MM-DD" 또는 "YYYY-MM-DD-am/-pm" 형태 — 날짜 접두(10자)로 매칭
+    const todo = rows.filter((r) => r.session_key.slice(0, 10) === target && r.status === "confirmed");
     for (const r of todo) {
       try {
         await sendReminderSms({

@@ -4,12 +4,12 @@
 /** true 로 바꾸면 접수 페이지 폼 + 서버 액션이 열린다. 오픈 시 이 값만 바꾸고 배포. */
 export const SUBMISSIONS_OPEN = true;
 
-/** 회차당 어린이 정원. */
-export const CAPACITY = 12;
+/** 타임당 정원. */
+export const CAPACITY = 15;
 
 /** 집결지 / 체험지 / 문의. */
-export const PLACE = "양양군 평생학습관 (양양읍 안산1길 36)";
-export const EXPERIENCE_SITE = "남대천 (양양군 서면 용천리 일원)";
+export const PLACE = "한국수산자원공단 동해생명자원센터 (양양군 손양면 동명로 119)";
+export const EXPERIENCE_SITE = "양양 남대천 일대 · 연어전시관";
 export const INQUIRY_TEL = "010-9542-3775";
 
 /** 관리자(로마드) 접수 알림 수신처 — 접수 들어올 때 문자+이메일 발송. */
@@ -21,13 +21,16 @@ export interface EcologySession {
   label: string; // 사람이 읽는 일시
 }
 
+// 하루 2타임(오전/오후) — session_key는 날짜+타임(-am/-pm). 코드가 날짜로 파싱하지 않으므로 안전.
 export const SESSIONS: EcologySession[] = [
-  { key: "2026-09-05", label: "9월 5일(토) 오전 10:00–12:00" },
-  { key: "2026-09-06", label: "9월 6일(일) 오전 10:00–12:00" },
-  { key: "2026-09-12", label: "9월 12일(토) 오전 10:00–12:00" },
-  { key: "2026-09-13", label: "9월 13일(일) 오전 10:00–12:00" },
-  { key: "2026-09-19", label: "9월 19일(토) 오전 10:00–12:00" },
-  { key: "2026-09-20", label: "9월 20일(일) 오전 10:00–12:00" },
+  { key: "2026-10-03-am", label: "10월 3일(토) 오전 10:00–12:00" },
+  { key: "2026-10-03-pm", label: "10월 3일(토) 오후 1:00–3:00" },
+  { key: "2026-10-10-am", label: "10월 10일(토) 오전 10:00–12:00" },
+  { key: "2026-10-10-pm", label: "10월 10일(토) 오후 1:00–3:00" },
+  { key: "2026-10-24-am", label: "10월 24일(토) 오전 10:00–12:00" },
+  { key: "2026-10-24-pm", label: "10월 24일(토) 오후 1:00–3:00" },
+  { key: "2026-10-31-am", label: "10월 31일(토) 오전 10:00–12:00" },
+  { key: "2026-10-31-pm", label: "10월 31일(토) 오후 1:00–3:00" },
 ];
 
 export function sessionLabel(key: string): string {
