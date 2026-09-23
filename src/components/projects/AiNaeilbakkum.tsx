@@ -1,10 +1,14 @@
 import "./ai-naeilbakkum.css";
 
-// 바들바들 현남생활 – Ai 내일바꿈 (2026년 9월 1·2기 모집)
+// 바들바들 현남생활 – Ai 내일바꿈 (2026년 10월 3기 모집)
 // 상세 랜딩. 생태체험 시리즈와 동일하게 스코프 CSS + 인라인 HTML 패턴을 사용한다.
-const APPLY_URL = "https://monthler-form.monthler.kr/form/apply/348528732316635136";
+// 3기 한달살러 신청폼 URL. 비어 있으면 버튼이 인스타그램으로 가고 "신청 링크 준비 중"으로 표시된다.
+const APPLY_URL = "";
+const APPLY_READY = APPLY_URL.length > 0;
 const INSTAGRAM_URL = "https://www.instagram.com/likehn.kr";
 const INQUIRY_TEL = "010-9542-3775";
+const APPLY_HREF = APPLY_READY ? APPLY_URL : "https://www.instagram.com/likehn.kr";
+const APPLY_LABEL = APPLY_READY ? "3기 참가 신청하기" : "신청 링크 준비 중 · 인스타 공지";
 
 const INLINE_HTML = `
 <div class="crumb">
@@ -15,7 +19,7 @@ const INLINE_HTML = `
 
 <section class="hero">
   <div class="wrap">
-    <div class="eyebrow"><span class="pulse"></span> 2026년 9월 · 1·2기 참가자 모집 중</div>
+    <div class="eyebrow"><span class="pulse"></span> 2026년 10월 · 3기 참가자 모집 중</div>
 
     <div class="prompt-box">
       <div class="lbl">HYEONNAM-LIFE · AI PROMPT</div>
@@ -30,8 +34,8 @@ const INLINE_HTML = `
     </p>
 
     <div class="hero-ctas">
-      <a class="btn btn-primary" href="${APPLY_URL}" target="_blank" rel="noopener noreferrer">
-        1·2기 참가 신청하기
+      <a class="btn btn-primary" href="${APPLY_HREF}" target="_blank" rel="noopener noreferrer">
+        ${APPLY_LABEL}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 4h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14L20 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <a class="btn btn-ghost" href="#program">프로그램 살펴보기</a>
@@ -42,9 +46,9 @@ const INLINE_HTML = `
     </div>
 
     <div class="chips">
-      <span class="chip">1기 9.3(목)–9.6(일)</span>
-      <span class="chip">2기 9.10(목)–9.13(일)</span>
-      <span class="chip">기수별 20명</span>
+      <span class="chip">3기 10.2(금)–10.5(월)</span>
+      <span class="chip">연휴 3박 4일</span>
+      <span class="chip">20명 선발</span>
       <span class="chip dark">참가비 무료</span>
     </div>
   </div>
@@ -60,15 +64,16 @@ const INLINE_HTML = `
       함께 준비하는 시간이 되도록 구성했습니다.
     </p>
     <p class="lead">
-      우리는 Ai를 통해 <b>더 많은 역할</b>을 할 수 있다고 생각해요. 같이 배운 Ai를 활용해
-      지역이 안고 있는 문제들을 함께 해결하는 다음 챕터도 준비하고 있습니다.
+      지난 9월 <b>1·2기 40명이 나흘 만에 각자 현업에 바로 쓰는 결과물을 만들어 발표</b>했습니다.
+      홈페이지를 완성한 사람도, 반복 업무를 대신해 주는 도구를 만든 사람도 있었어요.
+      3기는 그 검증된 커리큘럼 그대로, 개천절 연휴에 진행합니다.
     </p>
     <div class="keyline">바다에서 쉬고, Ai로 내일을 대비하고,<br>사람과 연결되는 3박 4일.</div>
     <div class="stats">
-      <div class="stat"><div class="num">5기수</div><div class="lbl">현남생활 운영 경험</div></div>
-      <div class="stat"><div class="num">100명</div><div class="lbl">누적 참가 청년</div></div>
-      <div class="stat"><div class="num">5.5:1</div><div class="lbl">역대 평균 경쟁률</div></div>
-      <div class="stat"><div class="num">95%</div><div class="lbl">참가자 만족도</div></div>
+      <div class="stat"><div class="num">40명</div><div class="lbl">1·2기 전원 완주 · 결과물 발표</div></div>
+      <div class="stat"><div class="num">4.97</div><div class="lbl">전반 만족도 (5점 만점)</div></div>
+      <div class="stat"><div class="num">100%</div><div class="lbl">추천 의향</div></div>
+      <div class="stat"><div class="num">95%</div><div class="lbl">&ldquo;양양에서 살아보고 싶다&rdquo;</div></div>
     </div>
   </div>
 </section>
@@ -78,8 +83,8 @@ const INLINE_HTML = `
     <span class="badge">프로그램 소개</span>
     <h2 class="section-title">바쁜 일상 잠깐 멈추고,<br>양양 현남면에서 <span class="hl">3박 4일</span></h2>
 
-    <div class="ov-row"><span class="k">일정</span><span class="v"><b>1기</b> 2026. 9. 3.(목) ~ 9. 6.(일) · <b>2기</b> 2026. 9. 10.(목) ~ 9. 13.(일)<small>각 3박 4일 · 기수별 20명 · 원하는 기수를 골라 신청하세요</small></span></div>
-    <div class="ov-row"><span class="k">접수 기간</span><span class="v"><b>2026년 8월 30일(일) 자정까지</b><small>결과 발표 8월 31일(월) 오후 3시 — 선정자에 한해 개별 연락</small></span></div>
+    <div class="ov-row"><span class="k">일정</span><span class="v"><b>3기</b> 2026. 10. 2.(금) ~ 10. 5.(월)<small>3박 4일 · 20명 · 10월 5일(월)은 개천절 대체휴일 — 연휴를 통째로 현남에서</small></span></div>
+    <div class="ov-row"><span class="k">접수 기간</span><span class="v"><b>2026년 9월 28일(월) 오후 1시까지</b><small>결과 발표 9월 28일(월) 오후 6시 — 선정자에 한해 개별 연락</small></span></div>
     <div class="ov-row"><span class="k">장소</span><span class="v">강원특별자치도 양양군 현남면 일대</span></div>
     <div class="ov-row"><span class="k">신청 대상</span><span class="v">만 19세 ~ 49세 청년, 타지역 거주자, 3박 4일간 머무를 수 있는 사람</span></div>
     <div class="ov-row"><span class="k">참가비</span><span class="v"><b>무료!</b> 숙박·교육·체험·이동 지원까지 전부 무료로 제공됩니다</span></div>
@@ -91,37 +96,37 @@ const INLINE_HTML = `
 <section class="band">
   <div class="wrap">
     <span class="badge">Ai 배움 &amp; 창작</span>
-    <h2 class="section-title">기본부터 실전까지,<br><span class="hl">내 일에 바로 쓰는</span> Ai 교육</h2>
+    <h2 class="section-title">말로 시키면 만들어지는,<br><span class="hl">내 일에 바로 쓰는</span> Ai 교육</h2>
     <p class="lead">
-      이론만 듣다 끝나는 강의가 아닙니다. <b>Ai 첫걸음 기본 교육</b>부터
-      <b>내 일에 바로 적용하는 실전 교육</b>까지 한 번에 — 배우는 자리에서 바로 써먹고,
-      결과물을 손에 쥐고 돌아갑니다.
+      이론만 듣다 끝나는 강의가 아닙니다. 첫날 <b>Ai 개발 도구를 내 노트북에 세팅</b>하고,
+      나흘째에는 <b>내 업무를 덜어주는 도구</b>를 직접 만들어 발표합니다. 코딩을 몰라도 됩니다 —
+      1·2기 40명 중 개발자는 소수였고, 전원이 결과물을 완성했습니다.
     </p>
 
     <div class="curr">
       <div class="curr-card">
-        <span class="curr-tag">STEP 1</span>
-        <h3>Ai 첫걸음</h3>
-        <p class="curr-for">&ldquo;Ai, 알긴 아는데 아직 제대로 써본 적 없다면&rdquo;</p>
+        <span class="curr-tag">1~2일차</span>
+        <h3>Ai 개발 도구, 내 노트북에</h3>
+        <p class="curr-for">&ldquo;혼자 해보다 세팅에서 막혀본 적 있다면&rdquo;</p>
         <ul>
-          <li>막연했던 Ai와 <b>첫 대화 잘하는 법</b>부터 차근차근 — 질문 하나 바꿨을 뿐인데 답이 달라지는 경험</li>
-          <li>여행 계획, 경조사 문자, 생활 서류… <b>실생활 미션</b>을 Ai와 직접 해결</li>
-          <li>그림엽서, 지인에게 보낼 축하 음악까지 — <b>Ai로 만드는 재미</b></li>
+          <li>첫날, <b>Claude Code</b> 설치와 계정 세팅을 운영진이 옆에서 1:1로 — 가장 큰 장벽을 함께 넘습니다</li>
+          <li>말로 시켜서 <b>첫 웹페이지</b>를 만들고, 둘째 날 <b>인터넷에 올려</b> 링크를 손에 쥡니다</li>
+          <li>데이터 저장소를 연결해 <b>기록이 남는 진짜 도구</b>로 한 단계 더</li>
         </ul>
       </div>
       <div class="curr-card">
-        <span class="curr-tag">STEP 2</span>
-        <h3>내 일에 바로 적용</h3>
+        <span class="curr-tag">3~4일차</span>
+        <h3>내 일에 쓰는 도구 만들기</h3>
         <p class="curr-for">&ldquo;매일 반복되는 업무, 절반으로 줄이고 싶다면&rdquo;</p>
         <ul>
-          <li>내 업무를 분해해 <b>Ai를 어디에 쓸지</b> 지도로 그리기</li>
-          <li>보고서·이메일·사업계획을 <b>내 문서로 바로 실습</b></li>
-          <li>엑셀·데이터 분석부터 <b>나만의 업무 Ai 비서</b> 만들기까지</li>
-          <li>마지막 날, <b>나만의 Ai 산출물</b>을 완성해 발표</li>
+          <li>내 업무와 일상에서 <b>불편한 것 하나</b>를 골라 &lsquo;내가 만들 것&rsquo;을 내 말로 설계</li>
+          <li>계획대로 만들고, 막히면 <b>운영진과 함께</b> 풀어갑니다 — 실습 재료는 남의 예제가 아니라 내 일</li>
+          <li>마지막 날, <b>완성한 결과물</b>을 발표하고 돌아가서 바로 씁니다</li>
+          <li>1·2기 결과물: 홈페이지, 업무 자동화 도구, 기록·관리 앱 등</li>
         </ul>
       </div>
     </div>
-    <div class="note-dark">처음이어도 괜찮아요 — <b>계정 세팅부터 운영진이 1:1로 지원</b>합니다</div>
+    <div class="note-dark">처음이어도 괜찮아요 — <b>계정 세팅부터 운영진이 1:1로 지원</b>합니다. 필요한 Ai 계정은 교육 기간 동안 제공해요.</div>
   </div>
 </section>
 
@@ -165,7 +170,7 @@ const INLINE_HTML = `
 <section class="band">
   <div class="wrap">
     <span class="badge">로컬 멘토투어</span>
-    <div class="best-badge">⭐ 지난 5기수 참가자 만족도 · 추천 1위 프로그램</div>
+    <div class="best-badge">⭐ 1·2기 참가자 &ldquo;나도 여기서 살아볼 수 있겠는데?&rdquo; 95%</div>
     <h2 class="section-title">로컬들만 아는 코스로,<br><span class="hl">찐 양양</span>을 즐겨요</h2>
     <p class="lead">
       양양에 먼저 정착한 <b>로컬 멘토들이 자신만의 코스로 안내하는 찐 로컬 투어.</b>
@@ -205,15 +210,50 @@ const INLINE_HTML = `
   <div class="wrap">
     <span class="badge">3박 4일 일정</span>
     <h2 class="section-title">쉼과 배움이 번갈아 오는<br><span class="hl">3박 4일</span></h2>
-    <div class="day"><div class="d">1<small>일차</small></div><div class="dt"><b>체크인 · 오리엔테이션</b><br>Ai 기본 세팅 → 숙소 체크인 · 네트워킹</div></div>
-    <div class="day"><div class="d">2<small>일차</small></div><div class="dt"><b>현남면 러닝 → Ai 기본 교육</b><br>오후엔 지역 멘토 로컬투어</div></div>
-    <div class="day"><div class="d">3<small>일차</small></div><div class="dt"><b>굿즈 만들기 → 서핑 → Ai 산출물 제작</b><br>저녁엔 요가로 하루 마무리</div></div>
-    <div class="day"><div class="d">4<small>일차</small></div><div class="dt"><b>Ai 산출물 · 현남생활 발표회</b><br>체크아웃 및 귀가</div></div>
+    <div class="day"><div class="d">1<small>일차 · 금</small></div><div class="dt"><b>체크인 · 오리엔테이션</b><br>Ai 기본 세팅 → 숙소 체크인 · 네트워킹</div></div>
+    <div class="day"><div class="d">2<small>일차 · 토</small></div><div class="dt"><b>현남면 러닝 → Ai 기본 교육</b><br>오후엔 지역 멘토 로컬투어</div></div>
+    <div class="day"><div class="d">3<small>일차 · 일</small></div><div class="dt"><b>해변 요가 → 서핑 → Ai 산출물 제작</b><br>저녁엔 현남생활 굿즈 만들기</div></div>
+    <div class="day"><div class="d">4<small>일차 · 월</small></div><div class="dt"><b>Ai 산출물 · 현남생활 발표회</b><br>체크아웃 및 귀가 (개천절 대체휴일)</div></div>
     <p class="foot-note">* 일정 외 시간은 식사 및 지역살이 탐색으로 자유롭게! 여건에 따라 일부 조정될 수 있습니다.</p>
   </div>
 </section>
 
 <section class="band">
+  <div class="wrap">
+    <span class="badge">1·2기 참가자 후기</span>
+    <h2 class="section-title">먼저 다녀온 40명이<br><span class="hl">남긴 말</span></h2>
+    <div class="quotes">
+      <blockquote class="quote">
+        <p>&ldquo;기본 세팅이 Ai 사용의 가장 큰 장벽인데, 혼자 시도했다가 이해가 안 돼 흥미가 떨어졌던 부분이 해결되니 비로소 Ai 사용의 재미를 본격적으로 느낄 수 있었어요.&rdquo;</p>
+        <footer>2기 참가자 · 30대 직장인</footer>
+      </blockquote>
+      <blockquote class="quote">
+        <p>&ldquo;어떤 아이디어가 떠올라도 &lsquo;그게 되겠어?&rsquo;라며 스스로 제한해 왔는데, 떠올린 아이디어가 눈앞에서 형태를 갖춰가는 걸 보고 이제는 직접 시도해 봐야겠다는 마음이 생겼어요.&rdquo;</p>
+        <footer>2기 참가자 · 창작자</footer>
+      </blockquote>
+      <blockquote class="quote">
+        <p>&ldquo;처음엔 0이었던 것이 결과물이 나올수록 계속 욕심나네요. 100% 될 때까지 해보려고 합니다. 3기 모집하면 신청할게요 :)&rdquo;</p>
+        <footer>2기 참가자 · 브랜드 디자이너</footer>
+      </blockquote>
+    </div>
+    <div class="tour-grid" style="margin-top:28px;">
+      <figure>
+        <div class="ph"><img src="/images/ai-naeilbakkum/p12_lecture.jpg" alt="1기 Ai 교육 현장" /></div>
+        <figcaption>1기 Ai 교육 — 각자 내 일을 재료로</figcaption>
+      </figure>
+      <figure>
+        <div class="ph"><img src="/images/ai-naeilbakkum/p12_surf.jpg" alt="1기 서핑 단체" /></div>
+        <figcaption>죽도해변 서핑, 전원 입수</figcaption>
+      </figure>
+      <figure>
+        <div class="ph"><img src="/images/ai-naeilbakkum/p12_orientation.jpg" alt="1기 오리엔테이션" /></div>
+        <figcaption>첫날 오리엔테이션 — 두 기수 40명 전원 완주</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="band" style="background: var(--paper);">
   <div class="wrap">
     <span class="badge">참가 혜택</span>
     <div class="bene-grid">
@@ -227,14 +267,14 @@ const INLINE_HTML = `
       </div>
       <div class="bene wide">
         <h4>심화과정 초청 기회</h4>
-        <p><b>별도 선발을 통해</b> 10월에 진행되는 <b>심화과정</b>에 초대합니다.<br>
+        <p><b>별도 선발을 통해</b> 1·2·3기 우수 참가자를 <b>심화과정</b>에 초대합니다.<br>
         Ai 심화 워크숍과 팀 프로젝트로, 현남에서 한 걸음 더 이어가요.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="band" style="background: var(--paper);">
+<section class="band">
   <div class="wrap">
     <span class="badge">지원 절차</span>
     <h2 class="section-title">신청은 <span class="hl">간단하게</span></h2>
@@ -252,7 +292,7 @@ const INLINE_HTML = `
         <li><b>프로그램은 전액 무료예요.</b> 보증금 5만원은 선정 후 납부하며, Ai 산출물 제출 시 100% 환급됩니다.</li>
         <li><b>터미널 ↔ 프로그램 장소 이동은 저희가 제공해요.</b> 프로그램 외 개별 이동은 자유롭게!</li>
         <li>식사는 지역 내 상점을 이용해주세요. (지역살이 탐색도 프로그램의 일부!)</li>
-        <li>3기(10월)는 <b>9월 초 별도 모집</b>합니다. 이번 모집은 1·2기 대상이에요.</li>
+        <li>10월 5일(월)은 <b>개천절 대체휴일</b>이에요. 연휴 3박 4일, 다음 날 출근 걱정 없이 다녀오세요.</li>
       </ul>
     </div>
   </div>
@@ -272,9 +312,9 @@ export default function AiNaeilbakkum() {
             바꿔보세요
           </h2>
           <p>
-            접수 <b>8월 30일(일) 자정까지</b> · 결과 발표 8월 31일(월) 오후 3시
+            접수 <b>9월 28일(월) 오후 1시까지</b> · 결과 발표 같은 날 오후 6시
             <br />
-            기수별 20명 선착 마감이 아닌 선발제로 진행됩니다.
+            20명 선착 마감이 아닌 선발제로 진행됩니다.
           </p>
           <div
             style={{
@@ -287,11 +327,11 @@ export default function AiNaeilbakkum() {
             <a
               className="btn"
               style={{ background: "var(--orange)", color: "#fff" }}
-              href={APPLY_URL}
+              href={APPLY_HREF}
               target="_blank"
               rel="noopener noreferrer"
             >
-              1·2기 참가 신청하기
+              {APPLY_LABEL}
             </a>
             <a
               className="btn"
