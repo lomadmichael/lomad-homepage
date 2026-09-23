@@ -3,7 +3,7 @@ import "./ai-naeilbakkum.css";
 // 바들바들 현남생활 – Ai 내일바꿈 (2026년 10월 3기 모집)
 // 상세 랜딩. 생태체험 시리즈와 동일하게 스코프 CSS + 인라인 HTML 패턴을 사용한다.
 // 3기 한달살러 신청폼 URL. 비어 있으면 버튼이 인스타그램으로 가고 "신청 링크 준비 중"으로 표시된다.
-const APPLY_URL = "";
+const APPLY_URL = "https://monthler-form.monthler.kr/form/apply/360971777674842112";
 const APPLY_READY = APPLY_URL.length > 0;
 const INSTAGRAM_URL = "https://www.instagram.com/likehn.kr";
 const INQUIRY_TEL = "010-9542-3775";

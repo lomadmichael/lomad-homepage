@@ -132,6 +132,10 @@ export const PROJECTS: Project[] = [
     image: "/images/ai-naeilbakkum.jpg",
     ogImage: "/images/og-ai-naeilbakkum.jpg",
     externalLinks: [
+      {
+        label: "3기 참가 신청하기",
+        url: "https://monthler-form.monthler.kr/form/apply/360971777674842112",
+      },
       { label: "Instagram", url: "https://www.instagram.com/likehn.kr" },
     ],
   },
