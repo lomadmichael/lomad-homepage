@@ -96,7 +96,7 @@ export function tourByKey(key: string): Tour | undefined {
 }
 
 /**
- * 3기 참가자 명단 — 본인 확인용 (선정 20명 · 팀 3쌍 포함). 이홍래는 운영진 테스트 계정.
+ * 3기 참가자 명단 — 본인 확인용 (9/28 기준 19명: 이수영·박은주 취소, 김승민 대체 · 박은주 대체자 대기). 이홍래는 운영진 테스트 계정.
  * staff: true 는 신청·응답은 할 수 있지만 집계(참가자 수·미신청자)에서 제외한다.
  */
 export const ROSTER: { name: string; phone: string; staff?: boolean }[] = [
@@ -106,13 +106,11 @@ export const ROSTER: { name: string; phone: string; staff?: boolean }[] = [
   { name: "정미경", phone: "01025762182" },
   { name: "정슬기", phone: "01022970128" },
   { name: "김응태", phone: "01034732415" },
-  { name: "박은주", phone: "01026365668" },
   { name: "배서희", phone: "01035149856" },
   { name: "박혜영", phone: "01024025768" },
   { name: "송희진", phone: "01027438479" },
   { name: "임예진", phone: "01071943219" },
   { name: "전희진", phone: "01050829097" },
-  { name: "이수영", phone: "01082567944" },
   { name: "문유미", phone: "01037086771" },
   { name: "송주연", phone: "01056863460" },
   { name: "강경모", phone: "01027446863" },
@@ -121,6 +119,7 @@ export const ROSTER: { name: string; phone: string; staff?: boolean }[] = [
   { name: "이수은", phone: "01090407126" },
   { name: "문수연", phone: "01024114758" },
   { name: "김명희", phone: "01090416372" },
+  { name: "김승민", phone: "01072567173" },
 ];
 
 /** 실제 참가자만 (초대 참가·운영진 제외) — 공식 성과 수치의 모집단 */
