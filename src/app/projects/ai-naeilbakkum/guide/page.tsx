@@ -432,7 +432,7 @@ export default function GuidePage() {
               </p>
             </div>
 
-            <p className={`${SECTION} text-[13px] font-bold mb-3`}>그 밖에 도착 가능한 터미널 · 역</p>
+            <p className={`${SECTION} text-[13px] font-bold mb-3`}>그 밖에 도착 가능한 터미널</p>
             <div className="space-y-3">
               {TERMINALS.map((t) => (
                 <div key={t.name} className="border border-border px-5 py-4">
