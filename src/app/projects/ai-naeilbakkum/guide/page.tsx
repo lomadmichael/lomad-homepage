@@ -285,6 +285,9 @@ export default function GuidePage() {
                 <strong>노트북 필수 지참</strong> — 충전기도 잊지 마세요
               </li>
               <li>
+                숙소는 <strong>2인 1실(동성 배정)</strong> 3박 — 룸메이트는 도착 후 안내, 어려운 사정이 있으면 미리 알려 주세요
+              </li>
+              <li>
                 <strong>9월 30일(수)까지 참가 동의서 작성</strong> —{" "}
                 <Link href={CONSENT_URL} className="underline font-bold">
                   작성하러 가기
