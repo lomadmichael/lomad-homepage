@@ -23,19 +23,19 @@ const TEL = "010-9542-3775";
 const SCHEDULE: { day: string; date: string; items: [string, string, string?][] }[] = [
   {
     day: "1일차",
-    date: "9월 10일 (목)",
+    date: "10월 2일 (금)",
     items: [
       ["~ 13:00", "터미널 · 강릉역 도착 → 픽업"],
-      ["~ 14:00", "집합 및 현생 체크인", "웨이브웍스"],
-      ["14:00 – 16:00", "오리엔테이션 · 자기소개", "웨이브웍스"],
-      ["16:00 – 18:00", "Ai 기본 세팅", "웨이브웍스"],
+      ["~ 14:00", "집합 및 현생 체크인", "어스투라운지"],
+      ["14:00 – 16:00", "오리엔테이션 · 자기소개", "어스투라운지"],
+      ["16:00 – 18:00", "Ai 기본 세팅", "어스투라운지"],
       ["18:00 ~", "숙소 체크인"],
-      ["18:30 ~", "네트워킹 · 저녁식사", "웨이브웍스"],
+      ["18:30 ~", "네트워킹 · 저녁식사", "어스투라운지"],
     ],
   },
   {
     day: "2일차",
-    date: "9월 11일 (금)",
+    date: "10월 3일 (토)",
     items: [
       ["08:00 까지", "러닝 집합", "인구 어린이공원"],
       ["08:00 – 09:00", "현남면 러닝", "인구 어린이공원"],
@@ -46,7 +46,7 @@ const SCHEDULE: { day: string; date: string; items: [string, string, string?][] 
   },
   {
     day: "3일차",
-    date: "9월 12일 (토)",
+    date: "10월 4일 (일)",
     items: [
       ["08:00 – 09:00", "해변 요가", "웨이브웍스 앞 해변"],
       ["10:00 – 12:00", "서핑", "죽도해변"],
@@ -57,7 +57,7 @@ const SCHEDULE: { day: string; date: string; items: [string, string, string?][] 
   },
   {
     day: "4일차",
-    date: "9월 13일 (일)",
+    date: "10월 5일 (월)",
     items: [
       ["~ 10:00", "숙소 체크아웃"],
       ["10:00 – 12:00", "Ai 산출물 · 현남생활 발표회", "어스투라운지"],
@@ -211,7 +211,7 @@ const FAQ: { q: string; a: React.ReactNode }[] = [
     a: (
       <>
         <strong>여행자 보험 가입</strong>과 <strong>보증금 환불</strong>에 필요합니다. 보험 가입을 일정
-        시작 전에 마쳐야 해서 <strong>9월 8일(화)까지</strong> 작성 부탁드립니다. 입력하신 주민등록번호는
+        시작 전에 마쳐야 해서 <strong>9월 30일(수)까지</strong> 작성 부탁드립니다. 입력하신 주민등록번호는
         암호화해 보관하고 보험 가입 완료 즉시 파기합니다.
         <br />
         <Link href={CONSENT_URL} className="underline font-bold">
@@ -286,16 +286,16 @@ export default function GuidePage() {
             </h2>
             <ul className={`${SECTION} text-[14px] leading-[2] text-[#A8410F] space-y-1`}>
               <li>
-                <strong>9월 10일(목) 오후 1시까지</strong> 터미널 도착 — 도착하시면 픽업해 드립니다
+                <strong>10월 2일(금) 오후 1시까지</strong> 터미널 도착 — 도착하시면 픽업해 드립니다
               </li>
               <li>
-                집합 장소는 <strong>죽도해변 웨이브웍스</strong> (양양군 현남면 인구중앙길 110)
+                집합 장소는 <strong>어스투라운지</strong> (양양군 현남면 인구길 64 1층)
               </li>
               <li>
                 <strong>노트북 필수 지참</strong> — 충전기도 잊지 마세요
               </li>
               <li>
-                <strong>9월 8일(화)까지 참가 동의서 작성</strong> —{" "}
+                <strong>9월 30일(수)까지 참가 동의서 작성</strong> —{" "}
                 <Link href={CONSENT_URL} className="underline font-bold">
                   작성하러 가기
                 </Link>
@@ -312,7 +312,7 @@ export default function GuidePage() {
           <section className="mb-16">
             <h2 className={`${SECTION} ${H2}`}>일정</h2>
             <p className={`${SECTION} ${LEAD}`}>
-              2기 9월 10일(목) ~ 9월 13일(일) 3박 4일 · 양양군 현남면 일원
+              3기 10월 2일(금) ~ 10월 5일(월) 3박 4일 · 양양군 현남면 일원 · 10월 5일은 개천절 대체휴일
               <br />
               일정 외 시간은 식사와 지역살이 탐색으로 자유롭게 보내시면 됩니다. 여건에 따라 일부
               조정될 수 있습니다.
@@ -380,7 +380,7 @@ export default function GuidePage() {
           <section className="mb-16">
             <h2 className={`${SECTION} ${H2}`}>오시는 길</h2>
             <p className={`${SECTION} ${LEAD}`}>
-              <strong className="text-text">9월 10일(목) 오후 1시까지</strong> 아래 터미널이나 역 중 한 곳에
+              <strong className="text-text">10월 2일(금) 오후 1시까지</strong> 아래 터미널이나 역 중 한 곳에
               도착해 주세요. 현남면까지는 <strong className="text-text">운영진이 픽업</strong>
               해 드립니다. 도착 예정 장소와 시간을 미리 알려 주시면 이동이 수월합니다.
             </p>
@@ -388,13 +388,14 @@ export default function GuidePage() {
               <p className={`${SECTION} text-[11px] tracking-[2px] font-extrabold uppercase text-text-sub mb-2`}>
                 집합 장소
               </p>
-              <p className={`${SECTION} text-[18px] font-black mb-1`}>죽도해변 웨이브웍스</p>
+              <p className={`${SECTION} text-[18px] font-black mb-1`}>어스투라운지</p>
               <p className={`${SECTION} text-[14px] text-text-sub mb-3`}>
-                강원특별자치도 양양군 현남면 인구중앙길 110
+                강원특별자치도 양양군 현남면 인구길 64 1층
               </p>
               <p className={`${SECTION} text-[13px] leading-relaxed`}>
-                죽도해변 바로 앞에 있는 공유 오피스입니다. 1일차 오후 2시 오리엔테이션이 이곳에서
-                시작됩니다. 터미널에서 오시는 분은 픽업해 드리니 이곳까지 직접 오실 필요는 없습니다.
+                인구해변 근처의 라운지 공간으로, 3박 4일 동안 Ai 교육이 진행되는 곳입니다. 1일차 오후 2시
+                오리엔테이션이 이곳에서 시작됩니다. 터미널에서 오시는 분은 픽업해 드리니 이곳까지 직접
+                오실 필요는 없습니다.
               </p>
             </div>
 
@@ -436,7 +437,8 @@ export default function GuidePage() {
                 권합니다.
                 <br />
                 <strong>동산해변에 내리시면 집합 장소까지 걸어서 오실 수 있습니다.</strong> 픽업을
-                기다리실 필요 없이 바로 웨이브웍스로 오시면 됩니다.
+                기다리실 필요 없이 바로 어스투라운지(인구길 64)로 오시면 됩니다. 연휴 첫날이라 도로가
+                밀릴 수 있으니 여유 있게 출발해 주세요.
               </p>
             </div>
 
@@ -455,7 +457,7 @@ export default function GuidePage() {
               <strong>코레일</strong>에서 확인하실 수 있습니다. 오후 1시 도착이 어려우시면 미리 연락 주세요 — 도착 시간에 맞춰 조율해
               드리겠습니다.
               <br />
-              자차로 오시는 분은 집합 장소인 <strong>죽도해변 웨이브웍스</strong>로 바로 오시면 됩니다.
+              자차로 오시는 분은 집합 장소인 <strong>어스투라운지</strong>(인구길 64)로 바로 오시면 됩니다.
             </p>
           </section>
 
