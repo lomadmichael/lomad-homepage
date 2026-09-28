@@ -125,7 +125,7 @@ export default function SurfForm() {
         <div>
           <span className={LABEL}>
             서핑{" "}
-            <span className="font-normal text-text-sub">· 오전 10시 ~ 12시 · 죽도해변 모쿠서프</span>
+            <span className="font-normal text-text-sub">· 오전 10시 ~ 12시 · 죽도해변 서프러프</span>
           </span>
           <div className="grid grid-cols-2 gap-3">
             {ATTEND.map((a) => (

@@ -11,7 +11,7 @@ function db(): SupabaseClient {
   return _client;
 }
 
-export const SURF_COHORT = "2기";
+export const SURF_COHORT = "3기";
 
 export type Experience = "none" | "beginner" | "experienced";
 export type Gear = "suit" | "rashguard";

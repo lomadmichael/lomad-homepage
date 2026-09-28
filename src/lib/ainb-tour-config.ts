@@ -1,7 +1,7 @@
-/** 「Ai 내일바꿈」 2기 · 2일차 멘토투어 설정 */
+/** 「Ai 내일바꿈」 3기 · 2일차 멘토투어 설정 (⚠️ 코스·정원·멘토는 2기 값 그대로 — 3기 코스 확정 시 교체) */
 
-export const TOUR_COHORT = "2기";
-export const TOUR_MEET = "9월 11일(금) 오후 12시 30분 · 어스투라운지";
+export const TOUR_COHORT = "3기";
+export const TOUR_MEET = "10월 3일(토) 오후 12시 30분 · 어스투라운지";
 export const TOUR_MEET_ADDR = "양양군 현남면 인구길 64 1층";
 export const TOUR_TEL = "010-9542-3775";
 /** 코스 사진이 들어 있는 public 하위 폴더 */
@@ -96,32 +96,31 @@ export function tourByKey(key: string): Tour | undefined {
 }
 
 /**
- * 2기 참가자 명단 — 본인 확인용 (선정 20명 + 초대 Joseph).
+ * 3기 참가자 명단 — 본인 확인용 (선정 20명 · 팀 3쌍 포함). 이홍래는 운영진 테스트 계정.
  * staff: true 는 신청·응답은 할 수 있지만 집계(참가자 수·미신청자)에서 제외한다.
  */
 export const ROSTER: { name: string; phone: string; staff?: boolean }[] = [
-  { name: "Joseph", phone: "01048420300", staff: true },
   { name: "이홍래", phone: "01037985676", staff: true },
-  { name: "강다율", phone: "01088904054" },
-  { name: "김경주", phone: "01034240128" },
-  { name: "김대식", phone: "01082391106" },
-  { name: "김동준", phone: "01072324655" },
-  { name: "김선정", phone: "01038008551" },
-  { name: "김연서", phone: "01024580706" },
-  { name: "노효진", phone: "01094860551" },
-  { name: "문보람", phone: "01041099068" },
-  { name: "민인애", phone: "01021910860" },
-  { name: "박시호", phone: "01052259791" },
-  { name: "박소현", phone: "01074265114" },
-  { name: "박이안", phone: "01051204313" },
-  { name: "박지혜", phone: "01043039212" },
-  { name: "성세미", phone: "01020084097" },
-  { name: "신영훈", phone: "01065583704" },
-  { name: "원보영", phone: "01026015044" },
-  { name: "유선준", phone: "01096160503" },
-  { name: "이서연", phone: "01053853090" },
-  { name: "홍선택", phone: "01020173072" },
-  { name: "황재윤", phone: "01057521763" },
+  { name: "장혜진", phone: "01033763217" },
+  { name: "박민선", phone: "01038275057" },
+  { name: "정미경", phone: "01025762182" },
+  { name: "정슬기", phone: "01022970128" },
+  { name: "김응태", phone: "01034732415" },
+  { name: "박은주", phone: "01026365668" },
+  { name: "배서희", phone: "01035149856" },
+  { name: "박혜영", phone: "01024025768" },
+  { name: "송희진", phone: "01027438479" },
+  { name: "임예진", phone: "01071943219" },
+  { name: "전희진", phone: "01050829097" },
+  { name: "이수영", phone: "01082567944" },
+  { name: "문유미", phone: "01037086771" },
+  { name: "송주연", phone: "01056863460" },
+  { name: "강경모", phone: "01027446863" },
+  { name: "배종원", phone: "01066620338" },
+  { name: "송재원", phone: "01033005124" },
+  { name: "이수은", phone: "01090407126" },
+  { name: "문수연", phone: "01024114758" },
+  { name: "김명희", phone: "01090416372" },
 ];
 
 /** 실제 참가자만 (초대 참가·운영진 제외) — 공식 성과 수치의 모집단 */

@@ -49,7 +49,7 @@ const SCHEDULE: { day: string; date: string; items: [string, string, string?][] 
     date: "10월 4일 (일)",
     items: [
       ["08:00 – 09:00", "해변 요가", "웨이브웍스 앞 해변"],
-      ["10:00 – 12:00", "서핑", "죽도해변"],
+      ["10:00 – 12:00", "서핑", "죽도 서프러프"],
       ["14:00 – 18:00", "Ai 교육 · 산출물 만들기", "어스투라운지"],
       ["18:00 – 19:00", "현남생활 굿즈 만들기", "어스투라운지"],
       ["19:00 ~", "자유시간 · 저녁식사"],
@@ -224,6 +224,7 @@ const FAQ: { q: string; a: React.ReactNode }[] = [
 const PLACE_COLOR: Record<string, string> = {
   "웨이브웍스": "#E8611C",
   "어스투라운지": "#1F6FB2",
+  "죽도 서프러프": "#0E8A7A",
   "인구 어린이공원": "#0B7A5A",
   "죽도해변": "#0B7A5A",
 };
@@ -231,6 +232,7 @@ const PLACE_COLOR: Record<string, string> = {
 const VENUES: { name: string; addr: string }[] = [
   { name: "웨이브웍스", addr: "양양군 현남면 인구중앙길 110 · 죽도해변 앞" },
   { name: "어스투라운지", addr: "양양군 현남면 인구길 64 1층" },
+  { name: "죽도 서프러프", addr: "양양군 현남면 인구중앙길 93 · 3일차 서핑" },
   { name: "인구 어린이공원", addr: "인구해수욕장 남쪽 · 2일차 러닝 집합 장소" },
 ];
 

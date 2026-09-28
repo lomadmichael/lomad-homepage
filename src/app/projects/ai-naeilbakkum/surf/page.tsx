@@ -6,12 +6,12 @@ import { TOUR_TEL } from "@/lib/ainb-tour-config";
 import { existsSync } from "fs";
 import { join } from "path";
 
-/** 모쿠서프 안내 이미지 — 파일이 public에 있을 때만 그린다 (깨진 이미지 방지) */
+/** 서프러프 안내 이미지 — 파일이 public에 있을 때만 그린다 (깨진 이미지 방지) */
 const MOKU_IMAGES = [
-  { src: "/ainb/surf2/moku_map.png", alt: "모쿠서프 위치 지도 — 죽도해변 도로변, 슈가비치와 전은경서프스쿨 사이. 길 건너편이 죽도야영장·주차장" },
-  { src: "/ainb/surf2/moku_shop.jpg", alt: "모쿠서프 매장 외관 — 흰 벽돌 단층 건물에 MOKU SURFSHOP 간판, 앞에 하늘색 서핑보드와 흰 벤치" },
+  { src: "/ainb/surf3/surfruff_map.png", alt: "서프러프 위치 지도 — 죽도해변 인구중앙길 93" },
+  { src: "/ainb/surf3/surfruff_shop.jpg", alt: "서프러프 매장 외관" },
 ];
-const NAVER_MAP_URL = "https://map.naver.com/p/search/" + encodeURIComponent("양양서핑 모쿠서프");
+const NAVER_MAP_URL = "https://map.naver.com/p/search/" + encodeURIComponent("죽도 서프러프");
 
 export const dynamic = "force-dynamic";
 
@@ -60,7 +60,7 @@ export default function SurfPage() {
 
           <div className="border-l-2 border-text pl-5 mb-8">
             <p className="font-[family-name:var(--font-noto)] text-[15px] leading-[1.9] text-text-sub">
-              내일(9월 12일 토) 오전 요가와 서핑, 각각 참석 여부를 알려주세요. 서핑에 오시는 분은
+              내일(10월 4일 일) 오전 요가와 서핑, 각각 참석 여부를 알려주세요. 서핑에 오시는 분은
               슈트·보드를 몸에 맞게 준비하기 위해 몇 가지만 더 여쭙습니다.{" "}
               <strong className="text-text">서핑이 처음이어도 괜찮습니다</strong> — 강사가 처음 하시는
               분 기준으로 함께합니다.
@@ -70,7 +70,7 @@ export default function SurfPage() {
           <div className="border border-[#E8611C] bg-[#FDEBD9] px-5 py-4 mb-8 space-y-4">
             <div>
               <p className="font-[family-name:var(--font-noto)] text-[14px] font-black text-[#A8410F]">
-                해변 요가 · 9월 12일(토) 오전 8시 ~ 9시 · 웨이브웍스 앞 해변
+                해변 요가 · 10월 4일(일) 오전 8시 ~ 9시 · 웨이브웍스 앞 해변
               </p>
               <p className="font-[family-name:var(--font-noto)] text-[13px] leading-[1.8] text-[#A8410F]">
                 편한 옷차림으로 오시면 됩니다.
@@ -78,7 +78,7 @@ export default function SurfPage() {
             </div>
             <div>
               <p className="font-[family-name:var(--font-noto)] text-[14px] font-black text-[#A8410F]">
-                서핑 · 9월 12일(토) 오전 10시 ~ 12시 · 죽도해변 모쿠서프
+                서핑 · 10월 4일(일) 오전 10시 ~ 12시 · 죽도해변 서프러프
               </p>
               <p className="font-[family-name:var(--font-noto)] text-[13px] leading-[1.8] text-[#A8410F]">
                 장비(보드·슈트)는 현장에서 제공합니다. 수영복 또는 래쉬가드, 여벌 수건을 챙겨 주세요.
@@ -91,10 +91,10 @@ export default function SurfPage() {
           <section className="border border-border mb-12">
             <div className="px-5 py-4 border-b border-border">
               <h2 className="font-[family-name:var(--font-noto)] text-[16px] font-black">
-                모쿠서프 찾아오는 길
+                서프러프 찾아오는 길
               </h2>
               <p className="font-[family-name:var(--font-noto)] text-[13px] text-text-sub mt-1">
-                양양군 현남면 인구중앙길 95-1 (양양서핑 모쿠서프)
+                양양군 현남면 인구중앙길 93 (죽도 서프러프)
               </p>
             </div>
             {mokuImages.length > 0 && (
@@ -111,10 +111,9 @@ export default function SurfPage() {
               </div>
             )}
             <ul className="px-5 py-4 font-[family-name:var(--font-noto)] text-[13px] leading-[1.9] text-text-sub space-y-1">
-              <li>· 죽도해변을 따라 난 도로변, <strong className="text-text">슈가비치와 전은경서프스쿨 사이</strong>에 있습니다.</li>
-              <li>· 길 건너편이 죽도야영장·주차장입니다. 자차는 그 주차장에 대시면 됩니다.</li>
-              <li>· 흰 벽돌 단층 건물에 <strong className="text-text">MOKU SURFSHOP</strong> 간판, 앞에 하늘색 보드와 흰 벤치가 놓여 있습니다.</li>
-              <li>· 웨이브웍스(인구중앙길 110)에서 남쪽으로 도보 3분 거리입니다.</li>
+              <li>· 죽도해변을 따라 난 <strong className="text-text">인구중앙길</strong> 도로변에 있습니다. 길 건너편이 죽도야영장·주차장입니다.</li>
+              <li>· 웨이브웍스(인구중앙길 110)에서 남쪽으로 도보 3분, 어스투라운지(인구길 64)에서 도보 5분 안팎입니다.</li>
+              <li>· 장비(보드·슈트)는 현장에서 제공합니다. 수영복 또는 래쉬가드, 여벌 수건을 챙겨 주세요.</li>
             </ul>
             <div className="px-5 pb-4">
               <a
