@@ -169,7 +169,8 @@ export default function ConsentForm() {
             <div className="flex gap-3">
               {[
                 { key: "1기", date: "9/3~9/6", closed: true },
-                { key: "2기", date: "9/10~9/13", closed: false },
+                { key: "2기", date: "9/10~9/13", closed: true },
+                { key: "3기", date: "10/2~10/5", closed: false },
               ].map((c) => (
                 <label
                   key={c.key}
@@ -196,7 +197,7 @@ export default function ConsentForm() {
                 </label>
               ))}
             </div>
-            <p className={HELP}>1기는 접수가 마감되어 2기만 선택하실 수 있습니다.</p>
+            <p className={HELP}>1·2기는 접수가 마감되어 3기만 선택하실 수 있습니다.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-5">
             <div>

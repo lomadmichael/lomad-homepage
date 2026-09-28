@@ -52,17 +52,17 @@ export default function ConsentPage() {
               <strong className="text-text">참가비 환불</strong>을 위해 동의서를 받고 있습니다.
             </p>
             <p className="font-[family-name:var(--font-noto)] text-[13px] leading-[1.9] text-text-sub mt-3">
-              1기 9월 3일(목)~6일(일) · 2기 9월 10일(목)~13일(일) · 양양군 현남면 일원
+              3기 10월 2일(금)~5일(월) · 양양군 현남면 일원
             </p>
           </div>
 
           <div className="border border-[#E8611C] bg-[#FDEBD9] px-5 py-4 mb-12">
             <p className="font-[family-name:var(--font-noto)] text-[14px] font-black text-[#A8410F] mb-1">
-              9월 1일(화)까지 제출해 주세요
+              9월 30일(수)까지 제출해 주세요
             </p>
             <p className="font-[family-name:var(--font-noto)] text-[13px] leading-[1.8] text-[#A8410F]">
               일정 시작 전 여행자 보험 가입을 마쳐야 하므로, 제출이 늦어지면 보험 가입이 어려울 수
-              있습니다. 1기·2기 참가자 모두 이 양식으로 작성해 주시면 됩니다.
+              있습니다. 3기 참가자는 이 양식으로 작성해 주시면 됩니다.
             </p>
           </div>
 

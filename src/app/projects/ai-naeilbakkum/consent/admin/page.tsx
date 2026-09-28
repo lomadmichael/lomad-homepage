@@ -62,7 +62,7 @@ export default async function ConsentAdminPage() {
           <h1 className="font-[family-name:var(--font-noto)] text-[16px] font-black">
             Ai 내일바꿈 참가 동의서
             <span className="ml-3 text-[13px] font-normal text-text-sub">
-              1기 {byCohort("1기").length}건 · 2기 {byCohort("2기").length}건 · 합계 {rows.length}건
+              1기 {byCohort("1기").length}건 · 2기 {byCohort("2기").length}건 · 3기 {byCohort("3기").length}건 · 합계 {rows.length}건
             </span>
           </h1>
           <div className="flex items-center gap-3">
@@ -90,7 +90,7 @@ export default async function ConsentAdminPage() {
 
         <PurgeBox remaining={remaining} />
 
-        {["1기", "2기"].map((c) => {
+        {["1기", "2기", "3기"].map((c) => {
           const list = byCohort(c);
           if (!list.length) return null;
           return (

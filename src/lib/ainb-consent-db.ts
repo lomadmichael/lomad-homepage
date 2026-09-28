@@ -44,7 +44,7 @@ export function decryptRrn(payload: string | null): string {
 }
 
 /* ── 타입 ────────────────────────────────────────────────────────── */
-export type Cohort = "1기" | "2기";
+export type Cohort = "1기" | "2기" | "3기";
 
 export interface ConsentInput {
   cohort: Cohort;

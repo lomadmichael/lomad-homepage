@@ -28,7 +28,7 @@ export interface ConsentFormState {
   values?: ConsentValues;
 }
 
-const COHORTS = new Set<Cohort>(["1기", "2기"]);
+const COHORTS = new Set<Cohort>(["1기", "2기", "3기"]);
 
 /** 하이픈·공백 제거 후 010 계열 11자리(또는 10자리)인지 확인 */
 function normalizePhone(raw: string): string | null {
