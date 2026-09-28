@@ -25,7 +25,7 @@ const SCHEDULE: { day: string; date: string; items: [string, string, string?][] 
     day: "1일차",
     date: "10월 2일 (금)",
     items: [
-      ["~ 13:00", "터미널 · 강릉역 도착 → 픽업"],
+      ["~ 13:00", "터미널 도착 → 픽업"],
       ["~ 14:00", "집합 및 현생 체크인", "어스투라운지"],
       ["14:00 – 16:00", "오리엔테이션 · 자기소개", "어스투라운지"],
       ["16:00 – 18:00", "Ai 기본 세팅", "어스투라운지"],
@@ -87,16 +87,6 @@ const TERMINALS: { name: string; addr: string; note: string }[] = [
     name: "속초고속버스터미널",
     addr: "속초시 동해대로 3988 (조양동)",
     note: "동서울·센트럴시티발 고속버스가 도착하는 곳입니다.",
-  },
-  {
-    name: "강릉시외·고속버스터미널",
-    addr: "강릉시 하슬라로 27 (홍제동)",
-    note: "시외·고속 터미널이 한 자리에 붙어 있습니다.",
-  },
-  {
-    name: "강릉역 (KTX)",
-    addr: "강릉시 용지로 176 (교동)",
-    note: "서울역·청량리역에서 KTX로 오실 수 있습니다. 강릉역에서도 픽업해 드립니다.",
   },
 ];
 
@@ -380,7 +370,7 @@ export default function GuidePage() {
           <section className="mb-16">
             <h2 className={`${SECTION} ${H2}`}>오시는 길</h2>
             <p className={`${SECTION} ${LEAD}`}>
-              <strong className="text-text">10월 2일(금) 오후 1시까지</strong> 아래 터미널이나 역 중 한 곳에
+              <strong className="text-text">10월 2일(금) 오후 1시까지</strong> 아래 터미널 중 한 곳에
               도착해 주세요. 현남면까지는 <strong className="text-text">운영진이 픽업</strong>
               해 드립니다. 도착 예정 장소와 시간을 미리 알려 주시면 이동이 수월합니다.
             </p>
@@ -453,8 +443,8 @@ export default function GuidePage() {
               ))}
             </div>
             <p className={`${SECTION} text-[13px] text-text-sub leading-relaxed mt-4`}>
-              동산해변 노선을 포함한 버스 시간은 <strong>버스타고</strong>·<strong>고속버스통합예매</strong>에서, KTX는{" "}
-              <strong>코레일</strong>에서 확인하실 수 있습니다. 오후 1시 도착이 어려우시면 미리 연락 주세요 — 도착 시간에 맞춰 조율해
+              동산해변 노선을 포함한 버스 시간은 <strong>버스타고</strong>·<strong>고속버스통합예매</strong>에서
+              확인하실 수 있습니다. 픽업은 양양·속초 터미널에서만 해 드립니다. 오후 1시 도착이 어려우시면 미리 연락 주세요 — 도착 시간에 맞춰 조율해
               드리겠습니다.
               <br />
               자차로 오시는 분은 집합 장소인 <strong>어스투라운지</strong>(인구길 64)로 바로 오시면 됩니다.
