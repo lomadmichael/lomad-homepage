@@ -17,12 +17,12 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "3일차 참석 조사 · 서핑 참가 신청 · 바들바들 현남생활 Ai 내일바꿈 | LOMAD",
-  description: "「바들바들 현남생활 – Ai 내일바꿈」 2기 3일차 해변 요가·서핑 참석 여부와 서핑 장비 준비 정보를 알려주세요.",
+  description: "「바들바들 현남생활 – Ai 내일바꿈」 3기 3일차 해변 요가·서핑 참석 여부와 서핑 장비 준비 정보를 알려주세요.",
   alternates: { canonical: "/projects/ai-naeilbakkum/surf" },
   ...ainbOg({
     title: "3일차 참석 조사 · 서핑 참가 신청 · 바들바들 현남생활 Ai 내일바꿈 | LOMAD",
     description:
-      "「바들바들 현남생활 – Ai 내일바꿈」 2기 3일차 해변 요가·서핑 참석 여부와 서핑 장비 준비 정보를 알려주세요.",
+      "「바들바들 현남생활 – Ai 내일바꿈」 3기 3일차 해변 요가·서핑 참석 여부와 서핑 장비 준비 정보를 알려주세요.",
     path: "/projects/ai-naeilbakkum/surf",
   }),
   robots: { index: false, follow: false },

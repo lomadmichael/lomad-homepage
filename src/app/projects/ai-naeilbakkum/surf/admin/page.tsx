@@ -19,7 +19,7 @@ export default async function SurfAdminPage() {
   const token = (await cookies()).get(ADMIN_COOKIE)?.value;
   if (!verifyAdmin(token)) return <AdminLogin />;
 
-  // 집계 모집단 = 참가자 20 + Joseph (형님 지시 9/11: 인원수 카운팅에 Joseph 포함). 테스트 계정만 제외
+  // 집계 모집단 = 참가자 + 초대 참가 guest (형님 지시 9/11 Joseph, 9/29 유진화). 테스트 계정만 제외
   const rows = (await listSurf()).filter((r) => !TEST_ACCOUNT_NAMES.has(r.name));
   const done = new Set(rows.map((r) => r.name));
   const pending = HEADCOUNT_ROSTER.filter((r) => !done.has(r.name));
@@ -41,7 +41,7 @@ export default async function SurfAdminPage() {
           3일차 참석 조사 · 서핑 신청 현황
         </h1>
         <p className="font-[family-name:var(--font-noto)] text-[14px] text-text-sub mb-8">
-          2기 · 응답 {rows.length}명 / 대상 {HEADCOUNT_ROSTER.length}명 (참가자 + Joseph)
+          3기 · 응답 {rows.length}명 / 대상 {HEADCOUNT_ROSTER.length}명 (참가자 + 초대)
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4">

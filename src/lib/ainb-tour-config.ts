@@ -98,8 +98,9 @@ export function tourByKey(key: string): Tour | undefined {
 /**
  * 3기 참가자 명단 — 본인 확인용 (9/28 기준 19명: 이수영·박은주 취소, 김승민 대체 · 박은주 대체자 대기). 이홍래는 운영진 테스트 계정.
  * staff: true 는 신청·응답은 할 수 있지만 집계(참가자 수·미신청자)에서 제외한다.
+ * guest: true 는 초대 참가 — 3일차 참석 조사(서핑·요가)만 대상. 멘토투어는 운영진이 직접 등록, 만족도 조사 대상 아님.
  */
-export const ROSTER: { name: string; phone: string; staff?: boolean }[] = [
+export const ROSTER: { name: string; phone: string; staff?: boolean; guest?: boolean }[] = [
   { name: "이홍래", phone: "01037985676", staff: true },
   { name: "장혜진", phone: "01033763217" },
   { name: "박민선", phone: "01038275057" },
@@ -120,20 +121,21 @@ export const ROSTER: { name: string; phone: string; staff?: boolean }[] = [
   { name: "문수연", phone: "01024114758" },
   { name: "김명희", phone: "01090416372" },
   { name: "김승민", phone: "01072567173" },
+  { name: "유진화", phone: "01085935032", guest: true },
 ];
 
 /** 실제 참가자만 (초대 참가·운영진 제외) — 공식 성과 수치의 모집단 */
-export const PARTICIPANTS = ROSTER.filter((r) => !r.staff);
+export const PARTICIPANTS = ROSTER.filter((r) => !r.staff && !r.guest);
 
 /** 집계에서 제외할 이름 */
 export const STAFF_NAMES = new Set(ROSTER.filter((r) => r.staff).map((r) => r.name));
-/** 운영진 테스트 계정 — 어떤 집계에도 넣지 않는다 (Joseph는 초대 참가라 참석 인원 집계에는 포함) */
+/** 운영진 테스트 계정 — 어떤 집계에도 넣지 않는다 (초대 참가 guest는 참석 인원 집계에는 포함) */
 export const TEST_ACCOUNT_NAMES = new Set(["이홍래"]);
-/** 참석 인원 집계 모집단 = 참가자 20 + Joseph (테스트 계정 제외) */
+/** 참석 인원 집계 모집단 = 참가자 + 초대 참가 guest (테스트 계정 제외) */
 export const HEADCOUNT_ROSTER = ROSTER.filter((r) => !TEST_ACCOUNT_NAMES.has(r.name));
 
-/** 명단에 있는 참가자인지 확인하고, 등록된 성명을 돌려준다. */
-export function findParticipant(phone: string): { name: string } | null {
-  const p = ROSTER.find((r) => r.phone === phone);
+/** 명단에 있는 참가자인지 확인하고, 등록된 성명을 돌려준다. 초대 참가(guest)는 allowGuest일 때만 찾는다. */
+export function findParticipant(phone: string, opts: { allowGuest?: boolean } = {}): { name: string } | null {
+  const p = ROSTER.find((r) => r.phone === phone && (opts.allowGuest || !r.guest));
   return p ? { name: p.name } : null;
 }

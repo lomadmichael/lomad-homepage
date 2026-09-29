@@ -58,7 +58,7 @@ export async function submitSurfForm(
   const phone = normalizePhone(values.phone);
   if (!phone) return fail("휴대전화 번호를 정확히 입력해 주세요. (예: 010-1234-5678)");
 
-  const participant = findParticipant(phone);
+  const participant = findParticipant(phone, { allowGuest: true });
   if (!participant) {
     return fail("참가자 명단에서 번호를 찾지 못했습니다. 신청서에 적으신 번호로 입력해 주세요.");
   }
