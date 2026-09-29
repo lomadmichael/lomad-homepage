@@ -96,23 +96,19 @@ export function tourByKey(key: string): Tour | undefined {
 }
 
 /**
- * 3기 참가자 명단 — 본인 확인용 (9/28 기준 19명: 이수영·박은주 취소, 김승민 대체 · 박은주 대체자 대기). 이홍래는 운영진 테스트 계정.
+ * 3기 참가자 명단 — 본인 확인용 (9/29 오후 기준 18명: 이수영·박은주·송희진·박민선·정슬기·문유미 취소, 김승민·이윤정·최근우·권지은 추가 · 김길옥·강승희는 번호 회신 후 추가 → 20명). 이홍래는 운영진 테스트 계정.
  * staff: true 는 신청·응답은 할 수 있지만 집계(참가자 수·미신청자)에서 제외한다.
  * guest: true 는 초대 참가 — 3일차 참석 조사(서핑·요가)만 대상. 멘토투어는 운영진이 직접 등록, 만족도 조사 대상 아님.
  */
 export const ROSTER: { name: string; phone: string; staff?: boolean; guest?: boolean }[] = [
   { name: "이홍래", phone: "01037985676", staff: true },
   { name: "장혜진", phone: "01033763217" },
-  { name: "박민선", phone: "01038275057" },
   { name: "정미경", phone: "01025762182" },
-  { name: "정슬기", phone: "01022970128" },
   { name: "김응태", phone: "01034732415" },
   { name: "배서희", phone: "01035149856" },
   { name: "박혜영", phone: "01024025768" },
-  { name: "송희진", phone: "01027438479" },
   { name: "임예진", phone: "01071943219" },
   { name: "전희진", phone: "01050829097" },
-  { name: "문유미", phone: "01037086771" },
   { name: "송주연", phone: "01056863460" },
   { name: "강경모", phone: "01027446863" },
   { name: "배종원", phone: "01066620338" },
@@ -121,6 +117,9 @@ export const ROSTER: { name: string; phone: string; staff?: boolean; guest?: boo
   { name: "문수연", phone: "01024114758" },
   { name: "김명희", phone: "01090416372" },
   { name: "김승민", phone: "01072567173" },
+  { name: "이윤정", phone: "01057797828" },
+  { name: "최근우", phone: "01033880135" },
+  { name: "권지은", phone: "01053197962" },
   { name: "유진화", phone: "01085935032", guest: true },
 ];
 
