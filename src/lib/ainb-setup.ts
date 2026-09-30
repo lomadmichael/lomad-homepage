@@ -166,6 +166,30 @@ const CODE_TAB_SHOTS = (img: { toggle?: string; codeHome?: string; newFolder?: s
   },
 ];
 
+// Mac 의 폴더 선택 창은 말이 다르다(「데스크탑」·「새로운 폴더」·「생성」·「열기」) + 폴더를 열면 '작업 공간 신뢰' 창이 뜬다.
+// CODE_TAB_SHOTS 의 ③④⑤(순번 2·3·4)만 Mac 말로 바꾼다.
+const MAC_CODE_TAB_SHOTS = (img: Parameters<typeof CODE_TAB_SHOTS>[0]): Shot[] => {
+  const shots = CODE_TAB_SHOTS(img);
+  shots[2] = {
+    ...shots[2],
+    alt: "폴더 선택 창 — 왼쪽 「데스크탑」, 아래 「새로운 폴더」 버튼",
+    action: "③ 폴더 선택 창이 뜨면 왼쪽에서 「데스크탑」을 고르고, 아래 「새로운 폴더」를 누르세요.",
+    note: "이미 데스크탑에 폴더를 만들어 뒀다면 이 단계는 건너뛰고 그 폴더를 고르면 됩니다.",
+  };
+  shots[3] = {
+    ...shots[3],
+    alt: `'새로운 폴더' 창 — 이름 칸에 「${SETUP_FOLDER}」 입력 후 「생성」`,
+    action: `④ 이름을 「${SETUP_FOLDER}」으로 치고 「생성」.`,
+  };
+  shots[4] = {
+    ...shots[4],
+    alt: `폴더 선택 창 — 위쪽에 「${SETUP_FOLDER}」, 아래 「열기」 버튼`,
+    action: `⑤ 위쪽에 「${SETUP_FOLDER}」이 보이는지 확인하고 「열기」를 누르세요.`,
+    note: "'이 워크스페이스를 신뢰하시겠습니까?'가 뜨면 「작업 공간 신뢰」를 누르세요.",
+  };
+  return shots;
+};
+
 const CODE_TAB_SUCCESS = (img?: string) => ({
   img,
   alt: `입력창 아래 칩에 '${SETUP_FOLDER}'이 표시된 화면`,
@@ -508,14 +532,14 @@ const MAC: SetupTrack = {
       shots: [
         {
           img: M(9),
-          alt: "claude.ai/download 페이지 — Mac 다운로드 버튼",
-          action: "① 아래 버튼으로 다운로드 페이지를 열고 「Mac」 다운로드를 누르세요.",
+          alt: "claude.ai/download 페이지 — 「Download for macOS」 버튼",
+          action: "① 아래 버튼으로 다운로드 페이지를 열고 「Download for macOS」 버튼을 누르세요.",
           link: { label: "Claude 앱 다운로드 페이지", href: "https://claude.ai/download" },
         },
         {
           img: M(10),
           alt: "다운로드 완료된 .dmg 파일",
-          action: "② 다 받으면 브라우저 오른쪽 위 다운로드 표시에서 파일(Claude….dmg)을 클릭하세요.",
+          action: "② 다 받으면 화면 아래 Dock의 다운로드 폴더나 브라우저의 다운로드 표시에서 파일(Claude.dmg)을 클릭하세요.",
         },
         {
           img: M(11),
@@ -529,8 +553,8 @@ const MAC: SetupTrack = {
         },
         {
           img: M(13),
-          alt: "Claude 앱 로그인 화면",
-          action: "⑤ 「Google로 계속하기」 → 브라우저에서 ai○○@lomadcoop.com 선택 → 「계속」 → 「Claude 열기」로 앱으로 돌아오기.",
+          alt: "Claude 앱 첫 화면 — 「시작하기」 버튼",
+          action: "⑤ 「시작하기」를 누르고 로그인합니다. 「Google로 계속하기」 → 브라우저에서 ai○○@lomadcoop.com 선택 → 「계속」 → 「Claude 열기」로 앱으로 돌아오기.",
           note: "2단계와 똑같은 계정이어야 합니다.",
         },
       ],
@@ -602,7 +626,7 @@ const MAC: SetupTrack = {
           action: "① 1단계 개발자 도구 설치가 「완료」되었는지 확인하고, Claude 앱을 Cmd + Q로 완전히 종료했다가 다시 여세요.",
           note: "앱을 다시 켜야 방금 설치한 개발자 도구를 인식합니다. 창만 닫으면(빨간 버튼) 종료가 아닙니다. 꼭 Cmd + Q.",
         },
-        ...CODE_TAB_SHOTS({ toggle: M(16), codeHome: M(17), picker: M(18), autoMode: W(37), model: W(39) }),
+        ...MAC_CODE_TAB_SHOTS({ toggle: "/ainb/setup/mac/M16b.png", codeHome: M(17), folderName: M(25), picker: M(18), autoMode: W(37), model: W(39) }),
       ],
       success: CODE_TAB_SUCCESS(M(24)),
       troubles: [
