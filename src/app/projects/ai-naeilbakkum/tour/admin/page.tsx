@@ -46,7 +46,7 @@ export default async function TourAdminPage() {
                       {t.title}
                     </h2>
                     <p className="font-[family-name:var(--font-noto)] text-[13px] text-text-sub">
-                      멘토 {t.mentor} · {t.belong}
+                      멘토 {t.mentor}{t.belong ? ` · ${t.belong}` : ""}
                     </p>
                   </div>
                   <span

@@ -25,7 +25,7 @@ export default function TourForm({ counts }: { counts: Record<string, number> })
           <p className="font-[family-name:var(--font-noto)] text-[15px] leading-[1.9] text-text-sub">
             <strong className="text-text">{t.title}</strong>
             <br />
-            멘토 {t.mentor} ({t.belong})
+            멘토 {t.mentor}{t.belong ? ` (${t.belong})` : ""}
           </p>
         )}
         <div className="mt-7 pt-7 border-t border-border font-[family-name:var(--font-noto)] text-[14px] leading-[1.9] text-text-sub">
@@ -107,7 +107,7 @@ export default function TourForm({ counts }: { counts: Record<string, number> })
                   {t.title}
                 </h3>
                 <p className="font-[family-name:var(--font-noto)] text-[14px] font-bold text-text-sub mb-5">
-                  멘토 {t.mentor} · {t.belong}
+                  멘토 {t.mentor}{t.belong ? ` · ${t.belong}` : ""}
                 </p>
 
                 <ul className="font-[family-name:var(--font-noto)] text-[14px] leading-[1.95] mb-4">

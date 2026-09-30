@@ -2,7 +2,7 @@
 
 import { sendAlimtalk } from "@/lib/solapi";
 import { signupTour, mySignup } from "@/lib/ainb-tour-db";
-import { findParticipant, tourByKey, TOUR_MEET, TOUR_MEET_ADDR, TOUR_TEL } from "@/lib/ainb-tour-config";
+import { findParticipant, tourByKey, TOUR_COHORT, TOUR_MEET, TOUR_MEET_ADDR, TOUR_TEL } from "@/lib/ainb-tour-config";
 
 export interface TourFormState {
   success: boolean;
@@ -99,12 +99,12 @@ async function sendTourSms(params: {
       ? `\n■ 개인 부담\n${tour.feeLabel} ${tour.fee.toLocaleString()}원\n점심·카페 식음료비는 각자 부담입니다.`
       : `\n■ 개인 부담\n점심·카페 식음료비는 각자 부담입니다.`;
 
-  const body = `[Ai 내일바꿈 1기] 멘토투어 ${params.changed ? "변경" : "신청"} 완료
+  const body = `[Ai 내일바꿈 ${TOUR_COHORT}] 멘토투어 ${params.changed ? "변경" : "신청"} 완료
 
 ${params.name}님, ${params.changed ? "선택하신 투어가 변경되었습니다." : "멘토투어 신청이 완료되었습니다."}
 
 ■ ${tour.title}
-멘토 ${tour.mentor} (${tour.belong})
+멘토 ${tour.mentor}${tour.belong ? ` (${tour.belong})` : ""}
 
 ${program}
 ${feeLine}
