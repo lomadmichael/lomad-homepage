@@ -20,6 +20,8 @@ export interface Tour {
   /** 개인 부담 체험비 (원). 없으면 0 */
   fee: number;
   feeLabel?: string;
+  /** 금액이 정해지지 않은 개인 부담 항목 (예: 입장료 현장 결제). fee가 0일 때 이 문구로 안내 */
+  feeText?: string;
   intro: string[];
   photos: string[];
   accent: string;
@@ -67,6 +69,7 @@ export const TOURS: Tour[] = [
     capacity: 4,
     program: ["설악산 오색탄산온천 (식사 · 산채 비빔밥)", "티타임", "영화 감상 또는 볼링"],
     fee: 0,
+    feeText: "온천 입장료 · 볼링 비용",
     intro: [
       "양양군 현남면에서 스위디시 브런치 카페 ‘Fika’를 운영했던 김동준 멘토는 서핑, 스킨스쿠버, 다이빙, 수영, 러닝까지 두루 즐기는 다재다능한 멘토입니다.",
       "북유럽의 ‘잠시 멈추고 함께하는 시간’이라는 가치를 지역에 녹여내며 현남면만의 따뜻한 문화를 만들어 가고 있습니다. 마을 청년과 여행자 모두가 머물고 싶은 공간, 서로를 이어주고 영감을 나누는 자리를 만들고자 합니다.",
@@ -78,7 +81,7 @@ export const TOURS: Tour[] = [
     key: "photo",
     title: "사진 산책",
     mentor: "황태연",
-    belong: "",
+    belong: "메리포엠",
     capacity: 4,
     program: ["점심", "사진 교육 (이론 2시간)", "사진 산책 (실습 2시간)"],
     fee: 25000,

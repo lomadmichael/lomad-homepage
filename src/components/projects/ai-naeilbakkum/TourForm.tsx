@@ -126,6 +126,10 @@ export default function TourForm({ counts }: { counts: Record<string, number> })
                     </strong>{" "}
                     — 개인 부담
                   </p>
+                ) : t.feeText ? (
+                  <p className="font-[family-name:var(--font-noto)] text-[13px] leading-[1.8] text-text-sub mb-4">
+                    <strong className="text-text">{t.feeText}</strong> — 개인 부담
+                  </p>
                 ) : (
                   <p className="font-[family-name:var(--font-noto)] text-[13px] leading-[1.8] text-text-sub mb-4">
                     별도 체험비 없음

@@ -97,7 +97,9 @@ async function sendTourSms(params: {
   const feeLine =
     tour.fee > 0
       ? `\n■ 개인 부담\n${tour.feeLabel} ${tour.fee.toLocaleString()}원\n점심·카페 식음료비는 각자 부담입니다.`
-      : `\n■ 개인 부담\n점심·카페 식음료비는 각자 부담입니다.`;
+      : tour.feeText
+        ? `\n■ 개인 부담\n${tour.feeText}\n점심·카페 식음료비는 각자 부담입니다.`
+        : `\n■ 개인 부담\n점심·카페 식음료비는 각자 부담입니다.`;
 
   const body = `[Ai 내일바꿈 ${TOUR_COHORT}] 멘토투어 ${params.changed ? "변경" : "신청"} 완료
 
