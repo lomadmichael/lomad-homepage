@@ -74,8 +74,8 @@ const LOGIN_SHOTS = (img: { addAccount?: string; claudeLogin?: string; pickAccou
     link: { label: "gmail.com 열기", href: "https://mail.google.com" },
   },
   {
-    alt: "받은편지함의 'Lomadcoop 팀 초대' 메일",
-    action: "② 받은편지함에서 「Lomadcoop 팀 초대」 메일을 열고 수락 버튼을 누르세요.",
+    alt: "받은편지함의 Claude 팀 초대 메일",
+    action: "② 받은편지함에서 Claude 팀 초대 메일을 열고 수락 버튼을 누르세요.",
     note: "메일이 없으면 스팸함 확인. 그래도 없으면 손을 들어 주세요 — 바로 다시 보내 드립니다.",
   },
   {
