@@ -1,4 +1,4 @@
-// Ai 내일바꿈 2기 실습 가이드 콘텐츠 — 일자별 STEP / 명령어 / 프롬프트
+// Ai 내일바꿈 3기 실습 가이드 콘텐츠 (3기 = 10/2~10/5, 교육 장소는 4일 모두 어스투라운지) — 일자별 STEP / 명령어 / 프롬프트
 // 페이지: /projects/ai-naeilbakkum/curriculum
 
 export type Block =
@@ -37,9 +37,9 @@ export const DAYS: Day[] = [
   {
     id: "day1",
     label: "1일차",
-    date: "9월 10일 (목)",
+    date: "10월 2일 (금)",
     time: "16:00 – 18:00",
-    place: "웨이브웍스",
+    place: "어스투라운지",
     theme: "Ai 기본 세팅",
     intro:
       "오늘은 작업 환경을 갖추고 필요한 계정을 만든 뒤, 마지막에 Claude Code로 내 이름이 담긴 첫 웹페이지를 띄웁니다. 한 STEP씩 같이 갑니다. 먼저 끝난 분은 옆 사람을 도와주세요.",
@@ -82,7 +82,7 @@ export const DAYS: Day[] = [
         minutes: "15분",
         blocks: [
           { kind: "text", body: "Code 탭('내일바꿈' 폴더가 열린 상태)에 아래를 붙여넣되, ○○○를 본인 이름으로 바꾸세요." },
-          { kind: "prompt", title: "Code 탭에 붙여넣기", text: "이 폴더 안에 \"안녕하세요, ○○○입니다. Ai 내일바꿈 2기 시작!\"이라는 인사말이 예쁘게 나오는 웹페이지를 만들고, 브라우저로 열어서 보여줘.", tip: "브라우저(또는 앱 안의 미리보기 창)에 내 인사 페이지가 뜨면 스크린샷을 찍어 단체방에 올리세요. 그게 오늘의 수료 도장입니다." },
+          { kind: "prompt", title: "Code 탭에 붙여넣기", text: "이 폴더 안에 \"안녕하세요, ○○○입니다. Ai 내일바꿈 3기 시작!\"이라는 인사말이 예쁘게 나오는 웹페이지를 만들고, 브라우저로 열어서 보여줘.", tip: "브라우저(또는 앱 안의 미리보기 창)에 내 인사 페이지가 뜨면 스크린샷을 찍어 단체방에 올리세요. 그게 오늘의 수료 도장입니다." },
           { kind: "check", text: "스크린샷을 단체방에 올리면 1일차 완료 🎉" },
           { kind: "warn", text: "오늘 못 끝내도 괜찮습니다. 저녁 식사 후 운영진이 개별로 도와드립니다 — 아무도 두고 가지 않습니다." },
         ],
@@ -94,9 +94,9 @@ export const DAYS: Day[] = [
   {
     id: "day2",
     label: "2일차",
-    date: "9월 11일 (금)",
+    date: "10월 3일 (토)",
     time: "10:00 – 12:00",
-    place: "웨이브웍스",
+    place: "어스투라운지",
     theme: "배포·데이터 연결 → 작업 규칙 → 계획 모드로 내 프로젝트 시작",
     intro:
       "오전 첫 30분에 어제 만든 인사 페이지를 진짜 인터넷에 올리고(Vercel), 데이터 저장소(Supabase)를 Claude Code에 연결합니다. 그다음 작업 규칙(CLAUDE.md)과 핸드오프 습관을 세팅하고, 계획 모드에서 '내가 만들 것'을 내 말로 적어 설계 문서와 작업 계획을 만듭니다. 3일차는 이 계획대로 만드는 날입니다.",
@@ -123,7 +123,7 @@ export const DAYS: Day[] = [
           { kind: "text", body: "이 파일은 앱을 켤 때 읽으므로 Claude 앱을 완전히 종료했다가 다시 엽니다 — 창만 닫으면 안 되고, 작업표시줄 트레이(Windows) 또는 메뉴 막대(Mac)의 Claude 아이콘 → 종료(Quit). 다시 열어 Code 탭에서 내 폴더로 새 세션을 시작한 뒤, 입력창에 /mcp 를 입력 → supabase 선택 → 「로그인」 → 브라우저가 열리면 어제 Supabase에 가입한 내 개인 gmail로 로그인('Continue with GitHub'는 누르지 마세요) → 「Authorize(허용)」 → 앱으로 돌아오기." },
           { kind: "text", body: "Authorize 화면에 'No organizations found'가 뜨면 정상입니다 — 새 계정엔 아직 조직(organization)이 없어서 그렇습니다. 「Create an organization」 → Name은 본인 이름(아무거나) → Type: Personal → Plan: Free - $0/month → 「Create organization」 → 다시 Authorize 화면에서 방금 만든 조직을 고르고 「Authorize」." },
           { kind: "prompt", title: "Code 탭에 붙여넣기 — 연결 확인", text: "내 Supabase 조직 목록과 프로젝트 목록을 보여줘. 프로젝트는 아직 만들지 마.", tip: "조직 이름(방금 만든 것)이 답에 나오면 연결 성공입니다. 프로젝트 만들기는 3일차에 합니다." },
-          { kind: "warn", text: "/mcp 목록에 supabase가 없으면 앱을 완전히 종료하지 않은 것입니다 — 트레이/메뉴 막대에서 종료 후 다시 여세요. Supabase 로그인이 '승인 안 됨'으로 막히면 이메일로 가입한 경우 Confirm(인증) 메일을 먼저 눌러야 합니다. 「+」→「커넥터」 메뉴의 Supabase는 조직 관리자 활성화가 필요한 방식이라 2기에서는 쓰지 않습니다 — 거기서 '요청'이 떠도 무시하세요." },
+          { kind: "warn", text: "/mcp 목록에 supabase가 없으면 앱을 완전히 종료하지 않은 것입니다 — 트레이/메뉴 막대에서 종료 후 다시 여세요. Supabase 로그인이 '승인 안 됨'으로 막히면 이메일로 가입한 경우 Confirm(인증) 메일을 먼저 눌러야 합니다. 「+」→「커넥터」 메뉴의 Supabase는 조직 관리자 활성화가 필요한 방식이라 이 과정에서는 쓰지 않습니다 — 거기서 '요청'이 떠도 무시하세요." },
           { kind: "prompt", title: "그래도 안 될 때 — 폴더 안 .mcp.json으로 연결", text: "이 폴더에 .mcp.json 파일을 만들어줘. 내용은 {\"mcpServers\":{\"supabase\":{\"type\":\"http\",\"url\":\"https://mcp.supabase.com/mcp\"}}} 그대로.", tip: "파일이 생기면 앱을 완전히 종료 후 다시 열고 같은 폴더로 새 세션 → /mcp → supabase 로그인. 파일은 반드시 Code 탭에 연결한 폴더 바로 안에 있어야 합니다(하위 폴더 X)." },
           { kind: "check", text: "조직 이름이 답에 나오면 Supabase 완료 (프로젝트는 3일차)" },
         ],
@@ -194,7 +194,7 @@ export const DAYS: Day[] = [
   {
     id: "day3",
     label: "3일차",
-    date: "9월 12일 (토)",
+    date: "10월 4일 (일)",
     time: "14:00 – 18:00",
     place: "어스투라운지",
     theme: "Ai 교육 · 산출물 만들기",
@@ -288,7 +288,7 @@ export const DAYS: Day[] = [
   {
     id: "day4",
     label: "4일차",
-    date: "9월 13일 (일)",
+    date: "10월 5일 (월)",
     time: "10:00 – 12:00",
     place: "어스투라운지",
     theme: "Ai 산출물 · 현남생활 발표회",
