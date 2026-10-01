@@ -100,7 +100,7 @@ export function tourByKey(key: string): Tour | undefined {
 }
 
 /**
- * 3기 참가자 명단 — 본인 확인용 (10/1 형님 확정표 기준 18명 + 초대 유진화). 이홍래는 운영진 테스트 계정.
+ * 3기 참가자 명단 — 본인 확인용 (10/1 형님 최종 명단 19명 + 초대 멘토 유진화 = 20). 이홍래는 운영진 테스트 계정.
  * staff: true 는 신청·응답은 할 수 있지만 집계(참가자 수·미신청자)에서 제외한다.
  * guest: true 는 초대 참가 — 3일차 참석 조사(서핑·요가)만 대상. 멘토투어는 운영진이 직접 등록, 만족도 조사 대상 아님.
  */
@@ -124,6 +124,7 @@ export const ROSTER: { name: string; phone: string; staff?: boolean; guest?: boo
   { name: "조연정", phone: "01055119013" },
   { name: "이로미", phone: "01026042665" },
   { name: "박은주", phone: "01026365668" },
+  { name: "편소영", phone: "01027704952" },
   { name: "유진화", phone: "01085935032", guest: true },
 ];
 
