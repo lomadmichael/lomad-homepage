@@ -1,7 +1,7 @@
 /** 「Ai 내일바꿈」 3기 · 2일차 멘토투어 설정 (원본: 3기운영/AI 내일바꿈 3기 멘토투어.pdf, 9/30) */
 
 export const TOUR_COHORT = "3기";
-export const TOUR_MEET = "10월 3일(토) 오후 12시 30분 · 어스투라운지";
+export const TOUR_MEET = "10월 3일(토) 낮 12시 · 어스투라운지";
 export const TOUR_MEET_ADDR = "양양군 현남면 인구길 64 1층";
 export const TOUR_TEL = "010-9542-3775";
 /** 코스 사진이 들어 있는 public 하위 폴더 */
