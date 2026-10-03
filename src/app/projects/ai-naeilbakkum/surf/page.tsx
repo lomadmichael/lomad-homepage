@@ -73,7 +73,8 @@ export default function SurfPage() {
                 해변 요가 · 10월 4일(일) 오전 8시 ~ 9시 · 웨이브웍스 앞 해변
               </p>
               <p className="font-[family-name:var(--font-noto)] text-[13px] leading-[1.8] text-[#A8410F]">
-                편한 옷차림으로 오시면 됩니다.
+                웨이브웍스 앞 해변 (양양군 현남면 인구중앙길 110)<br />
+                편한 옷차림으로 오세요. 아침에는 쌀쌀할 수 있으니 겉옷을 꼭 챙겨 주세요.
               </p>
             </div>
             <div>
