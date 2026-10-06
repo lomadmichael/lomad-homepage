@@ -22,6 +22,19 @@ export const metadata: Metadata = {
   title: `${BOOTH_NAME} · 2026 양양송이연어축제`,
   description: "양양 관내 당일 영수증 3만원마다 1명, 나만의 커스텀 티셔츠를 만들어 가세요. 로마드 협동조합 커스텀하우스 부스.",
   alternates: { canonical: BASE_PATH },
+  openGraph: {
+    title: "영수증 리워드 · 나만의 축제 티셔츠 만들기 | 2026 양양송이연어축제",
+    description: "양양 관내 당일 영수증 3만원마다 1명, 송송이·연동이 캐릭터로 나만의 축제 티셔츠를 만들어 가세요. 10월 16일(금)~18일(일) 10:00~18:00",
+    url: `https://lomadcoop.com${BASE_PATH}`,
+    siteName: "로마드 협동조합",
+    locale: "ko_KR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "영수증 리워드 · 나만의 축제 티셔츠 만들기",
+    description: "양양 관내 당일 영수증 3만원마다 1명, 나만의 축제 티셔츠를 만들어 가세요.",
+  },
 };
 
 export default function SongiLandingPage() {
