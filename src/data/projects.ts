@@ -171,6 +171,9 @@ export const PROJECTS: Project[] = [
       "양양의 로컬 자원을 활용한 상품 기획, 제작, 유통을 통해 지역의 이야기를 담은 굿즈와 브랜드를 만들어 양양의 가치를 더 많은 사람에게 전달합니다.",
     why: "지역의 이야기가 상품으로 이어지지 못하면 방문자는 기억만 가지고 떠납니다. 로컬의 감각을 일상에 연결하는 상품 구조를 만들기 위해 시작했습니다.",
     image: "/images/customhouse.jpg",
+    externalLinks: [
+      { label: "2026 송이연어축제 커스텀 티셔츠 접수", url: "/projects/custom-house/songi-salmon-2026" },
+    ],
   },
   {
     slug: "sae-cham-moim",
