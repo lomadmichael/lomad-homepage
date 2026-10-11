@@ -133,8 +133,8 @@ export default function FestecoRegisterForm({
           대표 신청자를 포함한 전체 인원을 입력해 주세요. 1건당 최대 {MAX_PER_APPLICATION}명.
         </p>
         <div className="space-y-2">
-          <Stepper label="성인" value={adults} onChange={setAdults} />
-          <Stepper label="어린이" value={children} onChange={setChildren} />
+          <Stepper label="성인" value={adults} max={MAX_PER_APPLICATION - children} onChange={setAdults} />
+          <Stepper label="어린이" value={children} max={MAX_PER_APPLICATION - adults} onChange={setChildren} />
         </div>
         <div className="flex items-center justify-between border-t border-border mt-3 pt-3 font-[family-name:var(--font-noto)]">
           <span className="text-[14px] font-black">총 인원</span>
@@ -208,10 +208,13 @@ export function NoticeList() {
 function Stepper({
   label,
   value,
+  max,
   onChange,
 }: {
   label: string;
   value: number;
+  /** 이 칸의 상한 — 다른 칸과 합쳐 1건당 최대 인원을 넘지 않게. */
+  max: number;
   onChange: (n: number) => void;
 }) {
   const btn =
@@ -233,8 +236,8 @@ function Stepper({
         <button
           type="button"
           aria-label={`${label} 늘리기`}
-          disabled={value >= MAX_PER_APPLICATION}
-          onClick={() => onChange(Math.min(MAX_PER_APPLICATION, value + 1))}
+          disabled={value >= max}
+          onClick={() => onChange(Math.min(max, value + 1))}
           className={btn}
         >
           +

@@ -31,8 +31,8 @@ export const PRE_CAPACITY = 10;
 export const ONSITE_CAPACITY = 5;
 export const CAPACITY_INFO = "회차별 15명 내외 = 사전예약 10명 + 현장접수 5명";
 
-/** 1건당 신청 가능 총 인원(성인+어린이). */
-export const MAX_PER_APPLICATION = 10;
+/** 1건당 신청 가능 총 인원(성인+어린이). 한 사람이 회차 정원을 독점하지 않도록 5명. */
+export const MAX_PER_APPLICATION = 5;
 
 /** 마감 회차 표시 문구 — 그대로 노출. */
 export const CLOSED_LABEL = "사전예약 마감 — 현장접수 별도 운영";

@@ -15,6 +15,7 @@ import {
   SUPPLIES,
   INQUIRY_TEL,
   CAPACITY_INFO,
+  MAX_PER_APPLICATION,
   PRE_CAPACITY,
   ONSITE_CAPACITY,
   CLOSED_LABEL,
@@ -276,6 +277,7 @@ export default async function FestecoLandingPage() {
                 <InfoRow k="대상" v={TARGET} />
                 <InfoRow k="참가비" v={FEE} />
                 <InfoRow k="인원" v={CAPACITY_INFO} />
+                <InfoRow k="1건당 신청" v={`최대 ${MAX_PER_APPLICATION}명 (성인+어린이 합계)`} />
                 <InfoRow k="현장접수" v={`현장접수 ${ONSITE_CAPACITY}명은 축제장 93번 부스에서 당일 운영`} />
               </div>
               <div className="pc-meta">
