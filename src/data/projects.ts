@@ -23,6 +23,11 @@ export type Project = {
    * /projects/[slug] 상세 라우트는 그대로 생성됨 (외부 공유 링크 유지).
    */
   archived?: boolean;
+  /**
+   * 카드 클릭 시 /projects/[slug] 대신 이동할 전용 페이지 경로.
+   * 지정하면 /projects/[slug] 상세 라우트도 이 경로로 리디렉트된다.
+   */
+  href?: string;
 };
 
 export const PROJECTS: Project[] = [
@@ -42,6 +47,25 @@ export const PROJECTS: Project[] = [
       "양양 남대천에서 진행되는 생태지도사와 함께하는 가족 생태체험 프로그램입니다. 매 월 새로운 주제로 운영되며, 10월에는 「양양 남대천 연어 생태이야기」를 주제로 연어의 한살이와 회귀 과정, 남대천을 찾는 회귀어종을 배우고 연어전시관을 관람합니다.",
     why: "양양 남대천은 강과 바다, 습지와 사구가 어우러진 살아있는 자연의 보고입니다. 가족이 직접 발 디디며 작은 생명들의 비밀을 풀어가는 장을 만들고자 시작했습니다.",
     image: "/images/ecology-wetland.jpg",
+    ogImage: "/images/og-ecology-salmon.jpg",
+  },
+  {
+    // 2026 양양송이연어축제(10/16~18) 기간 한정 프로그램 — 소개 페이지 /ecology/festival 로 연결.
+    // 축제 종료 후 archived:true 처리.
+    slug: "songi-salmon-festival-eco-walk",
+    href: "/ecology/festival",
+    name: "양양송이연어축제 남대천 생태탐방",
+    oneLiner: "숲과 물길을 따라 걷고, 놀이로 남대천의 생태 이야기를 배우는 축제 기간 무료 프로그램.",
+    category: "stay-tourism",
+    target: "어린이 동반 가족 및 성인 누구나",
+    operation:
+      "2026년 10월 16일(금)~18일(일), 회차별 약 2시간. 회차별 15명 내외(사전예약 10명 + 현장접수 5명), 양양송이연어축제장 93번 부스 집결·출발. 주최 양양군 · 주관 로마드협동조합.",
+    outcome:
+      "생태관광지도사와 함께 자연을 관찰하고, 연어의 여행과 생태계의 연결을 알아봅니다.",
+    description:
+      "숲과 물길을 따라 걷고, 놀이로 남대천의 생태 이야기를 배우는 프로그램. 생태관광지도사와 함께 자연을 관찰하고, 연어의 여행과 생태계의 연결을 알아봅니다.",
+    why: "숲과 물길을 따라 걷고, 놀이로 남대천의 생태 이야기를 배우는 프로그램입니다.",
+    image: "/images/og-ecology-salmon.jpg",
     ogImage: "/images/og-ecology-salmon.jpg",
   },
   {

@@ -78,7 +78,7 @@ export default function WhatWeDoPage() {
                       {relatedProjects.map((project) => (
                         <a
                           key={project.slug}
-                          href={`/projects/${project.slug}`}
+                          href={project.href ?? `/projects/${project.slug}`}
                           className="group"
                         >
                           <div className="relative h-[200px] rounded-lg overflow-hidden mb-3">

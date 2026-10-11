@@ -58,6 +58,7 @@ export async function setSessionOpenAction(formData: FormData): Promise<void> {
   }
   revalidatePath("/ecology/festival/admin");
   revalidatePath("/ecology/festival");
+  revalidatePath("/ecology/festival/apply");
 }
 
 /** 회차 사전예약 정원 설정 (admin 전용). */
@@ -74,4 +75,5 @@ export async function setCapacityAction(formData: FormData): Promise<void> {
   }
   revalidatePath("/ecology/festival/admin");
   revalidatePath("/ecology/festival");
+  revalidatePath("/ecology/festival/apply");
 }

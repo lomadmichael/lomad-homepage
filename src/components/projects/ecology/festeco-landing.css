@@ -1,0 +1,106 @@
+/* 송이연어축제 남대천 생태탐방 소개 페이지 전용 보조 스타일.
+   기본 디자인 시스템은 ../ecology-wetland.css(.ecology-wetland-page)를 그대로 쓰고,
+   여기서는 회차표·정보표·모바일 하단 고정 CTA 등 이 페이지에만 필요한 것만 추가한다. */
+
+.festeco-landing .hero-meta { flex-wrap: wrap; row-gap: 20px; }
+
+/* 운영 안내 표 */
+.festeco-landing .fe-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 40px;
+}
+.festeco-landing .fe-info .pc-meta-item { grid-template-columns: 110px 1fr; }
+
+/* 회차표 */
+.festeco-landing .fe-sessions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.festeco-landing .fe-session {
+  background: var(--cream);
+  border: 1px solid rgba(62, 78, 34, 0.12);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.festeco-landing .fe-session.closed { background: var(--cream-2); }
+.festeco-landing .fe-round {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--moss);
+  letter-spacing: 0.05em;
+}
+.festeco-landing .fe-when {
+  font-family: var(--font-noto);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--forest);
+  line-height: 1.4;
+}
+.festeco-landing .fe-deadline { font-size: 13px; color: var(--ink-soft); }
+.festeco-landing .fe-status {
+  margin-top: 10px;
+  align-self: flex-start;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(107, 127, 58, 0.15);
+  color: var(--deep-moss);
+}
+.festeco-landing .fe-status.closed {
+  background: rgba(212, 112, 92, 0.12);
+  color: var(--coral);
+}
+.festeco-landing .fe-after {
+  margin-top: 36px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.festeco-landing .fe-note {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+/* 모바일 하단 고정 CTA */
+.festeco-landing .fe-sticky { display: none; }
+
+@media (max-width: 900px) {
+  .festeco-landing .wrap { padding: 0 16px; }
+  .festeco-landing .crumb { padding: 20px 16px 0; }
+  .festeco-landing .fe-info,
+  .festeco-landing .fe-sessions { grid-template-columns: 1fr; }
+  .festeco-landing .fe-info .pc-meta-item { grid-template-columns: 96px 1fr; }
+  .festeco-landing .prog-card { padding: 28px 20px; }
+  .festeco-landing .hero-art { max-width: 420px; margin: 0 auto; }
+  .festeco-landing .btn { padding: 14px 22px; }
+  .festeco-landing .fe-sticky {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    gap: 8px;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(245, 239, 224, 0.96);
+    border-top: 1px solid rgba(62, 78, 34, 0.15);
+    backdrop-filter: blur(6px);
+  }
+  .festeco-landing .fe-sticky a {
+    flex: 1;
+    justify-content: center;
+    padding: 14px 12px;
+    font-size: 15px;
+  }
+  .festeco-landing .fe-sticky a.fe-sticky-sub { flex: 0 0 auto; }
+  .festeco-landing .fe-sticky-spacer { height: 76px; }
+}

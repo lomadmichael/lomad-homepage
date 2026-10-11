@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import Button from "@/components/ui/Button";
@@ -65,6 +65,9 @@ export default async function ProjectDetailPage({
   const { slug } = await params;
   const project = getProjectBySlug(slug);
   if (!project) notFound();
+
+  // 전용 페이지가 따로 있는 항목(예: 송이연어축제 생태탐방)은 그쪽으로 보낸다.
+  if (project.href) redirect(project.href);
 
   // 남대천 하구습지 생태체험 시리즈는 회차별 전용 랜딩(커스텀 디자인)을 렌더한다.
   if (project.slug === "ecology-wetland-spring") {
@@ -195,7 +198,7 @@ export default async function ProjectDetailPage({
                 .map((p) => (
                   <Link
                     key={p.slug}
-                    href={`/projects/${p.slug}`}
+                    href={p.href ?? `/projects/${p.slug}`}
                     className="group"
                   >
                     <div className="relative h-[160px] rounded-lg overflow-hidden mb-3">

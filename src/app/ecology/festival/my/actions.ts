@@ -91,6 +91,7 @@ export async function cancelMyRegistration(formData: FormData): Promise<void> {
   }
   revalidatePath("/ecology/festival/my");
   revalidatePath("/ecology/festival");
+  revalidatePath("/ecology/festival/apply");
 }
 
 export async function logoutMy(): Promise<void> {

@@ -60,7 +60,7 @@ export default async function FestecoMyPage() {
             {regs.length === 0 ? (
               <p className="text-[14px] text-text-sub">
                 이 연락처로 확정된 사전예약이 없습니다.{" "}
-                <Link href="/ecology/festival" className="underline">
+                <Link href="/ecology/festival/apply" className="underline">
                   사전예약 신청하기
                 </Link>
               </p>

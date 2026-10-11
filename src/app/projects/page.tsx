@@ -59,7 +59,7 @@ export default function ProjectsPage() {
             const service = SERVICES.find((s) => s.id === project.category);
             return (
               <FadeIn key={project.slug}>
-                <Link href={`/projects/${project.slug}`} className="group block">
+                <Link href={project.href ?? `/projects/${project.slug}`} className="group block">
                   <div className="relative h-[240px] rounded-lg overflow-hidden mb-4">
                     <Image
                       src={project.image}
