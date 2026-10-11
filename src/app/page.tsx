@@ -72,6 +72,30 @@ export default function Home() {
         </p>
       </section>
 
+      {/* ── 공지 배너: 2026 양양송이연어축제 남대천 생태탐방 사전예약 (축제 종료 후 제거) ── */}
+      <Link
+        href="/ecology/festival"
+        className="group block text-white"
+        style={{ background: "linear-gradient(135deg, #2A3A1A 0%, #2E5461 100%)" }}
+      >
+        <div className="max-w-[1400px] mx-auto px-6 md:px-[60px] py-5 md:py-6 flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div>
+            <p className="font-[family-name:var(--font-karla)] text-[10px] tracking-[3px] font-bold uppercase text-[#E8A845] mb-1">
+              Songi Salmon Festival · 10.16 – 10.18
+            </p>
+            <p className="font-[family-name:var(--font-noto)] text-[17px] md:text-[20px] font-black leading-snug">
+              양양송이연어축제 남대천 생태탐방 신청
+            </p>
+            <p className="font-[family-name:var(--font-noto)] text-[12px] md:text-[13px] text-white/70 mt-1">
+              무료 · 회차별 사전예약 10명 · 축제장 93번 부스 집결
+            </p>
+          </div>
+          <span className="font-[family-name:var(--font-karla)] text-[12px] font-extrabold tracking-[1.5px] uppercase border border-white/70 px-4 py-2.5 self-start md:self-auto group-hover:bg-white group-hover:text-[#2A3A1A] transition-colors">
+            사전예약 →
+          </span>
+        </div>
+      </Link>
+
       {/* ── Section 2: 한 줄 정의 ── */}
       <section className="max-w-[1400px] mx-auto px-6 md:px-[60px] pt-[60px] md:pt-[120px] pb-[50px]">
         <FadeIn>
