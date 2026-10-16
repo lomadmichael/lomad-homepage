@@ -311,7 +311,7 @@ function PendingTab({
               </div>
 
               <div className="grid grid-cols-[2fr_1fr] gap-2">
-                <button className="h-14 rounded-2xl bg-[#E07F74] text-white text-[18px] font-black">승인 · 회차권 발급</button>
+                <button className="h-14 rounded-2xl bg-[#E07F74] text-white text-[18px] font-black">승인</button>
                 <button
                   formAction={rejectAction}
                   formNoValidate
