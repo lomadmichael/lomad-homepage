@@ -157,7 +157,8 @@ export async function assignAndNotify(p: {
 export async function changeStatus(id: string, status: RegStatus): Promise<FlowResult> {
   const r = await setStatus(id, status);
   if (!r.ok) return { ok: false, message: `처리할 수 없는 상태예요 (${r.status ?? r.reason}).` };
-  if ((status === "no_show" || status === "cancelled") && r.reminder_group_id) {
+  // 입장한 손님에게 "10분 뒤 시작" 알림이 가지 않도록 입장 처리 때도 예약 알림을 취소한다.
+  if ((status === "checked_in" || status === "no_show" || status === "cancelled") && r.reminder_group_id) {
     await cancelReminderSms(r.reminder_group_id);
   }
   const label: Partial<Record<RegStatus, string>> = {
