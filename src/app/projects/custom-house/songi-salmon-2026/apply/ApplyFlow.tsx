@@ -149,7 +149,7 @@ export default function ApplyFlow({ verified }: { verified: boolean }) {
           <StepTitle>개인정보 수집·이용 동의</StepTitle>
           <Card className="mb-5 text-[14px] leading-relaxed space-y-2.5">
             <p>
-              <b className="text-[#8C4A42]">수집 목적</b> · 중복 참여 확인, 회차 배정·안내 문자 발송
+              <b className="text-[#8C4A42]">수집 목적</b> · 중복 참여 확인, 참여 순서 관리
             </p>
             <p>
               <b className="text-[#8C4A42]">수집 항목</b> · 대표 휴대폰 번호, 참여자 이름·성별·나이, 영수증 금액·가게명(선택)

@@ -212,6 +212,13 @@ export function suggestSlot(
   testMode: boolean,
   capacity?: number,
 ): number | null {
+  // 대기 시스템 운영 안 함(2026-10-16): 정원과 상관없이 지금 시각의 회차로 배정한다.
+  if (todayKst(now) === date) {
+    const { hour } = kstParts(now);
+    const first = SLOT_HOURS[0], last = SLOT_HOURS[SLOT_HOURS.length - 1];
+    return Math.min(Math.max(hour, first), last);
+  }
+  void seatsByHour; void partySize; void capacity;
   for (const h of SLOT_HOURS) {
     if (!isSlotAssignable(date, h, now, testMode)) continue;
     if ((capacity ?? slotCapacity(date, h)) - (seatsByHour[h] ?? 0) >= partySize) return h;

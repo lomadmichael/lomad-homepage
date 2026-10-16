@@ -49,8 +49,8 @@ export default function SongiLandingPage() {
     ["휴대폰 인증", "대표 한 분의 휴대폰 번호로 인증해요."],
     ["영수증 금액 입력", `양양 관내 오늘 영수증, 여러 장 합산 OK. 합계 ${unit}만원마다 1명.`],
     ["참여자 입력", "가족·일행 이름, 성별, 나이를 적어요."],
-    ["데스크에서 영수증 확인", "접수번호를 보여주고 실물 영수증을 확인받으면 회차권이 나와요."],
-    ["회차 시간에 부스로!", "시작 10분 전에 알림 문자를 보내 드려요."],
+    ["데스크에서 영수증 확인", "접수번호를 보여주고 실물 영수증을 확인받아요."],
+    ["바로 체험!", "확인이 끝나면 부스 안내에 따라 티셔츠를 만들어요."],
   ];
 
   return (
@@ -178,13 +178,10 @@ export default function SongiLandingPage() {
         </div>
         <ul className="text-[14px] leading-relaxed font-medium text-[#262120]/80 space-y-1.5">
           <li className="flex gap-2">
-            <span className="text-[#E07F74]">●</span>먼저 승인받은 순서대로 회차를 배정해요
+            <span className="text-[#E07F74]">●</span>현장 순서대로 진행해요
           </li>
           <li className="flex gap-2">
             <span className="text-[#E07F74]">●</span>대표 휴대폰 번호 기준 축제 기간 중 1회만 참여할 수 있어요
-          </li>
-          <li className="flex gap-2">
-            <span className="text-[#E07F74]">●</span>회차 시작 10분이 지나도 오지 않으면 자리가 다른 분께 넘어갈 수 있어요
           </li>
         </ul>
         <Link

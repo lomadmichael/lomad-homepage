@@ -130,7 +130,7 @@ function TicketView({ reg }: { reg: Registration }) {
             보여주세요
           </p>
           <p className="text-[15px] font-semibold mt-3 break-keep">
-            확인이 끝나면 이 화면이 회차권으로 바뀌고, 문자로도 보내 드려요.
+            확인이 끝나면 이 화면이 참여 확인 화면으로 바뀌어요.
           </p>
         </div>
         <p className="flex items-center justify-center gap-2 text-[14px] font-semibold text-[#262120]/60">
@@ -226,10 +226,7 @@ function TicketView({ reg }: { reg: Registration }) {
             <b className="text-[#8C4A42]">장소</b> · {PLACE}
           </p>
           <p>
-            <b className="text-[#8C4A42]">입장</b> · 회차 시작 시간에 이 화면을 보여주세요. 시작 10분 전에 알림 문자를 보내 드려요.
-          </p>
-          <p className="text-[#B2453A] font-bold break-keep">
-            회차 시작 {GRACE_MINUTES}분이 지나도 오지 않으시면 자리가 다른 분께 넘어갈 수 있어요.
+            <b className="text-[#8C4A42]">입장</b> · 부스 안내에 따라 순서대로 체험해요. 이 화면을 보여주세요.
           </p>
         </Card>
       )}

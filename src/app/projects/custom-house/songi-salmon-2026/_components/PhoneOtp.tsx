@@ -65,7 +65,7 @@ export default function PhoneOtp({
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
         />
-        <p className="text-[14px] font-medium text-[#262120]/65">이 번호로 인증번호와 회차권 문자가 가요.</p>
+        <p className="text-[14px] font-medium text-[#262120]/65">이 번호로 인증번호 문자가 가요.</p>
         {error && <p className="text-[14px] font-bold text-[#B2453A]">{error}</p>}
         <button className={btnPrimary} disabled={pending || phone.replace(/\D/g, "").length < 10}>
           {pending ? "보내는 중…" : "인증번호 받기"}

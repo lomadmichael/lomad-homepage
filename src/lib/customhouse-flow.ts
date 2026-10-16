@@ -125,10 +125,10 @@ export async function assignAndNotify(p: {
   if (!reg) return { ok: true, message: "배정 완료 (문자 발송 대상 조회 실패)" };
 
   const sameSlot = r.prev_status === "approved" && r.prev_date === date && r.prev_hour === p.hour;
-  // 이미 시작한 회차(= 지금 바로 체험, 대기 없음)면 회차권 문자를 보내지 않는다. 뒤 회차로 기다릴 때만 보냄.
-  const noWait = now.getTime() >= slotStart(date, p.hour).getTime();
+  // 대기 시스템·회차권/알림 문자 운영 중단(2026-10-16 형님 지시: 현장에서 순서대로 진행). 인증번호 문자만 유지.
+  const SEND_TICKET_SMS = false;
+  const noWait = !SEND_TICKET_SMS || now.getTime() >= slotStart(date, p.hour).getTime();
   const notes: string[] = [];
-  if (noWait) notes.push("바로 입장 — 문자 생략");
   if (!sameSlot && !noWait) {
     const t = await sendTicketSms({
       phone: reg.phone,
