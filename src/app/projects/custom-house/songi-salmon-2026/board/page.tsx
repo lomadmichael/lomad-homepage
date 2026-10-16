@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import {
   BOOTH_NAME,
-  SLOT_CAPACITY,
+  slotCapacity,
   SLOT_COLORS,
   SLOT_HOURS,
   currentSlotHour,
@@ -79,7 +79,7 @@ export default async function BoardPage() {
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
             {SLOT_HOURS.map((h) => {
-              const left = Math.max(0, SLOT_CAPACITY - (seats![h] ?? 0));
+              const left = Math.max(0, slotCapacity(date, h) - (seats![h] ?? 0));
               const closed = !isSlotAssignable(date, h, now, test);
               const c = SLOT_COLORS[h];
               const isCur = h === cur;
@@ -105,7 +105,7 @@ export default async function BoardPage() {
                       <p className="font-black leading-none">
                         <span className="sx-hand text-[14px] md:text-[20px] text-[#262120]/60 mr-1.5">남은 자리</span>
                         <span className="text-[38px] md:text-[60px] lg:text-[76px] tabular-nums text-[#8C4A42]">{left}</span>
-                        <span className="text-[15px] md:text-[22px] text-[#262120]/45"> / {SLOT_CAPACITY}</span>
+                        <span className="text-[15px] md:text-[22px] text-[#262120]/45"> / {slotCapacity(date, h)}</span>
                       </p>
                     )}
                   </div>

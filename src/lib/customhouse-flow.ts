@@ -4,7 +4,7 @@ import {
   OTP_MAX_VERIFY_ATTEMPTS,
   OTP_RESEND_COOLDOWN_SECONDS,
   OTP_TTL_SECONDS,
-  SLOT_CAPACITY,
+  slotCapacity,
   hourLabel,
   isSlotAssignable,
   isTestMode,
@@ -154,7 +154,7 @@ export async function assignAndNotify(p: {
   const verb = p.allowed.includes("pending") ? "승인" : "재배정";
   return {
     ok: true,
-    message: `${reg.code} ${verb} → ${hourLabel(p.hour)} 회차 (${r.seats_after}/${SLOT_CAPACITY}명${r.seats_after > SLOT_CAPACITY ? " · 정원 초과" : ""})${notes.length ? ` · ${notes.join(", ")}` : ""}`,
+    message: `${reg.code} ${verb} → ${hourLabel(p.hour)} 회차 (${r.seats_after}/${slotCapacity(date, p.hour)}명${r.seats_after > slotCapacity(date, p.hour) ? " · 정원 초과" : ""})${notes.length ? ` · ${notes.join(", ")}` : ""}`,
   };
 }
 

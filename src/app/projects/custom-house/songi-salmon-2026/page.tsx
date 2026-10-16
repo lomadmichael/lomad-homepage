@@ -7,7 +7,8 @@ import {
   EVENT_DATES,
   PRICE_UNIT,
   PURGE_DEADLINE,
-  SLOT_CAPACITY,
+  dailyCapacity,
+  todayKst,
   SLOT_COLORS,
   SLOT_HOURS,
   dateLabel,
@@ -160,8 +161,8 @@ export default function SongiLandingPage() {
       <Card className="pt-9 mb-6">
         <Tag>시간대별 운영</Tag>
         <p className="text-center text-[17px] font-bold mb-4">
-          매일 <b className="sx-hand text-[26px] text-[#8C4A42]">{SLOT_HOURS.length}회차</b> · 회차당{" "}
-          <b className="sx-hand text-[26px] text-[#8C4A42]">{SLOT_CAPACITY}명</b>
+          매일 <b className="sx-hand text-[26px] text-[#8C4A42]">{SLOT_HOURS.length}회차</b> · 오늘 정원{" "}
+          <b className="sx-hand text-[26px] text-[#8C4A42]">{dailyCapacity(todayKst())}명</b>
         </p>
         <div className="grid grid-cols-4 gap-2 mb-4">
           {SLOT_HOURS.map((h) => (

@@ -12,6 +12,19 @@ export const EVENT_DATES = ["2026-10-16", "2026-10-17", "2026-10-18"] as const;
 export const SLOT_HOURS = [10, 11, 12, 13, 14, 15, 16, 17] as const;
 /** 회차당 정원(인원 기준). 리허설 실측 후 하향 가능. */
 export const SLOT_CAPACITY = 50;
+/** 날짜별 하루 정원(없으면 SLOT_CAPACITY × 회차 수). 10/17 = 400 + 첫날 부족분 125 (2026-10-16 형님 지시). */
+export const DAILY_CAPACITY: Record<string, number> = { "2026-10-17": 525 };
+export function dailyCapacity(date: string): number {
+  return DAILY_CAPACITY[date] ?? SLOT_CAPACITY * SLOT_HOURS.length;
+}
+/** 회차별 정원: 하루 정원을 회차 수로 나누고 나머지는 앞 회차부터 1명씩 더한다(525 → 66×5 + 65×3). */
+export function slotCapacity(date: string, hour: number): number {
+  const total = dailyCapacity(date);
+  const n = SLOT_HOURS.length;
+  const idx = (SLOT_HOURS as readonly number[]).indexOf(hour);
+  const base = Math.floor(total / n);
+  return base + (idx >= 0 && idx < total % n ? 1 : 0);
+}
 /** 영수증 합계 단가 — 합계 ÷ 이 값(내림) = 최대 인원. */
 export const PRICE_UNIT = 30_000;
 /** 접수 오픈 시각(시). */
@@ -197,11 +210,11 @@ export function suggestSlot(
   partySize: number,
   now: Date,
   testMode: boolean,
-  capacity: number = SLOT_CAPACITY,
+  capacity?: number,
 ): number | null {
   for (const h of SLOT_HOURS) {
     if (!isSlotAssignable(date, h, now, testMode)) continue;
-    if (capacity - (seatsByHour[h] ?? 0) >= partySize) return h;
+    if ((capacity ?? slotCapacity(date, h)) - (seatsByHour[h] ?? 0) >= partySize) return h;
   }
   // 남은 회차가 모두 찼으면 지금 배정 가능한 가장 이른 회차로 정원을 넘겨 배정한다(정원은 안내용, 현장 판단 우선).
   for (const h of SLOT_HOURS) if (isSlotAssignable(date, h, now, testMode)) return h;

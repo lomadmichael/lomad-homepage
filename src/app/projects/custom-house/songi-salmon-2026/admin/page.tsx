@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ADMIN_COOKIE_PATH,
-  SLOT_CAPACITY,
+  dailyCapacity,
+  slotCapacity,
   SLOT_COLORS,
   SLOT_HOURS,
   STATUS_LABEL,
@@ -92,7 +93,7 @@ export default async function AdminPage({ searchParams }: { searchParams: SP }) 
         <div>
           <h1 className="sx-hand text-[26px] leading-tight">부스 관리 · {dateLabel(today)}</h1>
           <p className="text-[13px] text-[#262120]/60">
-            오늘 배정 {totalSeats}명 / {SLOT_CAPACITY * SLOT_HOURS.length}명 · 승인 대기 {pending.length}건
+            오늘 배정 {totalSeats}명 / {dailyCapacity(today)}명 · 승인 대기 {pending.length}건
             {test && <b className="ml-2 text-[#B2453A]">테스트 모드(시간 제한 해제·문자 드라이런)</b>}
           </p>
         </div>
@@ -180,7 +181,7 @@ function HourOptions({
   return (
     <>
       {SLOT_HOURS.map((h) => {
-        const left = SLOT_CAPACITY - (seats[h] ?? 0);
+        const left = slotCapacity(today, h) - (seats[h] ?? 0);
         const assignable = isSlotAssignable(today, h, now, test);
         const fits = left >= party;
         return (
@@ -379,7 +380,7 @@ function SlotsTab({
           >
             <span className="block text-[16px] tabular-nums">{hourLabel(h)}</span>
             <span className="block text-[13px] opacity-90">
-              {seats[h] ?? 0}/{SLOT_CAPACITY}
+              {seats[h] ?? 0}/{slotCapacity(today, h)}
             </span>
           </a>
         ))}
@@ -401,7 +402,7 @@ function SlotsTab({
             >
               <span className="text-[24px] font-black tabular-nums">{hourLabel(h)}</span>
               <span className="text-[14px] font-bold">
-                배정 {seats[h] ?? 0}/{SLOT_CAPACITY}명 · 입장 {checked}명
+                배정 {seats[h] ?? 0}/{slotCapacity(today, h)}명 · 입장 {checked}명
               </span>
             </header>
             {list.length === 0 ? (
