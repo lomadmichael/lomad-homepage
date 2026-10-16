@@ -179,10 +179,10 @@ export function registrationGate(now: Date, testMode: boolean): GateResult {
   return { open: true };
 }
 
-/** 회차 배정 가능: 회차 시작 + 10분 전까지. */
+/** 회차 배정 가능: 회차가 끝나기 전까지(정각~다음 정각). 자리가 남아 있으면 지금 진행 중인 회차로 바로 배정한다. */
 export function isSlotAssignable(date: string, hour: number, now: Date, testMode: boolean): boolean {
   if (testMode) return true;
-  return now.getTime() < slotStart(date, hour).getTime() + GRACE_MINUTES * 60_000;
+  return now.getTime() < slotStart(date, hour).getTime() + 60 * 60_000;
 }
 
 /** 노쇼 해제 가능: 회차 시작 + 10분 경과 후. */
