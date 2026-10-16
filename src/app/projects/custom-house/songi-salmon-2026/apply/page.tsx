@@ -40,7 +40,7 @@ export default async function ApplyPage() {
         <div className="text-center pt-10 space-y-4">
           <img src={`${IMG}/yeondong-front.webp`} alt="" width={233} height={240} className="w-[120px] h-auto mx-auto" />
           <h1 className="sx-hand text-[28px] leading-tight break-keep">{gate.message}</h1>
-          <p className="text-[15px] font-semibold text-[#262120]/65">접수는 행사일 10:00 ~ 17:10에 열려요.</p>
+          <p className="text-[15px] font-semibold text-[#262120]/65">접수는 축제 기간(10월 16일~18일) 부스에서 열려요.</p>
           <Link href={BASE_PATH} className={btnGhost}>
             안내로 돌아가기
           </Link>

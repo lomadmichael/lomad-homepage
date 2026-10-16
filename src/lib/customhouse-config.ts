@@ -148,14 +148,17 @@ export type GateResult =
   | { open: true }
   | { open: false; reason: "before_event" | "not_yet" | "closed_today" | "after_event"; message: string };
 
-/** 셀프 접수 가능 여부: 행사일 10:00 ~ 17:10 (KST). 테스트 모드면 항상 열림. */
+/**
+ * 셀프 접수 가능 여부: 축제 기간(행사일)이면 하루 종일 열림. 시간으로는 막지 않는다 —
+ * 접수 마감은 현장 데스크가 판단한다(2026-10-16 형님 지시). 테스트 모드면 항상 열림.
+ */
 export function registrationGate(now: Date, testMode: boolean): GateResult {
   if (testMode) return { open: true };
-  const { date, hour, minute } = kstParts(now);
+  const { date } = kstParts(now);
   const first = EVENT_DATES[0];
   const last = EVENT_DATES[EVENT_DATES.length - 1];
   if (date < first) {
-    return { open: false, reason: "before_event", message: `${dateLabel(first)} 10시에 열려요` };
+    return { open: false, reason: "before_event", message: `${dateLabel(first)}부터 열려요` };
   }
   if (date > last) {
     return { open: false, reason: "after_event", message: "축제가 끝났어요. 함께해 주셔서 고마워요!" };
@@ -163,25 +166,14 @@ export function registrationGate(now: Date, testMode: boolean): GateResult {
   if (!isEventDate(date)) {
     return { open: false, reason: "closed_today", message: "오늘은 운영하지 않아요" };
   }
-  const mins = hour * 60 + minute;
-  if (mins < REG_OPEN_HOUR * 60) {
-    return { open: false, reason: "not_yet", message: "10시에 열려요" };
-  }
-  if (mins >= REG_CLOSE_HOUR * 60 + REG_CLOSE_MINUTE) {
-    const idx = (EVENT_DATES as readonly string[]).indexOf(date);
-    const next = EVENT_DATES[idx + 1];
-    return {
-      open: false,
-      reason: "closed_today",
-      message: next ? `오늘 접수는 마감됐어요. ${dateLabel(next)} 10시에 다시 열려요` : "접수가 모두 마감됐어요",
-    };
-  }
   return { open: true };
 }
 
 /** 회차 배정 가능: 회차가 끝나기 전까지(정각~다음 정각). 자리가 남아 있으면 지금 진행 중인 회차로 바로 배정한다. */
 export function isSlotAssignable(date: string, hour: number, now: Date, testMode: boolean): boolean {
   if (testMode) return true;
+  // 마지막 회차는 운영이 끝날 때까지(그날 자정 전까지) 배정 가능 — 시간으로 접수를 막지 않기 위해.
+  if (hour === SLOT_HOURS[SLOT_HOURS.length - 1]) return todayKst(now) === date;
   return now.getTime() < slotStart(date, hour).getTime() + 60 * 60_000;
 }
 

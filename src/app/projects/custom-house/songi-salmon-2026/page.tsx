@@ -105,7 +105,7 @@ export default function SongiLandingPage() {
         ) : (
           <div className="rounded-[20px] bg-[#FBF7EE] border-[3px] border-dashed border-[#262120] px-4 py-4 text-center">
             <p className="sx-hand text-[22px] text-[#8C4A42]">{gate.message}</p>
-            <p className="text-[14px] font-semibold text-[#262120]/65 mt-1">접수는 행사일 10:00 ~ 17:10에 열려요</p>
+            <p className="text-[14px] font-semibold text-[#262120]/65 mt-1">접수는 축제 기간(10월 16일~18일) 부스에서 열려요</p>
           </div>
         )}
         <Link href={`${BASE_PATH}/ticket`} className={btnGhost}>
