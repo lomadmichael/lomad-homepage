@@ -142,7 +142,7 @@ export async function assignAndNotify(p: {
   }
   const rem = noWait ? null : await scheduleReminderSms({ phone: reg.phone, regId: reg.id, date, hour: p.hour, now });
   if (rem === null && !noWait) notes.push("알림 생략(시작 12분 이내)");
-  else if (!rem.ok) notes.push("알림 예약 실패");
+  else if (rem && !rem.ok) notes.push("알림 예약 실패");
   if (rem?.groupId && rem.ok) {
     try {
       await setReminderGroup(reg.id, rem.groupId);
