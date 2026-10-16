@@ -184,9 +184,9 @@ function HourOptions({
         const assignable = isSlotAssignable(today, h, now, test);
         const fits = left >= party;
         return (
-          <option key={h} value={h} disabled={!assignable || !fits || h === exclude}>
-            {hourLabel(h)} · 남은 {left}
-            {!assignable ? " (마감)" : !fits ? " (부족)" : ""}
+          <option key={h} value={h} disabled={!assignable || h === exclude}>
+            {hourLabel(h)} · 남은 {Math.max(left, 0)}
+            {!assignable ? " (마감)" : !fits ? " (정원 초과로 배정)" : ""}
           </option>
         );
       })}

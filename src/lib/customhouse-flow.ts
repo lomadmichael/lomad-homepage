@@ -105,7 +105,8 @@ export async function assignAndNotify(p: {
   if (!isSlotAssignable(date, p.hour, now, test)) {
     return { ok: false, message: `${hourLabel(p.hour)} 회차는 이미 끝났어요.` };
   }
-  const r = await assignSlot({ id: p.id, date, hour: p.hour, capacity: SLOT_CAPACITY, allowed: p.allowed });
+  // 정원(50)을 넘어도 승인되게 한다 — 정원은 안내용, 마감은 현장 판단(2026-10-16 형님 지시).
+  const r = await assignSlot({ id: p.id, date, hour: p.hour, capacity: 100000, allowed: p.allowed });
   if (!r.ok) {
     if (r.reason === "full") {
       return {
@@ -153,7 +154,7 @@ export async function assignAndNotify(p: {
   const verb = p.allowed.includes("pending") ? "승인" : "재배정";
   return {
     ok: true,
-    message: `${reg.code} ${verb} → ${hourLabel(p.hour)} 회차 (${r.seats_after}/${SLOT_CAPACITY}명)${notes.length ? ` · ${notes.join(", ")}` : ""}`,
+    message: `${reg.code} ${verb} → ${hourLabel(p.hour)} 회차 (${r.seats_after}/${SLOT_CAPACITY}명${r.seats_after > SLOT_CAPACITY ? " · 정원 초과" : ""})${notes.length ? ` · ${notes.join(", ")}` : ""}`,
   };
 }
 

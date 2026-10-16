@@ -203,6 +203,8 @@ export function suggestSlot(
     if (!isSlotAssignable(date, h, now, testMode)) continue;
     if (capacity - (seatsByHour[h] ?? 0) >= partySize) return h;
   }
+  // 남은 회차가 모두 찼으면 지금 배정 가능한 가장 이른 회차로 정원을 넘겨 배정한다(정원은 안내용, 현장 판단 우선).
+  for (const h of SLOT_HOURS) if (isSlotAssignable(date, h, now, testMode)) return h;
   return null;
 }
 
