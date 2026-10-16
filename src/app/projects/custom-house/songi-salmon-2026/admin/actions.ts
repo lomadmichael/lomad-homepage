@@ -209,7 +209,7 @@ export async function proxySubmitAction(input: {
   const phone = verifyProxy(input.token);
   if (!phone) return { ok: false, error: "인증이 만료됐어요(15분). 인증번호를 다시 받아 주세요." };
   if (!input.privacyConsent) return { ok: false, error: "손님의 개인정보 수집·이용 동의를 확인해 주세요." };
-  const v = validateApplication(input);
+  const v = validateApplication({ ...input, requireAge: false }); // 대리 접수는 나이 빈칸 허용
   if (!v.ok) return { ok: false, error: v.error };
   try {
     const r = await submitRegistration({

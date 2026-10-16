@@ -267,12 +267,17 @@ export interface ValidatedApplication {
   partySize: number;
 }
 
-/** 접수 내용 검증 (클라이언트·서버 공용). 오류 메시지 또는 정제된 값. */
+/**
+ * 접수 내용 검증 (클라이언트·서버 공용). 오류 메시지 또는 정제된 값.
+ * requireAge=false(관리자 대리 접수)면 나이 빈칸을 허용하고 null 로 저장한다.
+ */
 export function validateApplication(input: {
   participants: Participant[];
   receipts: Receipt[];
   guardianConsent: boolean;
+  requireAge?: boolean;
 }): { ok: true; value: ValidatedApplication } | { ok: false; error: string } {
+  const requireAge = input.requireAge ?? true;
   const receipts = (input.receipts || [])
     .map((r) => ({
       amount: Math.floor(Number(r.amount)),
@@ -288,10 +293,15 @@ export function validateApplication(input: {
   const participants: Participant[] = [];
   for (const p of input.participants || []) {
     const name = (p.name || "").trim().slice(0, 30);
-    const age = Number(p.age);
     if (!name) return { ok: false, error: "참여자 이름을 모두 입력해 주세요." };
     if (p.gender !== "남" && p.gender !== "여") return { ok: false, error: `${name}님의 성별을 선택해 주세요.` };
-    if (!Number.isInteger(age) || age < 0 || age > 120) return { ok: false, error: `${name}님의 나이를 확인해 주세요.` };
+    // 빈칸(null)을 Number()로 바꾸면 0이 되어 검사를 통과하므로 먼저 따로 거른다.
+    const blank = p.age === null || p.age === undefined || String(p.age).trim() === "";
+    if (blank && requireAge) return { ok: false, error: `${name}님의 나이를 입력해 주세요.` };
+    const age = blank ? null : Number(p.age);
+    if (age !== null && (!Number.isInteger(age) || age < 0 || age > 120)) {
+      return { ok: false, error: `${name}님의 나이를 확인해 주세요.` };
+    }
     participants.push({ name, gender: p.gender, age });
   }
   if (participants.length < 1) return { ok: false, error: "참여자를 1명 이상 입력해 주세요." };

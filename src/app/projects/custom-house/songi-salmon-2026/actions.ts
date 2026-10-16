@@ -89,7 +89,7 @@ export async function submitApplicationAction(input: {
   const gate = registrationGate(new Date(), isTestMode());
   if (!gate.open) return { ok: false, error: gate.message };
   if (!input.privacyConsent) return { ok: false, error: "개인정보 수집·이용에 동의해 주세요." };
-  const v = validateApplication(input);
+  const v = validateApplication({ ...input, requireAge: true }); // 손님 접수는 나이 필수
   if (!v.ok) return { ok: false, error: v.error };
   try {
     const r = await submitRegistration({
