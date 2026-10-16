@@ -46,6 +46,8 @@ export default function ApplyFlow({ verified }: { verified: boolean }) {
   const [receipts, setReceipts] = useState<ReceiptRow[]>([{ amount: "", store: "" }]);
   const [people, setPeople] = useState<PRow[]>([{ name: "", gender: "", age: "" }]);
   const [error, setError] = useState<string | null>(null);
+  /** 나이 빈칸으로 접수가 막혔을 때 true — 빈 나이 칸을 빨간 테두리로 표시한다. */
+  const [ageErr, setAgeErr] = useState(false);
   const [pending, start] = useTransition();
 
   const parsedReceipts = useMemo(
@@ -79,6 +81,14 @@ export default function ApplyFlow({ verified }: { verified: boolean }) {
       const v = validateApplication({ participants, receipts: parsedReceipts, guardianConsent: guardian });
       if (!v.ok) {
         setError(v.error);
+        const blank = people.findIndex((p) => p.age === "");
+        if (blank >= 0 && v.error.includes("나이를 입력")) {
+          setAgeErr(true);
+          // 일행이 많으면 빈 칸이 화면 위로 지나가 있으므로 그 칸으로 데려가 바로 입력하게 한다.
+          const el = document.getElementById(`ch-age-${blank}`);
+          el?.scrollIntoView({ behavior: "smooth", block: "center" });
+          (el as HTMLInputElement | null)?.focus({ preventScroll: true });
+        }
         return;
       }
       const r = await submitApplicationAction({
@@ -378,10 +388,15 @@ export default function ApplyFlow({ verified }: { verified: boolean }) {
                   ))}
                   <div className="relative">
                     <input
-                      className={`${inputCls} pr-9 text-center`}
+                      id={`ch-age-${i}`}
+                      className={`${inputCls} text-center placeholder:text-[15px] ${p.age === "" ? "!px-1" : "pr-9"} ${
+                        ageErr && p.age === "" ? "!border-[#B2453A] !bg-[#FCE3DE]" : ""
+                      }`}
                       inputMode="numeric"
-                      placeholder="나이"
-                      aria-label={i === 0 ? "대표 나이" : `동반 ${i} 나이`}
+                      placeholder="나이(필수)"
+                      aria-label={i === 0 ? "대표 나이(필수)" : `동반 ${i} 나이(필수)`}
+                      aria-invalid={ageErr && p.age === ""}
+                      required
                       value={p.age}
                       onChange={(e) => {
                         const next = [...people];
@@ -389,7 +404,9 @@ export default function ApplyFlow({ verified }: { verified: boolean }) {
                         setPeople(next);
                       }}
                     />
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[15px] font-bold text-[#262120]/55">세</span>
+                    {p.age !== "" && (
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[15px] font-bold text-[#262120]/55">세</span>
+                    )}
                   </div>
                 </div>
               </div>
