@@ -8,6 +8,7 @@ import {
   hourLabel,
   isSlotAssignable,
   isTestMode,
+  slotStart,
   todayKst,
   type RegStatus,
 } from "@/lib/customhouse-config";
@@ -102,7 +103,7 @@ export async function assignAndNotify(p: {
   const test = isTestMode();
   const date = todayKst(now);
   if (!isSlotAssignable(date, p.hour, now, test)) {
-    return { ok: false, message: `${hourLabel(p.hour)} 회차는 배정 가능 시간(시작 +10분)이 지났어요.` };
+    return { ok: false, message: `${hourLabel(p.hour)} 회차는 이미 끝났어요.` };
   }
   const r = await assignSlot({ id: p.id, date, hour: p.hour, capacity: SLOT_CAPACITY, allowed: p.allowed });
   if (!r.ok) {
@@ -123,8 +124,11 @@ export async function assignAndNotify(p: {
   if (!reg) return { ok: true, message: "배정 완료 (문자 발송 대상 조회 실패)" };
 
   const sameSlot = r.prev_status === "approved" && r.prev_date === date && r.prev_hour === p.hour;
+  // 이미 시작한 회차(= 지금 바로 체험, 대기 없음)면 회차권 문자를 보내지 않는다. 뒤 회차로 기다릴 때만 보냄.
+  const noWait = now.getTime() >= slotStart(date, p.hour).getTime();
   const notes: string[] = [];
-  if (!sameSlot) {
+  if (noWait) notes.push("바로 입장 — 문자 생략");
+  if (!sameSlot && !noWait) {
     const t = await sendTicketSms({
       phone: reg.phone,
       regId: reg.id,
@@ -136,8 +140,8 @@ export async function assignAndNotify(p: {
     });
     if (!t.ok) notes.push("회차권 문자 실패");
   }
-  const rem = await scheduleReminderSms({ phone: reg.phone, regId: reg.id, date, hour: p.hour, now });
-  if (rem === null) notes.push("알림 생략(시작 12분 이내)");
+  const rem = noWait ? null : await scheduleReminderSms({ phone: reg.phone, regId: reg.id, date, hour: p.hour, now });
+  if (rem === null && !noWait) notes.push("알림 생략(시작 12분 이내)");
   else if (!rem.ok) notes.push("알림 예약 실패");
   if (rem?.groupId && rem.ok) {
     try {
