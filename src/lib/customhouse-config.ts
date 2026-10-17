@@ -12,8 +12,12 @@ export const EVENT_DATES = ["2026-10-16", "2026-10-17", "2026-10-18"] as const;
 export const SLOT_HOURS = [10, 11, 12, 13, 14, 15, 16, 17] as const;
 /** 회차당 정원(인원 기준). 리허설 실측 후 하향 가능. */
 export const SLOT_CAPACITY = 50;
-/** 날짜별 하루 정원(없으면 SLOT_CAPACITY × 회차 수). 10/17 = 400 + 첫날 부족분 125 (2026-10-16 형님 지시). */
-export const DAILY_CAPACITY: Record<string, number> = { "2026-10-17": 525 };
+/**
+ * 날짜별 하루 정원(없으면 SLOT_CAPACITY × 회차 수).
+ * 10/17 = 400 + 첫날 부족분 125 (2026-10-16 형님 지시).
+ * 10/18 = 400 − 10/17 초과분 8 (10/17 최종 입장 533명 − 525, 2026-10-17 형님 지시).
+ */
+export const DAILY_CAPACITY: Record<string, number> = { "2026-10-17": 525, "2026-10-18": 392 };
 export function dailyCapacity(date: string): number {
   return DAILY_CAPACITY[date] ?? SLOT_CAPACITY * SLOT_HOURS.length;
 }
