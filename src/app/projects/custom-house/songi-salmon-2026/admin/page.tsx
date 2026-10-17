@@ -76,6 +76,8 @@ export default async function AdminPage({ searchParams }: { searchParams: SP }) 
     loadError = true;
   }
 
+  // 최신 접수가 위로 — 데스크 앞 손님(방금 접수한 사람)을 바로 찾아 승인·입장 누르게 (2026-10-17 형님 지시).
+  rows = [...rows].sort((a, b) => (a.created_at < b.created_at ? 1 : a.created_at > b.created_at ? -1 : 0));
   const pending = rows.filter((r) => r.status === "pending");
   const todays = rows.filter((r) => r.slot_date === today && r.status !== "cancelled" && r.status !== "pending");
   const totalSeats = Object.values(seats).reduce((a, b) => a + b, 0);
