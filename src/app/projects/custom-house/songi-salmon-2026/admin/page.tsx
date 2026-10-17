@@ -12,6 +12,7 @@ import {
   formatKstTime,
   hourLabel,
   isSlotAssignable,
+  kstParts,
   isTestMode,
   maxPartySize,
   suggestSlot,
@@ -355,6 +356,16 @@ function PendingTab({
   );
 }
 
+/**
+ * 회차 칸 순서: 지금 회차 → 지난 회차(최근 것부터) → 아직 안 온 회차.
+ * 승인하면 지금 회차로 들어가므로, 방금 접수한 손님이 페이지 맨 위에 보인다(2026-10-17 형님 지시).
+ */
+function slotOrder(now: Date): number[] {
+  const hours = SLOT_HOURS as readonly number[];
+  const cur = Math.min(Math.max(kstParts(now).hour, hours[0]), hours[hours.length - 1]);
+  return [...hours.filter((h) => h <= cur).reverse(), ...hours.filter((h) => h > cur)];
+}
+
 function SlotsTab({
   todays,
   seats,
@@ -388,7 +399,7 @@ function SlotsTab({
         ))}
       </div>
 
-      {SLOT_HOURS.map((h) => {
+      {slotOrder(now).map((h) => {
         const list = todays.filter((r) => r.slot_hour === h);
         const checked = list.filter((r) => r.status === "checked_in").reduce((s, r) => s + r.party_size, 0);
         const releasable = canReleaseNoShow(today, h, now, test);
