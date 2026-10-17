@@ -100,7 +100,8 @@ export default async function BoardPage() {
                     {closed ? (
                       <p className="sx-hand text-[22px] md:text-[32px] text-[#262120]/60">배정 마감</p>
                     ) : left === 0 ? (
-                      <p className="sx-hand text-[26px] md:text-[40px] text-[#D2463A] rotate-[-3deg] border-[3px] border-[#D2463A] rounded-xl px-3 pt-1">매진</p>
+                      // 정원은 표시용 — 넘어도 접수·승인된다. '매진'을 띄우면 손님이 돌아가므로 계속 접수 중으로 안내(2026-10-17 형님 지시).
+                      <p className="sx-hand text-[22px] md:text-[34px] text-[#3E6E5C] leading-tight">계속 접수 중</p>
                     ) : (
                       <p className="font-black leading-none">
                         <span className="sx-hand text-[14px] md:text-[20px] text-[#262120]/60 mr-1.5">남은 자리</span>
