@@ -9,6 +9,7 @@ import EcologyWetlandSpring from "@/components/projects/EcologyWetlandSpring";
 import EcologyWetlandSummer from "@/components/projects/EcologyWetlandSummer";
 import EcologyWetlandWater from "@/components/projects/EcologyWetlandWater";
 import EcologyWetlandSalmon from "@/components/projects/EcologyWetlandSalmon";
+import EcologyWetlandWinter from "@/components/projects/EcologyWetlandWinter";
 import AiNaeilbakkum from "@/components/projects/AiNaeilbakkum";
 // 현남생활 페스티벌은 정적 라우트(/projects/hyeonnam-festival/) 로 분리됨
 import { PROJECTS, getProjectBySlug } from "@/data/projects";
@@ -81,6 +82,9 @@ export default async function ProjectDetailPage({
   }
   if (project.slug === "ecology-wetland-salmon") {
     return <EcologyWetlandSalmon />;
+  }
+  if (project.slug === "ecology-wetland-winter") {
+    return <EcologyWetlandWinter />;
   }
 
   // Ai 내일바꿈 — 2026년 9월 1·2기 모집 전용 랜딩

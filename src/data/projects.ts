@@ -32,8 +32,25 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
-    // 시리즈 메인 카드 — 최신 회차(10월 연어) 상세로 연결.
+    // 시리즈 메인 카드 — 최신 회차(11월 겨울나기) 상세로 연결.
     // 회차가 바뀔 때마다: 새 회차 항목을 이 자리에 추가하고, 지난 회차는 archived:true 처리.
+    slug: "ecology-wetland-winter",
+    name: "남대천 생태체험 프로그램",
+    oneLiner: "양양 남대천에서 진행되는 생태지도사와 함께하는 가족 생태체험 프로그램",
+    category: "stay-tourism",
+    target: "초등학생 이상 어린이를 동반한 가족 및 일반 성인",
+    operation:
+      "월별 회차로 운영. 회차별 10~15명 내외, 생태지도사 인솔 가족 체험 프로그램. 매 회차마다 주제를 바꿔 가며 남대천의 자연을 깊이 만나는 시리즈. 주최 양양군 · 주관 로마드협동조합.",
+    outcome:
+      "지역 자연을 가족이 함께 경험하며 생태적 감수성을 기르는 체류형 생태관광 콘텐츠.",
+    description:
+      "양양 남대천에서 진행되는 생태지도사와 함께하는 가족 생태체험 프로그램입니다. 매 월 새로운 주제로 운영되며, 11월에는 「남대천, 겨울을 준비하는 생물들」을 주제로 곤충의 겨울집을 찾고 단풍·낙엽과 나무의 겨울눈을 관찰하며, 열매와 씨앗으로 씨앗 탐구 분류판을 만들고 남대천에서 겨울을 보내는 새를 탐조합니다.",
+    why: "양양 남대천은 강과 바다, 습지와 사구가 어우러진 살아있는 자연의 보고입니다. 가족이 직접 발 디디며 작은 생명들의 비밀을 풀어가는 장을 만들고자 시작했습니다.",
+    image: "/images/ecology-wetland.jpg",
+    ogImage: "/images/ecology-wetland.jpg",
+  },
+  {
+    // 10월 회차 — 시리즈 카드에서는 숨김 처리, 상세 URL은 유지 (외부 공유 링크 살아있음).
     slug: "ecology-wetland-salmon",
     name: "남대천 생태체험 프로그램",
     oneLiner: "양양 남대천에서 진행되는 생태지도사와 함께하는 가족 생태체험 프로그램",
@@ -48,6 +65,7 @@ export const PROJECTS: Project[] = [
     why: "양양 남대천은 강과 바다, 습지와 사구가 어우러진 살아있는 자연의 보고입니다. 가족이 직접 발 디디며 작은 생명들의 비밀을 풀어가는 장을 만들고자 시작했습니다.",
     image: "/images/ecology-wetland.jpg",
     ogImage: "/images/og-ecology-salmon.jpg",
+    archived: true,
   },
   {
     // 2026 양양송이연어축제(10/16~18) 기간 한정 프로그램 — 소개 페이지 /ecology/festival 로 연결.

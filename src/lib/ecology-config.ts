@@ -8,8 +8,8 @@ export const SUBMISSIONS_OPEN = true;
 export const CAPACITY = 15;
 
 /** 집결지 / 체험지 / 문의. */
-export const PLACE = "한국수산자원공단 동해생명자원센터 (양양군 손양면 동명로 119)";
-export const EXPERIENCE_SITE = "양양 남대천 일대 · 연어전시관";
+export const PLACE = "양양문화복지회관 앞 남대천 일원";
+export const EXPERIENCE_SITE = "양양 남대천 일원";
 export const INQUIRY_TEL = "010-9542-3775";
 
 /** 관리자(로마드) 접수 알림 수신처 — 접수 들어올 때 문자+이메일 발송. */
@@ -21,17 +21,22 @@ export interface EcologySession {
   label: string; // 사람이 읽는 일시
 }
 
-// 하루 2타임(오전/오후) — session_key는 날짜+타임(-am/-pm). 코드가 날짜로 파싱하지 않으므로 안전.
+// 11월 회차: 하루 1타임(오전) — session_key는 날짜+타임(-am) 규칙 유지 (리마인더 크론이 slice(0,10)으로 날짜만 사용).
 export const SESSIONS: EcologySession[] = [
-  { key: "2026-10-03-am", label: "10월 3일(토) 오전 10:00–12:00" },
-  { key: "2026-10-03-pm", label: "10월 3일(토) 오후 1:00–3:00" },
-  { key: "2026-10-10-am", label: "10월 10일(토) 오전 10:00–12:00" },
-  { key: "2026-10-10-pm", label: "10월 10일(토) 오후 1:00–3:00" },
-  { key: "2026-10-24-am", label: "10월 24일(토) 오전 10:00–12:00" },
-  { key: "2026-10-24-pm", label: "10월 24일(토) 오후 1:00–3:00" },
-  { key: "2026-10-31-am", label: "10월 31일(토) 오전 10:00–12:00" },
-  { key: "2026-10-31-pm", label: "10월 31일(토) 오후 1:00–3:00" },
+  { key: "2026-11-15-am", label: "11월 15일(일) 오전 10:00–12:00" },
+  { key: "2026-11-22-am", label: "11월 22일(일) 오전 10:00–12:00" },
+  { key: "2026-11-29-am", label: "11월 29일(일) 오전 10:00–12:00" },
 ];
+
+/**
+ * 날짜 자동 마감 — 체험일 1일 전까지 접수(체험 당일 0시 KST부터 마감).
+ * session_key 앞 10자리(YYYY-MM-DD)로 판정. 서버 시각 기준으로만 호출할 것.
+ */
+export function isPastDeadline(key: string, now: number = Date.now()): boolean {
+  const day = key.slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(day)) return false;
+  return now >= new Date(`${day}T00:00:00+09:00`).getTime();
+}
 
 export function sessionLabel(key: string): string {
   return SESSIONS.find((s) => s.key === key)?.label ?? key;

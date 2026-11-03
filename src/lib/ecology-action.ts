@@ -1,6 +1,6 @@
 "use server";
 
-import { SUBMISSIONS_OPEN, CAPACITY, SESSIONS } from "@/lib/ecology-config";
+import { SUBMISSIONS_OPEN, CAPACITY, SESSIONS, isPastDeadline } from "@/lib/ecology-config";
 import {
   submitRegistration,
   getSessionStates,
@@ -46,6 +46,11 @@ export async function submitEcology(
 
   if (!guardian || !phoneRaw) return { success: false, message: "신청자 이름과 연락처는 필수입니다." };
   if (!VALID_SESSIONS.has(session)) return { success: false, message: "참여 회차를 선택해 주세요." };
+
+  // 체험 당일부터 자동 마감
+  if (isPastDeadline(session)) {
+    return { success: false, message: "선택하신 회차는 접수가 마감되었습니다. 다른 회차를 선택해 주세요." };
+  }
 
   // 수동 마감된 회차 차단
   try {

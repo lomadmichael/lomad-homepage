@@ -36,7 +36,7 @@ export default async function EcologyMyPage() {
       <header className="border-b border-border">
         <div className="max-w-[900px] mx-auto px-6 md:px-12 py-5 flex items-center justify-between">
           <Link
-            href="/projects/ecology-wetland-water"
+            href="/projects/ecology-wetland-winter"
             className="font-[family-name:var(--font-karla)] text-[11px] font-extrabold tracking-[3px] uppercase text-text-sub hover:text-text"
           >
             남대천 생태체험

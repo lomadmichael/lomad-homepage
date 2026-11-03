@@ -4,8 +4,8 @@ import { PLACE, EXPERIENCE_SITE, INQUIRY_TEL, CAPACITY, sessionLabel } from "@/l
 
 const HEAD = "[로마드협동조합] 남대천 생태체험";
 /** 현재 운영 프로그램명 — 계절 프로그램이 바뀌면 PROGRAM·PREP 을 함께 갱신. */
-const PROGRAM = "「양양 남대천 연어 생태이야기」";
-const PREP = "걷기 편한 운동화·모자·개인 물병·날씨 변화에 대비한 겉옷";
+const PROGRAM = "「남대천, 겨울을 준비하는 생물들」";
+const PREP = "따뜻하고 활동하기 편한 겉옷·개인 물병·모자·장갑 등 방한용품";
 
 /** 접수 확정/대기 안내 문자. */
 export async function sendApplicationSms(params: {
