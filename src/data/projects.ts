@@ -69,8 +69,9 @@ export const PROJECTS: Project[] = [
   },
   {
     // 2026 양양송이연어축제(10/16~18) 기간 한정 프로그램 — 소개 페이지 /ecology/festival 로 연결.
-    // 축제 종료 후 archived:true 처리.
+    // 축제 종료(10/18) → 목록에서 숨김, 소개 페이지·/projects/<slug> 리디렉트는 유지.
     slug: "songi-salmon-festival-eco-walk",
+    archived: true,
     href: "/ecology/festival",
     name: "양양송이연어축제 남대천 생태탐방",
     oneLiner: "숲과 물길을 따라 걷고, 놀이로 남대천의 생태 이야기를 배우는 축제 기간 무료 프로그램.",
