@@ -13,12 +13,19 @@ const CHK_PLAIN = `<span class="chk"><svg width="12" height="12" viewBox="0 0 24
 
 const INLINE_HTML = `
 <style>
+  /* 11월 전용 강조색 — 늦가을 단풍(적갈색). 공통 CSS 변수만 이 페이지에서 덮어씀 (다른 달 페이지 영향 없음). */
+  .ecology-wetland-page.season-late-autumn {
+    --forest: #4A2418; --deep-moss: #6E3420; --moss: #A0522D; --reed: #D29A6A;
+    --ink: #2A1A14; --ink-soft: #5A463C;
+    word-break: keep-all; /* 한글 단어 중간에서 줄이 꺾이지 않게 */
+  }
+  .ecology-wetland-page .nw { white-space: nowrap; }
   /* 11월 회차 전용: 일정 3칸(데스크톱) + 진행 순서 표. 모바일은 공통 규칙으로 접힘. */
   @media (min-width: 901px) {
     .ecology-wetland-page .timeline.cols-3 { grid-template-columns: repeat(3, 1fr); }
   }
   .ecology-wetland-page .tt { list-style: none; padding: 0; margin: 0 auto; max-width: 820px; }
-  .ecology-wetland-page .tt li { display: grid; grid-template-columns: 76px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px dashed rgba(62, 78, 34, 0.25); }
+  .ecology-wetland-page .tt li { display: grid; grid-template-columns: 76px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px dashed rgba(110, 52, 32, 0.25); }
   .ecology-wetland-page .tt li:last-child { border-bottom: none; }
   .ecology-wetland-page .tt .tt-time { font-family: var(--font-noto); font-weight: 700; font-size: 17px; color: var(--coral); }
   .ecology-wetland-page .tt .tt-title { font-weight: 700; color: var(--forest); margin-bottom: 2px; }
@@ -37,7 +44,7 @@ const INLINE_HTML = `
       <div class="eyebrow"><span class="pulse"></span> 2026년 11월 · 양양 남대천</div>
       <h1 class="hero-title">
         남대천,<br>
-        <span class="flow">겨울을 준비하는 생물들</span>
+        <span class="flow">겨울을 준비하는<br>생물들</span>
       </h1>
       <p class="hero-sub">
         숲은 겨울에도 살아 있어요! 겨울을 앞둔 양양 남대천에서 곤충과 식물, 새들이
@@ -186,7 +193,7 @@ const INLINE_HTML = `
         <div class="pc-meta">
           <div class="pc-meta-item">
             <div class="pc-meta-k">운영일</div>
-            <div class="pc-meta-v">11월 15일(일) · 11월 22일(일) · 11월 29일(일)<br><span style="color: rgba(245,239,224,0.78); font-size:12px;">회차별 10~15명 내외</span></div>
+            <div class="pc-meta-v"><span class="nw">11월 15일(일)</span> · <span class="nw">11월 22일(일)</span> · <span class="nw">11월 29일(일)</span><br><span style="color: rgba(245,239,224,0.78); font-size:12px;">회차별 10~15명 내외</span></div>
           </div>
           <div class="pc-meta-item">
             <div class="pc-meta-k">운영시간</div>
@@ -645,7 +652,7 @@ const INLINE_HTML = `
 
 export default function EcologyWetlandWinter() {
   return (
-    <div className="ecology-wetland-page">
+    <div className="ecology-wetland-page season-late-autumn">
       <div dangerouslySetInnerHTML={{ __html: INLINE_HTML }} />
 
       {/* CTA section with real React links for 접수 + tel */}
