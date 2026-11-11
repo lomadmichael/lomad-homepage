@@ -64,7 +64,7 @@ const INLINE_HTML = `
         </div>
         <div>
           <div class="k">참여 대상</div>
-          <div class="v">초등학생 이상 가족 · 일반 성인</div>
+          <div class="v">가족 · 일반 성인 누구나 <span class="nw">(초등학생 이상 권장)</span></div>
         </div>
         <div>
           <div class="k">모집 인원</div>
@@ -201,7 +201,7 @@ const INLINE_HTML = `
           </div>
           <div class="pc-meta-item">
             <div class="pc-meta-k">참여대상</div>
-            <div class="pc-meta-v">초등학생 이상 어린이를 동반한 가족 및 일반성인<br><span style="color: var(--sun); font-weight:600;">참가비 무료</span> · 어린이는 보호자 동반 필수</div>
+            <div class="pc-meta-v">가족 · 일반 성인 누구나 (초등학생 이상 권장)<br><span style="color: var(--sun); font-weight:600;">참가비 무료</span> · 초등학생을 포함한 모든 어린이는 보호자 동반 필수</div>
           </div>
           <div class="pc-meta-item">
             <div class="pc-meta-k">장소</div>
@@ -596,7 +596,7 @@ const INLINE_HTML = `
       </div>
       <div class="note-card">
         <strong>👨‍👩‍👧 어린이는 보호자와 함께</strong><br>
-        어린이는 반드시 보호자가 동반해야 하며, 체험 중 보호자가 어린이의 안전을 직접 살펴주셔야 합니다.
+        초등학생을 포함한 모든 어린이는 반드시 보호자가 동반해야 하며, 체험 중 보호자가 어린이의 안전을 직접 살펴주셔야 합니다.
       </div>
       <div class="note-card">
         <strong>🐞 생물은 조심스럽게</strong><br>
@@ -631,7 +631,7 @@ const INLINE_HTML = `
       </details>
       <details>
         <summary>누가 참여할 수 있나요?</summary>
-        <p>초등학생 이상 어린이를 동반한 가족 및 일반성인이 참여할 수 있습니다. 미취학아동은 보호자가 안전을 충분히 살펴주실 수 있다면 가능합니다. 어린이는 반드시 보호자와 함께 참여해야 하며, 야외 활동 중 보호자가 어린이의 안전을 직접 살펴주셔야 합니다. 일반 성인은 어린이 동반 없이도 참여할 수 있습니다.</p>
+        <p>가족과 일반 성인 누구나 참여할 수 있어요. 2시간 동안 야외를 걷는 활동이라 초등학생 이상을 권장합니다. 초등학생을 포함한 모든 어린이는 반드시 보호자와 함께 참여해야 하며, 야외 활동 중 보호자가 어린이의 안전을 직접 살펴주셔야 합니다. 미취학 아동은 보호자가 곁에서 안전을 충분히 살펴 주실 수 있다면 함께할 수 있습니다. 일반 성인은 어린이 동반 없이도 참여할 수 있습니다.</p>
       </details>
       <details>
         <summary>참가비가 있나요?</summary>
