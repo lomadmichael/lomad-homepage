@@ -1,6 +1,7 @@
 "use server";
 
 import { submitClass } from "@/lib/ainb-class-db";
+import { CLASS_CLOSED } from "@/lib/ainb-class-config";
 
 export interface ClassValues {
   name: string;
@@ -32,6 +33,8 @@ export async function submitClassForm(
 
   const values: ClassValues = { name: get("name"), phone: get("phone") };
   const fail = (message: string): ClassFormState => ({ success: false, message, values });
+
+  if (CLASS_CLOSED) return fail("접수가 마감되었습니다.");
 
   if (!values.name) return fail("이름을 입력해 주세요.");
   if (values.name.length > NAME_MAX) return fail(`이름은 ${NAME_MAX}자 이내로 입력해 주세요.`);

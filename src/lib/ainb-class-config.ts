@@ -6,3 +6,6 @@ export const CLASS_TITLE = "협회원·지역민을 위한 Ai 클래스";
 export const CLASS_DATETIME = "2026. 11. 27.(금) 10:00 – 17:00";
 export const CLASS_PLACE = "해양종합레포츠센터";
 export const CLASS_BRING: readonly string[] = ["노트북", "클로드 계정"];
+
+/** true 면 접수 마감 — 신청 폼을 숨기고 서버에서도 신청을 받지 않는다. */
+export const CLASS_CLOSED = true;
