@@ -43,10 +43,10 @@ export default function ClassPage() {
           {CLASS_CLOSED ? (
             <div className="border border-border bg-input-bg px-6 py-8">
               <p className="font-[family-name:var(--font-noto)] text-[20px] font-black mb-2">
-                접수가 마감되었습니다
+                이번 클래스 접수는 마감되었습니다
               </p>
               <p className="font-[family-name:var(--font-noto)] text-[15px] leading-[1.7]">
-                신청해 주신 분이 많아 접수를 마감했습니다. 관심 가져 주셔서 감사합니다.
+                관심 가져 주셔서 감사합니다.
               </p>
             </div>
           ) : (
