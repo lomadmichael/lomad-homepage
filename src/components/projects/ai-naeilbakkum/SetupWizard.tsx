@@ -15,8 +15,8 @@ import {
 const SECTION = "font-[family-name:var(--font-noto)]";
 const KARLA = "font-[family-name:var(--font-karla)]";
 
-const STORE_KEY = "ainb-setup-v1";
-const CURRICULUM_HREF = "/projects/ai-naeilbakkum/curriculum#day1";
+const DEFAULT_STORE_KEY = "ainb-setup-v1";
+const DEFAULT_BACK_HREF = "/projects/ai-naeilbakkum/curriculum#day1";
 
 const HASH_PREFIX: Record<SetupOs, string> = { windows: "win", mac: "mac" };
 const OS_SHORT: Record<SetupOs, string> = { windows: "Windows", mac: "Mac" };
@@ -42,15 +42,16 @@ type Restored = { os: SetupOs | null; index: number; done: Set<string> };
 /** 서버(=하이드레이션 전) 스냅샷. 이 값이면 아직 복원 전이라는 뜻 */
 const PENDING: Restored = { os: null, index: 0, done: new Set<string>() };
 
-let restoredCache: Restored | null = null;
+/** 저장 키별로 캐시한다(페이지마다 다른 키를 쓸 수 있음) */
+let restoredCache: { key: string; value: Restored } | null = null;
 
-function computeRestored(): Restored {
+function computeRestored(storeKey: string): Restored {
   let os: SetupOs | null = null;
   let index = 0;
   let done = new Set<string>();
 
   try {
-    const raw = window.localStorage.getItem(STORE_KEY);
+    const raw = window.localStorage.getItem(storeKey);
     if (raw) {
       const saved = JSON.parse(raw) as Saved;
       if (saved.os === "windows" || saved.os === "mac") os = saved.os;
@@ -79,9 +80,11 @@ function computeRestored(): Restored {
   return { os, index, done };
 }
 
-function readRestored(): Restored {
-  if (!restoredCache) restoredCache = computeRestored();
-  return restoredCache;
+function readRestored(storeKey: string): Restored {
+  if (!restoredCache || restoredCache.key !== storeKey) {
+    restoredCache = { key: storeKey, value: computeRestored(storeKey) };
+  }
+  return restoredCache.value;
 }
 
 const readPending = (): Restored => PENDING;
@@ -236,13 +239,20 @@ function TroubleItem({
 export default function SetupWizard({
   tracks,
   availableImages,
+  storeKey = DEFAULT_STORE_KEY,
+  backHref = DEFAULT_BACK_HREF,
 }: {
   tracks: SetupTrack[];
   availableImages: string[];
+  /** 진행 상태 localStorage 키 — 페이지마다 겹치지 않게 (기본: 내일바꿈 설치 가이드) */
+  storeKey?: string;
+  /** 마지막 단계의 '실습 가이드로 돌아가기' 링크 (기본: 내일바꿈 실습 가이드 1일차) */
+  backHref?: string;
 }) {
   const available = useMemo(() => new Set(availableImages), [availableImages]);
 
-  const restored = useSyncExternalStore(subscribeNever, readRestored, readPending);
+  const readSnapshot = useCallback(() => readRestored(storeKey), [storeKey]);
+  const restored = useSyncExternalStore(subscribeNever, readSnapshot, readPending);
   const ready = restored !== PENDING;
 
   // 사용자가 건드리기 전에는 복원값(restored)을 그대로 쓴다
@@ -292,13 +302,13 @@ export default function SetupWizard({
     if (!ready) return;
     try {
       window.localStorage.setItem(
-        STORE_KEY,
+        storeKey,
         JSON.stringify({ os, stepIndex, done: Array.from(done) }),
       );
     } catch {
       /* 무시 */
     }
-  }, [ready, os, stepIndex, done]);
+  }, [ready, storeKey, os, stepIndex, done]);
 
   /* 해시 갱신 — 스크롤 점프 없이 */
   useEffect(() => {
@@ -615,7 +625,7 @@ export default function SetupWizard({
 
             {isLast ? (
               <a
-                href={CURRICULUM_HREF}
+                href={backHref}
                 className={cn(
                   SECTION,
                   "flex-1 min-h-[48px] flex items-center justify-center text-center",
