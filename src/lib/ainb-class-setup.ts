@@ -84,14 +84,11 @@ function fixText(t: string): string {
     .replace(/\s*와이파이가 느리면 운영진 USB에 같은 파일이 있습니다\.\s*/g, " ")
     .replace(/\s*와이파이가 느리면 운영진 USB\.\s*/g, " ")
     .replace("3일차에 내 작품을 인터넷에 올리는 도구(Vercel)가 쓰는 부품입니다.", "오늘 내 작품을 인터넷에 올리는 도구(Vercel)가 쓰는 부품입니다.")
-    .replace("「자동 · Opus 5」", "「자동」")
     .replace("실습 가이드 1일차로 돌아가세요.", "실습 가이드 1교시로 돌아가세요.")
     .trim();
 }
 
 function fixShot(shot: Shot): Shot | null {
-  // Code 탭 ⑦ 모델을 상위 모델로 바꾸는 장면은 뺀다 (모델은 Sonnet 그대로)
-  if (shot.alt.startsWith("모델 선택")) return null;
 
   // Windows 앱 로그인 ⑤ — 계정 선택 (팀 계정 스크린샷은 붙이지 않는다)
   if (shot.alt.startsWith("브라우저의 Google 계정 선택")) {
