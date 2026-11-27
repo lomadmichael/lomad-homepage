@@ -116,6 +116,23 @@ export const CLASS_PERIODS: Day[] = [
       "내 가게·숙소·협회 일에 바로 쓸 페이지 하나를 정해서, 계획을 세우고, 오후 안에 첫 버전을 인터넷에 올린 뒤, 데이터 저장(Supabase)까지 붙여 봅니다. 순서만 지키세요: 먼저 돌아가게, 그다음 더 좋게.",
     steps: [
       {
+        id: "c3-0",
+        title: "Supabase 가입·연결 — 데이터 저장소 먼저 준비 (모두 함께)",
+        minutes: "25분",
+        blocks: [
+          { kind: "text", body: "오후는 데이터 저장소부터 준비하고 시작합니다. 손님이 남기는 문의·예약 신청·방명록처럼 '쌓이는 것'을 보관할 곳입니다. 지금은 가입하고 Claude에 연결해 두기만 합니다 — 실제로 내 작품에 붙이는 것은 첫 버전이 돌아간 뒤 마지막 STEP에서 합니다. 강사 화면을 보면서 한 단계씩 같이 갑니다." },
+          { kind: "text", body: "① 가입 — Supabase는 데이터를 저장해 주는 서비스입니다. Google 가입 버튼이 없으니 이메일로 가입합니다: 이메일 칸에 내 구글 계정 gmail 주소, 비밀번호는 내가 새로 정한 비밀번호 → 가입 후 인증 메일이 gmail로 오니 열어서 「Confirm your mail」 링크를 클릭하세요(안 오면 스팸함, 그래도 없으면 로그인 화면의 'Resend'). 인증 후 로그인하면 조직을 만들라고 합니다 — 이름은 본인 이름으로 두면 되고, Free 플랜으로 「Create organization」." },
+          { kind: "link", label: "Supabase 가입하기 (이메일로)", href: "https://supabase.com/dashboard/sign-up", note: "GitHub 버튼은 누르지 마세요. 내 gmail 주소로 가입합니다." },
+          { kind: "text", body: "② 연결 — 데이터 저장소를 Claude에 붙입니다. 연결해 두면 '데이터 저장되게 해줘'라고만 해도 Claude가 테이블을 직접 만들고 연결합니다. 방법은 내 계정 설정 파일에 Supabase 주소 한 줄을 넣는 것입니다. 아래 문장을 Code 탭 입력창에 보내세요." },
+          { kind: "prompt", title: "Code 탭에 붙여넣기 — Supabase 연결 설정 넣기", text: "내 홈 폴더(사용자 폴더)의 .claude.json 파일을 열어서 mcpServers 항목에 supabase를 {\"type\":\"http\",\"url\":\"https://mcp.supabase.com/mcp\"} 로 추가해줘. 다른 내용은 절대 건드리지 말고, 추가한 뒤 mcpServers 부분만 보여줘.", tip: "답에 supabase 와 mcp.supabase.com 주소가 보이면 다음 줄로." },
+          { kind: "text", body: "이 파일은 앱을 켤 때 읽으므로 Claude 앱을 완전히 종료했다가 다시 엽니다 — 창만 닫으면 안 되고, 작업표시줄 트레이(Windows) 또는 메뉴 막대(Mac)의 Claude 아이콘 → 종료(Quit). 다시 열어 Code 탭에서 내 폴더로 새 세션을 시작한 뒤, 입력창에 /mcp 를 입력 → supabase 선택 → 「로그인」 → 브라우저가 열리면 방금 Supabase에 가입한 계정으로 로그인 → 「Authorize(허용)」 → 앱으로 돌아오기. Authorize 화면에 'No organizations found'가 뜨면 「Create an organization」 → Name은 본인 이름 → Type: Personal → Plan: Free - $0/month → 「Create organization」 → 방금 만든 조직을 고르고 「Authorize」." },
+          { kind: "prompt", title: "③ 연결 확인 (Code 탭)", text: "내 Supabase 조직 목록과 프로젝트 목록을 보여줘. 프로젝트는 아직 만들지 마.", tip: "조직 이름이 답에 나오면 연결 성공입니다." },
+          { kind: "prompt", title: "④ 프로젝트 만들기 (Code 탭)", text: "내 Supabase 조직에 'ai-class'라는 이름으로 서울(ap-northeast-2) 리전에 무료 플랜 프로젝트를 만들어줘. 비용 확인을 물어보면 내가 '확인'이라고 답할게. 만들어진 뒤 상태가 정상(ACTIVE_HEALTHY)이 될 때까지 확인하고, 프로젝트 주소를 알려줘.", tip: "Claude가 '월 $0입니다, 진행할까요?'라고 물으면 '확인'. 데이터베이스 비밀번호는 Supabase가 자동으로 만들고 Claude에게도 알려주지 않습니다 — 필요 없습니다. 생성에 1~2분." },
+          { kind: "warn", text: "/mcp 목록에 supabase가 없으면 앱을 완전히 종료하지 않은 것입니다 — 트레이/메뉴 막대에서 종료 후 다시 여세요. 'Supabase 도구를 찾을 수 없다'고 하면 연결이 풀린 것이니 /mcp 에서 supabase에 다시 로그인하세요. 프로젝트 생성이 'unavailable'로 실패하면 Supabase 장애(status.supabase.com)입니다 — 손을 들어 강사에게 알려 주세요." },
+          { kind: "check", text: "Claude가 내 Supabase 조직 이름을 답하고, 'ai-class' 프로젝트가 만들어졌으면 완료" },
+        ],
+      },
+      {
         id: "c3-1",
         title: "내가 만들 것 적기 — 계획 모드에서",
         minutes: "45분",
@@ -150,7 +167,7 @@ export const CLASS_PERIODS: Day[] = [
       {
         id: "c3-3",
         title: "만들기 — 계획대로 한 단계씩",
-        minutes: "80분",
+        minutes: "70분",
         blocks: [
           { kind: "text", body: "계획의 1단계부터 시작합니다. 권한 모드는 '자동', 모델은 Sonnet 그대로. 한 단계가 끝날 때마다 Claude가 브라우저로 열어 보여 주면, 눈으로 확인하고 다음으로 넘어가세요." },
           { kind: "prompt", title: "① 계획 실행 시작", text: "docs 폴더의 설계 문서와 계획(설계.md·계획.md)을 읽고, 계획 1단계부터 시작해줘. 동작하는 최소 버전부터 만들고, 각 단계가 끝나면 브라우저로 열어서 보여주고 다음 단계로 갈지 나에게 물어봐줘.", tip: "'동작하는 최소 버전'이라는 말이 과설계를 막습니다. 첫 버전이 돌아간 뒤에 기능을 더하세요." },
@@ -174,19 +191,12 @@ export const CLASS_PERIODS: Day[] = [
       },
       {
         id: "c3-5",
-        title: "데이터 저장 붙이기 — Supabase 연결 (모두 함께)",
-        minutes: "30분",
+        title: "데이터 저장 붙이기 — 내 작품에 Supabase 연결",
+        minutes: "15분",
         blocks: [
-          { kind: "text", body: "모두 함께 합니다. 내 작품에 '손님이 남기는 것' 하나(문의 남기기·예약 신청·방명록)를 붙여, 남긴 내용이 사라지지 않고 쌓이게 만듭니다. 첫 버전이 저장 없이 돌아가고 배포까지 된 상태에서 시작하세요. 강사 화면을 보면서 한 단계씩 같이 갑니다." },
-          { kind: "text", body: "① 가입 — Supabase는 데이터를 저장해 주는 서비스입니다. Google 가입 버튼이 없으니 이메일로 가입합니다: 이메일 칸에 내 구글 계정 gmail 주소, 비밀번호는 내가 새로 정한 비밀번호 → 가입 후 인증 메일이 gmail로 오니 열어서 「Confirm your mail」 링크를 클릭하세요(안 오면 스팸함, 그래도 없으면 로그인 화면의 'Resend'). 인증 후 로그인하면 조직을 만들라고 합니다 — 이름은 본인 이름으로 두면 되고, Free 플랜으로 「Create organization」." },
-          { kind: "link", label: "Supabase 가입하기 (이메일로)", href: "https://supabase.com/dashboard/sign-up", note: "GitHub 버튼은 누르지 마세요. 내 gmail 주소로 가입합니다." },
-          { kind: "text", body: "② 연결 — 데이터 저장소를 Claude에 붙입니다. 연결해 두면 '데이터 저장되게 해줘'라고만 해도 Claude가 테이블을 직접 만들고 연결합니다. 방법은 내 계정 설정 파일에 Supabase 주소 한 줄을 넣는 것입니다. 아래 문장을 Code 탭 입력창에 보내세요." },
-          { kind: "prompt", title: "Code 탭에 붙여넣기 — Supabase 연결 설정 넣기", text: "내 홈 폴더(사용자 폴더)의 .claude.json 파일을 열어서 mcpServers 항목에 supabase를 {\"type\":\"http\",\"url\":\"https://mcp.supabase.com/mcp\"} 로 추가해줘. 다른 내용은 절대 건드리지 말고, 추가한 뒤 mcpServers 부분만 보여줘.", tip: "답에 supabase 와 mcp.supabase.com 주소가 보이면 다음 줄로." },
-          { kind: "text", body: "이 파일은 앱을 켤 때 읽으므로 Claude 앱을 완전히 종료했다가 다시 엽니다 — 창만 닫으면 안 되고, 작업표시줄 트레이(Windows) 또는 메뉴 막대(Mac)의 Claude 아이콘 → 종료(Quit). 다시 열어 Code 탭에서 내 폴더로 새 세션을 시작한 뒤, 입력창에 /mcp 를 입력 → supabase 선택 → 「로그인」 → 브라우저가 열리면 방금 Supabase에 가입한 계정으로 로그인 → 「Authorize(허용)」 → 앱으로 돌아오기. Authorize 화면에 'No organizations found'가 뜨면 「Create an organization」 → Name은 본인 이름 → Type: Personal → Plan: Free - $0/month → 「Create organization」 → 방금 만든 조직을 고르고 「Authorize」." },
-          { kind: "prompt", title: "③ 연결 확인 (Code 탭)", text: "내 Supabase 조직 목록과 프로젝트 목록을 보여줘. 프로젝트는 아직 만들지 마.", tip: "조직 이름이 답에 나오면 연결 성공입니다." },
-          { kind: "prompt", title: "④ 프로젝트 만들기 (Code 탭)", text: "내 Supabase 조직에 'ai-class'라는 이름으로 서울(ap-northeast-2) 리전에 무료 플랜 프로젝트를 만들어줘. 비용 확인을 물어보면 내가 '확인'이라고 답할게. 만들어진 뒤 상태가 정상(ACTIVE_HEALTHY)이 될 때까지 확인하고, 프로젝트 주소를 알려줘.", tip: "Claude가 '월 $0입니다, 진행할까요?'라고 물으면 '확인'. 데이터베이스 비밀번호는 Supabase가 자동으로 만들고 Claude에게도 알려주지 않습니다 — 필요 없습니다. 생성에 1~2분." },
-          { kind: "prompt", title: "⑤ 데이터 저장 연결 (Code 탭)", text: "이 서비스에 데이터 저장 기능을 붙여줘: (무엇을 저장할지 — 예: 손님이 남긴 문의). 연결된 Supabase 프로젝트 'ai-class'에 필요한 테이블을 네가 직접 만들고(MCP 사용), 권한을 설정한 뒤, 프로젝트 주소와 anon 키를 코드에 넣어줘. 끝나면 새로고침해도 데이터가 남는지 확인하는 방법을 알려줘.", tip: "anon 키는 공개해도 되는 키입니다. 걱정되면 강사에게 물어보세요." },
-          { kind: "warn", text: "/mcp 목록에 supabase가 없으면 앱을 완전히 종료하지 않은 것입니다 — 트레이/메뉴 막대에서 종료 후 다시 여세요. 'Supabase 도구를 찾을 수 없다'고 하면 연결이 풀린 것이니 /mcp 에서 supabase에 다시 로그인하세요. 프로젝트 생성이 'unavailable'로 실패하면 Supabase 장애(status.supabase.com)입니다 — 오늘은 저장 없는 버전으로 보여 주고 저장은 다음 버전으로." },
+          { kind: "text", body: "STEP 1에서 준비해 둔 저장소를 이제 내 작품에 붙입니다. '손님이 남기는 것' 하나(문의 남기기·예약 신청·방명록)가 사라지지 않고 쌓이게 만듭니다. 첫 버전이 저장 없이 돌아가고 배포까지 된 상태에서 시작하세요." },
+          { kind: "prompt", title: "데이터 저장 연결 (Code 탭)", text: "이 서비스에 데이터 저장 기능을 붙여줘: (무엇을 저장할지 — 예: 손님이 남긴 문의). 연결된 Supabase 프로젝트 'ai-class'에 필요한 테이블을 네가 직접 만들고(MCP 사용), 권한을 설정한 뒤, 프로젝트 주소와 anon 키를 코드에 넣어줘. 끝나면 새로고침해도 데이터가 남는지 확인하는 방법을 알려줘.", tip: "anon 키는 공개해도 되는 키입니다. 걱정되면 강사에게 물어보세요." },
+          { kind: "warn", text: "'Supabase 도구를 찾을 수 없다'고 하면 연결이 풀린 것입니다 — 입력창에 /mcp 를 입력해 supabase에 다시 로그인하세요." },
           { kind: "check", text: "새로고침해도 데이터가 남아 있고, 다른 사람 폰에서도 같은 데이터가 보이면 완료 → 다시 배포" },
         ],
       },
